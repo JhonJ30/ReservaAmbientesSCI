@@ -1,0 +1,129 @@
+.oculto {
+    display: none;
+}
+
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: 70%;
+    background-color: #bbe7db;
+    border: none;
+    padding: 3%;
+    border-radius: 30px;
+}
+
+.modal::backdrop{
+    background-color: rgba(0,0,0,0.5)
+}
+
+
+.headerSearch{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerSearch h1{
+    margin: 0%;
+    margin-bottom: 2%;
+}
+
+.headerSearch button{
+    font-size:xx-large;
+}
+
+.contentSearch{
+    position: relative;
+}
+
+.filter{
+    display: flex;
+    align-items: center;
+}
+
+.filter h3{
+    width: 20%;
+}
+
+.filter button{
+    margin-left: 2%;
+    font-size: medium;
+}
+
+.ubication{
+    margin-left: 2%;
+    width: 60%;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+}
+
+#inputResource{
+    margin-left: 2%;
+    width: 60%;
+    height: 25px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+}
+
+.minValue, .maxValue{
+    margin-left: 2%;
+    width: 10%;
+    height: 25px;
+    border-radius: 10px;
+    border: none;
+    text-align: center;
+}
+
+.searchButton{
+    position: absolute;
+    right: 5%;
+    bottom: 10%;
+    width: 15%;
+    height: 10%;
+    font-size: 15px;
+    border-radius: 10px;
+    background-color: rgb(69, 196, 154);
+    border: none;
+}
+
+.searchButton:hover{
+    background-color: #E0E0E0;
+}
+
+input:focus{
+    outline: none;
+    text-align: center;
+    color: black;
+    border: none;
+}
+
+select:focus{
+    outline: none;
+    text-align: center;
+    color: black;
+    border: none;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    color: none;
+}
+
+button:hover{
+    background-color: transparent;
+    border: none;
+    color: none;   
+}
+
+button:focus{
+    background-color: transparent;
+    border: none;
+    color: none;   
+}
