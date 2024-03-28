@@ -27,7 +27,7 @@
                     <a href="#" class="priHabilitado2">Ver Ambientes</a>
                 </li>
                 <li>
-                    <a href="#" class="ultimo" >Ayuda</a>
+                    <a href="/inicio" class="ultimo" >Ayuda</a>
                 </li>
             </ul>
             <ul >
