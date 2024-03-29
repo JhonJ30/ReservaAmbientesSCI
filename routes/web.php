@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/inicio', function () {
+Route::get('/', function () {
     return view('home');
 });
 
@@ -39,26 +39,6 @@ Route::get('/inicio', function () {
 
 
 // Sarita
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('horarios', function () {
+    return view('Horarios');
+});
