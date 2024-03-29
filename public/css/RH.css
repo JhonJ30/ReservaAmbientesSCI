@@ -351,10 +351,10 @@ h1{/*Registro de horario*/
 }
 
 .registrar-btn {
-    background-color: #4CAF50; /* Color verde */
+    background-color: #0B6F63; /* Color verde */
     color: white; /* Color del texto */
     padding: 10px 50px;
-    border: 1px solid #4CAF50;
+    border: 1px solid #0B6F63;
     border-radius: 5px;
     cursor: pointer;
 }
