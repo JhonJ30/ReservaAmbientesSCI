@@ -42,3 +42,17 @@ Route::get('/', function () {
 Route::get('horarios', function () {
     return view('Horarios');
 });
+
+
+
+
+
+
+
+
+
+
+//mary
+Route::get('listaA', function () {
+    return view('listaAmb');
+});

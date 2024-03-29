@@ -14,7 +14,7 @@
             <div class="menu"> 
             <ul>
                 <li>
-                    <a href="#" class="priHabilitado">Inicio</a>
+                    <a href="/" class="priHabilitado">Inicio</a>
                 </li>
                 <li class="reserva-parent">
                     <a href="Registrar_Horario/Horarios.html" class="priHabilitado2">Registrar</a>
@@ -23,8 +23,12 @@
                         <li><a href="/horarios" class="priHabilitado2">Horarios</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" class="priHabilitado2">Ver Ambientes</a>
+                <li class="reserva-parent">
+                    <a href="Registrar_Horario/Horarios.html" class="priHabilitado2">Visualizar</a>
+                    <ul class="reserva-options">
+                        <li><a href="/listaA" class="priHabilitado2">Ambientes</a></li>
+                        <li><a href="#" class="priHabilitado2">Horarios</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="/inicio" class="ultimo" >Ayuda</a>

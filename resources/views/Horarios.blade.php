@@ -16,7 +16,7 @@
             <div class="menu">
             <ul>
                 <li>
-                    <a href="#" class="priHabilitado">Inicio</a>
+                    <a href="/" class="priHabilitado">Inicio</a>
                 </li>
                 <li class="reserva-parent">
                     <a href="#" class="priHabilitado2">Registrar</a>
