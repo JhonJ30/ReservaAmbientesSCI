@@ -311,7 +311,8 @@ button:hover {
 h1{/*Registro de horario*/
     font-size: 35px;/*agranda la letra*/
     margin-bottom: 30px; /* Añade un margen inferior al título(abajo) */
-    margin-left: 150px; /* Ajusta para mover el título más a la derecha */
+    /*margin-left: 100px; /* Ajusta para mover el título más a la derecha */
+    text-align: center;
 }
 
 .form-row {
