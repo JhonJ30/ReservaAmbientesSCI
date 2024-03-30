@@ -1,54 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="{{asset ('css/home.css')}}" rel="stylesheet">
-    <link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
+@extends('layout/plantilla')
+@section('contenido')
 
-    <title>Inicio</title>
-</head>
-<body>
-    <div class="div1" id="div1">
-        <img src="{{asset ('img/san simon.png')}}" class="logo" alt="...">
-        <nav class="navMenu">
-            <div class="menu"> 
-            <ul>
-                <li>
-                    <a href="/" class="priHabilitado">Inicio</a>
-                </li>
-                <li class="reserva-parent">
-                    <a href="Registrar_Horario/Horarios.html" class="priHabilitado2">Registrar</a>
-                    <ul class="reserva-options">
-                        <li><a href="#" class="priHabilitado2">Ambientes</a></li>
-                        <li><a href="/horarios" class="priHabilitado2">Horarios</a></li>
-                    </ul>
-                </li>
-                <li class="reserva-parent">
-                     <a href="Registrar_Horario/Horarios.html" class="priHabilitado2">Visualizar</a>
-                    <ul class="reserva-options">
-                        <li><a href="/listaA" class="priHabilitado2">Ambientes</a></li>
-                        <li><a href="#" class="priHabilitado2">Horarios</a></li>
-                    </ul>
-                   
-                </li>
-                <li>
-                    <a href="/inicio" class="ultimo" >Ayuda</a>
-                </li>
-            </ul>
-            <ul >
-                <li class="sesion">
-                    <a href="inicio_admin.html" class='iniSesion'>Mi Cuentaa</a>
-                </li>
-            </ul>
-            </div>
-        </nav>
-    
-    </div>
-
+<script>
+        // Verifica si hay un mensaje de éxito en la sesión y muestra una alerta si es así
+        @if(session('success'))
+            alert("{{ session('success') }}");
+        @endif
+    </script>
 <!--ver lista de ambientes registrados -->
-<br>
+<link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
 <br>
 <h2>Lista de Ambientes</h2>
 <br>
@@ -58,7 +18,6 @@
 </div>
 <br>
 <div> 
-
 <table>
   <thead>
     <tr>
@@ -70,36 +29,54 @@
     </tr>
   </thead>
   <tbody>
+    @foreach ($datos as $item )
     <tr>
-      <td>1</td>
-      <td>Juan</td>
-      <td>25</td>
-      <td>Madrid</td>
+      <td>{{$item->nroAmb}}</td>
+      <td>{{$item->capacidad}}</td>
+      <td>{{$item->ubicacion}}</td>
+      <td>{{$item->estado}}</td>
       <td>
-      <button class="edit-btn" onclick="alert('Editar entrada 2')">Modificar</button>
-        <button class="delete-btn" onclick="alert('Eliminar entrada 2')">Eliminar</button>
+      <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
+        <button class="delete-btn" onclick="openModal()">Eliminar</button>
       </td>
-      
     </tr>
-    <tr>
-      <td>2</td>
-      <td>Maria</td>
-      <td>30</td>
-      <td>Barcelona</td>
-      <td><button class="edit-btn" onclick="alert('Editar entrada 2')">Modificar</button>
-        <button class="delete-btn" onclick="alert('Eliminar entrada 2')">Eliminar</button></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Pablo</td>
-      <td>28</td>
-      <td>Sevilla</td>
-      <td><button class="edit-btn" onclick="alert('Editar entrada 2')">Modificar</button>
-        <button class="delete-btn" onclick="alert('Eliminar entrada 2')">Eliminar</button></td>
-    </tr>
+  @endforeach
   </tbody>
 </table>
 </div>
-    
-</body>
-</html>
+<!--ventana modal de eliminar-->
+<div id="myModal" class="modal">
+  <!-- Contenido del modal -->
+  <div class="modal-content">
+    <p><strong>¿Estás seguro que deseas eliminar este registro?</strong></p>
+    <br>
+    <p class="gris">Esta operacion es irreversible</p>
+    <br>
+    <!-- Botones de confirmar y cancelar -->
+    <div class="button-container">
+    <button class="btnAceptar" onclick="deleteItem()">Aceptar</button>
+    <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
+  </div>
+  </div>
+</div>
+
+<script>
+    // Función para abrir el modal
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    // Función para eliminar el elemento (simulado)
+    function deleteItem() {
+        // Aquí pondrías la lógica real para eliminar el elemento
+        alert('Elemento eliminado');
+        // Cerrar el modal después de eliminar
+        closeModal();
+    }
+</script>
+@endsection

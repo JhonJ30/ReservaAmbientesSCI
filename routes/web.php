@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RegistroAmbientes;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-
+//mary
+Route::get('listaA', function () {
+    return view('listaAmb');
+});
+Route::get('listaA',[RegistroAmbientes::class, 'create'])->name('ambientes.create');
 
 
 
@@ -52,7 +56,29 @@ Route::get('horarios', function () {
 
 
 
-//mary
-Route::get('listaA', function () {
-    return view('listaAmb');
+
+
+
+//leo
+Route::get('registroAmb', function () {
+    return view('registroAmb');
 });
+
+Route::get('editarAmb', function () {
+    return view('editarAmb');
+});
+
+Route::post('pruebita',[RegistroAmbientes::class,'store'])->name('store');
+
+Route::get('/pruebita', function () {
+    return view('listaAmb'); 
+})->name('pruebita');
+
+Route::get('success', function () {
+    return view('success');
+})->name('success');
+
+
+Route::get('/ambientes/editar/{id}', [RegistroAmbientes::class, 'editar'])->name('ambientes.editar');
+Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambientes.update');
+
