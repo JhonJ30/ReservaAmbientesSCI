@@ -19,7 +19,7 @@
                 <li class="reserva-parent">
                     <a href="Registrar_Horario/Horarios.html" class="priHabilitado2">Registrar</a>
                     <ul class="reserva-options">
-                        <li><a href="#" class="priHabilitado2">Ambientes</a></li>
+                        <li><a href="/registroAmb" class="priHabilitado2">Ambientes</a></li>
                         <li><a href="/horarios" class="priHabilitado2">Horarios</a></li>
                     </ul>
                 </li>
@@ -31,7 +31,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/inicio" class="ultimo" >Ayuda</a>
+                    <a href="#" class="ultimo" >Ayuda</a>
                 </li>
             </ul>
             <ul >

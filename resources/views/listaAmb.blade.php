@@ -8,6 +8,9 @@
     <link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
 
     <title>Inicio</title>
+    @if(session('success'))
+        <script>alert("{{ session('success') }}");</script>
+    @endif
 </head>
 <body>
     <div class="div1" id="div1">
