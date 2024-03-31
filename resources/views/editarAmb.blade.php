@@ -439,8 +439,9 @@ label{
         </nav>
     
     </div>
-    <form action="{{route('store')}}" method="POST">
+    <form action="{{ route('ambientes.update', $ambiente->id) }}" method="POST">
     @csrf
+    <input type="hidden" name="_method" value="PUT">
     <div class="registro">
 
         <div class="titulo-registro"> <h1>REGISTRO DE AMBIENTE</h1></div>
@@ -449,59 +450,61 @@ label{
            <label>Unidad de Ambiente(*)</label>
            <select name="unidadAmb" required>
             <option value="" disabled selected hidden class="opcion-deshabilitada">----</option>
-            <option value="Decanato" >Decanato</option>
-            <option value="Jefatura" >Jefatura</option>
-            <option value="Departamento" >Departamento</option>
+            <option value="Decanato" {{ $ambiente->unidadAmb == 'Decanato' ? 'selected' : '' }}>Decanato</option>
+            <option value="Jefatura" {{ $ambiente->unidadAmb == 'Jefatura' ? 'selected' : '' }}>Jefatura</option>
+            <option value="Departamento" {{ $ambiente->unidadAmb == 'Departamento' ? 'selected' : '' }}>Departamento</option>
            </select>
 
            <label >Ubicación del Ambiente(*)</label>
-           <textarea name="ubicacion" placeholder="Ej: Edificio nuevo segundo piso." class="textarea1" required></textarea>
+           <textarea name="ubicacion" placeholder="Ej: Edificio nuevo segundo piso." 
+           class="textarea1" required>{{ $ambiente->ubicacion }}</textarea>
            
            <label>Capacidad del Ambiente(*)</label>
-           <input name="capacidad" type="text" placeholder="Ej: 150" required>
+           <input name="capacidad" type="text" placeholder="Ej: 150" required value="{{ $ambiente->capacidad }}">
         </div>
         <div class="col2">
             <label>Tipo de Ambiente(*)</label>
             <select name="tipoAmb" id="" required>
                 <option value="" disabled selected hidden>----</option>
-                <option value="Aula">Aula</option>
-                <option value="Laboratorio">Laboratorio</option>
-                <option value="Auditorio">Auditorio</option>
-                <option value="Taller">Taller</option>
+                <option value="Aula" {{ $ambiente->tipoAmb == 'Aula' ? 'selected' : '' }}>Aula</option>
+                <option value="Laboratorio" {{ $ambiente->tipoAmb == 'Laboratorio' ? 'selected' : '' }}>Laboratorio</option>
+                <option value="Auditorio" {{ $ambiente->tipoAmb == 'Auditorio' ? 'selected' : '' }}>Auditorio</option>
+                <option value="Taller" {{ $ambiente->tipoAmb == 'Taller' ? 'selected' : '' }}>Taller</option>
             </select>
             <label>Equipamiento(*)</label>
             
             <div class="radiosButtons">
-                <input type="radio" name="equipamiento" value="Proyector">
+                <input type="radio" name="equipamiento" value="Proyector" {{ $ambiente->equipamiento == 'Proyector' ? 'checked' : '' }}>
                 <label >Proyector</label>
                 <br>
-                <input type="radio" name="equipamiento" value="Pizarras">
+                <input type="radio" name="equipamiento" value="Pizarras" {{ $ambiente->equipamiento == 'Pizarras' ? 'checked' : '' }}>
                 <label>Pizarras</label>
                 <br>
-                <input type="radio" name="equipamiento" value="Otros">
+                <input type="radio" name="equipamiento" value="Otros" {{ $ambiente->equipamiento == 'Otros' ? 'checked' : '' }}>
                 <label>Otros</label>
             </div>
 
             <label >Estado del Ambiente(*)</label>
             <select name="estado" id="" required>
                 <option value="" disabled selected hidden>----</option>
-                <option value="Disponible">Disponible</option>
-                <option value="No Disponible">No Disponible</option>
-                <option value="Reservado">Reservado</option>
+                <option value="Disponible" {{ $ambiente->estado == 'Disponible' ? 'selected' : '' }}>Disponible</option>
+                <option value="No Disponible" {{ $ambiente->estado == 'No Disponible' ? 'selected' : '' }}>No Disponible</option>
+                <option value="Reservado" {{ $ambiente->estado == 'Reservado' ? 'selected' : '' }}>Reservado</option>
             </select>
         </div>
 
         <div class="col3">
             <label>Número o Nombre <br> del Ambiente(*) </label>
-            <input type="text" placeholder="Ej: 690B"  name="nroAmb" required>
+            <input type="text" placeholder="Ej: 690B"  name="nroAmb" required value="{{ $ambiente->nroAmb }}">
             <label>Descripción(*)</label>
-            <textarea name="descripcion" placeholder="Ej: Aula común ubicado en el edificio nuevo, en el segundo piso de tamaño 75 a 100 m²." class="textarea2" required></textarea>
+            <textarea name="descripcion" placeholder="Ej: Aula común ubicado en el edificio nuevo, en el segundo piso de tamaño 75 a 100 m²."
+             class="textarea2" required>{{ $ambiente->descripcion }}</textarea>
         </div>
 
         </div>
         <div class="botones">
             <button class="botonCancelar" onclick="cancelar()">Cancelar</button>
-            <button class="botonRegistrar" type="submit">Registrar</button>
+            <button class="botonRegistrar" type="submit">Editar</button>
         </div>
     </div>
 </form>

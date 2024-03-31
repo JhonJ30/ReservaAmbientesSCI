@@ -28,6 +28,7 @@ class RegistroAmbientes extends Controller
         //el formulario donde nosotros aagregamos datos
         $datos=Ambientes::all();
         return view('listaAmb', compact('datos'));
+        
         //return view('pruebita');
     }
 
@@ -44,7 +45,7 @@ class RegistroAmbientes extends Controller
         $ambiente->unidadAmb = $request->input('unidadAmb');
         $ambiente->tipoAmb = $request->input('tipoAmb');
         $ambiente->nroAmb = $request->input('nroAmb');
-        $ambiente->ublicacion = $request->input('ubicacion');
+        $ambiente->ubicacion = $request->input('ubicacion');
         $ambiente->equipamiento = $request->input('equipamiento');
         $ambiente->capacidad = $request->input('capacidad');
         $ambiente->descripcion = $request->input('descripcion');
@@ -55,7 +56,18 @@ class RegistroAmbientes extends Controller
         $ambiente->save();
 
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
-        return redirect()->route('pruebita')->with('success', 'El ambiente ha sido registrado correctamente.');
+        return redirect()->route('ambientes.create')->with('success', '¡El ambiente ha sido registrado Correctamente!');
+    }
+    
+    public function editar($id)
+    {
+    $ambiente = Ambientes::find($id); 
+
+    if (!$ambiente) {
+        return redirect()->route('listaA'); // Redirige a la lista si el ambiente no existe
+    }
+
+    return view('editarAmb', compact('ambiente')); // Cambia 'ruta.vista.editar' por la ruta real de tu vista de edición
     }
 
     /**
@@ -89,7 +101,11 @@ class RegistroAmbientes extends Controller
      */
     public function update(Request $request, $id)
     {
-        //actualiza los datos
+        $ambiente = Ambientes::findOrFail($id);
+        $ambiente->update($request->all());
+
+    return redirect()->route('ambientes.create')->with('success', '¡Ambiente actualizado Correctamente!');
+
     }
 
     /**
@@ -102,4 +118,5 @@ class RegistroAmbientes extends Controller
     {
         //elima un registro
     }
+
 }

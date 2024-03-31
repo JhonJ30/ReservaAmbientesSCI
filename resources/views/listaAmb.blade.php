@@ -1,5 +1,12 @@
 @extends('layout/plantilla')
 @section('contenido')
+
+<script>
+        // Verifica si hay un mensaje de éxito en la sesión y muestra una alerta si es así
+        @if(session('success'))
+            alert("{{ session('success') }}");
+        @endif
+    </script>
 <!--ver lista de ambientes registrados -->
 <link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
 <br>
@@ -26,10 +33,10 @@
     <tr>
       <td>{{$item->nroAmb}}</td>
       <td>{{$item->capacidad}}</td>
-      <td>{{$item->ublicacion}}</td>
+      <td>{{$item->ubicacion}}</td>
       <td>{{$item->estado}}</td>
       <td>
-      <button class="edit-btn" onclick="alert('Editar entrada 2')">Modificar</button>
+      <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
         <button class="delete-btn" onclick="alert('Eliminar entrada 2')">Eliminar</button>
       </td>
     </tr>
