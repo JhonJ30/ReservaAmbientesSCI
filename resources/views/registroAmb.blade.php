@@ -404,6 +404,10 @@ label{
     }
 }
 
+/*Estilos para mis mensajes de error*/
+.texto-error-advertencia{
+    font-size: 12px;
+}
 
 
     </style>
@@ -445,7 +449,7 @@ label{
         </nav>
     
     </div>
-    <form action="{{route('store')}}" method="POST">
+    <form action="{{route('store')}}" method="POST" onsubmit="return error()">
     @csrf
     <div class="registro">
 
@@ -461,11 +465,16 @@ label{
            </select>
 
            <label >Ubicación del Ambiente(*)</label>
-           <textarea name="ubicacion" placeholder="Ej: Edificio nuevo segundo piso." class="textarea1" required></textarea>
+           <textarea name="ubicacion" placeholder="Ej: Edificio nuevo segundo piso." 
+           class="textarea1" maxlength="100" style="border: 1px solid black;" oninput="validarInput2(this)" required></textarea>
+           <div class="texto-error-advertencia" id="error-message2" style="color: red; display: none;"></div>
            
-           <label>Capacidad del Ambiente(*)</label>
-           <input name="capacidad" type="text" placeholder="Ej: 150" 
-           pattern="[0-9]+" title="Por favor ingrese solo números." required>
+           <label for="capacidad">Capacidad del Ambiente(*)</label>
+           <input name="capacidad" type="text" placeholder="Ej: 150" id="capacidad"
+            maxlength="3" oninput="validarInput(this)"
+           style="border: 1px solid black;" required>
+           <div class="texto-error-advertencia" id="error-message" style="color: red; display: none;"></div>
+
         </div>
         <div class="col2">
             <label>Tipo de Ambiente(*)</label>
@@ -479,13 +488,13 @@ label{
             <label>Equipamiento(*)</label>
             
             <div class="radiosButtons">
-                <input type="radio" name="equipamiento" value="Proyector">
+                <input type="checkbox" name="equipamiento[]" value="Proyector">
                 <label >Proyector</label>
                 <br>
-                <input type="radio" name="equipamiento" value="Pizarras">
+                <input type="checkbox" name="equipamiento[]" value="Pizarras">
                 <label>Pizarras</label>
                 <br>
-                <input type="radio" name="equipamiento" value="Otros">
+                <input type="checkbox" name="equipamiento[]" value="Otros">
                 <label>Otros</label>
             </div>
 
@@ -501,8 +510,11 @@ label{
         <div class="col3">
             <label>Número o Nombre <br> del Ambiente(*) </label>
             <input type="text" placeholder="Ej: 690B"  name="nroAmb" required>
+           
             <label>Descripción(*)</label>
-            <textarea name="descripcion" placeholder="Ej: Aula común ubicado en el edificio nuevo, en el segundo piso de tamaño 75 a 100 m²." class="textarea2" required></textarea>
+            <textarea name="descripcion" placeholder="Ej: Aula común ubicado en el edificio nuevo, en el segundo piso de tamaño 75 a 100 m²." 
+            class="textarea2" maxlength="150" style="border: 1px solid black;" oninput="validarInput3(this)" required></textarea>
+            <div class="texto-error-advertencia" id="error-message3" style="color: red; display: none;"></div>
         </div>
 
         </div>
@@ -554,6 +566,63 @@ label{
                 break;
         }
     });
+
+
+    // Selecciona el campo de entrada
+    function validarInput(input) {
+  const onlyNumbersRegex = /^\d+$/;
+  
+  if (!onlyNumbersRegex.test(input.value)) {
+    input.style.borderColor = "red";
+    document.getElementById("error-message").style.display = "block";
+    document.getElementById("error-message").innerText = "Por favor ingrese solo números";
+  } else {
+    input.style.borderColor = "black";
+    document.getElementById("error-message").style.display = "none";
+  }
+}
+
+function validarInput2(input) {
+  const onlyNumbersRegex = /^[a-zA-Z0-9]+$/;
+  
+  if (!onlyNumbersRegex.test(input.value)) {
+    input.style.borderColor = "red";
+    document.getElementById("error-message2").style.display = "block";
+    document.getElementById("error-message2").innerText = "No admite caracteres especiles";
+  } else {
+    input.style.borderColor = "black";
+    document.getElementById("error-message2").style.display = "none";
+  }
+}
+
+function validarInput3(input) {
+  const onlyNumbersRegex = /^[a-zA-Z0-9]+$/;
+  
+  if (!onlyNumbersRegex.test(input.value)) {
+    input.style.borderColor = "red";
+    document.getElementById("error-message3").style.display = "block";
+    document.getElementById("error-message3").innerText = "No admite caracteres especiles";
+  } else {
+    input.style.borderColor = "black";
+    document.getElementById("error-message3").style.display = "none";
+  }
+}
+
+function error() {
+   
+
+    var mensajeError = document.getElementById("error-message");
+    var mensajeError2 = document.getElementById("error-message2"); 
+    var mensajeError3 = document.getElementById("error-message3");  
+
+    if (mensajeError.style.display === "block" || mensajeError2.style.display === "block" || mensajeError3.style.display === "block") {
+        return false;
+    } else {
+        return true;
+    }
+    return true;
+   }
+
 </script>
 
 
