@@ -443,7 +443,7 @@ label{
     @csrf
     <div class="registro">
 
-        <div class="titulo-registro"> <h1>REGISTRO DE AMBIENTE Xd</h1></div>
+        <div class="titulo-registro"> <h1>REGISTRO DE AMBIENTE</h1></div>
         <div class="contenido-registro">
         <div class="col1">
            <label>Unidad de Ambiente(*)</label>
