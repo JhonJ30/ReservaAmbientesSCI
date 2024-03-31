@@ -14,7 +14,8 @@ class RegistroAmbientes extends Controller
      */
     public function index()
     {
-        //
+        //pagina de inicio
+        
     }
 
     /**
@@ -24,7 +25,10 @@ class RegistroAmbientes extends Controller
      */
     public function create()
     {
-        return view('pruebita');
+        //el formulario donde nosotros aagregamos datos
+        $datos=Ambientes::all();
+        return view('listaAmb', compact('datos'));
+        //return view('pruebita');
     }
 
     /**
@@ -35,6 +39,7 @@ class RegistroAmbientes extends Controller
      */
     public function store(Request $request)
     {
+        //sirve para guardar datos en la bd
         $ambiente = new Ambientes();
         $ambiente->unidadAmb = $request->input('unidadAmb');
         $ambiente->tipoAmb = $request->input('tipoAmb');
@@ -61,7 +66,7 @@ class RegistroAmbientes extends Controller
      */
     public function show($id)
     {
-        //
+        //servira para obtener un registro de nuestra tabala
     }
 
     /**
@@ -72,7 +77,7 @@ class RegistroAmbientes extends Controller
      */
     public function edit($id)
     {
-        //
+        //este metodo nos sirve para traer los datos que se van a editar
     }
 
     /**
@@ -84,7 +89,7 @@ class RegistroAmbientes extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //actualiza los datos
     }
 
     /**
@@ -95,6 +100,6 @@ class RegistroAmbientes extends Controller
      */
     public function destroy($id)
     {
-        //
+        //elima un registro
     }
 }

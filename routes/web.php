@@ -16,7 +16,11 @@ use App\Http\Controllers\RegistroAmbientes;
 Route::get('/', function () {
     return view('home');
 });
-
+//mary
+Route::get('listaA', function () {
+    return view('listaAmb');
+});
+Route::get('listaA',[RegistroAmbientes::class, 'create'])->name('ambientes.create');
 
 
 
@@ -52,10 +56,7 @@ Route::get('horarios', function () {
 
 
 
-//mary
-Route::get('listaA', function () {
-    return view('listaAmb');
-});
+
 
 
 //leo
