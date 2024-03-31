@@ -36,8 +36,8 @@
                     <label for="resource2">Pizarra</label>
                 </div>
                 <div class="resource">
-                    <input type="checkbox" id="resource2" value="Proyector">
-                    <label for="resource2">Otros </label>
+                    <input type="checkbox" id="resource3" value="Proyector">
+                    <label for="resource3">Otros</label>
                 </div>
             </div>
         </div>
