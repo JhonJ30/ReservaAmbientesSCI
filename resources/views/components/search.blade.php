@@ -39,12 +39,8 @@
                         <label for="resource2">Pizarra</label>
                     </div>
                     <div class="resource">
-                        <input type="checkbox" name="recursos[]" id="resource3" value="WiFi">
-                        <label for="resource3">WiFi</label>
-                    </div>
-                    <div class="resource">
-                        <input type="checkbox" name="recursos[]" id="resource4" value="Otros">
-                        <label for="resource4">Otros</label>
+                        <input type="checkbox" name="recursos[]" id="resource3" value="Otros">
+                        <label for="resource3">Otros</label>
                     </div>
                     <!-- Agrega más checkboxes si es necesario -->
                 </div>
