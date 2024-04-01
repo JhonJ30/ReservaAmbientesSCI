@@ -39,6 +39,11 @@
         <button class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
         <button class="registrar-btn" onclick="registrarHorario()">Registrar</button>
     </div>
+    <script>
+    function redirigirRegistro() {
+        window.location.href = 'RegistroHorario.php';
+    }
+</script>
 
 </div>
 <!--<script src="RH.js"></script>-->
