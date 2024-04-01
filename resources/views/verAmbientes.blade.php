@@ -20,50 +20,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Laboratorio</td>
-            <td>30</td>
-            <td>Laboratorio</td>
-            <td>Pizarra, Proyector</td>
-            <td>
-                <button onclick="openModal()">
-                    <i class="fas fa-calendar-days"></i>
+          @foreach ($ambientes as $ambiente)
+            <tr>
+              <td>{{ $ambiente->nroAmb }}</td>
+              <td>{{ $ambiente->capacidad }}</td>
+              <td>{{ $ambiente->ubicacion }}</td>
+              <td>{{ $ambiente->equipamiento }}</td>
+              <td>
+                <button onclick="window.location.href='/client/verAmbientes/calendario/{{ $ambiente->id }}'">
+                  <i class="fas fa-calendar-days"></i>
                 </button>
-            </td>
-          </tr>
-          <tr>
-            <td>Auditorio</td>
-            <td>60</td>
-            <td>Edificio Nuevo</td>
-            <td>Pizarra</td>
-            <td>
-                <button onclick="openModal()">
-                    <i class="fas fa-calendar-days"></i>
-                </button>
-            </td>
-          </tr>
-          <tr>
-            <td>691A</td>
-            <td>45</td>
-            <td>Edificio Nuevo</td>
-            <td>Pizarra, Proyector</td>
-            <td>
-                <button onclick="openModal()">
-                    <i class="fas fa-calendar-days"></i>
-                </button>
-            </td>
-          </tr>
-          <tr>
-            <td>691A</td>
-            <td>45</td>
-            <td>Edificio Nuevo</td>
-            <td>Pizarra, Proyector</td>
-            <td>
-                <button onclick="openModal()">
-                    <i class="fas fa-calendar-days"></i>
-                </button>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
       </table>
     </div>
 @endsection

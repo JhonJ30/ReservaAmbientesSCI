@@ -47,6 +47,7 @@
     height: 25px;
     border: none;
     text-align: center;
+    font-size: small;
 }
 
 .searchButton {
