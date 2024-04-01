@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 use App\Models\Ambientes;
 
 class RegistroAmbientes extends Controller
@@ -55,7 +57,12 @@ class RegistroAmbientes extends Controller
         $ambiente->save();
 
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
-        return redirect()->route('ambientes.create')->with('success', '¡El ambiente ha sido registrado Correctamente!');
+        //return redirect()->route('ambientes.create');
+
+
+        // Redirigir a la página de creación de ambientes
+        //return redirect()->route('ambientes.create');
+        return redirect()->route('ambientes.create')->with('success', '¡Ambiente Registrado Correctamente!');
     }
     
     public function editar($id)

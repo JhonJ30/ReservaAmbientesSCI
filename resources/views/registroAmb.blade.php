@@ -464,11 +464,12 @@ label{
            <textarea name="ubicacion" placeholder="Ej: Edificio nuevo segundo piso." class="textarea1" required></textarea>
            
            <label>Capacidad del Ambiente(*)</label>
-           <input name="capacidad" type="text" placeholder="Ej: 150" required>
+           <input name="capacidad" type="text" placeholder="Ej: 150" 
+           pattern="[0-9]+" title="Por favor ingrese solo números." required>
         </div>
         <div class="col2">
             <label>Tipo de Ambiente(*)</label>
-            <select name="tipoAmb" id="" required>
+            <select name="tipoAmb" id="tipoAmb" required>
                 <option value="" disabled selected hidden>----</option>
                 <option value="Aula">Aula</option>
                 <option value="Laboratorio">Laboratorio</option>
@@ -512,6 +513,8 @@ label{
     </div>
 </form>
 
+
+
 <script>
     function cancelar(){
         var confirmar = confirm("Esta seguro que quiere descartar el registro actual?");
@@ -519,6 +522,40 @@ label{
             window.location.href = "/";
         }
     }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+    // Esta función se llama cuando se carga la página para mostrar automáticamente el modal
+    window.onload = function() {
+        document.getElementById('myModal').style.display = 'block';
+    };
+
+    document.getElementById('tipoAmb').addEventListener('change', function() {
+        var selectedOption = this.value;
+        var nroAmbInput = document.getElementsByName('nroAmb')[0];
+
+        // Cambiar el placeholder dependiendo del tipo de ambiente seleccionado
+        switch(selectedOption) {
+            case 'Aula':
+                nroAmbInput.placeholder = 'Ej: 690B';
+                break;
+            case 'Laboratorio':
+                nroAmbInput.placeholder = 'Ej: Lab-01';
+                break;
+            case 'Auditorio':
+                nroAmbInput.placeholder = 'Ej: Auditorio Principal';
+                break;
+            case 'Taller':
+                nroAmbInput.placeholder = 'Ej: Taller 1';
+                break;
+            default:
+                nroAmbInput.placeholder = 'Ej: 690B';
+                break;
+        }
+    });
 </script>
+
+
 </body>
 </html>

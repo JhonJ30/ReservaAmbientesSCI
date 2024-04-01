@@ -1,12 +1,7 @@
 @extends('layout/plantilla')
 @section('contenido')
 
-<script>
-        // Verifica si hay un mensaje de éxito en la sesión y muestra una alerta si es así
-        @if(session('success'))
-            alert("{{ session('success') }}");
-        @endif
-    </script>
+
 <!--ver lista de ambientes registrados -->
 <link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
 <br>
@@ -62,6 +57,19 @@
   </div>
 </div>
 
+@if(Session::has('success'))
+    <div id="successModal" class="modal" style="display: block;">
+        <div class="modal-content">
+            <p><strong>{{ Session::get('success') }}</strong></p>
+            <!-- Otro contenido del modal si es necesario -->
+            <div class="button-container">
+                <button class="btnAceptar" onclick="closeSuccessModal()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+@endif
+
+
 <script>
    // Función para abrir el modal
    function openModal(registroId) {
@@ -103,6 +111,13 @@ document.getElementById('confirmDeleteBtn').addEventListener('click', function()
         console.error('Error de red:', error);
     });
 });
+
+
+function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+}
+
 </script>
+
 
 @endsection
