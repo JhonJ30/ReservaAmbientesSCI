@@ -89,7 +89,9 @@ Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambie
 
 
 //jhon
-Route::get('client', function () { return view('homeUser');});
+Route::get('client', function () {
+    return view('homeUser');
+});
 Route::get('client/verAmbientes', [RegistroAmbientes::class, 'index']);
 Route::get('client/buscarAmbientes', [RegistroAmbientes::class, 'buscar'])->name('ambientes.buscar');
 Route::get('client/buscarAmbientesAvanzado', [RegistroAmbientes::class, 'buscarAvanzado']);
