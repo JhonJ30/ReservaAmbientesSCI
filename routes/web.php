@@ -21,7 +21,9 @@ Route::get('listaA', function () {
     return view('listaAmb');
 });
 Route::get('listaA',[RegistroAmbientes::class, 'create'])->name('ambientes.create');
+Route::delete('/listaA/{id}',[RegistroAmbientes::class, 'destroy'])->name('ambientes.destroy');
 
+//Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 
 
 
@@ -63,11 +65,24 @@ Route::get('horarios', function () {
 Route::get('registroAmb', function () {
     return view('registroAmb');
 });
+
+Route::get('editarAmb', function () {
+    return view('editarAmb');
+});
+
 Route::post('pruebita',[RegistroAmbientes::class,'store'])->name('store');
 
 Route::get('/pruebita', function () {
     return view('listaAmb'); 
 })->name('pruebita');
+
+Route::get('success', function () {
+    return view('success');
+})->name('success');
+
+
+Route::get('/ambientes/editar/{id}', [RegistroAmbientes::class, 'editar'])->name('ambientes.editar');
+Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambientes.update');
 
 
 

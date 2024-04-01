@@ -9,7 +9,7 @@ class Ambientes extends Model
 {
     use HasFactory;
     protected $table = 'ambiente';
-
+    
     // Si la tabla tiene un campo de autoincremento, especifica su nombre
     protected $primaryKey = 'id';
 
