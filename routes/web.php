@@ -25,7 +25,7 @@ Route::delete('/listaA/{id}',[RegistroAmbientes::class, 'destroy'])->name('ambie
 
 //Einar
 Route::get('listaH', function () {
-    return view('RegistroHorario');
+    return view('pruebita');
 });
 
 
