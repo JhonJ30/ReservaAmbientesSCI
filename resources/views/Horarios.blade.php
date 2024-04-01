@@ -2,7 +2,7 @@
 @section('contenido')
 <!--hasta aqui menu-->
 <link href="{{asset ('css/RH.css')}}" rel="stylesheet">
-<h1>Registro Horarios</h1>
+<h1>Registro de Horarios</h1>
 
 <div id="form-container">
     <div class="form-row">

@@ -2,7 +2,7 @@ extends('layout/plantilla')
 @section('contenido')
 <!--hasta aqui menu-->
 <link href="{{asset ('css/RH.css')}}" rel="stylesheet">
-<h1>Aulas Registradas</h1>
+<h1>Horarios Registrados</h1>
 
 <link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
 <br>
