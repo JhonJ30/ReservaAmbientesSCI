@@ -12,10 +12,9 @@ class RegistroAmbientes extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //pagina de inicio
-        
+    public function index(){
+        $ambientes = Ambientes::all();
+            return view('verAmbientes', ['ambientes' => $ambientes]);
     }
 
     /**
@@ -123,4 +122,44 @@ class RegistroAmbientes extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function buscar(Request $request){
+        $search = $request->input('search');
+        $ambientes = Ambientes::query();
+
+        if ($search) {
+            $ambientes->where('nroAmb', 'like', '%' . $search . '%')
+                      ->orWhere('ubicacion', 'like', '%' . $search . '%');
+        }
+        $resultados = $ambientes->get();
+        return view('verAmbientes', ['ambientes' => $resultados]);
+    }
+
+    public function buscarAvanzado(Request $request) {
+        $recursos = $request->input('recursos');
+        $minValue = $request->input('minValue');
+        $maxValue = $request->input('maxValue');
+        $ambientes = Ambientes::query();
+    
+        if ($recursos) {
+            foreach ($recursos as $recurso) {
+                $ambientes->where('equipamiento', 'like', '%' . $recurso . '%');
+            }
+        }
+
+        if ($minValue && $maxValue) {
+            $ambientes->whereBetween('capacidad', [$minValue, $maxValue]);
+        }
+        $resultados = $ambientes->get();
+        return view('verAmbientes', ['ambientes' => $resultados]);
+    }
+    
+    public function showCalendario($id){
+        $ambiente = Ambientes::find($id);
+        if ($ambiente) {
+            $nroAula = $ambiente->nroAmb;
+        }else {
+            $nroAula = 'Aula no encontrada';
+        }
+        return view('calendarioAmbiente', ['nroAula' => $nroAula]);
+    }
 }
