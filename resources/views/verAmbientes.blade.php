@@ -53,6 +53,17 @@
                 </button>
             </td>
           </tr>
+          <tr>
+            <td>691A</td>
+            <td>45</td>
+            <td>Edificio Nuevo</td>
+            <td>Pizarra, Proyector</td>
+            <td>
+                <button onclick="openModal()">
+                    <i class="fas fa-calendar-days"></i>
+                </button>
+            </td>
+          </tr>
       </table>
     </div>
 @endsection
