@@ -1,50 +1,44 @@
-extends('layout/plantilla')
-@section('contenido')
-<!--hasta aqui menu-->
-<link href="{{asset ('css/RH.css')}}" rel="stylesheet">
-<h1>Horarios Registrados</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{asset ('css/listaH.css')}}" rel="stylesheet">
 
-<link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
-<br>
-<h2>Lista de Horarios</h2>
-<br>
-<div class="search-container">
-  <input type="text" placeholder="Buscar..." class="search-input">
-  <button class="search-button"><i class="fas fa-search"></i></button>
-</div>
-<br>
-<div> 
-<table>
-  <thead>
-    <tr>
-      <th>Tipo de ambiente</th>
-      <th>Ambiente</th>
-      <th>Hora de inicio</th>
-      <th>Hora de fin</th>
-      <th>Intervalo</th>
-    </tr>
-  </thead>
-  <tbody>
+    <title>Inicio</title>
+</head>
+<body>
+    <div class="div1" id="div1">
+        <img src="{{asset ('img/san simon.png')}}" class="logo" alt="...">
+        <nav class="navMenu">
+            <div class="menu"> 
+            <ul>
+                <li>
+                    <a href="#" class="priHabilitado">Inicio</a>
+                </li>
+                <li class="reserva-parent">
+                    <a href="Registrar_Horario/Horarios.html" class="priHabilitado2">Registrar</a>
+                    <ul class="reserva-options">
+                        <li><a href="#" class="priHabilitado2">Ambientes</a></li>
+                        <li><a href="Registrar_Horario/Horarios.html" class="priHabilitado2">Horarios</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="priHabilitado2">Ver Ambientes</a>
+                </li>
+                <li>
+                    <a href="#" class="ultimo" >Ayuda</a>
+                </li>
+            </ul>
+            <ul >
+                <li class="sesion">
+                    <a href="inicio_admin.html" class='iniSesion'>Mi Cuenta</a>
+                </li>
+            </ul>
+            </div>
+        </nav>
     
-    <tr>
-        <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
-        <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
-      </td>
-    </tr>
-    </tbody>
-</table>
-</div>
-<div id="myModal" class="modal">
- 
-  <div class="modal-content">
-    <p><strong>¿Estás seguro que deseas eliminar este Horario?</strong></p>
-    <br>
-    <p class="gris">Esta operacion es irreversible</p>
-    <br>
-    <div class="button-container">
-    <button class="btnAceptar" id="confirmDeleteBtn">Aceptar</button>
-    <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
-  </div>
-  </div>
-</div>
-
+    </div>
+    
+</body>
+</html>
