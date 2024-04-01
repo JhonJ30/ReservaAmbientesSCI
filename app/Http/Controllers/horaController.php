@@ -22,7 +22,7 @@ class horaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
+    //hecho por sara
     public function storeh(Request $request)
     {
         //sirve para guardar datos en la bd

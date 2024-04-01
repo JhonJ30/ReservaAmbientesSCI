@@ -9,7 +9,7 @@ class Horarios extends Model
 {
     use HasFactory;
     protected $table = 'horario';
-
+    //horario sara
     // Si la tabla tiene un campo de autoincremento, especifica su nombre
     protected $primaryKey = 'id';
 
