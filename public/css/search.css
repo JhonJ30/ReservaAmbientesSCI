@@ -1,0 +1,229 @@
+.modal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    background-color: #128a74;
+    border: none;
+    padding: 2%;
+}
+
+.modal::backdrop {
+    background-color: rgba(238, 236, 236, 0.9);
+}
+
+.contentSearch {
+    position: relative;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.filter label {
+    color: white;
+    width: 10%;
+}
+
+.filter button {
+    margin-left: 2%;
+    font-size: medium;
+}
+
+.date, .time {
+    margin-left: 2%;
+    width: 15%;
+    height: 25px;
+    border: none;
+    text-align: center;
+}
+
+.minValue, .maxValue {
+    margin-left: 2%;
+    width: 10%;
+    height: 25px;
+    border: none;
+    text-align: center;
+}
+
+.searchButton {
+    position: absolute;
+    right: 5%;
+    bottom: 10%;
+    width: 15%;
+    height: 15%;
+    font-size: 15px;
+}
+
+.cancelButton {
+    position: absolute;
+    right: 22%;
+    bottom: 10%;
+    width: 15%;
+    height: 15%;
+    font-size: 15px;
+}
+
+.selectResource {
+    display: flex;
+    flex-direction: row;
+}
+
+.resource {
+    display: flex;
+    align-items: center;
+    margin-right: 20%;
+}
+
+.resource label {
+    font-size: small;
+}
+
+.searchBox {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    height: 30px;
+    width: 50%;
+    font-family: inherit;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 90%;
+    margin-right: 10px;
+}
+
+.search::placeholder {
+    color: black;
+    text-align: center;
+}
+
+.iconButton{
+    background-color: #0d7360;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.icon i {
+    font-size: 15px;
+}
+
+.listClassroom {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: flex;
+    justify-content: center;
+}
+
+
+input:focus{
+    outline: none;
+    text-align: center;
+    color: black;
+    border: none;
+}
+
+select:focus{
+    outline: none;
+    text-align: center;
+    color: black;
+    border: none;
+}
+
+button {
+    background-color: rgb(39, 38, 38);
+    border: none;
+    border-radius: 5px;
+    color:white;
+}
+
+button:hover{
+    background-color: #777978;
+}
+
+table {
+    width: 80%;
+    height: auto;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 90%;
+}
+
+td {
+    border: 1px solid #0d7360;
+    background-color: #bbc0c2;
+    padding: 8px;
+}
+
+th {
+    border: 1px solid #0d7360;
+    background-color: #0d7360;
+    color: white;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+
+td button {
+    margin-right: 2px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 600px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+    th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr {
+        margin-bottom: 15px;
+    }
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+    td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+    td:nth-of-type(1):before {
+        content: "ID:";
+    }
+    td:nth-of-type(2):before {
+        content: "Nombre:";
+    }
+    td:nth-of-type(3):before {
+        content: "Edad:";
+    }
+    td:nth-of-type(4):before {
+        content: "Ciudad:";
+    }
+}

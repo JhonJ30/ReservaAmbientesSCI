@@ -41,7 +41,7 @@
             </ul>
             <ul >
                 <li class="sesion">
-                    <a href="inicio_admin.html" class='iniSesion'>Mi Cuenta</a>
+                    <a href="/client" class='iniSesion'>Mi Cuenta</a>
                 </li>
             </ul>
             </div>

@@ -69,3 +69,14 @@ Route::get('/pruebita', function () {
     return view('listaAmb'); 
 })->name('pruebita');
 
+
+
+
+//jhon
+Route::get('client', function () {
+    return view('homeUser');
+});
+
+Route::get('client/verAmbientes', function () {
+    return view('verAmbientes');
+});
