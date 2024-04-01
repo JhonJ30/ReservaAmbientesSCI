@@ -51,7 +51,7 @@ Route::get('listaH', function () {
 
 
 
-// Sarita
+// Saritaxd
 Route::get('horarios', function () {
     return view('Horarios');
 });

@@ -25,7 +25,7 @@
             </select>
         </div>
     </div>
-    
+    <!-- nuevo comentario-->
     <div class="form-row">
         <div class="form-column">
             <label for="hora-inicio">Hora de Inicio:</label>
