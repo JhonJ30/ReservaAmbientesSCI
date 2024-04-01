@@ -3,8 +3,9 @@
 <!--hasta aqui menu-->
 
 <link href="{{asset ('css/RH.css')}}" rel="stylesheet">
-<h1>Registro Horarios</h1>
-
+<h1>REGISTRO HORARIOS</h1>
+<form action="{{route('storeh')}}" method="POST">
+@csrf
 <div id="form-container">
     <div class="form-row">
         <div class="form-column">
@@ -43,7 +44,7 @@
         <button class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
         <button class="registrar-btn" type="submit">Registrar</button>
     </div>
-
+</form>
 </div>
 
 @endsection

@@ -54,8 +54,8 @@ Route::post('horarios', [horaController::class, 'storeh'])->name('storeh');
 Route::get('/HO', function () {
     return view('/');
 })->name('HO');
-
-
+/*Route::get('/',[horaController::class, 'storeh'])->name('sara.create');*/
+Route::get('horarios/create', [horaController::class, 'create'])->name('Horarios.create');
 
 
 
