@@ -21,7 +21,9 @@ Route::get('listaA', function () {
     return view('listaAmb');
 });
 Route::get('listaA',[RegistroAmbientes::class, 'create'])->name('ambientes.create');
+Route::delete('/listaA/{id}',[RegistroAmbientes::class, 'destroy'])->name('ambientes.destroy');
 
+//Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 
 
 

@@ -37,32 +37,40 @@
       <td>{{$item->estado}}</td>
       <td>
       <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
-        <button class="delete-btn" onclick="openModal()">Eliminar</button>
+        <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>
   @endforeach
   </tbody>
 </table>
 </div>
-<!--ventana modal de eliminar-->
+
+
+
+<!-- Modal de confirmación de eliminación -->
 <div id="myModal" class="modal">
-  <!-- Contenido del modal -->
+ 
   <div class="modal-content">
     <p><strong>¿Estás seguro que deseas eliminar este registro?</strong></p>
     <br>
     <p class="gris">Esta operacion es irreversible</p>
     <br>
-    <!-- Botones de confirmar y cancelar -->
     <div class="button-container">
-    <button class="btnAceptar" onclick="deleteItem()">Aceptar</button>
+    <button class="btnAceptar" id="confirmDeleteBtn">Aceptar</button>
     <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
   </div>
   </div>
 </div>
 
 <script>
-    // Función para abrir el modal
-    function openModal() {
+   // Función para abrir el modal
+   function openModal(registroId) {
+    var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+    // Guardar el ID del registro en un atributo data del botón de confirmación
+    confirmDeleteBtn.setAttribute('data-id', registroId);
+
+    // Mostrar el modal
         document.getElementById('myModal').style.display = 'block';
     }
 
@@ -70,13 +78,31 @@
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
-
-    // Función para eliminar el elemento (simulado)
-    function deleteItem() {
-        // Aquí pondrías la lógica real para eliminar el elemento
-        alert('Elemento eliminado');
-        // Cerrar el modal después de eliminar
-        closeModal();
-    }
+// Manejar el clic en el botón de eliminar en el modal
+document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+    var registroId = this.getAttribute('data-id');
+    
+    // Enviar una solicitud DELETE al servidor
+    fetch('/listaA/' + registroId, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Recargar la página o actualizar la lista de registros
+            window.location.reload();
+        } else {
+            console.error('Error al eliminar el registro');
+        }
+    })
+    .catch(error => {
+        console.error('Error de red:', error);
+    });
+});
 </script>
+
 @endsection

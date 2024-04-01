@@ -117,6 +117,10 @@ class RegistroAmbientes extends Controller
     public function destroy($id)
     {
         //elima un registro
+        $registro = Ambientes::findOrFail($id);
+        $registro->delete();
+
+        return response()->json(['success' => true]);
     }
 
 }
