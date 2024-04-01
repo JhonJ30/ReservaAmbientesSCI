@@ -233,6 +233,7 @@ li{
     align-items: center; /* Centra los hijos horizontalmente */
     padding: 20px;
     gap: 20px; /* Espacio entre el contenido de registro y los botones */
+    z-index: -1;
 }
 .contenido-registro {
     display: flex;
@@ -420,12 +421,17 @@ label{
                     <a href="#" class="priHabilitado2">Registrar</a>
                     <ul class="reserva-options">
                         <li><a href="#" class="priHabilitado2">Ambientes</a></li>
+                        <li><a href="/horarios" class="priHabilitado2">Horarios</a></li>
+                    </ul>
+                </li>
+                <li class="reserva-parent">
+                    <a href="#" class="priHabilitado2">Visualizar</a>
+                    <ul class="reserva-options">
+                        <li><a href="/listaA" class="priHabilitado2">Ambientes</a></li>
                         <li><a href="#" class="priHabilitado2">Horarios</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" class="priHabilitado2">Ver Ambientes</a>
-                </li>
+
                 <li>
                     <a href="#" class="ultimo" >Ayuda</a>
                 </li>

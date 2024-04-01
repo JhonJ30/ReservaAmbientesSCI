@@ -190,7 +190,7 @@ li{
     /*background-color: #ffffff;*/
     /*border: 1px solid #cccccc;*/
     padding: 15px;
-    z-index: 1;
+    z-index: 9999;
     /* Ajustes para posicionar correctamente */
     top: 100%; /* Se colocará debajo del elemento padre */
     left: -30px; /* Se alineará con el borde izquierdo del elemento padre */
@@ -233,6 +233,7 @@ li{
     align-items: center; /* Centra los hijos horizontalmente */
     padding: 20px;
     gap: 20px; /* Espacio entre el contenido de registro y los botones */
+    z-index: -1;
 }
 .contenido-registro {
     display: flex;
@@ -414,18 +415,23 @@ label{
             <div class="menu">
             <ul>
                 <li>
-                    <a href="#" class="priHabilitado">Inicio</a>
+                    <a href="/" class="priHabilitado">Inicio</a>
                 </li>
                 <li class="reserva-parent">
                     <a href="#" class="priHabilitado2">Registrar</a>
                     <ul class="reserva-options">
                         <li><a href="#" class="priHabilitado2">Ambientes</a></li>
+                        <li><a href="/horarios" class="priHabilitado2">Horarios</a></li>
+                    </ul>
+                </li>
+                <li class="reserva-parent">
+                    <a href="#" class="priHabilitado2">Visualizar</a>
+                    <ul class="reserva-options">
+                        <li><a href="/listaA" class="priHabilitado2">Ambientes</a></li>
                         <li><a href="#" class="priHabilitado2">Horarios</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" class="priHabilitado2">Ver Ambientes</a>
-                </li>
+                
                 <li>
                     <a href="#" class="ultimo" >Ayuda</a>
                 </li>
