@@ -37,11 +37,46 @@
       <td>{{$item->estado}}</td>
       <td>
       <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
-        <button class="delete-btn" onclick="alert('Eliminar entrada 2')">Eliminar</button>
+        <button class="delete-btn" onclick="openModal()">Eliminar</button>
       </td>
     </tr>
   @endforeach
   </tbody>
 </table>
 </div>
+<!--ventana modal de eliminar-->
+<div id="myModal" class="modal">
+  <!-- Contenido del modal -->
+  <div class="modal-content">
+    <p><strong>¿Estás seguro que deseas eliminar este registro?</strong></p>
+    <br>
+    <p class="gris">Esta operacion es irreversible</p>
+    <br>
+    <!-- Botones de confirmar y cancelar -->
+    <div class="button-container">
+    <button class="btnAceptar" onclick="deleteItem()">Aceptar</button>
+    <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
+  </div>
+  </div>
+</div>
+
+<script>
+    // Función para abrir el modal
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    // Función para eliminar el elemento (simulado)
+    function deleteItem() {
+        // Aquí pondrías la lógica real para eliminar el elemento
+        alert('Elemento eliminado');
+        // Cerrar el modal después de eliminar
+        closeModal();
+    }
+</script>
 @endsection
