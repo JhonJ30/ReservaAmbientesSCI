@@ -270,18 +270,25 @@ li{
 #form-container {
     margin-bottom: 20px;/* Ajusta los márgenes para reducir el tamaño del contenedor */
     padding: 20px;
-    background-color: #f0f0f0; /*color del cuadro*/
-    border-radius: 10px; /*borde del cuadro*/
+    background-color: #9ca2a6ef; /*color del cuadro*/
+    background-color: #ADADAD; /*borde del cuadro*/
     max-width: 1200px; /* Establece un ancho máximo para el contenedor*/
+    max-width: 1000px; /* Ajusta este valor según el tamaño deseado */
     margin-left: auto; /* Centra el contenedor horizontalmente*/
     margin-right: auto;
-
+    border-radius: 10px; /*curvea el cuadro*/
 }
 /* Estilos para las etiquetas */
 label {
     display: block;
     margin-bottom: 10px;
+    font-family: sans-serif;
+    color: #0B6F63;
 }
+label::after {
+    content: "(*)";
+    color: #0B6F63;
+  }
 
 /* Estilos para los campos de entrada */
 input[type="time"],
@@ -305,14 +312,16 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+/*button:hover {
     background-color: #0056b3;
-}
+}*/
 h1{/*Registro de horario*/
-    font-size: 35px;/*agranda la letra*/
+    font-size: 38px;/*agranda la letra*/
     margin-bottom: 30px; /* Añade un margen inferior al título(abajo) */
     /*margin-left: 100px; /* Ajusta para mover el título más a la derecha */
     text-align: center;
+    font-family: sans-serif;
+    color: #0B6F63;
 }
 
 .form-row {
@@ -343,11 +352,12 @@ h1{/*Registro de horario*/
 }
 .cancelar-btn {
     background-color: #ccc; /* Color plomito */
-    color: #333; /* Color del texto */
+    color: white; /* Color del texto */
     padding: 10px 50px; /* Ajusta el tamaño del botón */
     border: 1px solid #999; /* Añade un borde */
     border-radius: 5px; /* Redondea las esquinas */
     cursor: pointer;
+    background-color: #393E41;
 }
 
 .registrar-btn {
@@ -357,6 +367,15 @@ h1{/*Registro de horario*/
     border: 1px solid #0B6F63;
     border-radius: 5px;
     cursor: pointer;
+    background-color: #0B6F63;
+}
+.cancelar-btn:hover{
+    background-color: #ee316b;
+    transition: 0.5s;
+}
+.registrar-btn:hover{
+    background-color: #17ae74;
+    transition: 0.5s;
 }
 
 
