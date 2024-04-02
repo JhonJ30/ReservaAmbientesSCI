@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 use App\Models\Ambientes;
 
 class RegistroAmbientes extends Controller
@@ -14,7 +16,7 @@ class RegistroAmbientes extends Controller
      */
     public function index(){
         $ambientes = Ambientes::all();
-            return view('verAmbientes', ['ambientes' => $ambientes]);
+            return view('buscarAmbientes', ['ambientes' => $ambientes]);
     }
 
     /**
@@ -55,7 +57,12 @@ class RegistroAmbientes extends Controller
         $ambiente->save();
 
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
-        return redirect()->route('ambientes.create')->with('success', '¡El ambiente ha sido registrado Correctamente!');
+        //return redirect()->route('ambientes.create');
+
+
+        // Redirigir a la página de creación de ambientes
+        //return redirect()->route('ambientes.create');
+        return redirect()->route('ambientes.create')->with('success', '¡Ambiente Registrado Correctamente!');
     }
     
     public function editar($id)
@@ -131,7 +138,7 @@ class RegistroAmbientes extends Controller
                       ->orWhere('ubicacion', 'like', '%' . $search . '%');
         }
         $resultados = $ambientes->get();
-        return view('verAmbientes', ['ambientes' => $resultados]);
+        return view('buscarAmbientes', ['ambientes' => $resultados]);
     }
 
     public function buscarAvanzado(Request $request) {
@@ -150,7 +157,7 @@ class RegistroAmbientes extends Controller
             $ambientes->whereBetween('capacidad', [$minValue, $maxValue]);
         }
         $resultados = $ambientes->get();
-        return view('verAmbientes', ['ambientes' => $resultados]);
+        return view('buscarAmbientes', ['ambientes' => $resultados]);
     }
     
     public function showCalendario($id){
