@@ -23,9 +23,8 @@
         </div>
         <div class="form-column">
             <label for="ambiente">Ambiente:</label>
-            <select name="ambi">
+            <select id="ambi" name="ambi">
                 <!--poner aqui metodo para recuperar ambientes seleccionados-->
-                <option value=""></option>
                 <option value="690B">690B</option>
                 <option value="Lab1">Lab1</option>
             </select>
