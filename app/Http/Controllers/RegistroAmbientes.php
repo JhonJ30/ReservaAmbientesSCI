@@ -41,6 +41,17 @@ class RegistroAmbientes extends Controller
      */
     public function store(Request $request)
     {
+        // Validar que no exista un ambiente con el mismo número y tipo
+      $existingAmbiente = Ambientes::where('nroAmb', $request->input('nroAmb'))
+      ->where('tipoAmb', $request->input('tipoAmb'))
+      ->first();
+
+     if ($existingAmbiente) {
+    // Redirigir con un mensaje de error si el ambiente ya existe
+        //return redirect()->back()->withInput()->withErrors('Ya existe un ambiente con el mismo número y tipo.');
+        return redirect()->route('ambientes.create')->with('success', '¡El ambiente ya existe!');     
+    }
+   
         //sirve para guardar datos en la bd
         $ambiente = new Ambientes();
         $ambiente->unidadAmb = $request->input('unidadAmb');
@@ -56,13 +67,6 @@ class RegistroAmbientes extends Controller
 
         // Guardar el nuevo ambiente en la base de datos
         $ambiente->save();
-
-        // Redirigir a una página de éxito o mostrar un mensaje de confirmación
-        //return redirect()->route('ambientes.create');
-
-
-        // Redirigir a la página de creación de ambientes
-        //return redirect()->route('ambientes.create');
         return redirect()->route('ambientes.create')->with('success', '¡Ambiente Registrado Correctamente!');
     }
     
