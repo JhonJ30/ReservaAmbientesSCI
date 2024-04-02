@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Horarios;
 use Illuminate\Http\Request;
+use App\Models\Ambientes;
+
 
 class horaController extends Controller
 {
@@ -28,7 +30,7 @@ class horaController extends Controller
         //sirve para guardar datos en la bd
         $Horario = new Horarios();
         $Horario->ambi = $request->input('ambi');
-        $Horario->tipoHora = $request->input('tipoHora');
+        $Horario->tipoAmbiente = $request->input('tipoAmbiente');
         $Horario->horaInicio = $request->input('horaInicio');
         $Horario->horaFin = $request->input('horaFin');
 
@@ -38,6 +40,7 @@ class horaController extends Controller
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
         return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta :)!');
     }
+
     /*public function editar($id)
     {
     $ambiente = Ambientes::find($id); 
@@ -48,4 +51,14 @@ class horaController extends Controller
 
     return view('editarAmb', compact('ambiente')); // Cambia 'ruta.vista.editar' por la ruta real de tu vista de edición
     }*/
+
+    //cambios prueba
+    public function update(Request $request, $id)
+    {
+        $ambiente = Ambientes::findOrFail($id);
+        $ambiente->update($request->all());
+
+    //return redirect()->route('ambientes.create')->with('success', '¡Ambiente actualizado Correctamente!');
+
+    }
 }
