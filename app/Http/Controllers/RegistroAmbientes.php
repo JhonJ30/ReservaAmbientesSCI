@@ -47,7 +47,8 @@ class RegistroAmbientes extends Controller
         $ambiente->tipoAmb = $request->input('tipoAmb');
         $ambiente->nroAmb = $request->input('nroAmb');
         $ambiente->ubicacion = $request->input('ubicacion');
-        $ambiente->equipamiento = $request->input('equipamiento');
+        //$ambiente->equipamiento = $request->input('equipamiento');
+        $ambiente->equipamiento = is_array($request->input('equipamiento')) ? implode(',', $request->input('equipamiento')) : $request->input('equipamiento');
         $ambiente->capacidad = $request->input('capacidad');
         $ambiente->descripcion = $request->input('descripcion');
         $ambiente->estado = $request->input('estado');
