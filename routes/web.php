@@ -29,6 +29,7 @@ Route::get('listaH', function () {
     return view('ListaHorarios');
 });
 Route::get('listaH', [horaController::class, 'create'])->name('horarios.create');
+Route::delete('/listaH/{id}', [horaController::class, 'destroy'])->name('horarios.destroy');
 
 //Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 
