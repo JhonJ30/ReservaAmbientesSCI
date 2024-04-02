@@ -16,7 +16,8 @@ class horaController extends Controller
      */
     public function create()
     {
-        return view('home');
+        $datos=Horarios::all();
+        return view('ListaHorarios', compact('datos'));
     }
     /**
      * Store a newly created resource in storage.
