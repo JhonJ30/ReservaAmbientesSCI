@@ -1,3 +1,6 @@
+@extends('layout/plantilla')
+@section('contenido')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,3 +45,4 @@
     
 </body>
 </html>
+@endsection
