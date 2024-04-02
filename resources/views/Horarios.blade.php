@@ -10,18 +10,24 @@
     <div class="form-row">
         <div class="form-column">
             <label for="tipo-ambiente">Tipo de Ambiente:</label>
-            <select name="tipoHora" id="tipo-ambiente" onchange="toggleIntervalo()">
+            <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()">
+                <option value=""></option>
                 <option value="aula">Aula</option>
                 <option value="laboratorio">Laboratorio</option>
                 <option value="auditorio">Auditorio</option>
                 <option value="taller">Taller</option>
             </select>
+            @error('tipoAmbiente')
+              <p class="error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="form-column">
             <label for="ambiente">Ambiente:</label>
             <select name="ambi">
-                <option value="aula">Aula</option>
-                <option value="laboratorio">Laboratorio</option>
+                <!--poner aqui metodo para recuperar ambientes seleccionados-->
+                <option value=""></option>
+                <option value="690B">690B</option>
+                <option value="Lab1">Lab1</option>
             </select>
         </div>
     </div>

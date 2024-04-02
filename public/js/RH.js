@@ -47,3 +47,22 @@ function calcularHoraFin() {
 // onchange sirve para controlar los intervalos o label
 document.getElementById('hora-inicio').onchange = calcularHoraFin;
 document.getElementById('intervalo').onchange = calcularHoraFin;
+
+/*
+//cuando seleccione tipo ambiente metodo
+document.getElementById('tipoAmbiente').addEventListener('change', function() {
+    var tipoSeleccionado = this.value;
+
+    // Ocultar todas las opciones de ambiente
+    document.getElementById('opcionesAula').style.display = 'none';
+    document.getElementById('opcionesTaller').style.display = 'none';
+    // Ocultar opciones de auditorio y laboratorio (añadir más líneas según sea necesario)
+
+    // Mostrar las opciones correspondientes al tipo seleccionado
+    if (tipoSeleccionado === 'aula') {
+        document.getElementById('opcionesAula').style.display = 'block';
+    } else if (tipoSeleccionado === 'taller') {
+        document.getElementById('opcionesTaller').style.display = 'block';
+    }
+    // Mostrar opciones de auditorio y laboratorio según corresponda
+});*/
