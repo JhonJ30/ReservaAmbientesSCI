@@ -66,3 +66,4 @@ document.getElementById('tipoAmbiente').addEventListener('change', function() {
     }
     // Mostrar opciones de auditorio y laboratorio según corresponda
 });*/
+

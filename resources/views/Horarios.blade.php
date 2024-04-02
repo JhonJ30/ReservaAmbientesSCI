@@ -17,17 +17,10 @@
                 <option value="auditorio">Auditorio</option>
                 <option value="taller">Taller</option>
             </select>
-            @error('tipoAmbiente')
-              <p class="error">{{ $message }}</p>
-            @enderror
         </div>
         <div class="form-column">
             <label for="ambiente">Ambiente:</label>
-            <select id="ambi" name="ambi">
-                <!--poner aqui metodo para recuperar ambientes seleccionados-->
-                <option value="690B">690B</option>
-                <option value="Lab1">Lab1</option>
-            </select>
+            <input type="text" name="ambiente" id="ambienteInput" placeholder="Ingrese el ambiente">
         </div>
     </div>
     <!-- nuevo comentario-->
@@ -43,7 +36,8 @@
     </div>
         <div class="form-column"  id="intervalo-label">
             <label for="intervalo">Intervalo (si es necesario):</label>
-            <input type="text" id="intervalo" onchange="calcularHoraFin()">
+            <input type="text" id="intervalo" onchange="calcularHoraFin()" placeholder="Ingrese el rango de intervalo">
+
         </div>
     <div class="button-container">
         <button class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Horarios;
-use Illuminate\Http\Request;
 use App\Models\Ambientes;
+use Illuminate\Http\Request;
 
 
 class horaController extends Controller
@@ -34,13 +34,21 @@ class horaController extends Controller
         $Horario->horaInicio = $request->input('horaInicio');
         $Horario->horaFin = $request->input('horaFin');
 
-        // Guardar el nuevo ambiente en la base de datos
-        $Horario->save();
-
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
         return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta :)!');
     }
 
+    public function getTiposAmbiente()
+    {
+        return Ambientes::all();
+    }
+
+    public function getNumerosAmbiente(Ambientes $tipoAmbiente)
+    {
+        $listaNros = Ambientes::all();
+
+        return view('Horarios', compact('listaNros'));
+    }
     /*public function editar($id)
     {
     $ambiente = Ambientes::find($id); 
@@ -53,12 +61,5 @@ class horaController extends Controller
     }*/
 
     //cambios prueba
-    public function update(Request $request, $id)
-    {
-        $ambiente = Ambientes::findOrFail($id);
-        $ambiente->update($request->all());
 
-    //return redirect()->route('ambientes.create')->with('success', '¡Ambiente actualizado Correctamente!');
-
-    }
 }
