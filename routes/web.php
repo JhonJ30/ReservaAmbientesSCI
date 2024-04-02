@@ -26,9 +26,10 @@ Route::delete('/listaA/{id}', [RegistroAmbientes::class, 'destroy'])->name('ambi
 
 //Einar
 Route::get('listaH', function () {
-    return view('RegistroHorario');
+    return view('ListaHorarios');
 });
-
+Route::get('listaH', [horaController::class, 'create'])->name('horarios.create');
+Route::delete('/listaH/{id}', [horaController::class, 'destroy'])->name('horarios.destroy');
 
 //Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 

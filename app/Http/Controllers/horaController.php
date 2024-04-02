@@ -16,7 +16,17 @@ class horaController extends Controller
      */
     public function create()
     {
-        return view('home');
+        $datos=Horarios::all();
+        return view('ListaHorarios', compact('datos'));
+    }
+
+    public function destroy($id)
+    {
+        //elima un registro
+        $registro = Horarios::findOrFail($id);
+        $registro->delete();
+
+        return response()->json(['success' => true]);
     }
     /**
      * Store a newly created resource in storage.
