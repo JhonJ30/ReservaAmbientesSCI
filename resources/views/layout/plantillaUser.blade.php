@@ -15,13 +15,13 @@
         <nav class="navMenu">
             <div class="menu">
                 <ul>
-                    <li><a href="/client" class="priHabilitado">Inicio</a></li>
-                    <li><a href="/client/verAmbientes" class="priHabilitado2">Ver Ambientes</a></li>
-                    <li><a href="/client/ayuda" class="ultimo">Ayuda</a></li>
+                    <li><a href="/client" class="priHabilitado"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
+                    <li><a href="/client/verAmbientes" class="priHabilitado2"><i class="fas fa-eye"></i>&nbsp;Ver Ambientes</a></li>
+                    <li><a href="/client/ayuda" class="ultimo"><i class="fas fa-question-circle"></i>&nbsp;Ayuda</a></li>
                 </ul>
                 <ul>
                     <li class="sesion">
-                        <a href="/" class='iniSesion'>Mi Cuenta</a>
+                        <a href="/" class='iniSesion'><i class="fas fa-user"></i>&nbsp;Mi Cuenta</a>
                     </li>
 
                 </ul>
