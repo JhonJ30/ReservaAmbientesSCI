@@ -1,12 +1,12 @@
 .modal {
-    position: absolute;
-    top: 40%;
+    position: fixed;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
+    width: 90%;
     background-color: #128a74;
-    border: none;
-    padding: 2%;
+    border: auto;
+    padding: 5%;
 }
 
 .modal::backdrop {
@@ -42,7 +42,7 @@
 }
 
 .minValue, .maxValue {
-    margin-left: 2%;
+    margin-left: 4%;
     width: 10%;
     height: 25px;
     border: none;
@@ -152,17 +152,13 @@ button:hover{
 }
 
 table {
-    width: 80%;
-    height: auto;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 90%;
+    width: 100%; 
+    overflow-x: auto; 
 }
 
 td {
-    border: 1px solid #0d7360;
-    background-color: #bbc0c2;
     padding: 8px;
+    white-space: nowrap;
 }
 
 th {
@@ -186,14 +182,9 @@ td button {
 }
 
 @media only screen and (max-width: 600px) {
-    table,
-    thead,
-    tbody,
-    th,
-    td,
-    tr {
-        display: block;
-    }
+    .modal {
+        width: 95%;  
+        max-width: none; 
     th {
         position: absolute;
         top: -9999px;
@@ -227,4 +218,5 @@ td button {
     td:nth-of-type(4):before {
         content: "Ciudad:";
     }
+}
 }
