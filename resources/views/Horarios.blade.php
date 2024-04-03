@@ -11,6 +11,7 @@
         <div class="form-column">
             <label for="tipo-ambiente">Tipo de Ambiente:</label>
             <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" required>
+                 <option value="" disabled selected hidden>----</option>
                 <option value="aula">Aula</option>
                 <option value="laboratorio">Laboratorio</option>
                 <option value="auditorio">Auditorio</option>
@@ -20,8 +21,10 @@
         <div class="form-column">
             <label for="ambiente">Ambiente:</label>
             <select name="ambi" required>
-                <option value="690B">690B</option>
-                <option value="Lab1">Lab1</option>
+                <option value="" disabled selected hidden>----</option>
+                   @foreach($ambientes as $ambiente)
+                <option value="{{ $ambiente->nroAmb }}">{{ $ambiente->nroAmb }}</option>
+            @endforeach
             </select>
         </div>
     </div>
@@ -43,7 +46,7 @@
 
         </div>
     <div class="button-container">
-        <button class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
+        <button type="button" class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
         <button class="registrar-btn" type="submit">Registrar</button>
     </div>
 </form>

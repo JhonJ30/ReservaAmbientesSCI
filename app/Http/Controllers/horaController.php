@@ -78,7 +78,7 @@ class horaController extends Controller
 
 
         // Obtener todos los ambientes disponibles
-    $ambientes = Ambientes::all();//para q aparezca ambientes
+        $ambientes = Ambientes::all(); //para q aparezca ambientes
 
 
         // Puedes agregar más lógica según tus necesidades, como redireccionar a otra página

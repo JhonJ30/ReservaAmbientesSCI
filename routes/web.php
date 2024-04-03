@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Ambientes;
 use App\Http\Controllers\horaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroAmbientes;
@@ -68,13 +69,14 @@ Route::get('/listaH/{id}/editar', [horaController::class, 'edit'])->name('horari
 /*Route::put('/listaH/{id}', [horaController::class, 'update'])->name('actualizarHorario');*/
 /*Route::post('/actualizar-horario/{id}', 'HorarioController@actualizarHorario')->name('actualizarHorario');
 Route::get('/obtener-horario/{id}', 'HorarioController@obtenerHorario')->name('obtenerHorario');*/
-Route::get('/horarios/editar/{id}', [horaController::class, 'editar'])->name('horarios.editar');
+/*Route::get('/horarios/editar/{id}', [horaController::class, 'editar'])->name('horarios.editar');*/
 Route::put('/horarios/{id}', [horaController::class, 'update'])->name('horarios.update');
 Route::get('/ruta', 'horaController@metodo')->name('nombre.ruta'); //CAMBIO PARA MODIFICAR
-
-
-
-
+//listado de ambientes
+Route::get('/horarios', function () {
+    $ambientes = App\Models\Ambientes::all();
+    return view('Horarios')->with('ambientes', $ambientes);
+});
 
 
 
