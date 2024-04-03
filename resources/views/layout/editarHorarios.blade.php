@@ -427,10 +427,11 @@ h1{/*Registro de horario*/
            <!-- <input name="horaFin" type="time" id="hora-fin" value="{{ $horario->horaFin }}">-->
         </div>
     </div>
-        <div class="form-column"  id="intervalo-label">
-            <label for="intervalo">Intervalo:</label>
-            <input type="text" id="intervalo" name="intervalo" placeholder="Ingrese el rango de intervalo" value="{{ $horario->intervalo }}" ><!--CAMBIOS-->
-        </div>
+    <div class="form-column"  id="intervalo-label">
+        <label for="intervalo">Intervalo (si es necesario):</label>
+        <input type="text" id="intervalo" onchange="calcularHoraFin()" placeholder="Ingrese el rango de intervalo">
+
+    </div>
     <div class="button-container">
         <button class="cancelar-btn" type="button" onclick="cancelarRegistro()">Cancelar</button>
         <button class="Editar-btn" type="submit">Guardar Cambios</button>

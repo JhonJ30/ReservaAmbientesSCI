@@ -88,6 +88,6 @@ class horaController extends Controller
         $horario->save();
 
         // Puedes agregar más lógica según tus necesidades, como redireccionar a otra página
-        return redirect('/')->with('success', 'Horario actualizado exitosamente');
+        return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido modificado y guardado de manera correcta :)!');
     }
 }
