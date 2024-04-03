@@ -61,17 +61,6 @@ class horaController extends Controller
 
         return view('Horarios', compact('listaNros'));
     }
-    /*public function editar($id)
-    {
-    $ambiente = Ambientes::find($id); 
-
-    if (!$ambiente) {
-        return redirect()->route('listaA'); // Redirige a la lista si el ambiente no existe
-    }
-
-    return view('editarAmb', compact('ambiente')); // Cambia 'ruta.vista.editar' por la ruta real de tu vista de edición
-    }*/
-
     //cambios prueba AQUIIIIIIIIIIIIIIII
     public function edit($id)
     {
@@ -86,6 +75,11 @@ class horaController extends Controller
         $horario->horaInicio = $request->horaInicio;
         $horario->horaFin = $request->horaFin;
         $horario->save();
+
+
+        // Obtener todos los ambientes disponibles
+    $ambientes = Ambientes::all();//para q aparezca ambientes
+
 
         // Puedes agregar más lógica según tus necesidades, como redireccionar a otra página
         return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido modificado y guardado de manera correcta :)!');
