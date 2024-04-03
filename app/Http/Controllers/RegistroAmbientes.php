@@ -143,7 +143,12 @@ class RegistroAmbientes extends Controller
                       ->orWhere('ubicacion', 'like', '%' . $search . '%');
         }
         $resultados = $ambientes->get();
-        return view('buscarAmbientes', ['ambientes' => $resultados]);
+
+        if ($resultados->isEmpty()) {
+            return view('buscarAmbientes');
+        } else {
+            return view('buscarAmbientes', ['ambientes' => $resultados]);
+        }
     }
 
     public function buscarAvanzado(Request $request) {
@@ -162,7 +167,12 @@ class RegistroAmbientes extends Controller
             $ambientes->whereBetween('capacidad', [$minValue, $maxValue]);
         }
         $resultados = $ambientes->get();
-        return view('buscarAmbientes', ['ambientes' => $resultados]);
+        
+        if ($resultados->isEmpty()) {
+            return view('buscarAmbientes');
+        } else {
+            return view('buscarAmbientes', ['ambientes' => $resultados]);
+        }
     }
     
     public function showCalendario($id){

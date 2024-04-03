@@ -2,7 +2,7 @@
 
 <form action="/client/buscarAmbientes" method="GET">
 <div class="searchBox">
-    <input class="search" type="text" name="search" spellcheck="false" placeholder="Nombre del Aula, Ubicación...">
+    <input class="search" type="text" name="search" spellcheck="false" placeholder="No Aula, Ubicación..." maxlength="20" pattern="[a-zA-Z0-9 ]+">
     <div class="icon">
         <button class="iconButton" type="submit">
             <i class="fas fa-search"></i>
