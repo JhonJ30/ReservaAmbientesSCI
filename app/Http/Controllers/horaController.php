@@ -51,6 +51,8 @@ class horaController extends Controller
         return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta :)!');
     }
 
+   
+
     /*public function editar($id)
     {
     $ambiente = Ambientes::find($id); 
