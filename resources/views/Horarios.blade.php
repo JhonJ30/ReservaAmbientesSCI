@@ -10,44 +10,43 @@
     <div class="form-row">
         <div class="form-column">
             <label for="tipo-ambiente">Tipo de Ambiente:</label>
-            <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()">
-                <option value=""></option>
+            <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" required>
+                 <option value="" disabled selected hidden>----</option>
                 <option value="aula">Aula</option>
                 <option value="laboratorio">Laboratorio</option>
                 <option value="auditorio">Auditorio</option>
                 <option value="taller">Taller</option>
             </select>
-            @error('tipoAmbiente')
-              <p class="error">{{ $message }}</p>
-            @enderror
         </div>
         <div class="form-column">
             <label for="ambiente">Ambiente:</label>
-            <select name="ambi">
-                <!--poner aqui metodo para recuperar ambientes seleccionados-->
-                <option value=""></option>
-                <option value="690B">690B</option>
-                <option value="Lab1">Lab1</option>
+            <select name="ambi" required>
+                <option value="" disabled selected hidden>----</option>
+                   @foreach($ambientes as $ambiente)
+                <option value="{{ $ambiente->nroAmb }}">{{ $ambiente->nroAmb }}</option>
+            @endforeach
             </select>
         </div>
     </div>
+
     <!-- nuevo comentario-->
     <div class="form-row">
         <div class="form-column">
             <label for="hora-inicio">Hora de Inicio:</label>
-            <input name="horaInicio" type="time" id="hora-inicio"  onchange="calcularHoraFin()">
+            <input name="horaInicio" type="time" id="hora-inicio"  onchange="calcularHoraFin()" required>
         </div>
         <div class="form-column">
             <label for="hora-fin">Hora de Fin:</label>
-            <input name="horaFin" type="time" id="hora-fin">
+            <input name="horaFin" type="time" id="hora-fin" required>
         </div>
     </div>
         <div class="form-column"  id="intervalo-label">
             <label for="intervalo">Intervalo (si es necesario):</label>
-            <input type="text" id="intervalo" onchange="calcularHoraFin()">
+            <input type="text" id="intervalo" onchange="calcularHoraFin()" placeholder="Ingrese el rango de intervalo" requiered>
+
         </div>
     <div class="button-container">
-        <button class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
+        <button type="button" class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
         <button class="registrar-btn" type="submit">Registrar</button>
     </div>
 </form>

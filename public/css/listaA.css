@@ -60,7 +60,16 @@ table {
   .edit-btn {
     background-color: #393e41;
     color: white;
+    background-color: #393e41;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
   }
+
   .delete-btn {
     background-color: #0D7360;
     color: white;

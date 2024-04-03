@@ -48,21 +48,15 @@ function calcularHoraFin() {
 document.getElementById('hora-inicio').onchange = calcularHoraFin;
 document.getElementById('intervalo').onchange = calcularHoraFin;
 
-/*
-//cuando seleccione tipo ambiente metodo
-document.getElementById('tipoAmbiente').addEventListener('change', function() {
-    var tipoSeleccionado = this.value;
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+ // Esta función se llama cuando se carga la página para mostrar automáticamente el modal
+ window.onload = function() {
+    document.getElementById('myModal').style.display = 'block';
+};
 
-    // Ocultar todas las opciones de ambiente
-    document.getElementById('opcionesAula').style.display = 'none';
-    document.getElementById('opcionesTaller').style.display = 'none';
-    // Ocultar opciones de auditorio y laboratorio (añadir más líneas según sea necesario)
-
-    // Mostrar las opciones correspondientes al tipo seleccionado
-    if (tipoSeleccionado === 'aula') {
-        document.getElementById('opcionesAula').style.display = 'block';
-    } else if (tipoSeleccionado === 'taller') {
-        document.getElementById('opcionesTaller').style.display = 'block';
-    }
-    // Mostrar opciones de auditorio y laboratorio según corresponda
-});*/
+function cancelarRegistro() {
+    // Redirige a la página de inicio
+    window.location.href = '/'; // Cambia '/' por la ruta de tu página de inicio si es diferente
+}

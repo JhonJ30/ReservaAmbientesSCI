@@ -16,21 +16,21 @@
 <table>
   <thead>
     <tr>
-      <th>Tipo de Ambiente</th>
-      <th>Ambiente</th>
-      <th>Hora de inicio</th>
-      <th>Hora de fin</th>
-      <th>Acciones</th>
+      <th style="text-align: center;">Tipo de Ambiente</th>
+      <th style="text-align: center;">Ambiente</th>
+      <th style="text-align: center;">Hora de inicio</th>
+      <th style="text-align: center;">Hora de fin</th>
+      <th style="text-align: center;">Acciones</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($datos as $item )
     <tr>
-      <td>{{$item->tipoAmbiente}}</td>
-      <td>{{$item->ambi}}</td>
-      <td>{{$item->horaInicio}}</td>
-      <td>{{$item->horaFin}}</td>
-      <td>
+      <td style="text-align: center;">{{$item->tipoAmbiente}}</td>
+      <td style="text-align: center;">{{$item->ambi}}</td>
+      <td style="text-align: center;">{{$item->horaInicio}}</td>
+      <td style="text-align: center;">{{$item->horaFin}}</td>
+      <td style="text-align: center;">
       <button class="edit-btn" onclick="">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
