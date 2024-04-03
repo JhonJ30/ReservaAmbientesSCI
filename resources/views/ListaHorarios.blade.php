@@ -31,7 +31,7 @@
       <td>{{$item->horaInicio}}</td>
       <td>{{$item->horaFin}}</td>
       <td>
-      <button class="edit-btn" onclick=" ">Modificar</button>
+      <button class="edit-btn" onclick="">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>
