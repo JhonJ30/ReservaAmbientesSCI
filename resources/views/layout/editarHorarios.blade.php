@@ -397,7 +397,7 @@ h1{/*Registro de horario*/
     <div class="form-row">
         <div class="form-column">
             <label for="tipo-ambiente">Tipo de Ambiente:</label>
-            <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" required>
+            <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" required disabled>
                 <option value="" disabled selected hidden>----</option>
                 <option value="aula" {{ $horario->tipoAmbiente == 'aula' ? 'selected' : '' }}>Aula</option>
                 <option value="laboratorio" {{ $horario->tipoAmbiente == 'laboratorio' ? 'selected' : '' }}>Laboratorio</option>
@@ -407,7 +407,7 @@ h1{/*Registro de horario*/
         </div>
         <div class="form-column">
             <label for="ambiente">Ambiente:</label>
-            <select name="ambi" required>
+            <select name="ambi" required disabled>
                 <option value="" disabled selected hidden>----</option>
                 <option value="690B" {{ $horario->ambi == '690B' ? 'selected' : '' }}>690B</option>
                 <option value="Lab1" {{ $horario->ambi == 'Lab1' ? 'selected' : '' }}>Lab1</option>

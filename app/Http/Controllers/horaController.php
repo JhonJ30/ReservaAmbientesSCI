@@ -70,8 +70,7 @@ class horaController extends Controller
     public function update(Request $request, $id)
     {
         $horario = Horarios::find($id);
-        $horario->tipoAmbiente = $request->tipoAmbiente;
-        $horario->ambi = $request->ambi;
+
         $horario->horaInicio = $request->horaInicio;
         $horario->horaFin = $request->horaFin;
         $horario->save();
