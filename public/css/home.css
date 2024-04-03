@@ -8,6 +8,7 @@
 body{
     font-family: sans-serif;
     background-color: #E9F4F3;
+    
 }
 
 .div1 {
@@ -36,6 +37,7 @@ body{
     font-size: 16px;
     transform: translateX(-80px);
     
+    
 }
 
 li a {
@@ -47,7 +49,8 @@ li a {
     /*transition: border-color 0.3s, color 0.3s;*/
     /*border-radius: 5px;*/
     background-color: #F0F0F0;
-    color: #969696;
+    /*color: #969696;*/
+    
 }
 
 
@@ -62,6 +65,7 @@ ul {
     white-space: nowrap;
     align-items: center;
     margin-left: 15px;
+    
 }
 
 li{
@@ -99,8 +103,8 @@ li{
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: #0B6F63;
-    color: #F5F6F7;
+    background-color: #F5F6F7;
+    color: #3d475b;
     border-radius: 7px ;
     transition: background-color 0.3s;
     transition: color 0.3s;
@@ -156,6 +160,7 @@ li{
 .sesion{
     position: relative;
     left: 20px;
+    color:black;
 }
 
 /*Detecta cambio de ancho*/

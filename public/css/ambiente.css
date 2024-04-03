@@ -1,0 +1,212 @@
+
+.registro {
+width: 950px;
+height: auto; /* Ajusta según sea necesario para acomodar el contenido */
+position: absolute;
+left: 50%;
+top: 60%;
+transform: translate(-50%, -50%);
+background-color: #ADADAD;
+border: none;
+border-radius: 9px;
+display: flex;
+flex-direction: column; /* Alinea los hijos (columnas y botones) verticalmente */
+align-items: center; /* Centra los hijos horizontalmente */
+padding: 20px;
+gap: 20px; /* Espacio entre el contenido de registro y los botones */
+z-index: -1;
+
+}
+.contenido-registro {
+display: flex;
+justify-content: center;
+width: 100%;
+gap: 20px; /* Espacio entre las columnas */
+margin-bottom: 20px;
+}
+
+.botones {
+width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+display: flex;
+justify-content: center; /* Centra los botones horizontalmente */
+gap: 300px; /* Espacio entre los botones */
+}
+.botones button{
+width: 20%;
+height: 35px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+color: #FFFFFF;
+
+}
+.col1{
+margin-top: 85px;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-left: -70px;
+
+}
+.col1 label, select,textarea,input{
+padding: 5px;
+margin: 5px;
+
+}
+.col2{
+margin-top: 85px;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-left: 70px;
+}
+.col2 label, select,input{
+padding: 5px;
+margin: 5px;
+
+}
+.col3{
+margin-top: 70px;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-left: 50px;
+}
+.col3 label, textarea,input{
+padding: 5px;
+margin: 5px;
+
+}
+.titulo-registro h1{
+font-size: 2.5em; 
+margin-bottom: -80px; 
+font-family: sans-serif;
+color: #0B6F63;
+}
+
+select {
+width: 140px; /* Ajusta este valor al ancho deseado */
+padding: 5px; /* Añade un poco de relleno para que sea más fácil de usar */
+margin: 5px 0; /* Asegura un poco de espacio alrededor de los elementos para evitar la superposición */
+background-color: #fff; /* Fondo blanco o cualquier otro color deseado */
+border: 1px solid black; /* Borde sutil, cambia según prefieras */
+border-radius: 8px; /* Bordes redondeados para un aspecto moderno */
+box-shadow: inset 0 1px 3px #ddd; /* Sombra interna sutil para dar profundidad */
+font-family: sans-serif; /* Asegura una fuente consistente */
+font-size: 1em; /* Tamaño de fuente estándar */
+
+}
+input[type="text"]{
+width: 140px; /* Ajusta el ancho según sea necesario */
+padding: 6px 10px; /* Añade un relleno para hacerlo más cómodo al escribir */
+margin: 5px 0; /* Espacio antes y después del input */
+border: 1px solid black; /* Borde sutil */
+border-radius: 8px; /* Bordes redondeados para un aspecto suave */
+box-sizing: border-box; /* Asegura que el padding no aumente el tamaño del input */
+background-color: #f8f8f8; /* Fondo ligeramente gris para los inputs */
+font-family: sans-serif; /* Asegura una fuente consistente */
+font-size: 1em; /* Tamaño de fuente adecuado */
+text-align: center;
+}
+.textarea1{
+width: 170px; /* Ajusta el ancho según sea necesario */
+padding: 11px 10px; /* Añade un relleno para hacerlo más cómodo al escribir */
+margin: 5px 0; /* Espacio antes y después del input */
+border: 1px solid black; /* Borde sutil */
+border-radius: 11px; /* Bordes redondeados para un aspecto suave */
+box-sizing: border-box; /* Asegura que el padding no aumente el tamaño del input */
+background-color: #f8f8f8; /* Fondo ligeramente gris para los inputs */
+font-family: sans-serif; /* Asegura una fuente consistente */
+font-size: 1em; /* Tamaño de fuente adecuado */
+resize: none;
+
+}
+.textarea2{
+width: 210px; /* Ajusta el ancho según sea necesario */
+height: 105px;
+padding: 10px 10px; /* Añade un relleno para hacerlo más cómodo al escribir */
+margin: 5px 0; /* Espacio antes y después del input */
+border: 1px solid black; /* Borde sutil */
+border-radius: 11px; /* Bordes redondeados para un aspecto suave */
+box-sizing: border-box; /* Asegura que el padding no aumente el tamaño del input */
+background-color: #f8f8f8; /* Fondo ligeramente gris para los inputs */
+font-family: sans-serif; /* Asegura una fuente consistente */
+font-size: 1em; /* Tamaño de fuente adecuado */
+resize: none;
+
+}
+label{
+color: #0B6F63;
+font-size: 16px;
+}
+.botonCancelar{
+background-color: #393E41;
+}
+.botonRegistrar{
+background-color: #0B6F63;
+}
+.botonCancelar:hover{
+background-color: #ee316b;
+transition: 0.5s;
+}
+.botonRegistrar:hover{
+background-color: #17ae74;
+transition: 0.5s;
+}
+
+/* Agregar reglas de CSS para hacer el diseño responsive */
+@media (max-width: 768px) {
+.registro {
+width: 90%; /* Reducir el ancho del formulario en pantallas más pequeñas */
+padding: 10px; /* Ajustar el padding del formulario */
+margin-top: 280px; /* Aumentar el margen superior en pantallas más pequeñas */
+margin-bottom: 50px; /* Añadir un margen inferior para evitar que se superponga con el botón */
+}
+
+.contenido-registro {
+flex-direction: column; /* Colocar las columnas una debajo de la otra en pantallas más pequeñas */
+}
+
+.col1, .col2, .col3 {
+margin-left: 0; /* Eliminar el margen izquierdo en las columnas para que se alineen correctamente */
+text-align: center; /* Centrar el contenido de las columnas */
+width: 100%; /* Asegurar que las columnas ocupen todo el ancho disponible */
+margin-bottom: -90px; /* Agregar un margen inferior para separar las columnas */
+}
+.botones {
+flex-direction: column; /* Apilar los botones verticalmente */
+gap: 10px; /* Agregar espacio entre los botones */
+margin-top: 70px; /* Ajustar el margen superior */
+}
+.botones button{
+width: 100%;
+}
+.titulo-registro{
+text-align: center;
+}
+}
+
+/*Estilos para mis mensajes de error*/
+.texto-error-advertencia{
+font-size: 12px;
+}
+
+/*implementado por mary*/
+
+.cancelar-btn {
+    background-color: #ccc; /* Color plomito */
+    color: white; /* Color del texto */
+    padding: 10px 100px; /* Ajusta el tamaño del botón */
+    border: 1px solid #999; /* Añade un borde */
+    border-radius: 5px; /* Redondea las esquinas */
+    cursor: pointer;
+    background-color: #393E41;
+    justify-content: center;
+    display: flex;
+}
+.cancelar-btn:hover{
+    background-color: #ee316b;
+    transition: 0.5s;
+}
+
+
