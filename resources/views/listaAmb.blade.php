@@ -7,10 +7,16 @@
 <br>
 <h2>Lista de Ambientes</h2>
 <br>
-<div class="search-container">
-  <input type="text" placeholder="Buscar..." class="search-input">
-  <button class="search-button"><i class="fas fa-search"></i></button>
-</div>
+<!--buscador -->
+      <form action="/listaA/search" method="GET">
+      <div class="search-container">
+        
+            <input type="text" name="search" placeholder="Buscar por nro de  ambiente.." class="search-input">
+            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+        
+      </div>
+      </form> 
+
 <br>
 <div> 
 <table>
@@ -24,7 +30,7 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($datos as $item )
+    @foreach ($ambientes as $item )
     <tr>
       <td>{{$item->nroAmb}}</td>
       <td>{{$item->capacidad}}</td>
