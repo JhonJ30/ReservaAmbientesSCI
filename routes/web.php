@@ -52,7 +52,7 @@ Route::delete('/listaH/{id}', [horaController::class, 'destroy'])->name('horario
 
 
 
-// Saritaxd
+// Sara
 Route::get('horarios', function () {
     return view('Horarios');
 });
@@ -63,6 +63,15 @@ Route::get('/HO', function () {
 })->name('HO');
 /*Route::get('/',[horaController::class, 'storeh'])->name('sara.create');*/
 Route::get('horarios/create', [horaController::class, 'create'])->name('Horarios.create');
+//modificar para el boton xd
+Route::get('/listaH/{id}/editar', [horaController::class, 'edit'])->name('horarios.edit'); //inidica donde debe llegar
+/*Route::put('/listaH/{id}', [horaController::class, 'update'])->name('actualizarHorario');*/
+/*Route::post('/actualizar-horario/{id}', 'HorarioController@actualizarHorario')->name('actualizarHorario');
+Route::get('/obtener-horario/{id}', 'HorarioController@obtenerHorario')->name('obtenerHorario');*/
+Route::get('/horarios/editar/{id}', [horaController::class, 'editar'])->name('horarios.editar');
+Route::put('/horarios/{id}', [horaController::class, 'update'])->name('horarios.update');
+Route::get('/ruta', 'horaController@metodo')->name('nombre.ruta'); //CAMBIO PARA MODIFICAR
+
 
 
 

@@ -31,7 +31,8 @@
       <td>{{$item->horaInicio}}</td>
       <td>{{$item->horaFin}}</td>
       <td>
-      <button class="edit-btn" onclick=" ">Modificar</button>
+        <!--BOTON MODIFICAR-->
+        <a href="{{ route('horarios.edit', ['id' => $item->id]) }}" class="edit-btn">Modificar</a><!--CAMBIOOOOOOOOS-->
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>

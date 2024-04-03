@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Horarios;
-use App\Models\Ambientes; //CAMBIO 
+use App\Models\Ambientes;
 use Illuminate\Http\Request;
-
-
 
 class horaController extends Controller
 {
@@ -17,9 +15,10 @@ class horaController extends Controller
      */
     public function create()
     {
-        $datos = Horarios::all(); //CAMBIO
-        return view('ListaHorarios', compact('datos')); //CAMBIO
+        $datos = Horarios::all();
+        return view('ListaHorarios', compact('datos'));
     }
+
     public function destroy($id)
     {
         //elima un registro
@@ -27,7 +26,7 @@ class horaController extends Controller
         $registro->delete();
 
         return response()->json(['success' => true]);
-    } //CAMBIO
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -50,6 +49,7 @@ class horaController extends Controller
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
         return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta :)!');
     }
+
     public function getTiposAmbiente()
     {
         return Ambientes::all();
@@ -72,6 +72,22 @@ class horaController extends Controller
     return view('editarAmb', compact('ambiente')); // Cambia 'ruta.vista.editar' por la ruta real de tu vista de edición
     }*/
 
-    //cambios prueba
+    //cambios prueba AQUIIIIIIIIIIIIIIII
+    public function edit($id)
+    {
+        $horario = Horarios::findOrFail($id);
+        return view('layout.editarHorarios', compact('horario'));
+    } //CAMBIOSMODIFICAR
+    public function update(Request $request, $id)
+    {
+        $horario = Horarios::find($id);
+        $horario->tipoAmbiente = $request->tipoAmbiente;
+        $horario->ambi = $request->ambi;
+        $horario->horaInicio = $request->horaInicio;
+        $horario->horaFin = $request->horaFin;
+        $horario->save();
 
+        // Puedes agregar más lógica según tus necesidades, como redireccionar a otra página
+        return redirect('/')->with('success', 'Horario actualizado exitosamente');
+    }
 }

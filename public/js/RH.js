@@ -65,3 +65,5 @@ function closeModal() {
 function cancelarRegistro() {
     document.getElementById("formulario").reset();
 }
+//modificar
+
