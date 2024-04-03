@@ -27,8 +27,8 @@ class RegistroAmbientes extends Controller
     public function create()
     {
         //el formulario donde nosotros aagregamos datos
-        $datos=Ambientes::all();
-        return view('listaAmb', compact('datos'));
+        $ambientes=Ambientes::all();
+        return view('listaAmb', compact('ambientes'));
         
         //return view('pruebita');
     }
@@ -133,7 +133,18 @@ class RegistroAmbientes extends Controller
 
         return response()->json(['success' => true]);
     }
+    //buscador de administrador
 
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        
+        $ambientes = Ambientes::where('nroAmb', 'like', '%' . $searchTerm . '%')->get();
+       return view('listaAmb',  compact('ambientes'));
+        
+    }
+
+    //buscador de usuario
     public function buscar(Request $request){
         $search = $request->input('search');
         $ambientes = Ambientes::query();
