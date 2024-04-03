@@ -32,11 +32,11 @@
     <div class="form-row">
         <div class="form-column">
             <label for="hora-inicio">Hora de Inicio:</label>
-            <input name="horaInicio" type="time" id="hora-inicio"  onchange="calcularHoraFin()" required>
+            <input name="horaInicio" type="time" id="hora-inicio"  onchange="calcularHoraFin()" required min="06:45" max="21:45">
         </div>
         <div class="form-column">
             <label for="hora-fin">Hora de Fin:</label>
-            <input name="horaFin" type="time" id="hora-fin" required>
+            <input name="horaFin" type="time" id="hora-fin" required min="06:45" max="21:45">
         </div>
     </div>
         <div class="form-column"  id="intervalo-label">
