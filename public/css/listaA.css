@@ -105,7 +105,7 @@ table {
       white-space: nowrap;
     }
     td:nth-of-type(1):before { content: "Nro:"; }
-    td:nth-of-type(2):before { content: "capacidad:"; }
+    td:nth-of-type(2):before { content: "Capacidad:"; }
     td:nth-of-type(3):before { content: "Ubicacion:"; }
     td:nth-of-type(4):before { content: "Estado:"; }
       
