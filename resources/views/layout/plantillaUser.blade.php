@@ -8,7 +8,7 @@
     <link href="{{asset ('css/home.css')}}" rel="stylesheet">
     <title>@yield('titulopagina')</title>
 </head>
-
+<!--menu usuario-->
 <body>
     <div class="div1" id="div1">
         <img src="{{asset ('img/san simon.png')}}" class="logo" alt="...">
