@@ -250,6 +250,7 @@ table {
       width: 45%;
       padding-right: 10px;
       white-space: nowrap;
+      text-align: center; 
     }
     td:nth-of-type(1):before { content: "Nro Aula:"; }
     td:nth-of-type(2):before { content: "Capacidad:"; }
