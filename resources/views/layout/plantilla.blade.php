@@ -230,6 +230,20 @@
   .submenu.active {
     display: block;
   }
+  .avisos{
+    flex-direction: column;
+  }
+  .comunicado img, .tecno img {
+    max-width: 100%;
+    height: auto;
+    margin: 1px 0; /* Ajusta los márgenes para las imágenes */
+  }
+  .tecno img {
+    margin-left: -4px !important; 
+  }
+  .aviso{
+    text-align: center;
+  }
 }
 .container {
     max-width: 100%;
@@ -248,7 +262,7 @@
 .comunicado img{
     width: 650px;
     height: 435px;
-    margin-left: 2%;
+    margin-left: -1%;
     margin-top: 12px;
 }
 .avisos{
@@ -258,7 +272,7 @@
     width: 650px;
     height: 435px;
     margin-top: 12px;
-    margin-left: 37px;
+    margin-left: 25px;
 }
 
 
