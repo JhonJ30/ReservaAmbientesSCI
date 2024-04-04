@@ -22,21 +22,21 @@
 <table>
   <thead>
     <tr>
-      <th>Nro</th>
-      <th>capacidad</th>
-      <th>Ubicacion</th>
-      <th>Estado</th>
-      <th>Acciones</th>
+      <th style="text-align: center;">Nro</th>
+      <th style="text-align: center;">capacidad</th>
+      <th style="text-align: center;">Ubicacion</th>
+      <th style="text-align: center;">Estado</th>
+      <th style="text-align: center;">Acciones</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($ambientes as $item )
     <tr>
-      <td>{{$item->nroAmb}}</td>
-      <td>{{$item->capacidad}}</td>
-      <td>{{$item->ubicacion}}</td>
-      <td>{{$item->estado}}</td>
-      <td>
+      <td style="text-align: center;">{{$item->nroAmb}}</td>
+      <td style="text-align: center;">{{$item->capacidad}}</td>
+      <td style="text-align: center;">{{$item->ubicacion}}</td>
+      <td style="text-align: center;">{{$item->estado}}</td>
+      <td style="text-align: center;">
       <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
