@@ -236,13 +236,15 @@
   .comunicado img, .tecno img {
     max-width: 100%;
     height: auto;
-    margin: 1px 0; /* Ajusta los márgenes para las imágenes */
+    margin: 10px 0;
+    margin-top: -3px !important;
   }
   .tecno img {
     margin-left: -4px !important; 
   }
   .aviso{
     text-align: center;
+    
   }
 }
 .container {
@@ -254,8 +256,8 @@
 /*hasta aqui*/
 .aviso{
     font-size: 30px;
-    margin-left: 2%;
-    margin-top: 20px;
+    margin-left: 0.5%;
+    margin-top: 15px;
     font-family: sans-serif;
     color: #3d475b;
 }
