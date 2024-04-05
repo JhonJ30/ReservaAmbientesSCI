@@ -76,6 +76,7 @@ h1{/*Registro de horario*/
 #intervalo {
     width: 50%; /* Puedes ajustar el valor según tus necesidades */
 }
+/*CAMBIOS PARA BOTONES RESPONSIVOS ------------------------------------------------------------*/
 /* Estilos de los botones cancelar y registrar */
 .button-container {
     display: flex;
@@ -84,8 +85,32 @@ h1{/*Registro de horario*/
 }
 
 .button-container button {
-    margin: 0 90px; /* Agrega un margen horizontal entre los botones */
+    /*margin: 0 90px; /* Agrega un margen horizontal entre los botones */
+    margin: 0 190px;  /* Ajusta un margen horizontal entre los botones usando porcentajes */
+   /* flex-grow: 1; /* Permite que los botones crezcan para ocupar el espacio disponible */
+    max-width: 95%; /* Establece un ancho máximo para los botones */
+    font-size: 16px; /* Tamaño de fuente predeterminado */
 }
+/* Estilos específicos para pantallas más pequeñas*/
+@media screen and (max-width: 600px) {
+    .button-container {
+        flex-direction: column; /* Cambia la dirección de los botones a vertical */
+        align-items: center; /* Centra los botones verticalmente */
+    }
+
+    .button-container button {
+        margin: 2% 0; /* Ajusta el margen superior e inferior */
+        width: 150%; /* Ajusta el ancho de los botones al 90% del contenedor */
+        font-size: 15px;
+    }
+}
+/* Estilos específicos para pantallas más grandes */
+@media screen and (min-width: 1200px) {
+    .button-container button {
+        font-size: 16px; /* Ajusta el tamaño de la fuente para botones más pequeños en pantallas grandes */
+    }
+}
+/*hasta aqui CAMBIO DE BOTONES RESPONSIVOS---------------------------------------------------------------------*/
 .cancelar-btn {
     background-color: #ccc; /* Color plomito */
     color: white; /* Color del texto */
