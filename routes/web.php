@@ -60,7 +60,7 @@ Route::delete('/listaH/{id}', [horaController::class, 'destroy'])->name('horario
 
 
 
-// Sara
+// Sara Colque 
 Route::get('horarios', function () {
     return view('Horarios');
 });
