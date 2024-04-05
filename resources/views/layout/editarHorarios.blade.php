@@ -83,18 +83,41 @@ h1{/*Registro de horario*/
 }
 
 .button-container button {
-    margin: 0 90px; /* Agrega un margen horizontal entre los botones */
+    margin: 0 30px; /* Agrega un margen horizontal entre los botones */
+    padding: 10px 50px; /* Ancho relativo */
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;   
 }
-.cancelar-btn {
-    background-color: #ccc; /* Color plomito */
-    color: white; /* Color del texto */
-    padding: 10px 50px; /* Ajusta el tamaño del botón */
-    border: 1px solid #999; /* Añade un borde */
-    border-radius: 5px; /* Redondea las esquinas */
-    cursor: pointer;
+button.cancelar-btn {
     background-color: #393E41;
+    color: white;
+    padding: 10px 20px; /* Ancho relativo */
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
+/* Estilos específicos para pantallas más pequeñas*/
+@media screen and (max-width: 600px) {
+    .button-container {
+        flex-direction: column; /* Cambia la dirección de los botones a vertical */
+        align-items: center; /* Centra los botones verticalmente */
+        text-align: center;
+    }
+
+    .button-container button {
+        margin: 10px 0; /* Ajusta el margen superior e inferior */
+        width: 80%; /* Ajusta el ancho de los botones */
+        font-size: 16px; /* Tamaño de la fuente */
+        padding: 15px 135px; /* Ajusta el relleno */
+    }
+    BUTTON.cancelar-btn {
+        width: 80%; /* Botón ocupa el 80% del ancho disponible en pantallas pequeñas */
+        min-width: unset; /* Eliminar el ancho mínimo */
+        margin: 10px auto; /* Centra el botón */
+    }
+}
 .Editar-btn {
     background-color: #0B6F63; /* Color verde */
     color: white; /* Color del texto */
@@ -112,6 +135,7 @@ h1{/*Registro de horario*/
     background-color: #17ae74;
     transition: 0.5s;
 }
+
 </style>
 
 @extends('layout/plantilla')
@@ -170,7 +194,7 @@ h1{/*Registro de horario*/
     <a href="/listaH">
         <button class="cancelar-btn" type="button" onclick=" ">Cancelar</button>
     </a>    
-        <button class="Editar-btn" type="submit">Guardar Cambios</button>
+        <button class="Editar-btn" type="submit">Editar</button>
     </div>
 </form>
 </div>
