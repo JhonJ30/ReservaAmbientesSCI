@@ -32,6 +32,7 @@ h2 {
 table {
     width: 100%;
     border-collapse: collapse;
+    
   }
   td {
     border: 1px solid #0D7360;
@@ -46,9 +47,7 @@ table {
     color: white;
     padding: 8px;
   }
-  tr:nth-child(even) {
-    background-color: #fdfdfd;
-  }
+  
   td button {
     margin-right: 2px;
     padding: 6px 10px;
@@ -80,6 +79,7 @@ table {
   @media only screen and (max-width: 600px) {
     table, thead, tbody, th, td, tr {
       display: block;
+      z-index: -1;
     }
     th {
       position: absolute;
