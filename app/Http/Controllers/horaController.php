@@ -47,10 +47,10 @@ class horaController extends Controller
         $Horario->save();
 
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
-        return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta :)!');
+        return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta!');
     }
 
-   
+
 
     public function getTiposAmbiente()
     {
@@ -83,6 +83,6 @@ class horaController extends Controller
 
 
         // Puedes agregar más lógica según tus necesidades, como redireccionar a otra página
-        return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido modificado y guardado de manera correcta :)!');
+        return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido modificado y guardado de manera correcta!');
     }
 }
