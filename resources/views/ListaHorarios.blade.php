@@ -3,7 +3,7 @@
 
 
 <!--ver lista de horarios registrados -->
-<link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
+<link href="{{asset ('css/listaH.css')}}" rel="stylesheet">
 <br>
 <h2>Lista de Horarios</h2>
 <br>
