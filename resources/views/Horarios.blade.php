@@ -3,6 +3,8 @@
 <!--hasta aqui menu-->
 
 <link href="{{asset ('css/RH.css')}}" rel="stylesheet">
+<script src="{{ asset('js/RH.js') }}"></script>
+
 <h1>REGISTRO HORARIOS</h1>
 <form action="{{route('storeh')}}" method="POST">
 @csrf

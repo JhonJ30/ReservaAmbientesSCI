@@ -31,7 +31,7 @@
       <td style="text-align: center;">{{$item->horaInicio}}</td>
       <td style="text-align: center;">{{$item->horaFin}}</td>
       <td style="text-align: center;">
-      <button class="edit-btn" onclick="">Modificar</button>
+      <button class="edit-btn" onclick="window.location.href='{{ route('horarios.edit', $item->id) }}'">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>
