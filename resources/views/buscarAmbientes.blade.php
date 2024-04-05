@@ -2,6 +2,7 @@
 @section('contenido')
 
 <link href="{{asset ('css/search.css')}}" rel="stylesheet">
+<div>
 <div class="search-container">
     @include('components.search')
 </div>
@@ -39,5 +40,6 @@
     @else
         <p style="text-align:left; margin-left: 100px; margin-top:20px">No se encontraron resultados</p>
     @endif
+</div>
 </div>
 @endsection
