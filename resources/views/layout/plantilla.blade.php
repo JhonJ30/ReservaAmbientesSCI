@@ -20,7 +20,7 @@
     <div class="bar"></div>
   </div>
   <ul class="menu">
-    <li> <a href="/" class="priHabilitado"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
+    <li> <a href="/" class="priHabilitadoInicio"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
     <li><a href="#" id="menuRegistrar" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Registrar</a>
       <ul class="submenu" id="submenuRegistrar">
         <p><a href="/registroAmb" class="priHabilitado2">&nbsp;&nbsp;Ambientes</a></p>

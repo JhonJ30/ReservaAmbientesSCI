@@ -41,14 +41,15 @@ body {
 .menu {
   display: flex;
   list-style-type: none;
-  background-color: #ADADAD;
+  /*background-color: #ADADAD;*/
   align-items: center;
-  margin-right: 10px !important;
+  margin-right: 45px !important;
+  
 }
 
 .menu li {
    
-  margin-right: 10px;
+  margin-right: 0.1px;
   position: relative;
 }
 
@@ -94,6 +95,19 @@ body {
     transition: color 0.3s;
     cursor: pointer; 
 }
+.priHabilitadoInicio{
+  background-color: #F5F6F7;
+  color: #3d475b;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: background-color 0.3s;
+  transition: color 0.3s;
+  cursor: pointer; 
+}
+
 .priHabilitado i{
     padding: 8px;
     border-radius: 50%;
@@ -110,7 +124,7 @@ body {
     display: flex;
     align-items: center;
     padding: 15.5px;
-    border-radius: 7px;
+    
     transition: background-color 0.3s;
     transition: color 0.3s;
     cursor: pointer; 
@@ -132,6 +146,7 @@ body {
     transition: background-color 0.3s;
     transition: color 0.3s;
     cursor: pointer;
+    margin-left: 20px;
 }
 .iniSesion i{
     background-color: #3d475b;
@@ -157,7 +172,8 @@ body {
     display: flex;
     align-items: center;
     padding: 15.5px;
-    border-radius: 7px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     transition: background-color 0.3s;
     transition: color 0.3s;
     cursor: pointer; 
@@ -235,6 +251,12 @@ body {
   .aviso{
     text-align: center;
     
+  }
+  .priHabilitadoInicio{
+    border-radius: 5px;
+  }
+  .iniSesion{
+    margin-right: 18px;
   }
 }
 .container {
