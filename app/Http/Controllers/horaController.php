@@ -18,14 +18,29 @@ class horaController extends Controller
         $datos = Horarios::all();
         return view('ListaHorarios', compact('datos'));
     }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        
+        $datos = Horarios::where('ambi', 'like', '%' . $searchTerm . '%')->get();
+       return view('ListaHorarios',  compact('datos'));
+        
+    }
 
-    public function destroy($id)
+   /* public function destroy($id)
     {
         //elima un registro
         $registro = Horarios::findOrFail($id);
         $registro->delete();
 
         return response()->json(['success' => true]);
+    }*/
+    public function destroy(Request $request)
+    {
+    $registro = Horarios::findOrFail($request->registro_id);
+    $registro->delete();
+
+    return redirect()->back()->with('success', 'Registro eliminado correctamente');
     }
     /**
      * Store a newly created resource in storage.

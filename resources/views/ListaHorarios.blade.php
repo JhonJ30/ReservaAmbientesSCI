@@ -7,10 +7,14 @@
 <br>
 <h2>Lista de Horarios</h2>
 <br>
-<div class="search-container">
-  <input type="text" placeholder="Buscar..." class="search-input">
-  <button class="search-button"><i class="fas fa-search"></i></button>
-</div>
+      <form action="/listaH/search" method="GET">
+      <div class="search-container">
+        
+            <input type="text" name="search" placeholder="Buscar por ambiente.." class="search-input">
+            <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+        
+      </div>
+      </form> 
 <br>
 <div> 
 <table>
@@ -49,7 +53,12 @@
     <p class="gris">Esta operacion es irreversible</p>
     <br>
     <div class="button-container">
-    <button class="btnAceptar" id="confirmDeleteBtn">Aceptar</button>
+    <form action="{{route('horarios.destroy')}}" method="POST">
+            @csrf
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="registro_id" id="registro_id">
+    <button class="btnAceptar" type="submit">Aceptar</button>
+</form>
     <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
   </div>
   </div>
@@ -70,11 +79,7 @@
 <script>
    // Función para abrir el modal
    function openModal(registroId) {
-    var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-
-    // Guardar el ID del registro en un atributo data del botón de confirmación
-    confirmDeleteBtn.setAttribute('data-id', registroId);
-
+    document.getElementById('registro_id').value = registroId;
     // Mostrar el modal
         document.getElementById('myModal').style.display = 'block';
     }
@@ -83,31 +88,7 @@
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
-// Manejar el clic en el botón de eliminar en el modal
-document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
-    var registroId = this.getAttribute('data-id');
-    
-    // Enviar una solicitud DELETE al servidor
-    fetch('/listaH/' + registroId, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Recargar la página o actualizar la lista de registros
-            window.location.reload();
-        } else {
-            console.error('Error al eliminar el registro');
-        }
-    })
-    .catch(error => {
-        console.error('Error de red:', error);
-    });
-});
+
 
 
 function closeSuccessModal() {

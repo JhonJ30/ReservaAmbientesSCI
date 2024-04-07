@@ -125,13 +125,20 @@ class RegistroAmbientes extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+  /*  public function destroy($id)
     {
         //elima un registro
         $registro = Ambientes::findOrFail($id);
         $registro->delete();
 
-        return response()->json(['success' => true]);
+        return redirect()->back()->with('success', 'Registro eliminado correctamente');
+    }*/
+    public function destroy(Request $request)
+    {
+    $registro = Ambientes::findOrFail($request->registro_id);
+    $registro->delete();
+
+    return redirect()->back()->with('success', 'Registro eliminado correctamente');
     }
     //buscador de administrador
 

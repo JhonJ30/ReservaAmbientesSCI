@@ -23,7 +23,7 @@ Route::get('listaA', function () {
     return view('listaAmb');
 });
 Route::get('listaA', [RegistroAmbientes::class, 'create'])->name('ambientes.create');
-Route::delete('/listaA/{id}', [RegistroAmbientes::class, 'destroy'])->name('ambientes.destroy');
+Route::delete('listaA', [RegistroAmbientes::class, 'destroy'])->name('ambientes.destroy');
 Route::get('/listaA/search', [RegistroAmbientes::class, 'search'])->name('ambientes.search');
 
 
@@ -34,10 +34,10 @@ Route::get('listaH', function () {
     return view('ListaHorarios');
 });
 
-
-
 Route::get('listaH', [horaController::class, 'create'])->name('horarios.create');
-Route::delete('/listaH/{id}', [horaController::class, 'destroy'])->name('horarios.destroy');
+//Route::delete('/listaH/{id}', [horaController::class, 'destroy'])->name('horarios.destroy');
+Route::delete('listaH', [horaController::class, 'destroy'])->name('horarios.destroy');
+Route::get('/listaH/search', [horaController::class, 'search'])->name('horarios.search');
 
 //Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 

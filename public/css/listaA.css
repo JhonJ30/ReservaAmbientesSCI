@@ -77,88 +77,129 @@ table {
     opacity: 0.8;
   }
   @media only screen and (max-width: 600px) {
-    table, thead, tbody, th, td, tr {
-      display: block;
-      z-index: -1;
+    /* Estilos para hacer la tabla responsiva */
+    table {
+        width: 100%;
+        border-collapse: collapse;
     }
-    th {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-     
-    }
+    
+    /* Estilos para las filas de la tabla */
     tr {
-      margin-bottom: 15px;
+        display: block;
+        margin-bottom: 15px;
     }
+    
+    /* Estilos para las celdas de la tabla */
+    td, th {
+        display: block;
+        text-align: left;
+    }
+    
+    /* Estilos para las cabeceras de la tabla */
+    th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    /* Estilos para el contenido de las celdas */
     td {
-      border: none;
-      position: relative;
-      padding-left: 50%;
-     
+        border: none;
+        position: relative;
+        padding-left: 50%;
     }
+    
+    /* Estilos para el contenido antes de las celdas */
     td:before {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
     }
+    
+    /* Etiquetas antes de cada columna */
     td:nth-of-type(1):before { content: "Nro:"; }
     td:nth-of-type(2):before { content: "Capacidad:"; }
     td:nth-of-type(3):before { content: "Ubicacion:"; }
     td:nth-of-type(4):before { content: "Estado:"; }
-      
-  }
+    
+    /* Ajustes para los botones */
+    .btn-container {
+        text-align: center;
+    }
+
+    .btn-container button {
+        margin: 5px;
+    }
+}
+
   /* Estilo para el modal */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height:100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.6);
+ 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 /* Estilo para el contenido del modal */
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 20%;
-    text-align: center;
-    border-radius: 5px;
-    
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Ancho ajustado para dispositivos móviles */
+  max-width: 400px; /* Ancho máximo para dispositivos grandes */
+  text-align: center;
+  border-radius: 5px;
 }
+
+/* Estilos para el contenedor de los botones */
 .button-container {
-  display: flex; /* Utiliza flexbox para centrar el contenido */
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-
+  display: flex;
+  justify-content: center; /* Centra horizontalmente los botones */
+  margin-top: 10px; /* Añade margen arriba de los botones */
 }
 
-/* Estilo para los botones */
+/* Estilos para los botones */
 .modal-content button {
-  margin-right: 20px;
-  padding: 6px 10px;
+  margin: 0 5px; /* Añade margen entre los botones */
+  padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 15b  px;
-  
+  font-size: 16px;
 }
+
+/* Estilos específicos para los botones de aceptar y cancelar */
 .modal-content .btnAceptar {
-  background-color: #393e41;
-    color: white;
-}
-.modal-content .btnCancelar {
-  background-color: #0D7360;
+  background-color:#0D7360 ;
   color: white;
 }
-.gris {
-color: #808080; 
+
+.modal-content .btnCancelar {
+  background-color:  #393e41;
+  color: white;
 }
+.btnCancelar:hover{
+  background-color: #ee316b;
+  transition: 0.5s;
+  }
+  .btnAceptar:hover{
+  background-color: #17ae74;
+  transition: 0.5s;
+  }
+/* Ajustes adicionales para pantallas grandes */
+@media only screen and (min-width: 600px) {
+  .modal-content button {
+      width: auto; /* Restaura el ancho automático de los botones */
+  }
+}
+
