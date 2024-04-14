@@ -18,13 +18,32 @@ use App\Http\Controllers\RegistroAmbientes;
 Route::get('/', function () {
     return view('home');
 });
+
+
 //mary
 Route::get('listaA', function () {
     return view('listaAmb');
 });
+Route::get('noti', function () {
+    return view('notificacion');
+});
 Route::get('listaA', [RegistroAmbientes::class, 'create'])->name('ambientes.create');
+//Route::get('listaA', [RegistroAmbientes::class, 'create'])->name('ambientes.create');
 Route::delete('listaA', [RegistroAmbientes::class, 'destroy'])->name('ambientes.destroy');
 Route::get('/listaA/search', [RegistroAmbientes::class, 'search'])->name('ambientes.search');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -55,11 +74,6 @@ Route::get('/listaH/search', [horaController::class, 'search'])->name('horarios.
 
 
 
-
-
-
-
-
 // Sara Colque 
 Route::get('horarios', function () {
     return view('Horarios');
@@ -69,14 +83,10 @@ Route::post('horarios', [horaController::class, 'storeh'])->name('storeh');
 Route::get('/HO', function () {
     return view('/');
 })->name('HO');
-/*Route::get('/',[horaController::class, 'storeh'])->name('sara.create');*/
+
 Route::get('horarios/create', [horaController::class, 'create'])->name('Horarios.create');
 //modificar para el boton xd
 Route::get('/listaH/{id}/editar', [horaController::class, 'edit'])->name('horarios.edit'); //inidica donde debe llegar
-/*Route::put('/listaH/{id}', [horaController::class, 'update'])->name('actualizarHorario');*/
-/*Route::post('/actualizar-horario/{id}', 'HorarioController@actualizarHorario')->name('actualizarHorario');
-Route::get('/obtener-horario/{id}', 'HorarioController@obtenerHorario')->name('obtenerHorario');*/
-/*Route::get('/horarios/editar/{id}', [horaController::class, 'editar'])->name('horarios.editar');*/
 Route::put('/horarios/{id}', [horaController::class, 'update'])->name('horarios.update');
 Route::get('/ruta', 'horaController@metodo')->name('nombre.ruta'); //CAMBIO PARA MODIFICAR
 //listado de ambientes
@@ -84,6 +94,15 @@ Route::get('/horarios', function () {
     $ambientes = App\Models\Ambientes::all();
     return view('Horarios')->with('ambientes', $ambientes);
 });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,10 +125,21 @@ Route::get('/pruebita', function () {
 Route::get('success', function () {
     return view('success');
 })->name('success');
-
-
 Route::get('/ambientes/editar/{id}', [RegistroAmbientes::class, 'editar'])->name('ambientes.editar');
 Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambientes.update');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

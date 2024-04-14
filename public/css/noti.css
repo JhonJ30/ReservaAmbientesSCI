@@ -1,0 +1,32 @@
+  /* Estilo del card */
+  .card {
+    max-width: 300px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  /* Estilo del header del card */
+  .card-header {
+    background-color: #0D7360;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    position: relative;
+  }
+
+  /* Estilo del contenido del card */
+  .card-content {
+    padding: 15px;
+    background-color: #bbc0c2;
+  }
+
+  /* Estilo del botón de cierre */
+  .noti{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
