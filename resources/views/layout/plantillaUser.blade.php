@@ -305,6 +305,137 @@
 }
 
 
+
+/* otro*/
+.container-reservas {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative; 
+            border-radius: 10px;
+        }
+
+.container-reservas h2 {
+            text-align: start;
+            margin-bottom: 20px;
+        }
+.container-reservas ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+.container-reservas  li {
+            padding: 10px;
+            background-color: #0B6F63;
+            color: #FFFFFF;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cancel-button {
+            background-color: #EE316B;
+            color: #FFFFFF;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 8px;
+        }
+
+        
+        .editar-button {
+            background-color: #3D475B;
+            color: #FFFFFF;
+            border: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 8px;
+        }
+
+       
+
+        .cancel-button2 {
+            background-color: #D3D7DF;
+            color: #3D475B;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 0;
+            width: 100%;
+            cursor: pointer;
+            text-align: left;
+            padding-left: 24px;
+            border-radius: 10px;
+        }
+
+        .cancel-button2 i {
+            padding-left: 200px; /* Ajusta el espacio del icono */
+        }
+
+        .cancel-button2:hover {
+            background-color: #EE316B;
+            color: #FFFFFF;
+        }
+
+        .logo-reservas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 95.5%;
+            height: 86px; /* Altura ajustable según tu preferencia */
+            background-color: #B4B8BB; /* Color de fondo */
+            display: flex;
+            align-items: center;
+            padding-left: 20px; /* Ajusta el espaciado izquierdo */
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .logo-reservas i {
+            font-size: 64px; /* Tamaño del icono ajustable */
+            margin-right: 25px; /* Espaciado entre el icono y el texto */
+            margin-left: 20px;
+            
+        }
+
+        .container-reservas h2 {
+            margin-top: 80px; /* Ajusta el margen superior para compensar la altura de .logo */
+            color: #3D475B;
+        }
+
+        .logo-reservas h2 {
+            font-size: 28px; /* Ajusta el tamaño de la fuente según tu preferencia */
+            margin-top: 0; /* Elimina el margen superior predeterminado */
+            margin-bottom: 0; /* Elimina el margen inferior predeterminado */
+            vertical-align: middle; /* Alinea verticalmente el texto con el icono */
+            color: #3D475B;
+        }
+
+  .miCuentaContent {
+    display: none;
+    position: absolute;
+    
+}
+
+.iniSesion:hover #miCuentaContent {
+    display: block;
+}
+
+.container-reservas {
+   margin-left: -290px;
+   margin-top: 23px;
+}
+
+.icon-color {
+    color: #3d475b; 
+}
 </style>
 <body>
 
@@ -322,7 +453,48 @@
     <li><a href="/client/verAmbientes" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Ver Ambientes</a>
     </li>
     <li><a href="/client/ayuda" class="ultimo" ><i class="fas fa-question-circle"></i>&nbsp;Ayuda</a></li>
-    <li><a href="/" class='iniSesion'><i class="fas fa-user"></i>Mi Cuenta</a></li>
+    <div onmouseover="showMiCuentaContent()" onmouseout="hideMiCuentaContent()">
+   <li><a href="/" class='iniSesion'><i class="fas fa-user"></i>Mi Cuenta</a></li>
+  <div id="miCuentaContent" class="miCuentaContent" style="display: none;">
+    <div class="container-reservas">
+    <div class="logo-reservas">
+            <i class="fas fa-user-circle icon-color"></i>
+            <h2>Usuario</h2>
+        </div>
+        <h2>Reservas</h2>
+        <ul>
+            <li>
+                <span>Aula: 691A<br>
+                    Fecha: 26/05/2024<br>
+                      Hora: 15:45-17:15<br>
+                </span>
+                <button class="editar-button">Editar</button>
+                <button class="cancel-button">Cancelar</button>
+            </li>
+            <li>
+                <span>Aula: 691A<br>
+                    Fecha: 26/05/2024<br>
+                    Hora: 15:45-17:15<br>
+              </span>
+              <button class="editar-button">Editar</button>
+                <button class="cancel-button">Cancelar</button>
+            </li>
+            <li>
+                <span>Aula: 691A<br>
+                    Fecha: 26/05/2024<br>
+                    Hora: 15:45-17:15<br>
+              </span>
+               <button class="editar-button">Editar</button>
+                <button class="cancel-button">Cancelar</button>
+            </li>
+
+        </ul>
+        <button class="cancel-button2">Cerrar Sesión 
+            <i class="fas fa-right-from-bracket"></i>
+        </button>
+    </div>
+  </div>
+</div>
   </ul>
 </div>
 <div class="container">
@@ -353,6 +525,14 @@ window.addEventListener('resize', function() {
         container.style.marginTop = '0';
     }
 });
+
+function showMiCuentaContent() {
+  document.getElementById("miCuentaContent").style.display = "block";
+}
+
+function hideMiCuentaContent() {
+  document.getElementById("miCuentaContent").style.display = "none";
+}
 </script>
 
 </body>
