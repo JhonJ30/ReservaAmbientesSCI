@@ -18,6 +18,7 @@
                         <th>Ubicación</th>
                         <th>Recursos</th>
                         <th>Calendario</th>
+                        <th>Reservas</th> <!--cambios sara-->
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +31,10 @@
                             <td>
                                 <button onclick="window.location.href='/client/verAmbientes/calendario/{{ $ambiente->id }}'">
                                     <i class="fas fa-calendar-days"></i>
+                                </button>
+                            </td>
+                            <td> <!--columna de RESERVAR cambios sara-->
+                                <button onclick="window.location.href='{{ route('cliente.reservar', ['ambiente_id' => $ambiente->id]) }}'">Reservar
                                 </button>
                             </td>
                         </tr>

@@ -58,5 +58,5 @@ function closeModal() {
 
 function cancelarRegistro() {
     // Redirige a la página de inicio
-    window.location.href = '/'; // Cambia '/' por la ruta de tu página de inicio si es diferente
+    window.location.href = '/'; 
 }

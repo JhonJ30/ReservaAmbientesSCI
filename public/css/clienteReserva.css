@@ -1,0 +1,108 @@
+.reserva-form {
+    width: 60%;/*Ajusta el largo del contenedor*/
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #ADADAD; /* Color de fondo del formulario */
+    padding: 30px;/*Ajusta el alto del contenedor*/
+    border-radius: 8px;
+}
+
+.reserva-form h2 {/*Ajusta el titulo de REGISTRAR RESERVAS*/
+    text-align: center;
+    color: #0B6F63;
+    font-size: 40px;
+}
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-column {
+    flex: 1;
+    margin-right: 50px; /* Ajusta el margen entre las columnas según sea necesario :)*/
+}
+
+.form-group {
+    margin-bottom: 35px;/*Ajusta la distancia de ancho entre las filas :)*/
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.botones {
+    width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+}
+.botones button{
+    width: 20%;
+    height: 35px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+    
+label{ /*LAS LETRAS PONE COLOR VERDE*/
+    color: #0B6F63;
+    font-size: 16px;
+}
+.botonCancelar{
+    background-color: #393E41;
+}
+.botonRegistrar{
+    background-color: #0B6F63;
+}
+.botonCancelar:hover{
+    background-color: #ee316b;
+    transition: 0.5s;
+}
+.botonRegistrar:hover{
+    background-color: #17ae74;
+    transition: 0.5s;
+}
+.botones {
+    flex-direction: column; /* Apilar los botones verticalmente */
+    gap: 10px; /* Agregar espacio entre los botones */
+    margin-top: 70px; /* Ajustar el margen superior */
+}
+.botones button{
+    width: 100%;
+}        
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    .botones {
+        flex-direction: column; /* Apilar los botones verticalmente */
+    }
+
+    .botonCancelar,
+    .botonRegistrar {
+        width: 100%; /* Ancho completo */
+    }
+}
+/* Media query para pantallas más grandes */
+@media screen and (min-width: 768px) {
+    .botones {
+        flex-direction: row; /* Los botones se alinearán en una sola fila */
+        gap: 150px; /* Espacio entre los botones */
+    }
+
+    .botones button {
+        width: auto; /* Ancho automático basado en el contenido */
+        padding: 10px 65px; /* Ajuste de relleno */
+    }
+}

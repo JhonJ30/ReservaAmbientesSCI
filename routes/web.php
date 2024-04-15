@@ -94,12 +94,12 @@ Route::get('/horarios', function () {
     $ambientes = App\Models\Ambientes::all();
     return view('Horarios')->with('ambientes', $ambientes);
 });
+//GESTIONAR RESERVAS
+use App\Http\Controllers\ClienteReservaController;
 
+Route::get('/cliente/reservar/{ambiente_id}', [ClienteReservaController::class, 'mostrarFormularioReserva'])->name('cliente.reservar');
 
-
-
-
-
+Route::post('/reserva/store', [ClienteReservaController::class, 'store'])->name('reserva.store');
 
 
 
