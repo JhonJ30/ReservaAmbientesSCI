@@ -25,4 +25,8 @@ class Reservar extends Model
         'fecha',
         'estado',
     ];
+    public function usuario()
+{
+    return $this->belongsTo(User::class, 'codUser');
+}
 }
