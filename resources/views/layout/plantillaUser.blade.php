@@ -452,6 +452,7 @@
     <li> <a href="/client" class="priHabilitado"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
     <li><a href="/client/verAmbientes" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Ver Ambientes</a>
     </li>
+    <li><a href="/noti" class="priHabilitado2" ><i class="fas fa-bell"></i>&nbsp;<sup style="color: red;">2</sup></a></li>
     <li><a href="/client/ayuda" class="ultimo" ><i class="fas fa-question-circle"></i>&nbsp;Ayuda</a></li>
     <div onmouseover="showMiCuentaContent()" onmouseout="hideMiCuentaContent()">
    <li><a href="/" class='iniSesion'><i class="fas fa-user"></i>Mi Cuenta</a></li>
@@ -462,7 +463,7 @@
             <h2>Usuario</h2>
         </div>
         <h2>Reservas</h2>
-        <a href="/iniciarSesion" class="sesion-button"<i class="fas fa-question-circle"></i>Iniciar Sesión</a>
+        <a href="/iniciarSesion" class="sesion-button"><i class="fas fa-question-circle"></i>Iniciar Sesión</a>
         <ul>
             <li>
                 <span>Aula: 691A<br>

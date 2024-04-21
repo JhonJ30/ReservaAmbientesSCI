@@ -37,8 +37,9 @@
         <p><a href="/listaU" class="priHabilitado2">&nbsp;&nbsp;Usuarios</a></p>
       </ul>
     </li>
-    <li><a href="/noti" class="priHabilitado2" ><i class="fas fa-bell"></i>&nbsp;</a></li>
-    <li><a href="#" class="ultimo" ><i class="fas fa-question-circle"></i>&nbsp;Ayuda</a></li>
+    
+  
+    <li><a href="#" class="ultimo" ><i class="fas fa-bell"></i>&nbsp;</a></li>
     <li><a href="/client" class='iniSesion'><i class="fas fa-user"></i>Mi Cuenta</a></li>
   </ul>
 </div>
