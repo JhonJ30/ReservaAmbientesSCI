@@ -56,6 +56,13 @@
     cursor: pointer;
     color: #FFFFFF;
 }
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
     
 label{ /*LAS LETRAS PONE COLOR VERDE*/
     color: #0B6F63;

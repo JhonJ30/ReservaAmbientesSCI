@@ -133,7 +133,7 @@ Route::get('success', function () {
 })->name('success');
 Route::get('/ambientes/editar/{id}', [RegistroAmbientes::class, 'editar'])->name('ambientes.editar');
 Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambientes.update');
-
+//para visualizar materias en el combo box
 
 
 
@@ -182,7 +182,7 @@ Route::get('/listaM/search', [materiaController::class, 'search'])->name('materi
 
 
 
-Route::get('/iniciarSesion', function(){
+Route::get('/iniciarSesion', function () {
     $adminCount = User::where('rol', 'Administrador')->count();
     if ($adminCount === 0) {
         $newAdmin = new User();

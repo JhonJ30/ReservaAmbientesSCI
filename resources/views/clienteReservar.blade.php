@@ -13,11 +13,13 @@
                 <div class="form-column">
                     <div class="form-group">
                         <label for="solicitante">Solicitante(*)</label>
-                        <input type="text" id="solicitante" name="solicitante" required>
+                        <input type="text" id="solicitante" name="solicitante"  required>
                     </div>
                     <div class="form-group">
                         <label for="ambiente">Ambiente(*)</label>
-                        <input type="text" id="ambiente" name="ambiente" required>
+                        <select id="ambiente" name="ambiente" onchange="toggleIntervalo()" required>
+                            <option value="" disabled selected hidden>----</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="hora_inicio">Hora de inicio(*)</label>
@@ -31,7 +33,9 @@
                 <div class="form-column">
                     <div class="form-group">
                         <label for="materia">Materia(*)</label>
-                        <input type="text" id="materia" name="materia" required>
+                        <select id="ambiente" name="ambiente" onchange="toggleIntervalo()" required>
+                            <option value="" disabled selected hidden>----</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="fecha">Fecha(*)</label>
