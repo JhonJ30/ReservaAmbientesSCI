@@ -28,7 +28,7 @@
     <tr>
       <td style="text-align: center;">{{$item->nombre}}</td>
       <td style="text-align: center;">{{$item->apellido}}</td>
-      <td style="text-align: center;">{{$item->correo}}</td>
+      <td style="text-align: center;">{{$item->email}}</td>
       <td style="text-align: center;">{{$item->codSis}}</td>
       <td style="text-align: center;">
         <button class="edit-btn" onclick="">Modificar</button>

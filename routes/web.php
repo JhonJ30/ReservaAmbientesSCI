@@ -7,6 +7,7 @@ use App\Http\Controllers\RegistroAmbientes;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\materiaController;
 use App\Http\Controllers\loginController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -182,6 +183,17 @@ Route::get('/listaM/search', [materiaController::class, 'search'])->name('materi
 
 
 Route::get('/iniciarSesion', function(){
+    $adminCount = User::where('rol', 'Administrador')->count();
+    if ($adminCount === 0) {
+        $newAdmin = new User();
+        $newAdmin->codSis = '2024';
+        $newAdmin->rol = 'Administrador';
+        $newAdmin->nombre = 'admin';
+        $newAdmin->apellido = 'main';
+        $newAdmin->email = 'admin@gmail.com';
+        $newAdmin->password = bcrypt('2024');
+        $newAdmin->save();
+    }
     return view('iniciarSesion');
 });
 Route::post('/login', [loginController::class, 'login'])->name('login');
