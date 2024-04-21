@@ -23,6 +23,10 @@
                         <label for="hora_inicio">Hora de inicio(*)</label>
                         <input type="time" id="hora_inicio" name="hora_inicio" required>
                     </div>
+                    <div class="form-group">
+                        <label for="actividad">Actividad(*)</label>
+                        <input type="text" id="actividad" name="actividad" required>
+                    </div>
                 </div>
                 <div class="form-column">
                     <div class="form-group">

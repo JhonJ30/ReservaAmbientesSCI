@@ -78,7 +78,7 @@ label{ /*LAS LETRAS PONE COLOR VERDE*/
 .botones {
     flex-direction: column; /* Apilar los botones verticalmente */
     gap: 10px; /* Agregar espacio entre los botones */
-    margin-top: 70px; /* Ajustar el margen superior */
+    margin-top: 7px; /* Ajustar el margen superior de los botones con el formulario jje*/
 }
 .botones button{
     width: 100%;
