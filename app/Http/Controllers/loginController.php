@@ -16,7 +16,7 @@ class loginController extends Controller{
             if ($user->rol === 'Administrador') {
                 return redirect('/admin');
             }elseif ($user->rol === 'Docente') {
-                return redirect('/docente');
+                return redirect('/docente/create3');
             } elseif ($user->rol === 'Auxiliar') {
                 return view('/aux');
             }else{

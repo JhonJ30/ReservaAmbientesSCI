@@ -212,4 +212,5 @@ class RegistroAmbientes extends Controller
         }
         return view('calendarioAmbiente', ['nroAula' => $nroAula]);
     }
+
 }
