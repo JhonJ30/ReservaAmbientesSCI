@@ -184,13 +184,13 @@ table {
   td {
     border: 1px solid #0D7360;
     background-color: #bbc0c2;
-    text-align: left;
+    text-align: center;
     padding: 8px;
   }
   th {
     background-color: #0D7360;
     border: 1px solid #bbc0c2;
-    text-align: left;
+    text-align: center;
     color: white;
     padding: 8px;
   }

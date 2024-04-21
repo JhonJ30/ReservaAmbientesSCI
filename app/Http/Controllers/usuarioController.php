@@ -25,8 +25,8 @@ class UsuarioController extends Controller{
             'rol' => $request->get('rol'),
             'nombre' => $request->get('nombre'),
             'apellido' => $request->get('apellido'),
-            'correo' => $request->get('correo'),
-            'contraseña' => bcrypt($request->get('contraseña')),
+            'email' => $request->get('correo'),
+            'password' => bcrypt($request->get('contraseña')),
         ]);
         $usuario->save();
         return redirect()->route('usuarios.create')->with('success', '¡El usuario ha sido registrado de manera correcta!');
