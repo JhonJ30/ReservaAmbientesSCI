@@ -135,10 +135,10 @@ Route::get('/ambientes/editar/{id}', [RegistroAmbientes::class, 'editar'])->name
 Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambientes.update');
 //para visualizar materias en el combo box
 
+Route::get('docente/create3', [ClienteReservaController::class, 'create3'])->name('ambientes.create3');
 
 
-
-
+Route::delete('docente/create3', [ClienteReservaController::class, 'destroyR'])->name('ambientes.destroyR');
 
 
 
