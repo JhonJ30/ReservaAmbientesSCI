@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 
 <body>
     <h1>INICIAR SESIÓN</h1>
-    <form action="{{route('materias.store')}}" method="POST" onsubmit="return error()">
+    <form action="{{route('login')}}" method="POST" onsubmit="return error()">
         @csrf
         <select name="rol" required>
             <option value="Administrador">Administrador</option>
@@ -20,16 +20,16 @@
         </select>
 
         <div class="form-column">
-            <label for="correo">Correo electrónico: </label>
-            <input name="correo" , type="email" required>
+            <label for="email">Correo electrónico: </label>
+            <input name="email" , type="email" required>
         </div>
 
         <div class="form-column">
-            <label for="contraseña" , style="margin-right: 67px;">Contraseña: </label>
-            <input name="contraseña" , type="password" required>
+            <label for="password" , style="margin-right: 67px;">Contraseña: </label>
+            <input name="password" , type="password" required>
         </div>
 
-        <button type="button" class="buttonLogin" type="submit">INGRESAR</button>
+        <button class="buttonLogin" type="submit">INGRESAR</button>
     </form>
 </body>
 

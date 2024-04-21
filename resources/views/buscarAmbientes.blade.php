@@ -1,4 +1,4 @@
-@extends('layout/plantillaUser')
+@extends('layout/plantillaDocente')
 @section('contenido')
 
 <link href="{{asset ('css/search.css')}}" rel="stylesheet">

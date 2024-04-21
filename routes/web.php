@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroAmbientes;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\materiaController;
+use App\Http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\materiaController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('homeUser');
 });
 
 
@@ -149,7 +150,7 @@ Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambie
 
 //jhon
 Route::get('client', function () {
-    return view('homeUser');
+    return view('homeDocente');
 });
 
 
@@ -182,4 +183,16 @@ Route::get('/listaM/search', [materiaController::class, 'search'])->name('materi
 
 Route::get('/iniciarSesion', function(){
     return view('iniciarSesion');
+});
+Route::post('/login', [loginController::class, 'login'])->name('login');
+Route::get('/logout', [loginController::class, 'logout'])->name('logout');
+
+
+
+Route::get('/admin', function () {
+    return view('home');
+});
+
+Route::get('/docente', function () {
+    return view('homeDocente');
 });

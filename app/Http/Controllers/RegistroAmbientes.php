@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Ambientes;
 
@@ -153,6 +154,15 @@ class RegistroAmbientes extends Controller
 
     //buscador de usuario
     public function buscar(Request $request){
+        if (Auth::check()) {
+            $usuario = Auth::user();
+    
+            // Imprimir el usuario como un arreglo
+            dd($usuario);
+        } else {
+            // Realizar alguna acción si no hay usuario autenticado
+        }
+
         $search = $request->input('search');
         $ambientes = Ambientes::query();
 
