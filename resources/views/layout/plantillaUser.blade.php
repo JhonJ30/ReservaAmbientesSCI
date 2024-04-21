@@ -462,6 +462,7 @@
             <h2>Usuario</h2>
         </div>
         <h2>Reservas</h2>
+        <a href="/iniciarSesion" class="sesion-button"<i class="fas fa-question-circle"></i>Iniciar Sesión</a>
         <ul>
             <li>
                 <span>Aula: 691A<br>

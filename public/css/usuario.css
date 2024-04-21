@@ -1,0 +1,135 @@
+/* Estilos para el formulario */
+form {
+    margin-bottom: 10px;
+    padding: 30px;
+    background-color: #d7d5d5;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+/* Estilos para las etiquetas */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+    color: #0B6F63;
+}
+label::after {
+    content: "(*)";
+    color: #0B6F63;
+}
+
+/* Estilos para los campos de entrada */
+input,
+select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+/* Estilos para el botón */
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 35px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    text-align: center;
+    font-family: sans-serif;
+    color: #0B6F63;
+}
+
+.form-row {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.form-column {
+    flex: 1;
+    margin-right: 50px;
+}
+
+.form-column:last-child {
+    margin-right: 0;
+}
+
+/* Estilos de los botones cancelar y registrar */
+.button-container {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    margin-top: 15px;
+}
+
+.button-container button {
+    margin: 0 15%;
+    max-width: calc(50% - 0px);
+    font-size: 16px;
+}
+
+.csv{
+    margin: 20px;
+    margin-left: 50px;
+    margin-top: 0px;
+}
+
+/* Estilos específicos para pantallas más pequeñas */
+@media screen and (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .button-container button {
+        margin: 2% 0;
+        width: 150%;
+        font-size: 15px;
+    }
+}
+
+/* Estilos específicos para pantallas más grandes */
+@media screen and (min-width: 1200px) {
+    .button-container button {
+        font-size: 16px;
+    }
+}
+
+.cancelar-btn {
+    background-color: #393E41;
+    color: white;
+    padding: 10px 50px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.registrar-btn {
+    background-color: #0B6F63;
+    color: white;
+    padding: 10px 50px;
+    border: 1px solid #0B6F63;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancelar-btn:hover{
+    background-color: #ee316b;
+    transition: 0.5s;
+}
+
+.registrar-btn:hover{
+    background-color: #17ae74;
+    transition: 0.5s;
+}

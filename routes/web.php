@@ -4,6 +4,9 @@ use App\Models\Ambientes;
 use App\Http\Controllers\horaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistroAmbientes;
+use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\materiaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +34,7 @@ Route::get('listaA', [RegistroAmbientes::class, 'create'])->name('ambientes.crea
 //Route::get('listaA', [RegistroAmbientes::class, 'create'])->name('ambientes.create');
 Route::delete('listaA', [RegistroAmbientes::class, 'destroy'])->name('ambientes.destroy');
 Route::get('/listaA/search', [RegistroAmbientes::class, 'search'])->name('ambientes.search');
+
 
 
 
@@ -147,7 +151,35 @@ Route::put('/ambientes/{id}', [RegistroAmbientes::class, 'update'])->name('ambie
 Route::get('client', function () {
     return view('homeUser');
 });
+
+
 Route::get('client/verAmbientes', [RegistroAmbientes::class, 'index']);
 Route::get('client/buscarAmbientes', [RegistroAmbientes::class, 'buscar'])->name('ambientes.buscar');
 Route::get('client/buscarAmbientesAvanzado', [RegistroAmbientes::class, 'buscarAvanzado']);
 Route::get('client/verAmbientes/calendario/{id}', [RegistroAmbientes::class, 'showCalendario']);
+
+
+
+Route::get('registroUsuario', function () {
+    return view('registroUsuario');
+});
+
+Route::get('listaU', [usuarioController::class, 'create'])->name('usuarios.create');
+Route::post('/usuarios', [usuarioController::class, 'store'])->name('usuarios.store');
+
+Route::get('/listaU/search', [usuarioController::class, 'search'])->name('usuarios.search');
+
+
+Route::get('registroMateria', function () {
+    return view('registroMateria');
+});
+Route::get('listaM', [materiaController::class, 'create'])->name('materias.create');
+Route::post('/materias', [materiaController::class, 'store'])->name('materias.store');
+
+Route::get('/listaM/search', [materiaController::class, 'search'])->name('materias.search');
+
+
+
+Route::get('/iniciarSesion', function(){
+    return view('iniciarSesion');
+});

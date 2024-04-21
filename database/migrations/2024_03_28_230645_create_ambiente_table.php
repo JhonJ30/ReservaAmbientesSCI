@@ -18,7 +18,7 @@ class CreateAmbienteTable extends Migration
             $table->string('unidadAmb');
             $table->string('tipoAmb');
             $table->string('nroAmb');
-            $table->string('ublicacion');
+            $table->string('ubicacion');
             $table->string('equipamiento');
             $table->integer('capacidad');
             $table->string('descripcion');
