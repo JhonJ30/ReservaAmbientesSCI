@@ -1,5 +1,5 @@
 
-@extends('layout/plantilla')
+@extends('layout/plantillaUser')
 @section('contenido')
 <link href="{{asset ('css/noti.css')}}" rel="stylesheet">
 
