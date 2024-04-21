@@ -15,7 +15,7 @@ class CreateNotificacionTable extends Migration
     {
         Schema::create('notificacion', function (Blueprint $table) {
             $table->id();
-            $table->integer('codUser');
+            $table->integer('codReser');
             $table->string('mensaje');
             $table->string('estado');
             $table->timestamps();

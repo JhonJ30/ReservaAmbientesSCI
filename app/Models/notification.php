@@ -16,7 +16,7 @@ class notification extends Model
 
     // Los campos que se pueden asignar en masa
     protected $fillable = [
-        'codUser',
+        'codReser',
         'mensaje',
         'estado',
     ];
