@@ -29,7 +29,7 @@
         <div class="form-row">
             <div class="form-column">
                 <label for="nombre">Nombre: </label>
-                <input name="nombre", type="text", style="width: 95%;" required>
+                <input name="nombre", type="text", style="width: 100%;" required>
             </div>
         </div>
 

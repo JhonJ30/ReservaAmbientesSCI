@@ -18,6 +18,7 @@
     <tr>
       <th style="text-align: center;">Nombre</th>
       <th style="text-align: center;">Apellido</th>
+      <th style="text-align: center;">Rol</th>
       <th style="text-align: center;">Correo electrónico</th>
       <th style="text-align: center;">Código sis</th>
       <th style="text-align: center;">Acciones</th>
@@ -28,6 +29,7 @@
     <tr>
       <td style="text-align: center;">{{$item->nombre}}</td>
       <td style="text-align: center;">{{$item->apellido}}</td>
+      <td style="text-align: center;">{{$item->rol}}</td>
       <td style="text-align: center;">{{$item->email}}</td>
       <td style="text-align: center;">{{$item->codSis}}</td>
       <td style="text-align: center;">

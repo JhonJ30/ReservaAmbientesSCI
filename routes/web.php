@@ -7,6 +7,7 @@ use App\Http\Controllers\RegistroAmbientes;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\materiaController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\usuarioMateriaController;
 use App\Models\User;
 
 /*
@@ -149,6 +150,13 @@ Route::delete('docente/create3', [ClienteReservaController::class, 'destroyR'])-
 
 
 
+
+
+
+
+
+
+
 //jhon
 Route::get('client', function () {
     return view('homeDocente');
@@ -161,9 +169,9 @@ Route::get('client/buscarAmbientesAvanzado', [RegistroAmbientes::class, 'buscarA
 Route::get('client/verAmbientes/calendario/{id}', [RegistroAmbientes::class, 'showCalendario']);
 
 
-
 Route::get('registroUsuario', function () {
-    return view('registroUsuario');
+    $materias = App\Models\Materias::all();
+    return view('registroUsuario')->with('materias', $materias);
 });
 
 Route::get('listaU', [usuarioController::class, 'create'])->name('usuarios.create');
@@ -181,8 +189,7 @@ Route::post('/materias', [materiaController::class, 'store'])->name('materias.st
 Route::get('/listaM/search', [materiaController::class, 'search'])->name('materias.search');
 
 
-
-Route::get('/iniciarSesion', function () {
+Route::get('/iniciarSesion', function(){
     $adminCount = User::where('rol', 'Administrador')->count();
     if ($adminCount === 0) {
         $newAdmin = new User();
@@ -198,8 +205,6 @@ Route::get('/iniciarSesion', function () {
 });
 Route::post('/login', [loginController::class, 'login'])->name('login');
 Route::get('/logout', [loginController::class, 'logout'])->name('logout');
-
-
 
 Route::get('/admin', function () {
     return view('home');

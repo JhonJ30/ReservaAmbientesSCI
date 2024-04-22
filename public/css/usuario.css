@@ -1,7 +1,7 @@
 /* Estilos para el formulario */
 form {
     margin-bottom: 10px;
-    padding: 30px;
+    padding: 25px;
     background-color: #d7d5d5;
     max-width: 60%;
     margin-left: auto;
@@ -24,7 +24,7 @@ label::after {
 /* Estilos para los campos de entrada */
 input,
 select {
-    width: 90%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -133,3 +133,63 @@ h1 {
     background-color: #17ae74;
     transition: 0.5s;
 }
+
+
+.agregar-btn{
+    height: 5vh;
+    margin-top: 4vh;
+}
+
+
+.materiasDocente label::after{
+    content: "";
+    color: #0B6F63;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+  }
+  td {
+    border: 1px solid #0D7360;
+    background-color: #bbc0c2;
+    text-align: center;
+    padding: 8px;
+  }
+  th {
+    background-color: #0D7360;
+    border: 1px solid #bbc0c2;
+    text-align: center;
+    color: white;
+    padding: 8px;
+  }
+  
+  td button {
+    margin-right: 2px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .edit-btn {
+    background-color: #393e41;
+    color: white;
+    background-color: #393e41;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .delete-btn {
+    background-color: #0D7360;
+    color: white;
+  }
+  .edit-btn:hover, .delete-btn:hover {
+    opacity: 0.8;
+  }
