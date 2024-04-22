@@ -18,9 +18,11 @@ class CreateReservasTable extends Migration
             $table->string('codUser');
             $table->string('codAmb');
             $table->string('Materia');
-            $table->string('horaInicio');
-            $table->string('horaFin');
+            $table->time('horaInicio');
+            $table->time('horaFin');
             $table->string('Actividad');
+            $table->date('Fecha');
+           /*$table->string('Estado');*/
             $table->timestamps();
         });
     }

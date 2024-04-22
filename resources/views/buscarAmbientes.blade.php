@@ -33,10 +33,10 @@
                                     <i class="fas fa-calendar-days"></i>
                                 </button>
                             </td>
-                            <td> <!--columna de RESERVAR cambios sara-->
-                                <button onclick="window.location.href='{{ route('cliente.reservar', ['ambiente_id' => $ambiente->id]) }}'">Reservar
-                                </button>
-                            </td>
+                            <td>
+                                <!--columna de RESERVAR cambios sara-->
+                                <button onclick="window.location.href='{{ route('cliente.reservar', ['ambiente_id' => $ambiente->nroAmb, 'nro_ambiente' => $ambiente->nroAmb]) }}'">Reservar</button>
+                            </td>                            
                         </tr>
                     @endforeach
                 </tbody>

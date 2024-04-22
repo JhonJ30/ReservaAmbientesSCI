@@ -16,6 +16,7 @@ class loginController extends Controller{
             if ($user->rol === 'Administrador') {
                 return redirect('/admin');
             }elseif ($user->rol === 'Docente') {
+                //cambios por :) para mostrar el nombre del usuario q inicio sesion
                 return redirect('/docente/create3');
             } elseif ($user->rol === 'Auxiliar') {
                 return view('/aux');

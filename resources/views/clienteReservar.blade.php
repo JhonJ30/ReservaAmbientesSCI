@@ -17,17 +17,19 @@
                     </div>
                     <div class="form-group">
                         <label for="ambiente">Ambiente(*)</label>
-                        <select id="ambiente" name="ambiente" onchange="toggleIntervalo()" required>
-                            <option value="" disabled selected hidden>----</option>
-                        </select>
-                    </div>
+                        <input type="text" id="ambiente" name="ambiente" value="{{ $nroAmbiente }}" readonly>
+                    </div>                    
                     <div class="form-group">
                         <label for="hora_inicio">Hora de inicio(*)</label>
                         <input type="time" id="hora_inicio" name="hora_inicio" required>
                     </div>
                     <div class="form-group">
                         <label for="actividad">Actividad(*)</label>
-                        <input type="text" id="actividad" name="actividad" required>
+                        <select id="actividad" name="actividad" onchange="toggleIntervalo()" required>
+                            <option value="" disabled selected hidden>----</option>
+                                <option value="examen">Examen</option>
+                                <option value="clase_normal">Clase Normal</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-column">
@@ -35,6 +37,9 @@
                         <label for="materia">Materia(*)</label>
                         <select id="ambiente" name="ambiente" onchange="toggleIntervalo()" required>
                             <option value="" disabled selected hidden>----</option>
+                            @foreach($materias as $id => $materia)
+                                 <option value="{{ $id }}">{{ $materia }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
@@ -45,6 +50,10 @@
                         <label for="hora_fin">Hora de fin(*)</label>
                         <input type="time" id="hora_fin" name="hora_fin" required>
                     </div>
+                   <!-- <div class="form-group">
+                        <label for="estado">Estado(*)</label>
+                        <input type="text" id="estado" name="estado"  required>
+                    </div>-->
                 </div>
             </div>
             <div class="botones">

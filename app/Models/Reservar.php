@@ -23,6 +23,6 @@ class Reservar extends Model
         'HoraFin',
         'Actividad',
         'fecha',
-        'estado',
+       /* 'estado',*/
     ];
 }
