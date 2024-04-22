@@ -33,6 +33,9 @@
                             <h2>{{ Auth::user()->apellido }} {{ Auth::user()->nombre }}</h2>
                         </div>
                         <h2>Reservas</h2>
+                        @if ($ambientes->isEmpty())
+                       <p style="font-size: 20px; color: gray;" >No hay reservas.</p>
+                        @else
                         <ul>
                         @foreach ($ambientes as $ambiente)
                         <li >
@@ -48,9 +51,12 @@
                        </li>
                        @endforeach
                         </ul>
+                        @endif
+                        <div class="footer">
                         <button class="cancel-button2" id="cancel-button2">Cerrar Sesión
                             <i class="fas fa-right-from-bracket"></i>
                         </button>
+                        </div>
                     </div>
                 </div>
         </ul>
