@@ -52,7 +52,7 @@
                        @endforeach
                         </ul>
                         @endif
-                        <div class="footer">
+                        <div class="footer" >
                         <button class="cancel-button2" id="cancel-button2">Cerrar Sesión
                             <i class="fas fa-right-from-bracket"></i>
                         </button>
