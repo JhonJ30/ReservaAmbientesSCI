@@ -20,7 +20,10 @@ class ClienteReservaController extends Controller
 
     public function create3()
     {
-        $ambientes = Reservar::all();
+        $userId = Auth::id();
+    
+        $ambientes = Reservar::where('codUser', $userId)->get();
+    
         return view('homeDocente', compact('ambientes'));
     }
 
