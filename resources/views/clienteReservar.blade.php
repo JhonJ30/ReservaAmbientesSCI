@@ -58,7 +58,7 @@
             </div>
             <div class="botones">
             <button id="botonCancelar" class="botonCancelar" type="button" onclick="window.location.href='/client/verAmbientes'">Cancelar</button>
-            <button class="botonRegistrar" type="submit">Registrar</button>
+            <button class="botonRegistrar" type="button" onclick="window.location.href='/client/verAmbientes'">Registrar</button>
             </div>
         </form>
     </div>
