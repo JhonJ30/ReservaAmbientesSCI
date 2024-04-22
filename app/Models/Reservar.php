@@ -7,26 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservar extends Model
 {
+    public $timestamps = false;
     use HasFactory;
     protected $table = 'reserva';
-    
+
     // Si la tabla tiene un campo de autoincremento, especifica su nombre
     protected $primaryKey = 'id';
 
     // Los campos que se pueden asignar en masa
     protected $fillable = [
         'codUser',
-        /*'codAmb',*/
-        'nroAmb',
-        'Materia', 
+        'codAmb',
+        /*'nroAmb',*/
+        'Materia',
         'horaInicio',
         'horaFin',
         'Actividad',
         'fecha',
-       /* 'estado',*/
+        /* 'estado',*/
     ];
     public function usuario()
-{
-    return $this->belongsTo(User::class, 'codUser');
-}
+    {
+        return $this->belongsTo(User::class, 'codUser');
+    }
 }

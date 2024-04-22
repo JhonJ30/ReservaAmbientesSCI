@@ -16,13 +16,13 @@ class CreateReservasTable extends Migration
         Schema::create('Reserva', function (Blueprint $table) {
             $table->id();
             $table->string('codUser');
-            $table->string('nroAmb');
+            $table->string('codAmb');
             $table->string('Materia');
             $table->time('horaInicio');
             $table->time('horaFin');
             $table->string('Actividad');
             $table->date('fecha');
-           /*$table->string('estado');*/
+            /*$table->string('estado');*/
             $table->timestamps();
         });
     }

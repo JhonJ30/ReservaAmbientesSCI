@@ -35,7 +35,7 @@
                 <div class="form-column">
                     <div class="form-group">
                         <label for="materia">Materia(*)</label>
-                        <select id="ambiente" name="ambiente" onchange="toggleIntervalo()" required>
+                        <select id="materia" name="materia" onchange="toggleIntervalo()" required>
                             <option value="" disabled selected hidden>----</option>
                             @foreach($materias as $id => $materia)
                                  <option value="{{ $id }}">{{ $materia }}</option>
