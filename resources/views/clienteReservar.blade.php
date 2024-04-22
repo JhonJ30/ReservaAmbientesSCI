@@ -13,7 +13,7 @@
                 <div class="form-column">
                     <div class="form-group">
                         <label for="solicitante">Solicitante(*)</label>
-                        <input type="text" id="solicitante" name="solicitante"  required>
+                        <input type="text" id="solicitante" name="solicitante" value="{{ $nombreUsuario }} {{ $apellidoUsuario }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="ambiente">Ambiente(*)</label>
@@ -21,7 +21,7 @@
                     </div>                    
                     <div class="form-group">
                         <label for="hora_inicio">Hora de inicio(*)</label>
-                        <input type="time" id="hora_inicio" name="hora_inicio" required>
+                        <input type="time" id="hora_inicio" name="hora_inicio"  min="06:45" max="21:25" required>
                     </div>
                     <div class="form-group">
                         <label for="actividad">Actividad(*)</label>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group">
                         <label for="hora_fin">Hora de fin(*)</label>
-                        <input type="time" id="hora_fin" name="hora_fin" required>
+                        <input type="time" id="hora_fin" name="hora_fin" min="06:45" max="21:45" required>
                     </div>
                    <!-- <div class="form-group">
                         <label for="estado">Estado(*)</label>

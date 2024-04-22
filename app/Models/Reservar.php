@@ -16,11 +16,11 @@ class Reservar extends Model
     // Los campos que se pueden asignar en masa
     protected $fillable = [
         'codUser',
-        'codAmb',
+        /*'codAmb',*/
         'nroAmb',
         'Materia', 
-        'HoraInicio',
-        'HoraFin',
+        'horaInicio',
+        'horaFin',
         'Actividad',
         'fecha',
        /* 'estado',*/
