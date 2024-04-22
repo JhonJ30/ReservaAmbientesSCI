@@ -37,4 +37,5 @@ class UsuarioController extends Controller{
         $usuarios = User::where('codSis', 'like', '%' . $searchTerm . '%')->get();
        return view('listaUsuarios',  compact('usuarios'));
     }
+    
 }

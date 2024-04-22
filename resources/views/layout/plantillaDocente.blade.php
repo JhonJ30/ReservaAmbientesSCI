@@ -20,7 +20,7 @@
             <div class="bar"></div>
         </div>
         <ul class="menu">
-            <li> <a href="/client" class="priHabilitado"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
+            <li> <a href="/docente/create3" class="priHabilitado"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
             <li><a href="/client/verAmbientes" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Ver Ambientes</a>
             </li>
             <li><a href="#" class="ultimo"><i class="fas fa-question-circle"></i>&nbsp;Ayuda</a></li>
