@@ -32,7 +32,7 @@
       <td style="text-align: center;">{{$item->codSis}}</td>
       <td style="text-align: center;">
         <button class="edit-btn" onclick="">Modificar</button>
-        <button  class="delete-btn" onclick="" >Eliminar</button>
+        <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>
   @endforeach
@@ -49,7 +49,7 @@
     <p class="gris">Esta operacion es irreversible</p>
     <br>
     <div class="button-container">
-    <form action="{{route('horarios.destroy')}}" method="POST">
+    <form action="{{route('materias.destroy')}}" method="POST">
             @csrf
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="registro_id" id="registro_id">

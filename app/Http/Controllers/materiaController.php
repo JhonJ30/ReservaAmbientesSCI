@@ -35,4 +35,11 @@ class materiaController extends Controller{
         $materias = Materias::where('codSis', 'like', '%' . $searchTerm . '%')->get();
         return view('listaMaterias',  compact('materias'));
     }
+    public function destroy(Request $request)
+    {
+        $materias = Materias::findOrFail($request->registro_id);
+        $materias->delete();
+    
+        return redirect()->back()->with('success', '¡La materia ha sido eliminado correctamente!');
+    }
 }
