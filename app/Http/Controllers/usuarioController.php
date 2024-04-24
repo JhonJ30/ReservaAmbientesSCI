@@ -50,4 +50,16 @@ class UsuarioController extends Controller{
         $usuarios = User::where('codSis', 'like', '%' . $searchTerm . '%')->get();
        return view('listaUsuarios',  compact('usuarios'));
     }
+    
+    public function destroy(Request $request)
+{
+    $usuarios = User::findOrFail($request->registro_id);
+    $usuarios->delete();
+
+    return redirect()->back()->with('success', '¡El usuario ha sido eliminado correctamente!');
+}
+
+
+    
+    
 }

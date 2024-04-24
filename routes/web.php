@@ -65,6 +65,10 @@ Route::get('listaH', [horaController::class, 'create'])->name('horarios.create')
 Route::delete('listaH', [horaController::class, 'destroy'])->name('horarios.destroy');
 Route::get('/listaH/search', [horaController::class, 'search'])->name('horarios.search');
 
+Route::delete('listaU', [usuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+
+
 //Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 
 
