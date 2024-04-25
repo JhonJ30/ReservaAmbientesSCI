@@ -260,6 +260,10 @@ body {
     .iniSesion{
         padding: 10px;
     }
+    .container-reservas {
+      margin-left: -150px !important;
+      margin-top: 23px;
+   }
 }
 
 
