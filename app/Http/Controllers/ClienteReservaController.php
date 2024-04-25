@@ -59,6 +59,6 @@ class ClienteReservaController extends Controller
         ]);
 
         // Redirigir a una página de éxito o donde desees
-        return redirect()->back()->with('success');
+        return redirect('/client/verAmbientes')->with('success', 'Reserva realizada exitosamente');
     }
 }
