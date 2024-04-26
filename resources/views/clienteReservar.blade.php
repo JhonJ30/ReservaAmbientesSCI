@@ -27,8 +27,10 @@
                         <label for="actividad">Actividad(*)</label>
                         <select id="actividad" name="actividad" onchange="toggleIntervalo()" required>
                             <option value="" disabled selected hidden>----</option>
-                                <option value="examen">Examen</option>
-                                <option value="clase_normal">Clase Normal</option>
+                                <option value="Examen Normal">Examen Normal</option>
+                                <option value="Examen de Mesa">Examen de Mesa</option>
+                                <option value="Clase Normal">Clase Normal</option>
+                                <option value="Clase Auxiliatura">Clase Auxiliatura</option>
                         </select>
                     </div>
                 </div>

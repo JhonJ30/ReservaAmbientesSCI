@@ -116,9 +116,6 @@ Route::post('/reserva/store', [ClienteReservaController::class, 'store'])->name(
 
 
 
-
-
-
 //leo
 Route::get('registroAmb', function () {
     return view('registroAmb');
