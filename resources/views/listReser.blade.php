@@ -20,40 +20,78 @@
     </tr>
   </thead>
   <tbody>
+  @foreach ($reservas as $item )
     <tr>
-      <td style="text-align: center;">15/04/2024</td>
-      <td style="text-align: center;">12:45</td>
-      <td style="text-align: center;">690B</td>
-      <td style="text-align: center;">Ing. Leticia</td>
-      <td style="text-align: center;">Pasar clases</td>
+      <td style="text-align: center;">{{$item->fecha}}</td>
+      <td style="text-align: center;">{{$item->horaInicio}} - {{$item->horaFin}}</td>
+      <td style="text-align: center;">{{$item->codAmb}}</td>
+      <td style="text-align: center;">{{$item->nombre}} {{$item->apellido}}</td>
+      <td style="text-align: center;">{{$item->Actividad}}</td>
       <td style="text-align: center;">
-      <button class="edit-btn" >Aceptar</button>
-        <button  class="delete-btn"  >Rechazar</button>
+      <form method="POST" action="{{ route('notificaciones.store') }}">
+        @csrf
+        <input type="hidden" name="reserva_id" value="{{$item->id}}">
+        <button type="submit"  class="edit-btn">Aceptar</button>
+        <button type="button" class="delete-btn" onclick="openModal({{ $item->id }})">Rechazar</button>
+      </form>  
+        
+  
       </td>
     </tr>
-    <tr>
-      <td style="text-align: center;">15/04/2024</td>
-      <td style="text-align: center;">12:45</td>
-      <td style="text-align: center;">690B</td>
-      <td style="text-align: center;">Ing. Leticia</td>
-      <td style="text-align: center;">Pasar clases</td>
-      <td style="text-align: center;">
-      <button class="edit-btn" >Aceptar</button>
-        <button  class="delete-btn"  >Rechazar</button>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: center;">15/04/2024</td>
-      <td style="text-align: center;">12:45</td>
-      <td style="text-align: center;">690B</td>
-      <td style="text-align: center;">Ing. Leticia</td>
-      <td style="text-align: center;">Pasar clases</td>
-      <td style="text-align: center;">
-      <button class="edit-btn" >Aceptar</button>
-        <button  class="delete-btn"  >Rechazar</button>
-      </td>
-    </tr>
+  @endforeach
+   
   </tbody>
 </table>
 </div>
+
+<!-- Modal de confirmación de eliminación -->
+<div id="myModal" class="modal">
+ 
+  <div class="modal-content">
+    <p><strong>¿Estás seguro que desea rechazar esta solicitud?</strong></p>
+    <br>
+    <p class="gris">Esta operacion es irreversible</p>
+    <br>
+    <div class="button-container">
+    <form method="POST" action="{{ route('notificaciones.Rechazar') }}">
+    @csrf
+            <input type="hidden" name="reserva_id" id="reserva_id">
+       <button class="btnAceptar" type="submit" >Aceptar</button>
+      </form>
+    <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
+  </div>
+  </div>
+</div>
+
+<script>
+   // Función para abrir el modal
+   function openModal(registroId) {
+    document.getElementById('reserva_id').value = registroId;
+    // Mostrar el modal
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+    function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+}
+
+
+
+</script>
+@if(Session::has('success'))
+    <div id="successModal" class="modal" style="display: block;">
+        <div class="modal-content">
+            <p><strong>{{ Session::get('success') }}</strong></p>
+            <!-- Otro contenido del modal si es necesario -->
+            <div class="button-container">
+                <button class="btnAceptar" onclick="closeSuccessModal()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+@endif
+
 @endsection

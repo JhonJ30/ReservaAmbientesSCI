@@ -56,9 +56,24 @@ class ClienteReservaController extends Controller
             'horaFin' => $request->hora_fin,
             'Actividad' => $request->actividad,
             'fecha' => $request->fecha,
+            'estado'=>"Proceso",
         ]);
 
         // Redirigir a una página de éxito o donde desees
         return redirect('/client/verAmbientes')->with('success', 'Reserva realizada exitosamente');
     }
+    public function verReserva()
+    {
+        $reservas = Reservar::join('users', 'reserva.codUser', '=', 'users.id')
+                           ->where('reserva.estado', "Proceso")
+                           ->select('users.nombre as nombre', 'users.apellido as apellido','users.email as correo','reserva.*')
+                           ->get();
+        //el formulario donde nosotros aagregamos datos
+
+     
+        return view('listReser', compact('reservas'));
+        
+        //return view('pruebita');
+    }
+
 }

@@ -31,6 +31,7 @@
             </li>
             <li><a href="#" id="menuRegistrar2" class="priHabilitado2"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
                 <ul class="submenu" id="submenuRegistrar2">
+                    <p><a href="/listaR" class="priHabilitado2">&nbsp;&nbsp;Reservas</a></p>
                     <p><a href="/listaA" class="priHabilitado2">&nbsp;&nbsp;Ambientes</a></p>
                     <p><a href="/listaH" class="priHabilitado2">&nbsp;&nbsp;Horarios</a></p>
                     <p><a href="/listaM" class="priHabilitado2">&nbsp;&nbsp;Materias</a></p>

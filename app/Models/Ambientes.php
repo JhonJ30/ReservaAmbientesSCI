@@ -24,4 +24,5 @@ class Ambientes extends Model
         'descripcion',
         'estado',
     ];
+  
 }

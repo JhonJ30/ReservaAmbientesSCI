@@ -9,6 +9,8 @@ use App\Http\Controllers\materiaController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\usuarioMateriaController;
 use App\Models\User;
+use App\Http\Controllers\notificationController;
+use App\Http\Controllers\ClienteReservaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,17 @@ Route::get('listaA', [RegistroAmbientes::class, 'create'])->name('ambientes.crea
 //Route::get('listaA', [RegistroAmbientes::class, 'create'])->name('ambientes.create');
 Route::delete('listaA', [RegistroAmbientes::class, 'destroy'])->name('ambientes.destroy');
 Route::get('/listaA/search', [RegistroAmbientes::class, 'search'])->name('ambientes.search');
+Route::get('listaR', function () {
+    return view('listReser');
+});
+
+Route::get('noti', [notificationController::class, 'ObtenerNoti'])->name('notificaciones.ObtenerNoti');
+
+Route::put('/notificaciones/{id}', [notificationController::class, 'update'])->name('notificaciones.update');
+Route::get('listaR', [ClienteReservaController::class, 'verReserva'])->name('reserva.verReserva');
+
+Route::post('/notificaciones/store', [notificationController::class, 'store'])->name('notificaciones.store');
+Route::post('/notificaciones/Rechazar', [notificationController::class, 'Rechazar'])->name('notificaciones.Rechazar');
 
 
 
@@ -107,7 +120,7 @@ Route::get('/horarios', function () {
     return view('Horarios')->with('ambientes', $ambientes);
 });
 //GESTIONAR RESERVAS
-use App\Http\Controllers\ClienteReservaController;
+//use App\Http\Controllers\ClienteReservaController;
 
 Route::get('/cliente/reservar/{ambiente_id}', [ClienteReservaController::class, 'mostrarFormularioReserva'])->name('cliente.reservar');
 
