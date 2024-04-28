@@ -48,10 +48,11 @@
                         <label for="fecha">Fecha(*)</label>
                         <!--se agrego @ para darle la funcion a los tiempos de las fechas-->
                         @php
-                            $fecha_limite = date('Y-m-d', strtotime('+1 day'));
+                            $fecha_minima = date('Y-m-d', strtotime('+1 day'));
+                            $mes_anio_actual = date('Y-m');
                         @endphp
                         <!--se aumento esto min="... y max=... para restriccion de fechas-->
-                        <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" max="{{ $fecha_limite }}" required>
+                        <input type="date" id="fecha" name="fecha"  value="{{ $fecha_minima }}" min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
                     </div>
                     <div class="form-group">
                         <label for="hora_fin">Hora de fin(*)</label>
@@ -63,6 +64,12 @@
                     </div>-->
                 </div>
             </div>
+            <!-- esto es el código para mostrar el mensaje de error si existe -->
+            @if(session('error'))
+                <div class="alert alert-danger">
+                  {{ session('error') }}
+                </div>
+            @endif
             <div class="botones">
             <button id="botonCancelar" class="botonCancelar" type="button" onclick="window.location.href='/client/verAmbientes'">Cancelar</button>
             <button class="botonRegistrar" type="submit" >Registrar</button>
