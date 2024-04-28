@@ -46,7 +46,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fecha">Fecha(*)</label>
-                        <input type="date" id="fecha" name="fecha" required>
+                        <!--se agrego @ para darle la funcion a los tiempos de las fechas-->
+                        @php
+                            $fecha_limite = date('Y-m-d', strtotime('+1 day'));
+                        @endphp
+                        <!--se aumento esto min="... y max=... para restriccion de fechas-->
+                        <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" max="{{ $fecha_limite }}" required>
                     </div>
                     <div class="form-group">
                         <label for="hora_fin">Hora de fin(*)</label>
