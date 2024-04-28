@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Ambientes;
-
+use App\Models\Reservar;
 class RegistroAmbientes extends Controller
 {
     /**
@@ -17,7 +17,9 @@ class RegistroAmbientes extends Controller
      */
     public function index(){
         $ambientes = Ambientes::all();
-            return view('buscarAmbientes', ['ambientes' => $ambientes]);
+        $userId = Auth::id();
+        $reservas = Reservar::where('codUser', $userId)->get();
+            return view('buscarAmbientes', compact('reservas'),['ambientes' => $ambientes]);
     }
 
     /**

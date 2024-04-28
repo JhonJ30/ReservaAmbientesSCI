@@ -34,11 +34,11 @@
                             <h2>{{ Auth::user()->apellido }} {{ Auth::user()->nombre }}</h2>
                         </div>
                         <h2>Reservas</h2>
-                        @if ($ambientes->isEmpty())
+                        @if ($reservas->isEmpty())
                        <p style="font-size: 20px; color: gray;" >No hay reservas.</p>
                         @else
                         <ul>
-                        @foreach ($ambientes as $ambiente)
+                        @foreach ($reservas as $ambiente)
                         <li >
                        <span>Aula: {{ $ambiente->codAmb }}<br>
                        Fecha: {{ $ambiente->fecha }}<br>

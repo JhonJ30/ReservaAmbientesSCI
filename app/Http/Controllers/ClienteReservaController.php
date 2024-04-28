@@ -22,9 +22,9 @@ class ClienteReservaController extends Controller
     {
         $userId = Auth::id();
 
-        $ambientes = Reservar::where('codUser', $userId)->get();
+        $reservas = Reservar::where('codUser', $userId)->get();
 
-        return view('homeDocente', compact('ambientes'));
+        return view('homeDocente', compact('reservas'));
     }
 
     public function destroyR(Request $request)
