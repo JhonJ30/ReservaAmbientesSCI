@@ -55,6 +55,12 @@ h1 {
     color: #0B6F63;
 }
 
+.error{
+    margin: 0px;
+    font-size: smaller;
+    color: red;
+}
+
 .form-row {
     display: flex;
     margin-bottom: 30px;

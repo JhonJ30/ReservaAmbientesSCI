@@ -65,7 +65,6 @@ Route::get('/listaUsuarios', [usuarioController::class, 'create'])->name('usuari
 Route::get('/buscarUsuarios', [usuarioController::class, 'search'])->name('usuarios.search');
 Route::delete('/listaUsuarios', [usuarioController::class, 'destroy'])->name('usuarios.destroy');
 
-
 //notificaciones
 Route::get('notificacion', [notificationController::class, 'ObtenerNoti'])->name('notificaciones.ObtenerNoti');
 Route::put('/notificaciones/{id}', [notificationController::class, 'update'])->name('notificaciones.update');
