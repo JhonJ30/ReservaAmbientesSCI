@@ -42,4 +42,23 @@ class materiaController extends Controller{
     
         return redirect()->back()->with('success', '¡La materia ha sido eliminado correctamente!');
     }
+    public function editar($id)
+    {
+    $materias = Materias::find($id); 
+
+    if (!$materias) {
+        return redirect()->route('listaM'); // Redirige a la lista si el ambiente no existe
+    }
+
+    return view('editarMat', compact('materias')); // Cambia 'ruta.vista.editar' por la ruta real de tu vista de edición
+    }
+
+    public function update(Request $request, $id)
+    {
+        $materias = Materias::findOrFail($id);
+        $materias->update($request->all());
+
+    return redirect()->route('materias.create')->with('success', '¡Materia actualizada Correctamente!');
+
+    }
 }

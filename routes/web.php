@@ -87,6 +87,12 @@ Route::get('editarUsu', function () {
 Route::get('/usuarios/editarUsu/{id}', [usuarioController::class, 'editar'])->name('usuarios.editar');
 Route::put('/usuarios/{id}', [usuarioController::class, 'update'])->name('usuarios.update');
 
+Route::get('editarMat', function () {
+    return view('editarMat');
+});
+Route::get('/materias/editarMat/{id}', [materiaController::class, 'editar'])->name('materias.editar');
+Route::put('/materias/{id}', [materiaController::class, 'update'])->name('materias.update');
+
 //Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 
 
