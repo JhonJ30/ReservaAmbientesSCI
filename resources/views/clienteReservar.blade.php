@@ -27,8 +27,10 @@
                         <label for="actividad">Actividad(*)</label>
                         <select id="actividad" name="actividad" onchange="toggleIntervalo()" required>
                             <option value="" disabled selected hidden>----</option>
-                                <option value="examen">Examen</option>
-                                <option value="clase_normal">Clase Normal</option>
+                                <option value="Examen Normal">Examen Normal</option>
+                                <option value="Examen de Mesa">Examen de Mesa</option>
+                                <option value="Clase Normal">Clase Normal</option>
+                                <option value="Clase Auxiliatura">Clase Auxiliatura</option>
                         </select>
                     </div>
                 </div>
@@ -44,7 +46,13 @@
                     </div>
                     <div class="form-group">
                         <label for="fecha">Fecha(*)</label>
-                        <input type="date" id="fecha" name="fecha" required>
+                        <!--se agrego @ para darle la funcion a los tiempos de las fechas-->
+                        @php
+                            $fecha_minima = date('Y-m-d', strtotime('+1 day'));
+                            $mes_anio_actual = date('Y-m');
+                        @endphp
+                        <!--se aumento esto min="... y max=... para restriccion de fechas-->
+                        <input type="date" id="fecha" name="fecha"  value="{{ $fecha_minima }}" min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
                     </div>
                     <div class="form-group">
                         <label for="hora_fin">Hora de fin(*)</label>
@@ -56,9 +64,15 @@
                     </div>-->
                 </div>
             </div>
+            <!-- esto es el código para mostrar el mensaje de error si existe -->
+            @if(session('error'))
+                <div class="alert alert-danger">
+                  {{ session('error') }}
+                </div>
+            @endif
             <div class="botones">
             <button id="botonCancelar" class="botonCancelar" type="button" onclick="window.location.href='/client/verAmbientes'">Cancelar</button>
-            <button class="botonRegistrar" type="button" onclick="window.location.href='/client/verAmbientes'">Registrar</button>
+            <button class="botonRegistrar" type="submit" >Registrar</button>
             </div>
         </form>
     </div>

@@ -20,4 +20,9 @@ class notification extends Model
         'mensaje',
         'estado',
     ];
+    //notif
+    public function reserva()
+    {
+        return $this->belongsTo(Reservar::class);
+    }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\User;
 class Ambientes extends Model
 {
     use HasFactory;
@@ -24,4 +24,8 @@ class Ambientes extends Model
         'descripcion',
         'estado',
     ];
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'codUser');
+    }
 }

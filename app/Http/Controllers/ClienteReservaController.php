@@ -21,10 +21,10 @@ class ClienteReservaController extends Controller
     public function create3()
     {
         $userId = Auth::id();
-    
-        $ambientes = Reservar::where('codUser', $userId)->get();
-    
-        return view('homeDocente', compact('ambientes'));
+
+        $reservas = Reservar::where('codUser', $userId)->get();
+
+        return view('homeDocente', compact('reservas'));
     }
 
     public function destroyR(Request $request)
@@ -47,6 +47,17 @@ class ClienteReservaController extends Controller
             'fecha' => 'required',
             'hora_fin' => 'required',
         ]);
+
+        // para verificar si ya existe una reserva para el mismo ambiente en la misma fecha y hora
+        $reservaExistente = Reservar::where('codAmb', $request->ambiente)
+            ->where('fecha', $request->fecha)
+            ->where('horaInicio', $request->hora_inicio)
+            ->exists();
+
+        if ($reservaExistente) {
+            return redirect()->back()->with('error', 'Ya existe una reserva para este ambiente en la misma hora.');
+        }
+
         // para la creacion de uno nuevo en el formulario
         Reservar::create([
             'codUser' => Auth::id(), // obtiene el ID del usuario autenticado
@@ -56,9 +67,23 @@ class ClienteReservaController extends Controller
             'horaFin' => $request->hora_fin,
             'Actividad' => $request->actividad,
             'fecha' => $request->fecha,
+            'estado' => "Proceso",
         ]);
 
         // Redirigir a una página de éxito o donde desees
-        return redirect()->back()->with('success');
+        return redirect('/client/verAmbientes')->with('success', 'Reserva realizada exitosamente');
+    }
+    public function verReserva()
+    {
+        $reservas = Reservar::join('users', 'reserva.codUser', '=', 'users.id')
+            ->where('reserva.estado', "Proceso")
+            ->select('users.nombre as nombre', 'users.apellido as apellido', 'users.email as correo', 'reserva.*')
+            ->get();
+        //el formulario donde nosotros aagregamos datos
+
+
+        return view('listReser', compact('reservas'));
+
+        //return view('pruebita');
     }
 }
