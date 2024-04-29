@@ -1,6 +1,10 @@
-@extends('layout/plantilla')
-@section('contenido')
+@extends('layout/plantillaAdmin')
 
+@php
+    $materias = App\Models\Materias::all();
+@endphp
+
+@section('contenido')
 <link href="{{asset ('css/usuario.css')}}" rel="stylesheet">
 
 <h1>REGISTRO DE USUARIO</h1>
@@ -21,7 +25,6 @@
                     <option value="" disabled selected hidden>----</option>
                     <option value="Administrador">Administrador</option>
                     <option value="Docente">Docente</option>
-                    <option value="Aulixiar">Auxiliar</option>
                 </select>
             </div>
         </div>
@@ -88,7 +91,7 @@
     <input type="hidden" name="asignaciones[]" value="">
 
     <div class="button-container">
-        <button type="button" class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
+        <button type="button" class="cancelar-btn" onclick="cancelar()">Cancelar</button>
         <button class="registrar-btn" type="submit">Registrar</button>
     </div>
 

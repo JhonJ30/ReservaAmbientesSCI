@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Materias;
 
-class materiaController extends Controller{
-    public function create(){
-        $materias=Materias::all();
-        return view('listaMaterias', compact('materias'));
+class materiaController extends Controller
+{
+    public function create()
+    {
+        $materias = Materias::all();
+        return view('materias/listaMaterias', compact('materias'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -18,7 +20,8 @@ class materiaController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $materia = new Materias([
             'codSis' => $request->get('codSis'),
             'nivel' => $request->get('nivel'),
@@ -30,16 +33,17 @@ class materiaController extends Controller{
         return redirect()->route('materias.create')->with('success', '¡La materia ha sido registrado de manera correcta!');
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $searchTerm = $request->input('search');
         $materias = Materias::where('codSis', 'like', '%' . $searchTerm . '%')->get();
-        return view('listaMaterias',  compact('materias'));
+        return view('materias/listaMaterias',  compact('materias'));
     }
+
     public function destroy(Request $request)
     {
         $materias = Materias::findOrFail($request->registro_id);
         $materias->delete();
-    
         return redirect()->back()->with('success', '¡La materia ha sido eliminado correctamente!');
     }
 }

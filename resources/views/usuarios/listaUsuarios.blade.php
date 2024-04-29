@@ -1,13 +1,13 @@
-@extends('layout/plantilla')
+@extends('layout/plantillaAdmin')
 @section('contenido')
 
 <link href="{{asset ('css/listaH.css')}}" rel="stylesheet">
 <br>
 <h2>LISTA DE USUARIOS</h2>
 <br>
-      <form action="/listaU/search" method="GET">
+      <form action="{{ route('usuarios.search') }}" method="GET">
       <div class="search-container">
-            <input type="text" name="search" placeholder="Buscar usuario" class="search-input">
+            <input type="text" name="search" placeholder="Buscar por código sis" class="search-input">
             <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
       </div>
       </form> 
@@ -16,22 +16,22 @@
 <table>
   <thead>
     <tr>
+      <th style="text-align: center;">Código sis</th>
       <th style="text-align: center;">Nombre</th>
       <th style="text-align: center;">Apellido</th>
       <th style="text-align: center;">Rol</th>
       <th style="text-align: center;">Correo electrónico</th>
-      <th style="text-align: center;">Código sis</th>
       <th style="text-align: center;">Acciones</th>
     </tr>
   </thead>
   <tbody>
     @foreach ($usuarios as $item)
     <tr>
+      <td style="text-align: center;">{{$item->codSis}}</td>
       <td style="text-align: center;">{{$item->nombre}}</td>
       <td style="text-align: center;">{{$item->apellido}}</td>
       <td style="text-align: center;">{{$item->rol}}</td>
       <td style="text-align: center;">{{$item->email}}</td>
-      <td style="text-align: center;">{{$item->codSis}}</td>
       <td style="text-align: center;">
         <button class="edit-btn" onclick="">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>

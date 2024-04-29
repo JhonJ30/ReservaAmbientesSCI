@@ -1,31 +1,78 @@
 <?php
 
 use App\Models\Ambientes;
-use App\Http\Controllers\horaController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegistroAmbientes;
 use App\Http\Controllers\usuarioController;
 use App\Http\Controllers\materiaController;
+use App\Http\Controllers\horarioController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\usuarioMateriaController;
-use App\Models\User;
+use App\Http\Controllers\ambienteController;
+use App\Http\Controllers\notificationController;
+use App\Http\Controllers\reservaController;
+
+
+//general
+Route::view('/', 'usuarios/home')->name('home');
+
+//login
+Route::view('/iniciarSesion', 'iniciarSesion')->name('iniciarSesion');
+Route::post('/login', [loginController::class, 'login'])->name('login');
+Route::get('/logout', [loginController::class, 'logout'])->name('logout');
+
+//ambientes
+Route::view('/registroAmbiente', 'ambientes/registroAmbiente')->name('ambientes.registrar');
+Route::post('/ambientes', [ambienteController::class, 'store'])->name('ambientes.store');
+Route::get('/listaAmbientes', [ambienteController::class, 'create'])->name('ambientes.create');
+Route::delete('/listaAmbientes', [ambienteController::class, 'destroy'])->name('ambientes.destroy');
+Route::get('/ambientes/editar/{id}', [ambienteController::class, 'editar'])->name('ambientes.editar');
+Route::put('/ambientes/{id}', [ambienteController::class, 'update'])->name('ambientes.update');
+
+Route::get('/verAmbientes', [ambienteController::class, 'index'])->name('ambientes.index');
+Route::get('/buscarAmbientes', [ambienteController::class, 'buscar'])->name('ambientes.buscar');
+Route::get('/buscarAmbientesAvanzado', [ambienteController::class, 'buscarAvanzado'])->name('ambientes.buscarAvanzado');
+Route::get('/verAmbientes/calendario/{id}', [ambienteController::class, 'showCalendario'])->name('ambientes.calendario');
+
+//horarios
+Route::view('/registroHorario', 'horarios/registroHorario')->name('horarios.registrar');
+Route::post('/horarios', [horarioController::class, 'store'])->name('horarios.store');
+Route::get('/listaHorarios', [horarioController::class, 'create'])->name('horarios.create');
+Route::get('/buscarHorarios', [horarioController::class, 'search'])->name('horarios.search');
+Route::delete('/listaHorarios', [horarioController::class, 'destroy'])->name('horarios.destroy');
+Route::get('/horarios/editar/{id}', [horarioController::class, 'edit'])->name('horarios.edit');
+Route::put('/horarios/{id}', [horarioController::class, 'update'])->name('horarios.update');
+
+//materias
+Route::view('/registroMateria','materias/registroMateria')->name('materias.registrar');
+Route::post('/materias', [materiaController::class, 'store'])->name('materias.store');
+Route::get('/listaMaterias', [materiaController::class, 'create'])->name('materias.create');
+Route::get('/buscarMaterias', [materiaController::class, 'search'])->name('materias.search');
+Route::delete('/listaMaterias', [materiaController::class, 'destroy'])->name('materias.destroy');
+
+//reservas
+Route::post('/reservas', [reservaController::class, 'store'])->name('reservas.store');
+Route::get('/reservas/{ambiente_id}', [reservaController::class, 'show'])->name('reservas.show');
+Route::delete('/verAmbientes', [reservaController::class, 'destroy'])->name('reservas.destroy');
+Route::delete('/', [reservaController::class, 'destroy'])->name('reservas.destroy');
+
+Route::get('/listaReservas', [reservaController::class, 'create'])->name('reservas.create');
+Route::get('/listaReservas', [reservaController::class, 'verReserva'])->name('reservas.verReserva');
+
+//usuarios
+Route::view('/registroUsuario','usuarios/registroUsuario')->name('usuarios.registrar');
+Route::post('/usuarios', [usuarioController::class, 'store'])->name('usuarios.store');
+Route::get('/listaUsuarios', [usuarioController::class, 'create'])->name('usuarios.create');
+Route::get('/buscarUsuarios', [usuarioController::class, 'search'])->name('usuarios.search');
+Route::delete('/listaUsuarios', [usuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+
+//notificaciones
+Route::get('notificacion', [notificationController::class, 'ObtenerNoti'])->name('notificaciones.ObtenerNoti');
+Route::put('/notificaciones/{id}', [notificationController::class, 'update'])->name('notificaciones.update');
+Route::post('/notificaciones/store', [notificationController::class, 'store'])->name('notificaciones.store');
+Route::post('/notificaciones/Rechazar', [notificationController::class, 'Rechazar'])->name('notificaciones.Rechazar');
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('homeUser');
-});
-
-
 //mary
 Route::get('listaA', function () {
     return view('listaAmb');
@@ -160,11 +207,6 @@ Route::delete('docente/create3', [ClienteReservaController::class, 'destroyR'])-
 
 
 //jhon
-Route::get('client', function () {
-    return view('homeDocente');
-});
-
-
 Route::get('client/verAmbientes', [RegistroAmbientes::class, 'index']);
 Route::get('client/buscarAmbientes', [RegistroAmbientes::class, 'buscar'])->name('ambientes.buscar');
 Route::get('client/buscarAmbientesAvanzado', [RegistroAmbientes::class, 'buscarAvanzado']);
@@ -191,7 +233,7 @@ Route::post('/materias', [materiaController::class, 'store'])->name('materias.st
 Route::get('/listaM/search', [materiaController::class, 'search'])->name('materias.search');
 
 
-Route::get('/iniciarSesion', function(){
+Route::get('/iniciarSesion', function () {
     $adminCount = User::where('rol', 'Administrador')->count();
     if ($adminCount === 0) {
         $newAdmin = new User();
@@ -215,3 +257,4 @@ Route::get('/admin', function () {
 Route::get('/docente', function () {
     return view('homeDocente');
 });
+*/

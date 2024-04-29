@@ -1,43 +1,43 @@
-@extends('layout/plantilla')
+@extends('layout/plantillaAdmin')
+
+@php
+    $ambientes = App\Models\Ambientes::all();
+@endphp
+
 @section('contenido')
-
-
-<!--ver lista de ambientes registrados -->
-<link href="{{asset ('css/listaA.css')}}" rel="stylesheet">
+<link href="{{asset ('css/listaH.css')}}" rel="stylesheet">
 <br>
-<h2>Lista de Ambientes</h2>
+<h2>LISTA DE MATERIAS</h2>
 <br>
-<!--buscador -->
-      <form action="/listaA/search" method="GET">
+      <form action="{{ route('materias.search') }}" method="GET">
       <div class="search-container">
-        
-            <input type="text" name="search" placeholder="Buscar por nro de  ambiente.." class="search-input">
+            <input type="text" name="search" placeholder="Buscar por código de materia" class="search-input">
             <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
-        
       </div>
       </form> 
-
 <br>
 <div> 
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">Nro</th>
-      <th style="text-align: center;">Capacidad</th>
-      <th style="text-align: center;">Ubicacion</th>
-      <th style="text-align: center;">Estado</th>
+      <th style="text-align: center;">Cod. Materia</th>
+      <th style="text-align: center;">Nombre</th>
+      <th style="text-align: center;">Grupos</th>
+      <th style="text-align: center;">Nivel</th>
+      <th style="text-align: center;">Departamento</th>
       <th style="text-align: center;">Acciones</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($ambientes as $item )
+    @foreach ($materias as $item)
     <tr>
-      <td style="text-align: center;">{{$item->nroAmb}}</td>
-      <td style="text-align: center;">{{$item->capacidad}}</td>
-      <td style="text-align: center;">{{$item->ubicacion}}</td>
-      <td style="text-align: center;">{{$item->estado}}</td>
+      <td style="text-align: center;">{{$item->codSis}}</td>
+      <td style="text-align: center;">{{$item->nombre}}</td>
+      <td style="text-align: center;">{{$item->cantGrupos}}</td>
+      <td style="text-align: center;">{{$item->nivel}}</td>
+      <td style="text-align: center;">{{$item->departamento}}</td>
       <td style="text-align: center;">
-      <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
+        <button class="edit-btn" onclick="">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>
@@ -45,8 +45,6 @@
   </tbody>
 </table>
 </div>
-
-
 
 <!-- Modal de confirmación de eliminación -->
 <div id="myModal" class="modal">
@@ -57,12 +55,12 @@
     <p class="gris">Esta operacion es irreversible</p>
     <br>
     <div class="button-container">
-    <form action="{{route('ambientes.destroy')}}" method="POST">
+    <form action="{{route('materias.destroy')}}" method="POST">
             @csrf
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="registro_id" id="registro_id">
-       <button class="btnAceptar" type="submit" >Aceptar</button>
-      </form>
+    <button class="btnAceptar" type="submit">Aceptar</button>
+</form>
     <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
   </div>
   </div>
@@ -72,7 +70,6 @@
     <div id="successModal" class="modal" style="display: block;">
         <div class="modal-content">
             <p><strong>{{ Session::get('success') }}</strong></p>
-            <!-- Otro contenido del modal si es necesario -->
             <div class="button-container">
                 <button class="btnAceptar" onclick="closeSuccessModal()">Aceptar</button>
             </div>
@@ -80,20 +77,15 @@
     </div>
 @endif
 
-
 <script>
-   // Función para abrir el modal
    function openModal(registroId) {
     document.getElementById('registro_id').value = registroId;
-    // Mostrar el modal
         document.getElementById('myModal').style.display = 'block';
     }
 
-    // Función para cerrar el modal
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
-
 
 function closeSuccessModal() {
     document.getElementById('successModal').style.display = 'none';

@@ -138,7 +138,8 @@ button.cancelar-btn {
 
 </style>
 
-@extends('layout/plantilla')
+@extends('layout/plantillaAdmin')
+
 @section('contenido')
 <!--hasta aqui menu-->
 
@@ -191,7 +192,7 @@ button.cancelar-btn {
 
     </div>
     <div class="button-container">
-    <a href="/listaH">
+    <a href="/listaHorarios">
         <button class="cancelar-btn" type="button" onclick=" ">Cancelar</button>
     </a>    
         <button class="Editar-btn" type="submit">Editar</button>

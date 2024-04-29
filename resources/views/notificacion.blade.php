@@ -1,40 +1,33 @@
+@extends(Auth::check() ? 
+    (Auth::user()->rol === 'Docente' ? 'layout.plantillaDocente' : 
+    (Auth::user()->rol === 'Administrador' ? 'layout.plantillaAdmin' : 
+    'layout.plantillaInvitado')) 
+: 'layout.plantillaInvitado')
 
-@extends('layout/plantillaUser')
 @section('contenido')
 <link href="{{asset ('css/noti.css')}}" rel="stylesheet">
 
-<div class="card">
-  <div class="card-header">Notificación
-    <span class="noti" onclick="closeNotification()">&times;</span>
-    </div>
-  <div class="card-content">
-    Esta es una notificación de prueba.
-  </div>
-</div>
-<div class="card">
-  <div class="card-header">Notificación
-    <span class="noti" onclick="closeNotification()">&times;</span>
-    </div>
-  <div class="card-content">
-    Esta es una notificación de prueba.
-  </div>
-</div>
-<div id="card1" class="card">
-  <div class="card-header">Notificación
-    <span class="noti" onclick="closeNotification()">&times;</span>
-    </div>
-  <div class="card-content">
-    Esta es una notificación de prueba.
-  </div>
-</div>
-<div id="card" class="card">
-  <div class="card-header">Notificación
-    <span class="noti" onclick="closeNotification()">&times;</span>
-    </div>
-  <div class="card-content">
-    Esta es una notificación de prueba.
-  </div>
-</div>
+@foreach ($notificaciones as $item )
+      <div class="card">
+        <div class="card-header">Notificación
+
+        <form action="{{ route('notificaciones.update', $item->idN) }}" method="POST" style="display: inline;">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="btn btn-link"><span class="noti">X</span></button>
+            </form>
+         
+        </div>
+        <div class="card-content">
+        La solicitud a su reserva del aula {{$item->codAmb}} en fecha {{$item->fecha}} 
+        fue una  {{$item->mensaje}} 
+        </div>
+       
+      </div>
+  @endforeach
+
+
+
 <script>
   // Función para cerrar la notificación
   function closeNotification() {
@@ -48,7 +41,3 @@
 
 
 @endsection
-
-
-
-

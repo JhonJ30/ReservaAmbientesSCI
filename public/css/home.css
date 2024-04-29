@@ -42,9 +42,7 @@ body {
   display: flex;
   list-style-type: none;
   /*background-color: #ADADAD;*/
-  align-items: center;
-  margin-right: 45px !important;
-  
+  align-items: center;  
 }
 
 .menu li {

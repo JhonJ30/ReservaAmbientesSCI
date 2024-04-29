@@ -4,34 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
-class loginController extends Controller{
-    public function login(){
-        $credentials = request()->only('rol', 'email', 'password');
+class LoginController extends Controller
+{
+    public function login(Request $request)
+    {
+        $credentials = $request->only('rol', 'email', 'password');
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
-            if ($user->rol === 'Administrador') {
-                return redirect('/admin');
-            }elseif ($user->rol === 'Docente') {
-                //cambios por :) para mostrar el nombre del usuario q inicio sesion
-                return redirect('/docente/create3');
-            } elseif ($user->rol === 'Auxiliar') {
-                return view('/aux');
-            }else{
-            }
-        }else{
-            return $credentials;
+            return redirect('/');
+        } else {
+            $errorMessage = 'Credenciales no válidas';
+            return redirect()->back()->with('errorMessage', $errorMessage)->withInput($request->except('password'));
         }
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }

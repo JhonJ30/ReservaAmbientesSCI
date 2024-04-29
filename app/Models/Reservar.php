@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservar extends Model
 {
-    public $timestamps = false;
     use HasFactory;
     protected $table = 'reserva';
 
@@ -24,10 +23,21 @@ class Reservar extends Model
         'horaFin',
         'Actividad',
         'fecha',
-        /* 'estado',*/
+        'estado',
     ];
+
     public function usuario()
     {
         return $this->belongsTo(User::class, 'codUser');
+    }
+
+    public function ambiente()
+    {
+        return $this->belongsTo(Ambientes::class);
+    }
+
+    public function notificacion()
+    {
+        return $this->hasOne(notification::class);
     }
 }

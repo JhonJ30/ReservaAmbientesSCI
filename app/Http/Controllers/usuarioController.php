@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\UsuarioMateria; 
+use App\Models\UsuarioMateria;
 
-class UsuarioController extends Controller{
-    public function create(){
-        $usuarios=User::all();
-        return view('listaUsuarios', compact('usuarios'));
+class UsuarioController extends Controller
+{
+    public function create()
+    {
+        $usuarios = User::all();
+        return view('usuarios/listaUsuarios', compact('usuarios'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $usuario = new User([
             'codSis' => $request->get('codSis'),
             'rol' => $request->get('rol'),
@@ -32,34 +35,32 @@ class UsuarioController extends Controller{
         if ($request->get('rol') === 'Docente') {
             $asignaciones = $request->input('asignaciones');
             $asignacionesArray = json_decode($asignaciones[0], true);
-            
-            foreach ($asignacionesArray as $asignacion) {
-                $usuarioMateria = new UsuarioMateria([
-                    'idUsuario' => $usuario->id,
-                    'idMateria' => $asignacion['materia'],
-                    'nGrupo' => $asignacion['grupo'],
-                ]);
-                $usuarioMateria->save();
+            if (!empty($asignacionesArray)) {
+                foreach ($asignacionesArray as $asignacion) {
+                    $usuarioMateria = new UsuarioMateria([
+                        'idUsuario' => $usuario->id,
+                        'idMateria' => $asignacion['materia'],
+                        'nGrupo' => $asignacion['grupo'],
+                    ]);
+                    $usuarioMateria->save();
+                }
             }
         }
         return redirect()->route('usuarios.create')->with('success', '¡El usuario ha sido registrado de manera correcta!');
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $searchTerm = $request->input('search');
         $usuarios = User::where('codSis', 'like', '%' . $searchTerm . '%')->get();
-       return view('listaUsuarios',  compact('usuarios'));
+        return view('usuarios/listaUsuarios',  compact('usuarios'));
     }
-    
+
     public function destroy(Request $request)
-{
-    $usuarios = User::findOrFail($request->registro_id);
-    $usuarios->delete();
+    {
+        $usuarios = User::findOrFail($request->registro_id);
+        $usuarios->delete();
 
-    return redirect()->back()->with('success', '¡El usuario ha sido eliminado correctamente!');
-}
-
-
-    
-    
+        return redirect()->back()->with('success', '¡El usuario ha sido eliminado correctamente!');
+    }
 }

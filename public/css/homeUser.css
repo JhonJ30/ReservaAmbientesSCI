@@ -304,14 +304,12 @@ body {
 .container-reservas {
             width: 400px;
             height: auto;
-            max-height: 450px;
             margin: 50px auto;
             background-color: #FFFFFF;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative; 
             border-radius: 10px;
-            overflow-y: auto;
         }
 
 .container-reservas h2 {
