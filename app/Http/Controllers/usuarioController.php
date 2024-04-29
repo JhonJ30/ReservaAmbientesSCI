@@ -58,8 +58,25 @@ class UsuarioController extends Controller{
 
     return redirect()->back()->with('success', '¡El usuario ha sido eliminado correctamente!');
 }
+public function editar($id)
+    {
+    $usuarios = User::find($id); 
 
+    if (!$usuarios) {
+        return redirect()->route('listaU'); // Redirige a la lista si el ambiente no existe
+    }
 
+    return view('editarUsu', compact('usuarios')); // Cambia 'ruta.vista.editar' por la ruta real de tu vista de edición
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuarios = User::findOrFail($id);
+        $usuarios->update($request->all());
+
+    return redirect()->route('usuarios.create')->with('success', '¡Ambiente actualizado Correctamente!');
+
+    }
     
     
 }

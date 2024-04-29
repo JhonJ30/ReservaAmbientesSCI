@@ -68,7 +68,11 @@ Route::get('/listaH/search', [horaController::class, 'search'])->name('horarios.
 Route::delete('listaU', [usuarioController::class, 'destroy'])->name('usuarios.destroy');
 Route::delete('listaM', [materiaController::class, 'destroy'])->name('materias.destroy');
 
-
+Route::get('editarUsu', function () {
+    return view('editarUsu');
+});
+Route::get('/usuarios/editarUsu/{id}', [usuarioController::class, 'editar'])->name('usuarios.editar');
+Route::put('/usuarios/{id}', [usuarioController::class, 'update'])->name('usuarios.update');
 
 //Route::delete('/listaA/{id}', [RegistroController::class, 'destroy']);
 

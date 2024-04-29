@@ -33,7 +33,7 @@
       <td style="text-align: center;">{{$item->email}}</td>
       <td style="text-align: center;">{{$item->codSis}}</td>
       <td style="text-align: center;">
-        <button class="edit-btn" onclick="">Modificar</button>
+        <button class="edit-btn" onclick="window.location.href='{{ route('usuarios.editar', $item->id) }}'">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>
