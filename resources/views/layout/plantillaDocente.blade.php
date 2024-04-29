@@ -27,7 +27,11 @@
         <ul class="menu">
             <li> <a href="/" class="priHabilitado"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
             <li><a href="/verAmbientes" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Ver Ambientes</a></li>
-            <li><a href="/notificacion" class="ultimo" ><i class="fas fa-bell"></i>&nbsp;<sup style="color: red;">2</sup></a></li>
+            
+            <li><a href="/notificacion" id="notificacionLink"  class="ultimo" ><i class="fas fa-bell"><sup id="contadorNotificaciones" style="color: red;">
+            {{ App\Http\Controllers\notificationController::contarNotificacionesRecientes() }}</sup></i>
+            </a></li>
+
             <div onmouseover="showMiCuentaContent()" onmouseout="hideMiCuentaContent()">
                 <li><a href="#" class='iniSesion'><i class="fas fa-user"></i>Mi Cuenta</a></li>
                 <div id="miCuentaContent" class="miCuentaContent" style="display: none;">
@@ -138,6 +142,14 @@
     function closeModal2() {
         document.getElementById('myModal').style.display = 'none';
     }
+
+    //notificacion
+    
+    document.getElementById('notificacionLink').addEventListener('click', function() {
+        document.getElementById('contadorNotificaciones').textContent = '0';
+    });
+
+
 </script>
 
 </html>

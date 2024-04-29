@@ -7,6 +7,7 @@ use App\Models\notification;
 use App\Models\Reservar;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class notificationController extends Controller
 {
@@ -31,7 +32,7 @@ class notificationController extends Controller
     public function ObtenerNoti()
     {
        
-        $usuario = Auth::id();; 
+        $usuario = Auth::id();
 
         // Realizar la consulta con JOIN
         $notificaciones = Notification::join('reserva', 'notificacion.codReser', '=', 'reserva.id')
@@ -42,7 +43,22 @@ class notificationController extends Controller
        
         return view('notificacion', compact('notificaciones'));
     }
+    //contar las notificaciones
+    public function contarNotificacionesRecientes()
+    {
+        $usuario = Auth::id(); 
+        // Definir el rango de tiempo para las notificaciones recientes (por ejemplo, últimas 24 horas)
+        $tiempo_reciente = Carbon::now()->subDay();
 
+        // Contar las notificaciones enviadas recientemente al usuario
+        $conteo = Notification::join('reserva', 'notificacion.codReser', '=', 'reserva.id')
+                                ->where('reserva.codUser', $usuario)
+                                ->where('notificacion.estado', 0) // Estado cero para notificaciones no leídas
+                               ->where('notificacion.created_at', '>=', $tiempo_reciente)
+                               ->count();
+
+        return $conteo;
+    }
 
  
     public function update(Request $request, $id)
@@ -54,6 +70,15 @@ class notificationController extends Controller
 
         return redirect()->back()->with('notificaciones.ObtenerNoti', 'Registro eliminado correctamente');
     }
+
+
+
+
+
+
+
+
+    //Reservas solicitud de acepta o rechazar
 
     public function Rechazar(Request $request)
     {
