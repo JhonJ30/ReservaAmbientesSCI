@@ -74,7 +74,7 @@ public function editar($id)
         $usuarios = User::findOrFail($id);
         $usuarios->update($request->all());
 
-    return redirect()->route('usuarios.create')->with('success', '¡Ambiente actualizado Correctamente!');
+    return redirect()->route('usuarios.create')->with('success', '¡Usuario actualizado Correctamente!');
 
     }
     
