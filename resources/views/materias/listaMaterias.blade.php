@@ -37,7 +37,7 @@
       <td style="text-align: center;">{{$item->nivel}}</td>
       <td style="text-align: center;">{{$item->departamento}}</td>
       <td style="text-align: center;">
-        <button class="edit-btn" onclick="">Modificar</button>
+        <button class="edit-btn" onclick="window.location.href='{{ route('materias.editar', $item->id) }}'">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>

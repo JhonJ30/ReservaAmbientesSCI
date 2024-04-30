@@ -49,6 +49,9 @@ Route::get('/listaMaterias', [materiaController::class, 'create'])->name('materi
 Route::get('/buscarMaterias', [materiaController::class, 'search'])->name('materias.search');
 Route::delete('/listaMaterias', [materiaController::class, 'destroy'])->name('materias.destroy');
 
+Route::get('/materias/editar/{id}', [materiaController::class, 'editar'])->name('materias.editar');
+Route::put('/materias/{id}', [materiaController::class, 'update'])->name('materias.update');
+
 //reservas
 Route::post('/reservas', [reservaController::class, 'store'])->name('reservas.store');
 Route::get('/reservas/{ambiente_id}', [reservaController::class, 'show'])->name('reservas.show');
@@ -64,6 +67,9 @@ Route::post('/usuarios', [usuarioController::class, 'store'])->name('usuarios.st
 Route::get('/listaUsuarios', [usuarioController::class, 'create'])->name('usuarios.create');
 Route::get('/buscarUsuarios', [usuarioController::class, 'search'])->name('usuarios.search');
 Route::delete('/listaUsuarios', [usuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+Route::get('/usuarios/editar/{id}', [usuarioController::class, 'editar'])->name('usuarios.editar');
+Route::put('/usuarios/{id}', [usuarioController::class, 'update'])->name('usuarios.update');
 
 //notificaciones
 Route::get('notificacion', [notificationController::class, 'ObtenerNoti'])->name('notificaciones.ObtenerNoti');

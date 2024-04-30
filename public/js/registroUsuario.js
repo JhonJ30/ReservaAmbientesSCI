@@ -59,6 +59,7 @@ function agregarAsignacion() {
 function editarAsignacion(botonEditar) {
     const fila = botonEditar.parentElement.parentElement;
     const materiaId = fila.cells[0].getAttribute("data-id");
+    console.log(materiaId);
     const materiaNombre = fila.cells[0].textContent;
     const grupo = fila.cells[1].textContent;
 

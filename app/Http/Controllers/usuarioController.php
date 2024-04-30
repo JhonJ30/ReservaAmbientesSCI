@@ -63,4 +63,21 @@ class UsuarioController extends Controller
 
         return redirect()->back()->with('success', '¡El usuario ha sido eliminado correctamente!');
     }
+
+    public function editar($id)
+    {
+        $usuarios = User::find($id);
+        if (!$usuarios) {
+            return redirect()->route('usuarios.create');
+        }
+        return view('usuarios/editarUsuarios', compact('usuarios'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuarios = User::findOrFail($id);
+        $usuarios->update($request->all());
+        
+        return redirect()->route('usuarios.create')->with('success', '¡Usuario actualizado Correctamente!');
+    }
 }

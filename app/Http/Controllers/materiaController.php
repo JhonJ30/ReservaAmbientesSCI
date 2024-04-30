@@ -46,4 +46,21 @@ class materiaController extends Controller
         $materias->delete();
         return redirect()->back()->with('success', '¡La materia ha sido eliminado correctamente!');
     }
+
+    public function editar($id)
+    {
+        $materias = Materias::find($id);
+        if (!$materias) {
+            return redirect()->route('materias.create');
+        }
+        return view('materias.editarMaterias', compact('materias'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $materias = Materias::findOrFail($id);
+        $materias->update($request->all());
+
+        return redirect()->route('materias.create')->with('success', '¡Materia actualizada Correctamente!');
+    }
 }
