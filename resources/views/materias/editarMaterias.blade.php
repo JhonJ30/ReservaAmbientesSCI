@@ -69,7 +69,7 @@
 
     <div class="button-container">
         <button type="button" class="cancelar-btn" onclick="cancelar()">Cancelar</button>
-        <button class="registrar-btn" type="submit">Registrar</button>
+        <button class="registrar-btn" type="submit">Editar</button>
     </div>
 </form>
 

@@ -132,7 +132,7 @@ $materias = App\Models\Materias::all();
             ocultarError('codSis');
         }
 
-        if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ]+$/.test(nombre)) {
+        if (!/^[A-Za-z\sÁÉÍÓÚáéíóúñÑ]+$/.test(nombre)) {
             error += "El nombre solo puede contener letras.\n";
             mostrarError('nombre', "El nombre solo puede contener letras.");
         } else if (nombre.length < 2 || nombre.length > 20) {
@@ -142,7 +142,7 @@ $materias = App\Models\Materias::all();
             ocultarError('nombre');
         }
 
-        if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ]+$/.test(apellido)) {
+        if (!/^[A-Za-z\sÁÉÍÓÚáéíóúñÑ]+$/.test(apellido)) {
             error += "El apellido solo puede contener letras.\n";
             mostrarError('apellido', "El apellido solo puede contener letras.");
         } else if (apellido.length < 2 || apellido.length > 20) {
