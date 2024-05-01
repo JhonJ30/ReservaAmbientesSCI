@@ -7,7 +7,7 @@
     background-color: #ADADAD; /* Color de fondo del formulario */
     padding: 30px;/*Ajusta el alto del contenedor*/
     border-radius: 8px;
-    z-index: -1;
+    
 }
 
 .reserva-form h2 {/*Ajusta el titulo de REGISTRAR RESERVAS*/
