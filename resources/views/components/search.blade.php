@@ -1,8 +1,8 @@
 <link href="{{asset ('css/search.css')}}" rel="stylesheet">
 
-<form action="/client/buscarAmbientes" method="GET">
+<form action="{{ route('ambientes.buscar') }}" method="GET">
     <div class="searchBox">
-        <input class="search" type="text" name="search" spellcheck="false" placeholder="No Aula, Ubicación..." maxlength="20" pattern="[a-zA-Z0-9 ]+">
+        <input class="search" type="text" name="search" spellcheck="false" placeholder="No Aula, Ubicación..." maxlength="50" pattern="[a-zA-Z0-9 ]+">
         <div class="icon">
             <button class="iconButton" type="submit">
                 <i class="fas fa-search"></i>
@@ -16,8 +16,8 @@
     </div>
 </form>
 
-<dialog class="modal" id="mainModal">
-    <form action="/client/buscarAmbientesAvanzado" method="GET">
+<dialog class="modalSearch" id="mainModal">
+    <form action="{{ route('ambientes.buscarAvanzado') }}" method="GET">
         <div class="contentSearch">
             <div class="filter">
                 <div class="filterDate">

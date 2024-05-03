@@ -1,5 +1,9 @@
+@extends(Auth::check() ? 
+    (Auth::user()->rol === 'Docente' ? 'layout.plantillaDocente' : 
+    (Auth::user()->rol === 'Administrador' ? 'layout.plantillaAdmin' : 
+    'layout.plantillaInvitado')) 
+: 'layout.plantillaInvitado')
 
-@extends('layout/plantillaDocente')
 @section('contenido')
 <link href="{{asset ('css/noti.css')}}" rel="stylesheet">
 
@@ -37,7 +41,3 @@
 
 
 @endsection
-
-
-
-

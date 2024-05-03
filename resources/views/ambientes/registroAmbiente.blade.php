@@ -1,10 +1,9 @@
+@extends('layout/plantillaAdmin')
 
-@extends('layout/plantilla')
 @section('contenido')
 <link href="{{asset ('css/ambiente.css')}}" rel="stylesheet">
-    <form action="{{ route('ambientes.update', $ambiente->id) }}" method="POST" onsubmit="return error()">
+    <form action="{{route('ambientes.store')}}" method="POST" onsubmit="return error()">
     @csrf
-    <input type="hidden" name="_method" value="PUT">
     <div class="registro">
 
         <div class="titulo-registro"> <h1>REGISTRO DE AMBIENTE</h1></div>
@@ -13,85 +12,74 @@
            <label>Unidad de Ambiente(*)</label>
            <select name="unidadAmb" required>
             <option value="" disabled selected hidden class="opcion-deshabilitada">----</option>
-            <option value="Decanato" {{ $ambiente->unidadAmb == 'Decanato' ? 'selected' : '' }}>Decanato</option>
-            <option value="Jefatura" {{ $ambiente->unidadAmb == 'Jefatura' ? 'selected' : '' }}>Jefatura</option>
-            <option value="Departamento" {{ $ambiente->unidadAmb == 'Departamento' ? 'selected' : '' }}>Departamento</option>
+            <option value="Decanato" >Decanato</option>
+            <option value="Jefatura" >Jefatura</option>
+            <option value="Departamento" >Departamento</option>
            </select>
 
            <label >Ubicación del Ambiente(*)</label>
-           <textarea name="ubicacion" placeholder="Ej: Edificio nuevo segundo piso." maxlength="100" style="border: 1px solid black;" oninput="validarInput2(this)"
-           class="textarea1" required>{{ $ambiente->ubicacion }}</textarea>
+           <textarea name="ubicacion" placeholder="Ej: Edificio nuevo segundo piso." 
+           class="textarea1" maxlength="100" style="border: 1px solid black;" oninput="validarInput2(this)" required></textarea>
            <div class="texto-error-advertencia" id="error-message2" style="color: red; display: none;"></div>
-
-
-           <label>Capacidad del Ambiente(*)</label>
-           <input name="capacidad" type="text" placeholder="Ej: 150" required value="{{ $ambiente->capacidad }}"
-           id="capacidad" maxlength="3" oninput="validarInput(this)" style="border: 1px solid black;">
+           
+           <label for="capacidad">Capacidad del Ambiente(*)</label>
+           <input name="capacidad" type="text" placeholder="Ej: 150" id="capacidad"
+            maxlength="3" oninput="validarInput(this)"
+           style="border: 1px solid black;" required>
            <div class="texto-error-advertencia" id="error-message" style="color: red; display: none;"></div>
-        
+
         </div>
         <div class="col2">
             <label>Tipo de Ambiente(*)</label>
             <select name="tipoAmb" id="tipoAmb" required>
                 <option value="" disabled selected hidden>----</option>
-                <option value="Aula" {{ $ambiente->tipoAmb == 'Aula' ? 'selected' : '' }}>Aula</option>
-                <option value="Laboratorio" {{ $ambiente->tipoAmb == 'Laboratorio' ? 'selected' : '' }}>Laboratorio</option>
-                <option value="Auditorio" {{ $ambiente->tipoAmb == 'Auditorio' ? 'selected' : '' }}>Auditorio</option>
-                <option value="Taller" {{ $ambiente->tipoAmb == 'Taller' ? 'selected' : '' }}>Taller</option>
+                <option value="Aula">Aula</option>
+                <option value="Laboratorio">Laboratorio</option>
+                <option value="Auditorio">Auditorio</option>
+                <option value="Taller">Taller</option>
             </select>
             <label>Equipamiento(*)</label>
             
             <div class="radiosButtons">
-            @php
-// Suponiendo que $ambiente->equipamiento contiene algo como "Proyector,Pizarras"
-// Convertimos esa cadena en un array
-$equipamientoSeleccionado = explode(',', $ambiente->equipamiento);
-@endphp
-
-<input type="checkbox" name="equipamiento[]" value="Proyector" {{ in_array('Proyector', $equipamientoSeleccionado) ? 'checked' : '' }}>
-<label>Proyector</label>
-<br>
-<input type="checkbox" name="equipamiento[]" value="Pizarras" {{ in_array('Pizarras', $equipamientoSeleccionado) ? 'checked' : '' }}>
-<label>Pizarras</label>
-<br>
-<input type="checkbox" name="equipamiento[]" value="Otros" {{ in_array('Otros', $equipamientoSeleccionado) ? 'checked' : '' }}>
-<label>Otros</label>
-
+                <input type="checkbox" name="equipamiento[]" value="Proyector">
+                <label >Proyector</label>
+                <br>
+                <input type="checkbox" name="equipamiento[]" value="Pizarras">
+                <label>Pizarras</label>
+                <br>
+                <input type="checkbox" name="equipamiento[]" value="Otros">
+                <label>Otros</label>
             </div>
 
             <label >Estado del Ambiente(*)</label>
             <select name="estado" id="" required>
                 <option value="" disabled selected hidden>----</option>
-                <option value="Disponible" {{ $ambiente->estado == 'Disponible' ? 'selected' : '' }}>Disponible</option>
-                <option value="No Disponible" {{ $ambiente->estado == 'No Disponible' ? 'selected' : '' }}>No Disponible</option>
-                <option value="Reservado" {{ $ambiente->estado == 'Reservado' ? 'selected' : '' }}>Reservado</option>
+                <option value="Disponible">Disponible</option>
+                <option value="No Disponible">No Disponible</option>
+                <option value="Reservado">Reservado</option>
             </select>
         </div>
 
         <div class="col3">
             <label>Número o Nombre <br> del Ambiente(*) </label>
-            <input type="text" placeholder="Ej: 690B"  name="nroAmb" maxlength="5" required value="{{ $ambiente->nroAmb }}">
+            <input type="text" placeholder="Ej: 690B"  name="nroAmb" maxlength="5" required>
             <div class="texto-error-advertencia" id="error-message4" style="color: red; display: none;"></div>
-            
-            <label>Descripción(*)</label>
-            <textarea name="descripcion" placeholder="Ej: Aula común ubicado en el edificio nuevo, en el segundo piso de tamaño 75 a 100 m²."
-             class="textarea2" maxlength="150" style="border: 1px solid black;" oninput="validarInput3(this)" required>{{ $ambiente->descripcion }}</textarea>
-            <div class="texto-error-advertencia" id="error-message3" style="color: red; display: none;"></div>
 
+            <label>Descripción(*)</label>
+            <textarea name="descripcion" placeholder="Ej: Aula común ubicado en el edificio nuevo, en el segundo piso de tamaño 75 a 100 m²." 
+            class="textarea2" maxlength="150" style="border: 1px solid black;" oninput="validarInput3(this)" required></textarea>
+            <div class="texto-error-advertencia" id="error-message3" style="color: red; display: none;"></div>
         </div>
 
         </div>
         <div class="botones">
-            
-            <a href="/listaA" >
-            <button class="cancelar-btn" type="button" onclick=" ">Cancelar</button>
-           <!-- <button class="botonCancelar" onclick=" ">Cancelar</button>-->
-             </a> 
-              
-            <button class="botonRegistrar" type="submit">Editar</button>
+            <button class="botonCancelar" onclick="cancelar()">Cancelar</button>
+            <button class="botonRegistrar" type="submit">Registrar</button>
         </div>
     </div>
 </form>
+
+
 
 <script>
     function cancelar(){
@@ -261,5 +249,8 @@ function error() {
     }
     return true;
    }
+
 </script>
 @endsection
+
+

@@ -20,25 +20,24 @@
             <div class="bar"></div>
         </div>
         <ul class="menu">
-            <li> <a href="/admin" class="priHabilitadoInicio"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
+            <li> <a href="/" class="priHabilitadoInicio"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
             <li><a href="#" id="menuRegistrar" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Registrar</a>
                 <ul class="submenu" id="submenuRegistrar">
-                    <p><a href="/registroAmb" class="priHabilitado2">&nbsp;&nbsp;Ambientes</a></p>
-                    <p><a href="/horarios" class="priHabilitado2">&nbsp;&nbsp;Horarios</a></p>
+                    <p><a href="/registroAmbiente" class="priHabilitado2">&nbsp;&nbsp;Ambientes</a></p>
+                    <p><a href="/registroHorario" class="priHabilitado2">&nbsp;&nbsp;Horarios</a></p>
                     <p><a href="/registroMateria" class="priHabilitado2">&nbsp;&nbsp;Materias</a></p>
                     <p><a href="/registroUsuario" class="priHabilitado2">&nbsp;&nbsp;Usuarios</a></p>
                 </ul>
             </li>
-            <li><a href="#" id="menuRegistrar2" class="priHabilitado2"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
+            <li><a href="#" id="menuRegistrar2" class="ultimo"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
                 <ul class="submenu" id="submenuRegistrar2">
-                    <p><a href="/listaR" class="priHabilitado2">&nbsp;&nbsp;Reservas</a></p>
-                    <p><a href="/listaA" class="priHabilitado2">&nbsp;&nbsp;Ambientes</a></p>
-                    <p><a href="/listaH" class="priHabilitado2">&nbsp;&nbsp;Horarios</a></p>
-                    <p><a href="/listaM" class="priHabilitado2">&nbsp;&nbsp;Materias</a></p>
-                    <p><a href="/listaU" class="priHabilitado2">&nbsp;&nbsp;Usuarios</a></p>
+                    <p><a href="/listaReservas" class="priHabilitado2">&nbsp;&nbsp;Reservas</a></p>
+                    <p><a href="/listaAmbientes" class="priHabilitado2">&nbsp;&nbsp;Ambientes</a></p>
+                    <p><a href="/listaHorarios" class="priHabilitado2">&nbsp;&nbsp;Horarios</a></p>
+                    <p><a href="/listaMaterias" class="priHabilitado2">&nbsp;&nbsp;Materias</a></p>
+                    <p><a href="/listaUsuarios" class="priHabilitado2">&nbsp;&nbsp;Usuarios</a></p>
                 </ul>
             </li>
-            <li><a href="#" class="ultimo"><i class="fas fa-question-circle"></i>&nbsp;Ayuda</a></li>
             <div onmouseover="showMiCuentaContent()" onmouseout="hideMiCuentaContent()">
                 <li><a href="#" class='iniSesion'><i class="fas fa-user"></i>Mi Cuenta</a></li>
                 <div id="miCuentaContent" class="miCuentaContent" style="display: none;">
@@ -47,32 +46,8 @@
                             <i class="fas fa-user-circle icon-color"></i>
                             <h2>{{ Auth::user()->apellido }} {{ Auth::user()->nombre }}</h2>
                         </div>
-                        <h2>Reservas</h2>
+                        <h2></h2>
                         <ul>
-                            <li>
-                                <span>Aula: 691A<br>
-                                    Fecha: 26/05/2024<br>
-                                    Hora: 15:45-17:15<br>
-                                </span>
-                                <button class="editar-button">Editar</button>
-                                <button class="cancel-button">Cancelar</button>
-                            </li>
-                            <li>
-                                <span>Aula: 691A<br>
-                                    Fecha: 26/05/2024<br>
-                                    Hora: 15:45-17:15<br>
-                                </span>
-                                <button class="editar-button">Editar</button>
-                                <button class="cancel-button">Cancelar</button>
-                            </li>
-                            <li>
-                                <span>Aula: 691A<br>
-                                    Fecha: 26/05/2024<br>
-                                    Hora: 15:45-17:15<br>
-                                </span>
-                                <button class="editar-button">Editar</button>
-                                <button class="cancel-button">Cancelar</button>
-                            </li>
                         </ul>
                         <button class="cancel-button2" id="cancel-button2">Cerrar Sesión
                             <i class="fas fa-right-from-bracket"></i>

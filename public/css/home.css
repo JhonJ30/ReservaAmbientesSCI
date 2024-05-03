@@ -42,9 +42,8 @@ body {
   display: flex;
   list-style-type: none;
   /*background-color: #ADADAD;*/
-  align-items: center;
-  margin-right: 45px !important;
-  
+  align-items: center;  
+  margin-right: 10px;
 }
 
 .menu li {
@@ -296,6 +295,7 @@ body {
 .container-reservas {
   width: 400px;
   margin: 50px auto;
+  max-height: 500px;
   background-color: #FFFFFF;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

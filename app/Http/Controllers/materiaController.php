@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Materias;
 
-class materiaController extends Controller{
-    public function create(){
-        $materias=Materias::all();
-        return view('listaMaterias', compact('materias'));
+class materiaController extends Controller
+{
+    public function create()
+    {
+        $materias = Materias::all();
+        return view('materias/listaMaterias', compact('materias'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -18,7 +20,8 @@ class materiaController extends Controller{
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $materia = new Materias([
             'codSis' => $request->get('codSis'),
             'nivel' => $request->get('nivel'),
@@ -30,27 +33,27 @@ class materiaController extends Controller{
         return redirect()->route('materias.create')->with('success', '¡La materia ha sido registrado de manera correcta!');
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $searchTerm = $request->input('search');
         $materias = Materias::where('codSis', 'like', '%' . $searchTerm . '%')->get();
-        return view('listaMaterias',  compact('materias'));
+        return view('materias/listaMaterias',  compact('materias'));
     }
+
     public function destroy(Request $request)
     {
         $materias = Materias::findOrFail($request->registro_id);
         $materias->delete();
-    
         return redirect()->back()->with('success', '¡La materia ha sido eliminado correctamente!');
     }
+
     public function editar($id)
     {
-    $materias = Materias::find($id); 
-
-    if (!$materias) {
-        return redirect()->route('listaM'); // Redirige a la lista si el ambiente no existe
-    }
-
-    return view('editarMat', compact('materias')); // Cambia 'ruta.vista.editar' por la ruta real de tu vista de edición
+        $materias = Materias::find($id);
+        if (!$materias) {
+            return redirect()->route('materias.create');
+        }
+        return view('materias.editarMaterias', compact('materias'));
     }
 
     public function update(Request $request, $id)
@@ -58,7 +61,6 @@ class materiaController extends Controller{
         $materias = Materias::findOrFail($id);
         $materias->update($request->all());
 
-    return redirect()->route('materias.create')->with('success', '¡Materia actualizada Correctamente!');
-
+        return redirect()->route('materias.create')->with('success', '¡Materia actualizada Correctamente!');
     }
 }

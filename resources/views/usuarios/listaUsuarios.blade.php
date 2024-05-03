@@ -1,13 +1,13 @@
-@extends('layout/plantilla')
+@extends('layout/plantillaAdmin')
 @section('contenido')
 
 <link href="{{asset ('css/listaH.css')}}" rel="stylesheet">
 <br>
-<h2>LISTA DE MATERIAS</h2>
+<h2>LISTA DE USUARIOS</h2>
 <br>
-      <form action="/listaM/search" method="GET">
+      <form action="{{ route('usuarios.search') }}" method="GET">
       <div class="search-container">
-            <input type="text" name="search" placeholder="Buscar por codSis" class="search-input">
+            <input type="text" name="search" placeholder="Buscar por código sis" class="search-input">
             <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
       </div>
       </form> 
@@ -16,22 +16,24 @@
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">Nombre</th>
-      <th style="text-align: center;">Departamento</th>
-      <th style="text-align: center;">Grupos</th>
       <th style="text-align: center;">Código sis</th>
+      <th style="text-align: center;">Nombre</th>
+      <th style="text-align: center;">Apellido</th>
+      <th style="text-align: center;">Rol</th>
+      <th style="text-align: center;">Correo electrónico</th>
       <th style="text-align: center;">Acciones</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($materias as $item)
+    @foreach ($usuarios as $item)
     <tr>
-      <td style="text-align: center;">{{$item->nombre}}</td>
-      <td style="text-align: center;">{{$item->departamento}}</td>
-      <td style="text-align: center;">{{$item->cantGrupos}}</td>
       <td style="text-align: center;">{{$item->codSis}}</td>
+      <td style="text-align: center;">{{$item->nombre}}</td>
+      <td style="text-align: center;">{{$item->apellido}}</td>
+      <td style="text-align: center;">{{$item->rol}}</td>
+      <td style="text-align: center;">{{$item->email}}</td>
       <td style="text-align: center;">
-        <button class="edit-btn" onclick="window.location.href='{{ route('materias.editar', $item->id) }}'">Modificar</button>
+        <button class="edit-btn" onclick="window.location.href='{{ route('usuarios.editar', $item->id) }}'">Modificar</button>
         <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
       </td>
     </tr>
@@ -49,8 +51,9 @@
     <p class="gris">Esta operacion es irreversible</p>
     <br>
     <div class="button-container">
-    <form action="{{route('materias.destroy')}}" method="POST">
+    <form action="{{route('usuarios.destroy')}}" method="POST">
             @csrf
+            
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="registro_id" id="registro_id">
     <button class="btnAceptar" type="submit">Aceptar</button>

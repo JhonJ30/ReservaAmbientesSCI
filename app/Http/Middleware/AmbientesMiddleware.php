@@ -22,11 +22,10 @@ class AmbientesMiddleware
         // $ambientes = Ambiente::all();
         $userId = Auth::id();
     
-        $reservas = Reservar::where('codUser', $userId)->get();
+        $ambientes = Reservar::where('codUser', $userId)->get();
 
         // Compartir los ambientes con todas las vistas
-        view()->share('reservas', $reservas);
+        view()->share('ambientes', $ambientes);
         return $next($request);
     }
 }
-

@@ -6,42 +6,29 @@ use App\Models\Horarios;
 use App\Models\Ambientes;
 use Illuminate\Http\Request;
 
-class horaController extends Controller
+class horarioController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $datos = Horarios::all();
-        return view('ListaHorarios', compact('datos'));
+        return view('horarios/listaHorarios', compact('datos'));
     }
+
     public function search(Request $request)
     {
         $searchTerm = $request->input('search');
-        
         $datos = Horarios::where('ambi', 'like', '%' . $searchTerm . '%')->get();
-       return view('ListaHorarios',  compact('datos'));
-        
+        return view('horarios/listaHorarios',  compact('datos'));
     }
 
-   /* public function destroy($id)
-    {
-        //elima un registro
-        $registro = Horarios::findOrFail($id);
-        $registro->delete();
-
-        return response()->json(['success' => true]);
-    }*/
     public function destroy(Request $request)
     {
-    $registro = Horarios::findOrFail($request->registro_id);
-    $registro->delete();
+        $registro = Horarios::findOrFail($request->registro_id);
+        $registro->delete();
 
-    return redirect()->back()->with('success', 'Registro eliminado correctamente');
+        return redirect()->back()->with('success', 'Registro eliminado correctamente');
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,7 +36,7 @@ class horaController extends Controller
      * @return \Illuminate\Http\Response
      */
     //hecho por sara
-    public function storeh(Request $request)
+    public function store(Request $request)
     {
         //sirve para guardar datos en la bd
         $Horario = new Horarios();
@@ -62,7 +49,7 @@ class horaController extends Controller
         $Horario->save();
 
         // Redirigir a una página de éxito o mostrar un mensaje de confirmación
-        return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta!');
+        return redirect()->route('horarios.create')->with('success', '¡El horario ha sido registrado de manera correcta!');
     }
 
 
@@ -76,13 +63,13 @@ class horaController extends Controller
     {
         $listaNros = Ambientes::all();
 
-        return view('Horarios', compact('listaNros'));
+        return view('horarios/registroHorario', compact('listaNros'));
     }
     //cambios prueba AQUIIIIIIIIIIIIIIII
     public function edit($id)
     {
         $horario = Horarios::findOrFail($id);
-        return view('layout.editarHorarios', compact('horario'));
+        return view('horarios/editarHorarios', compact('horario'));
     } //CAMBIOSMODIFICAR
     public function update(Request $request, $id)
     {
@@ -96,6 +83,6 @@ class horaController extends Controller
         // Obtener todos los ambientes disponibles
         $ambientes = Ambientes::all(); //para q aparezca ambientes
 
-        return redirect()->route('Horarios.create')->with('success', '¡El horario ha sido modificado y guardado de manera correcta!');
+        return redirect()->route('horarios.create')->with('success', '¡El horario ha sido modificado y guardado de manera correcta!');
     }
 }

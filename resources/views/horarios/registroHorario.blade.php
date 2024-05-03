@@ -1,12 +1,15 @@
-@extends('layout/plantilla')
-@section('contenido')
-<!--hasta aqui menu-->
+@extends('layout/plantillaAdmin')
 
+@php
+    $ambientes = App\Models\Ambientes::all();
+@endphp
+
+@section('contenido')
 <link href="{{asset ('css/RH.css')}}" rel="stylesheet">
 <script src="{{ asset('js/RH.js') }}"></script>
 
 <h1>REGISTRO HORARIOS</h1>
-<form action="{{route('storeh')}}" method="POST">
+<form action="{{route('horarios.store')}}" method="POST">
 @csrf
 <div id="form-container">
     <div class="form-row">

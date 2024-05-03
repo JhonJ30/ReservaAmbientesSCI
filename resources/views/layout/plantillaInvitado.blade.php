@@ -21,7 +21,7 @@
         </div>
         <ul class="menu">
             <li> <a href="/" class="priHabilitado"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
-            <li><a href="#" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Ver Ambientes</a></li>
+            <li><a href="/verAmbientes" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Ver Ambientes</a></li>
             <li><a href="#" class="ultimo"><i class="fas fa-question-circle"></i>&nbsp;Ayuda</a></li>
             <li><a href="/iniciarSesion" class='iniSesion'><i class="fas fa-user"></i>&nbsp;Iniciar Sesión</a></li>
         </ul>

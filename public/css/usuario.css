@@ -26,10 +26,13 @@ input,
 select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
+}
+
+#column-unico select{
+    width: 47%;
 }
 
 /* Estilos para el botón */
@@ -51,9 +54,15 @@ h1 {
     color: #0B6F63;
 }
 
+.error{
+    margin: 0px;
+    font-size: smaller;
+    color: red;
+}
+
 .form-row {
     display: flex;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .form-column {
@@ -68,25 +77,49 @@ h1 {
 /* Estilos de los botones cancelar y registrar */
 .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     justify-items: center;
     margin-top: 15px;
 }
 
 .button-container button {
-    margin: 0 15%;
-    max-width: calc(50% - 0px);
     font-size: 16px;
 }
 
-.csv{
-    margin: 20px;
-    margin-left: 50px;
-    margin-top: 0px;
+#csvForm{
+    display: flex; 
+    align-items: center;
 }
+
+#csvForm input{
+    flex: 1;
+}
+
+#csvForm input{
+    margin-right: 5%;
+}
+
 
 /* Estilos específicos para pantallas más pequeñas */
 @media screen and (max-width: 600px) {
+    form{
+        max-width: 80%;
+        padding: 30px;
+    }
+
+    .form-row{
+        flex-direction: column;
+        margin-bottom: 0px;
+    }
+
+    .form-column{
+        margin-right: 0px;
+    }
+
+    #column-unico select{
+        width: 100%;
+    }
+
     .button-container {
         flex-direction: column;
         align-items: center;
@@ -94,8 +127,12 @@ h1 {
 
     .button-container button {
         margin: 2% 0;
-        width: 150%;
+        width: 100%;
         font-size: 15px;
+    }
+
+    .csv{
+        margin-left: 5%;
     }
 }
 
