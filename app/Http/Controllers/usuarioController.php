@@ -75,9 +75,17 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id)
     {
-        $usuarios = User::findOrFail($id);
-        $usuarios->update($request->all());
+        $usuario = User::findOrFail($id);
+        $usuario->update([
+            'codSis' => $request->get('codSis'),
+            'rol' => $request->get('rol'),
+            'nombre' => $request->get('nombre'),
+            'apellido' => $request->get('apellido'),
+            'email' => $request->get('correo'),
+            'password' => bcrypt($request->get('contraseña')),
+        ]);
         
-        return redirect()->route('usuarios.create')->with('success', '¡Usuario actualizado Correctamente!');
+        return redirect()->route('usuarios.create')->with('success', '¡Usuario actualizado correctamente!');
     }
+    
 }

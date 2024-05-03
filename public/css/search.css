@@ -227,7 +227,6 @@ table {
   @media only screen and (max-width: 600px) {
     table, thead, tbody, th, td, tr {
       display: block;
-      z-index: -1;
     }
     th {
       position: absolute;

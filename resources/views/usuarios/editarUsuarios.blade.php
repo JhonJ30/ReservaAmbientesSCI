@@ -53,7 +53,7 @@ $materias = App\Models\Materias::all();
 
             <div class="form-column">
                 <label for="contraseña">Contraseña: </label>
-                <input name="contraseña" , type="password" required>
+                <input name="contraseña" type="password" required>
                 <p class="error" id="error-contraseña" style="display: none; color: red;"></p>
             </div>
         </div>
