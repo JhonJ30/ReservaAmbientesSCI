@@ -25,20 +25,23 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($usuarios as $item)
-    <tr>
-      <td style="text-align: center;">{{$item->codSis}}</td>
-      <td style="text-align: center;">{{$item->nombre}}</td>
-      <td style="text-align: center;">{{$item->apellido}}</td>
-      <td style="text-align: center;">{{$item->rol}}</td>
-      <td style="text-align: center;">{{$item->email}}</td>
-      <td style="text-align: center;">
-        <button class="edit-btn" onclick="window.location.href='{{ route('usuarios.editar', $item->id) }}'">Modificar</button>
-        <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
-      </td>
-    </tr>
+  @foreach ($usuarios as $item)
+    @if($item->id != 1)
+      <tr>
+        <td style="text-align: center;">{{$item->codSis}}</td>
+        <td style="text-align: center;">{{$item->nombre}}</td>
+        <td style="text-align: center;">{{$item->apellido}}</td>
+        <td style="text-align: center;">{{$item->rol}}</td>
+        <td style="text-align: center;">{{$item->email}}</td>
+        <td style="text-align: center;">
+          <button class="edit-btn" onclick="window.location.href='{{ route('usuarios.editar', $item->id) }}'">Modificar</button>
+          <button  class="delete-btn" onclick="openModal({{ $item->id }})" >Eliminar</button>
+        </td>
+      </tr>
+    @endif
   @endforeach
-  </tbody>
+</tbody>
+
 </table>
 </div>
 
@@ -62,6 +65,9 @@
   </div>
   </div>
 </div>
+
+<br>
+<br>
 
 @if(Session::has('success'))
     <div id="successModal" class="modal" style="display: block;">

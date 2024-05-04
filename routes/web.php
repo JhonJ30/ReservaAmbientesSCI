@@ -49,7 +49,7 @@ Route::post('/materias', [materiaController::class, 'store'])->name('materias.st
 Route::get('/listaMaterias', [materiaController::class, 'create'])->name('materias.create');
 Route::get('/buscarMaterias', [materiaController::class, 'search'])->name('materias.search');
 Route::delete('/listaMaterias', [materiaController::class, 'destroy'])->name('materias.destroy');
-Route::post('/uploadCSV', [csvController::class, 'materia'])->name('materias.csv');
+Route::post('/materiasCSV', [csvController::class, 'materia'])->name('materias.csv');
 
 
 Route::get('/materias/editar/{id}', [materiaController::class, 'editar'])->name('materias.editar');
@@ -70,9 +70,9 @@ Route::post('/usuarios', [usuarioController::class, 'store'])->name('usuarios.st
 Route::get('/listaUsuarios', [usuarioController::class, 'create'])->name('usuarios.create');
 Route::get('/buscarUsuarios', [usuarioController::class, 'search'])->name('usuarios.search');
 Route::delete('/listaUsuarios', [usuarioController::class, 'destroy'])->name('usuarios.destroy');
-
 Route::get('/usuarios/editar/{id}', [usuarioController::class, 'editar'])->name('usuarios.editar');
 Route::put('/usuarios/{id}', [usuarioController::class, 'update'])->name('usuarios.update');
+Route::post('/usuariosCSV', [csvController::class, 'usuario'])->name('usuarios.csv');
 
 //notificaciones
 Route::get('notificacion', [notificationController::class, 'ObtenerNoti'])->name('notificaciones.ObtenerNoti');

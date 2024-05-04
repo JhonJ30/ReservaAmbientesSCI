@@ -8,9 +8,13 @@ $materias = App\Models\Materias::all();
 <link href="{{asset ('css/usuario.css')}}" rel="stylesheet">
 
 <h1>REGISTRO DE USUARIO</h1>
-<!-- <button class="csv">Subir desde .CSV</button> -->
+<form id="csvForm" action="{{ route('usuarios.csv') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="csv_file" id="csv_file">
+    <button type="button" onclick="validarCSV()">Subir archivo CSV</button >
+</form>
 
-<form action="{{route('usuarios.store')}}" method="POST" onsubmit="return error()">
+<form id="registroForm" action="{{route('usuarios.store')}}" method="POST" onsubmit="return error()">
     @csrf
     <div class="register">
         <div class="form-row">
@@ -178,9 +182,17 @@ $materias = App\Models\Materias::all();
         return true;
     }
 
-    document.getElementsByTagName('form')[0].onsubmit = function() {
+    function validarCSV() {
+        var inputFile = document.getElementById('csv_file');
+        if (inputFile.files.length === 0) {
+            return false;
+        }
+        document.getElementById('csvForm').submit(); // Si hay un archivo seleccionado, enviar el formulario
+    }
+
+    document.getElementById('registroForm').onsubmit = function() {
         return validarFormulario();
-    };
+    }
 </script>
 
 <script src="{{ asset('js/registroUsuario.js') }}"></script>
