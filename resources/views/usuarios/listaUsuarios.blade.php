@@ -13,7 +13,7 @@
       </form> 
 <br>
 <div> 
-<table>
+<table class="listaUsuarios">
   <thead>
     <tr>
       <th style="text-align: center;">Código sis</th>

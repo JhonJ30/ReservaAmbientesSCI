@@ -17,7 +17,7 @@
       </form> 
 <br>
 <div> 
-<table>
+<table class="listaMaterias">
   <thead>
     <tr>
       <th style="text-align: center;">Cod. Materia</th>
