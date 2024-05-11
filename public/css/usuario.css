@@ -93,12 +93,8 @@ h1 {
 
 #csvForm input{
     flex: 1;
-}
-
-#csvForm input{
     margin-right: 5%;
 }
-
 
 /* Estilos específicos para pantallas más pequeñas */
 @media screen and (max-width: 600px) {
@@ -133,6 +129,16 @@ h1 {
 
     .csv{
         margin-left: 5%;
+    }
+
+    #csvForm button {
+        padding: 10px;
+    }
+    
+    #csvForm input {
+        color: transparent;
+        padding: 0px;
+        margin: 0px;
     }
 }
 
