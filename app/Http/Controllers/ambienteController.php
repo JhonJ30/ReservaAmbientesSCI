@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Ambientes;
+use App\Models\Bitacora;
+use Carbon\Carbon;
 
 class ambienteController extends Controller
 {
@@ -55,6 +57,21 @@ class ambienteController extends Controller
 
         // Guardar el nuevo ambiente en la base de datos
         $ambiente->save();
+
+        $bitacora = new Bitacora();
+        $fechaYHoraActual = Carbon::now();
+        $idAmbiente = $ambiente->id;
+        $idUsuario = Auth::id();
+
+        $bitacora->fecha = $fechaYHoraActual->toDateString();
+        $bitacora->hora = $fechaYHoraActual->toTimeString();
+        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->evento = 'Create';
+        $bitacora->tabla = 'ambiente';
+        $bitacora->id_Registro=$idAmbiente;
+        $bitacora->dato_modificado = 'Nuevo ambiente: ' . $ambiente->nroAmb . ', ' . $ambiente->tipoAmb . ', ' .$ambiente->equipamiento. 
+        ', ' .$ambiente->capacidad;
+        $bitacora->save();
         return redirect()->route('ambientes.create')->with('success', '¡Ambiente Registrado Correctamente!');
     }
 
@@ -77,16 +94,62 @@ class ambienteController extends Controller
     public function update(Request $request, $id)
     {
         $ambiente = Ambientes::findOrFail($id);
+        $datosOriginales = $ambiente->toArray(); 
+        
         $ambiente->update($request->all());
-
+        
+        $bitacora = new Bitacora();
+        $fechaYHoraActual = Carbon::now();
+        $idAmbiente = $ambiente->id;
+        $idUsuario = Auth::id();
+    
+      
+        $datosModificados = [];
+        foreach ($request->except('_token', '_method') as $campo => $valor) {
+            if (!array_key_exists($campo, $datosOriginales) || $datosOriginales[$campo] != $valor) {
+                $datosModificados[$campo] = [
+                    'original' => array_key_exists($campo, $datosOriginales) ? $datosOriginales[$campo] : null,
+                    'nuevo' => $valor
+                ];
+            }
+        }
+    
+        
+        $datosModificadosJson = json_encode($datosModificados);
+    
+        $bitacora->fecha = $fechaYHoraActual->toDateString();
+        $bitacora->hora = $fechaYHoraActual->toTimeString();
+        $bitacora->id_Usuario = $idUsuario;
+        $bitacora->evento = 'Update';
+        $bitacora->tabla = 'ambiente';
+        $bitacora->id_Registro = $idAmbiente;
+        $bitacora->dato_modificado = $datosModificadosJson;
+        $bitacora->save();
         return redirect()->route('ambientes.create')->with('success', '¡Ambiente actualizado Correctamente!');
     }
+    
+    
 
     public function destroy(Request $request)
     {
         $registro = Ambientes::findOrFail($request->registro_id);
         $registro->delete();
+        
 
+        $bitacora = new Bitacora();
+        $fechaYHoraActual = Carbon::now();
+        $idAmbiente = $registro->id;
+        $idUsuario = Auth::id();
+
+        $bitacora->fecha = $fechaYHoraActual->toDateString();
+        $bitacora->hora = $fechaYHoraActual->toTimeString();
+        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->evento = 'Delete';
+        $bitacora->tabla = 'ambiente';
+        $bitacora->id_Registro=$idAmbiente;
+        $bitacora->dato_modificado = 'Ambiente Eliminado: ' . $registro->nroAmb . ', ' . $registro->tipoAmb . ', ' .$registro->equipamiento. 
+        ', ' .$registro->capacidad;
+        $bitacora->save();
         return redirect()->back()->with('success', 'Registro eliminado correctamente');
     }
 

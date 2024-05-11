@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Materias;
-
+use App\Models\Bitacora;
+use Carbon\Carbon;
 class materiaController extends Controller
 {
     public function create()
@@ -30,6 +31,21 @@ class materiaController extends Controller
             'cantGrupos' => $request->get('cantGrupos'),
         ]);
         $materia->save();
+
+        $bitacora = new Bitacora();
+        $fechaYHoraActual = Carbon::now();
+        $idMateria = $materia->id;
+        $idUsuario = Auth::id();
+
+        $bitacora->fecha = $fechaYHoraActual->toDateString();
+        $bitacora->hora = $fechaYHoraActual->toTimeString();
+        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->evento = 'Create';
+        $bitacora->tabla = 'materia';
+        $bitacora->id_Registro=$idMateria;
+        $bitacora->dato_modificado = 'Nueva Materia: ' . $materia->codSis . ', ' . $materia->nivel . ', ' .$materia->nombre. 
+        ', ' .$materia->cantGrupos;
+        $bitacora->save();
         return redirect()->route('materias.create')->with('success', '¡La materia ha sido registrado de manera correcta!');
     }
 
@@ -44,6 +60,21 @@ class materiaController extends Controller
     {
         $materias = Materias::findOrFail($request->registro_id);
         $materias->delete();
+
+        $bitacora = new Bitacora();
+        $fechaYHoraActual = Carbon::now();
+        $idMateria = $materias->id;
+        $idUsuario = Auth::id();
+
+        $bitacora->fecha = $fechaYHoraActual->toDateString();
+        $bitacora->hora = $fechaYHoraActual->toTimeString();
+        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->evento = 'Delete';
+        $bitacora->tabla = 'materia';
+        $bitacora->id_Registro=$idMateria;
+        $bitacora->dato_modificado = 'Materia Eliminada: ' . $materias->codSis . ', ' . $materias->nivel . ', ' .$materias->nombre. 
+        ', ' .$materias->cantGrupos;
+        $bitacora->save();
         return redirect()->back()->with('success', '¡La materia ha sido eliminado correctamente!');
     }
 
@@ -59,8 +90,37 @@ class materiaController extends Controller
     public function update(Request $request, $id)
     {
         $materias = Materias::findOrFail($id);
+        $datosOriginales = $materias->toArray();
         $materias->update($request->all());
+        
 
+        $bitacora = new Bitacora();
+        $fechaYHoraActual = Carbon::now();
+        $idMateria = $materias->id;
+        $idUsuario = Auth::id();
+    
+      
+        $datosModificados = [];
+        foreach ($request->except('_token', '_method') as $campo => $valor) {
+            if (!array_key_exists($campo, $datosOriginales) || $datosOriginales[$campo] != $valor) {
+                $datosModificados[$campo] = [
+                    'original' => array_key_exists($campo, $datosOriginales) ? $datosOriginales[$campo] : null,
+                    'nuevo' => $valor
+                ];
+            }
+        }
+    
+        
+        $datosModificadosJson = json_encode($datosModificados);
+    
+        $bitacora->fecha = $fechaYHoraActual->toDateString();
+        $bitacora->hora = $fechaYHoraActual->toTimeString();
+        $bitacora->id_Usuario = $idUsuario;
+        $bitacora->evento = 'Update';
+        $bitacora->tabla = 'materia';
+        $bitacora->id_Registro = $idMateria;
+        $bitacora->dato_modificado = $datosModificadosJson;
+        $bitacora->save();
         return redirect()->route('materias.create')->with('success', '¡Materia actualizada Correctamente!');
     }
 }
