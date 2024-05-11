@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Ambientes;
+use App\Models\Bitacora;
+use Carbon\Carbon;
 
 class ambienteController extends Controller
 {
@@ -55,6 +57,21 @@ class ambienteController extends Controller
 
         // Guardar el nuevo ambiente en la base de datos
         $ambiente->save();
+
+
+        $bitacora = new Bitacora();
+        $fechaYHoraActual = Carbon::now();
+        $idAmbiente = $ambiente->id;
+        $idUsuario = Auth::id();
+
+        $bitacora->fecha = $fechaYHoraActual->toDateString();
+        $bitacora->hora = $fechaYHoraActual->toTimeString();
+        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->evento = 'Create';
+        $bitacora->tabla = 'ambiente';
+        $bitacora->id_Registro=$idAmbiente;
+        $bitacora->dato_modificado = 'Se creó un nuevo ambiente con número ' . $ambiente->nroAmb . ' y tipo ' . $ambiente->tipoAmb;
+        $bitacora->save();
         return redirect()->route('ambientes.create')->with('success', '¡Ambiente Registrado Correctamente!');
     }
 
