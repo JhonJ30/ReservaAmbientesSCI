@@ -10,6 +10,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\ambienteController;
 use App\Http\Controllers\notificationController;
 use App\Http\Controllers\reservaController;
+use App\Http\Controllers\csvController;
 
 
 //general
@@ -48,6 +49,8 @@ Route::post('/materias', [materiaController::class, 'store'])->name('materias.st
 Route::get('/listaMaterias', [materiaController::class, 'create'])->name('materias.create');
 Route::get('/buscarMaterias', [materiaController::class, 'search'])->name('materias.search');
 Route::delete('/listaMaterias', [materiaController::class, 'destroy'])->name('materias.destroy');
+Route::post('/uploadCSV', [csvController::class, 'materia'])->name('materias.csv');
+
 
 Route::get('/materias/editar/{id}', [materiaController::class, 'editar'])->name('materias.editar');
 Route::put('/materias/{id}', [materiaController::class, 'update'])->name('materias.update');

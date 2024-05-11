@@ -4,9 +4,14 @@
 <link href="{{asset ('css/usuario.css')}}" rel="stylesheet">
 
 <h1>REGISTRO DE MATERIA</h1>
-<!-- <button class="csv">Subir desde .CSV</button> -->
+<form id="csvForm" action="{{ route('materias.csv') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="csv_file" id="csv_file">
+    <button type="button" onclick="validarCSV()">Subir archivo CSV</button >
+</form>
 
-<form action="{{route('materias.store')}}" method="POST" onsubmit="return error()">
+
+<form id="registroForm" action="{{route('materias.store')}}" method="POST" onsubmit="return error()">
     @csrf
     <div class="register">
         <div class="form-row">
@@ -136,8 +141,16 @@
         return true; // Permitir el envío del formulario si no hay errores
     }
 
+    function validarCSV() {
+        var inputFile = document.getElementById('csv_file');
+        if (inputFile.files.length === 0) {
+            return false;
+        }
+        document.getElementById('csvForm').submit(); // Si hay un archivo seleccionado, enviar el formulario
+    }
+
     // Asignar la función de validación al evento onsubmit del formulario
-    document.getElementsByTagName('form')[0].onsubmit = function() {
+    document.getElementById('registroForm').onsubmit = function() {
         return validarFormulario();
     };
 </script>
