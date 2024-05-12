@@ -23,6 +23,7 @@
                     <div class="form-group">
                         <label for="ambiente">Ambiente(*)</label>
                         <input type="text" id="ambiente" name="ambiente" value="{{ $nroAmbiente }}" readonly>
+                        <input type="hidden" id="idAmbiente" name="idAmbiente" value="{{ $idAmbiente }}">
                     </div>
                     <div class="form-group">
                         <label for="hora_inicio">Hora de inicio(*)</label>

@@ -32,7 +32,7 @@ Route::put('/ambientes/{id}', [ambienteController::class, 'update'])->name('ambi
 Route::get('/verAmbientes', [ambienteController::class, 'index'])->name('ambientes.index');
 Route::get('/buscarAmbientes', [ambienteController::class, 'buscar'])->name('ambientes.buscar');
 Route::get('/buscarAmbientesAvanzado', [ambienteController::class, 'buscarAvanzado'])->name('ambientes.buscarAvanzado');
-Route::get('/verAmbientes/calendario/{id}', [ambienteController::class, 'showCalendario'])->name('ambientes.calendario');
+Route::get('/calendario/{id}', [ambienteController::class, 'showCalendario'])->name('ambientes.calendario');
 
 //horarios
 Route::view('/registroHorario', 'horarios/registroHorario')->name('horarios.registrar');
@@ -57,7 +57,7 @@ Route::put('/materias/{id}', [materiaController::class, 'update'])->name('materi
 
 //reservas
 Route::post('/reservas', [reservaController::class, 'store'])->name('reservas.store');
-Route::get('/reservas/{ambiente_id}', [reservaController::class, 'show'])->name('reservas.show');
+Route::get('/reservas/{ambiente_id}/{nro_ambiente}', [reservaController::class, 'show'])->name('reservas.show');
 Route::delete('/verAmbientes', [reservaController::class, 'destroy'])->name('reservas.destroy');
 Route::delete('/', [reservaController::class, 'destroy'])->name('reservas.destroy');
 
