@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="hora_inicio">Hora de inicio(*)</label>
-                        <input type="time" id="hora_inicio" name="hora_inicio" min="06:45" max="21:25" required>
+                        <input type="time" id="hora_inicio" name="hora_inicio" min="06:45" max="21:25" step="900" required>
                     </div>
                     <div class="form-group">
                         <label for="actividad">Actividad(*)</label>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label for="hora_fin">Hora de fin(*)</label>
-                        <input type="time" id="hora_fin" name="hora_fin" min="06:45" max="21:45" required>
+                        <input type="time" id="hora_fin" name="hora_fin" min="06:45" max="21:45" step="900" required>
                     </div>
                     <!-- <div class="form-group">
                         <label for="estado">Estado(*)</label>
@@ -71,6 +71,7 @@
             </div>
             <!-- esto es el código para mostrar el mensaje de error si existe -->
             @if(session('error'))
+            <div style="color: {{ session('error_color', 'black') }}; font-weight: bold;"> <!--mensajes de error color rojo-->
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>

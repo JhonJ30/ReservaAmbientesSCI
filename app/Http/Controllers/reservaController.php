@@ -44,7 +44,22 @@ class reservaController extends Controller
             'fecha' => 'required',
             'hora_fin' => 'required',
         ]);
-        
+        // CAMBIOS calcular la diferencia de tiempo entre la hora de inicio y la hora de fin
+        $inicio = new \DateTime($request->get('hora_inicio'));
+        $fin = new \DateTime($request->get('hora_fin'));
+        $duracion = $inicio->diff($fin);
+
+        // CAMBIOS verificar si la duración es exactamente de 90 minutos
+        if ($duracion->format('%H:%I') !== '01:30') {
+            return redirect()->back()->with('error', 'La duración de la reserva debe ser de 90 minutos.')->with('error_color', 'red');
+        }
+
+        // CAMBIOS verificar que la hora de inicio esté dentro de los horarios permitidos
+        $horarios_permitidos = ['06:45', '08:15', '09:45', '11:15', '12:45', '14:15', '15:45', '17:15', '18:45', '20:15'];
+        if (!in_array($request->get('hora_inicio'), $horarios_permitidos)) {
+            return redirect()->back()->with('error', 'La hora de inicio no es válida.')->with('error_color', 'red');
+        }
+
         // para verificar si ya existe una reserva para el mismo ambiente en la misma fecha y hora
         $reservaExistente = Reservar::where('codAmb', $request->ambiente)
             ->where('fecha', $request->fecha)
@@ -52,7 +67,7 @@ class reservaController extends Controller
             ->exists();
 
         if ($reservaExistente) {
-            return redirect()->back()->with('error', 'Ya existe una reserva para este ambiente en la misma hora.');
+            return redirect()->back()->with('error', 'Ya existe una reserva para este ambiente en la misma hora.')->with('error_color', 'red');
         }
 
         // para la creacion de uno nuevo en el formulario
