@@ -204,6 +204,6 @@ class ambienteController extends Controller
         $idAmbiente = $id;
         $ambiente = Ambientes::find($id);
         $nroAula = $ambiente->nroAmb;
-        return view('ambientes/calendarioAmbiente', compact('nroAula'));
+        return view('ambientes/calendarioAmbiente', compact('nroAula', 'idAmbiente'));
     }
 }
