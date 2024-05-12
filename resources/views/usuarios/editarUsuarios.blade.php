@@ -88,12 +88,18 @@ $materias = App\Models\Materias::all();
                 <tbody id="asignacionesBody">
                     @php
                     $asignacionesUsuario = App\Models\UsuarioMateria::where('idUsuario', $usuarios->id)->get();
+                    $asignacionesPendientes = [];
                     @endphp
+
                     @foreach($asignacionesUsuario as $asignacion)
                     @php
                     $materia = App\Models\Materias::find($asignacion->idMateria);
+                    $asignacionesPendientes[] = [
+                    'materia' => strval($materia->id),
+                    'grupo' => $asignacion->nGrupo
+                    ];
                     @endphp
-                    <tr> <!-- Añadir el atributo data-id -->
+                    <tr>
                         <td data-id="{{ $materia->id }}">{{ $materia->nombre }}</td>
                         <td>{{ $asignacion->nGrupo }}</td>
                         <td>
@@ -102,6 +108,12 @@ $materias = App\Models\Materias::all();
                         </td>
                     </tr>
                     @endforeach
+
+                    @php
+                    $asignacionesPendientesJson = json_encode($asignacionesPendientes);
+                    @endphp
+
+                    <input type="hidden" name="asignaciones[]" value="{{ $asignacionesPendientesJson }}">
                 </tbody>
             </table>
 

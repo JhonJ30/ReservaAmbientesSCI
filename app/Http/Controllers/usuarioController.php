@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Bitacora;
 use App\Models\UsuarioMateria;
+use App\Models\Reservar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 class UsuarioController extends Controller
@@ -76,6 +77,8 @@ class UsuarioController extends Controller
     public function destroy(Request $request)
     {
         $usuarios = User::findOrFail($request->registro_id);
+        UsuarioMateria::where('idUsuario', $usuarios->id)->delete();
+        Reservar::where('codUser', $usuarios->id)->delete();
         $usuarios->delete();
         
 
@@ -118,6 +121,22 @@ class UsuarioController extends Controller
             'password' => bcrypt($request->get('contraseña')),
         ]);
         
+        UsuarioMateria::where('idUsuario', $usuario->id)->delete();
+        
+        if ($request->get('rol') === 'Docente') {
+            $asignaciones = $request->input('asignaciones');
+            $asignacionesArray = json_decode($asignaciones[0], true);
+            if (!empty($asignacionesArray)) {
+                foreach ($asignacionesArray as $asignacion) {
+                    $usuarioMateria = new UsuarioMateria([
+                        'idUsuario' => $usuario->id,
+                        'idMateria' => $asignacion['materia'],
+                        'nGrupo' => $asignacion['grupo'],
+                    ]);
+                    $usuarioMateria->save();
+                }
+            }
+        }
 
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();

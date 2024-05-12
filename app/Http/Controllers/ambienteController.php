@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Reservar;
 use App\Models\Ambientes;
 use App\Models\Bitacora;
 use Carbon\Carbon;
@@ -133,6 +133,7 @@ class ambienteController extends Controller
     public function destroy(Request $request)
     {
         $registro = Ambientes::findOrFail($request->registro_id);
+        Reservar::where('codAmb', $registro->id)->delete();
         $registro->delete();
 
 

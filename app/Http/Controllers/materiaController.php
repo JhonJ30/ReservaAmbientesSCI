@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Materias;
+use App\Models\UsuarioMateria;
+use App\Models\Reservar;
 use App\Models\Bitacora;
 use Carbon\Carbon;
 class materiaController extends Controller
@@ -59,6 +61,8 @@ class materiaController extends Controller
     public function destroy(Request $request)
     {
         $materias = Materias::findOrFail($request->registro_id);
+        UsuarioMateria::where('idMateria', $materias->id)->delete();
+        Reservar::where('Materia', $materias->id)->delete();
         $materias->delete();
 
         $bitacora = new Bitacora();

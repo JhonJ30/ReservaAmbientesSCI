@@ -112,3 +112,7 @@ function cancelar() {
         window.location.href = "/";
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    asignacionesPendientes = JSON.parse(document.querySelector('input[name="asignaciones[]"]').value);
+});
