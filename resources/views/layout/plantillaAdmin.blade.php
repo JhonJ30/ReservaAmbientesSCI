@@ -29,7 +29,7 @@
                     <p><a href="/registroUsuario" class="priHabilitado2">&nbsp;&nbsp;Usuarios</a></p>
                 </ul>
             </li>
-            <li><a href="#" id="menuRegistrar2" class="ultimo"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
+            <li><a href="#" id="menuRegistrar2" class="priHabilitado2"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
                 <ul class="submenu" id="submenuRegistrar2">
                     <p><a href="/listaReservas" class="priHabilitado2">&nbsp;&nbsp;Reservas</a></p>
                     <p><a href="/listaAmbientes" class="priHabilitado2">&nbsp;&nbsp;Ambientes</a></p>
@@ -38,6 +38,8 @@
                     <p><a href="/listaUsuarios" class="priHabilitado2">&nbsp;&nbsp;Usuarios</a></p>
                 </ul>
             </li>
+            <li> <a href="/viewlistAviso" class="ultimo">&nbsp;Avisos</a></li>
+
             <div onmouseover="showMiCuentaContent()" onmouseout="hideMiCuentaContent()">
                 <li><a href="#" class='iniSesion'><i class="fas fa-user"></i>Mi Cuenta</a></li>
                 <div id="miCuentaContent" class="miCuentaContent" style="display: none;">

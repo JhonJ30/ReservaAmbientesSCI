@@ -1,0 +1,221 @@
+.add-button {
+    float: right;
+    margin-top: -30px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+
+h2 {
+    text-align: center;
+    margin: 0px;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+  td {
+    border: 1px solid #0D7360;
+    background-color: #bbc0c2;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #0D7360;
+    border: 1px solid #bbc0c2;
+    text-align: left;
+    color: white;
+    padding: 8px;
+  }
+  
+  td button {
+    margin-right: 2px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .edit-btn {
+    background-color: #393e41;
+    color: white;
+    background-color: #393e41;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .delete-btn {
+    background-color: #0D7360;
+    color: white;
+  }
+  .edit-btn:hover, .delete-btn:hover {
+    opacity: 0.8;
+  }
+  @media only screen and (max-width: 600px) {
+    /* Estilos para hacer la tabla responsiva */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    /* Estilos para las filas de la tabla */
+    tr {
+        display: block;
+        margin-bottom: 15px;
+    }
+    
+    /* Estilos para las celdas de la tabla */
+    td, th {
+        display: block;
+        text-align: left;
+    }
+    
+    /* Estilos para las cabeceras de la tabla */
+    th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    /* Estilos para el contenido de las celdas */
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    /* Estilos para el contenido antes de las celdas */
+    td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+    
+    /* Etiquetas antes de cada columna */
+    td:nth-of-type(1):before { content: "Nro:"; }
+    td:nth-of-type(2):before { content: "Capacidad:"; }
+    td:nth-of-type(3):before { content: "Ubicacion:"; }
+    td:nth-of-type(4):before { content: "Estado:"; }
+    
+    /* Ajustes para los botones */
+    .btn-container {
+        text-align: center;
+    }
+
+    .btn-container button {
+        margin: 5px;
+    }
+}
+
+  /* Estilo para el modal */
+ 
+  body {
+    font-family: Arial, sans-serif;
+}
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+}
+.modal-content h2{
+text-align: center;
+color: #0B6F63;
+
+}
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.form-column {
+    flex: 1;
+    margin-right: 10px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+   /* font-weight: bold;*/
+    color: #0B6F63;
+}
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="datetime-local"],
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.button-container {
+    text-align: left;
+}
+.botones {
+    margin-top: 20px;
+    text-align: center;
+}
+.botones button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #FFFFFF;
+}
+.btnCancelar{
+    background-color: #393E41;
+}
+.btnRegistrar{
+    background-color: #0B6F63;
+}
+.btnCancelar:hover{
+    background-color: #ee316b;
+    transition: 0.5s;
+}
+.btnRegistrar:hover{
+    background-color: #17ae74;
+    transition: 0.5s;
+}
+@media only screen and (max-width: 600px) {
+    .form-column {
+        flex: 100%;
+        margin-right: 0;
+    }
+}

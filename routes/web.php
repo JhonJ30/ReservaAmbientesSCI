@@ -10,6 +10,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\ambienteController;
 use App\Http\Controllers\notificationController;
 use App\Http\Controllers\reservaController;
+use App\Http\Controllers\avisoController;
 use App\Http\Controllers\csvController;
 
 
@@ -79,6 +80,11 @@ Route::get('notificacion', [notificationController::class, 'ObtenerNoti'])->name
 Route::put('/notificaciones/{id}', [notificationController::class, 'update'])->name('notificaciones.update');
 Route::post('/notificaciones/store', [notificationController::class, 'store'])->name('notificaciones.store');
 Route::post('/notificaciones/Rechazar', [notificationController::class, 'Rechazar'])->name('notificaciones.Rechazar');
+
+//avisos
+
+Route::get('/viewlistAviso', [avisoController::class, 'verAvisos'])->name('avisos.verAvisos');
+Route::post('/avisos', [avisoController::class, 'add'])->name('avisos.add');
 
 /*
 //mary
