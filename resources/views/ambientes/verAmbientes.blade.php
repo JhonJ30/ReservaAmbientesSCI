@@ -34,13 +34,13 @@
                         <td>{{ $ambiente->ubicacion }}</td>
                         <td>{{ $ambiente->equipamiento }}</td>
                         <td>
-                            <button onclick="window.location.href='/verAmbientes/calendario/{{ $ambiente->id }}'">
+                            <button onclick="window.location.href='/calendario/{{ $ambiente->id }}'">
                                 <i class="fas fa-calendar-days"></i>
                             </button>
                         </td>
                         <td>
                             @auth
-                            <button onclick="window.location.href='{{ route('reservas.show', ['ambiente_id' => $ambiente->nroAmb, 'nro_ambiente' => $ambiente->nroAmb]) }}'">Reservar</button>
+                            <button onclick="window.location.href='{{ route('reservas.show', ['ambiente_id' => $ambiente->id, 'nro_ambiente' => $ambiente->nroAmb]) }}'">Reservar</button>
                             @else
                             <button onclick="window.location.href='{{ route('iniciarSesion') }}'">Reservar</button>
                             @endauth

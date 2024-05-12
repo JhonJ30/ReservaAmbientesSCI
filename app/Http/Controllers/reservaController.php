@@ -15,13 +15,14 @@ class reservaController extends Controller
         return view('reservas/listaReservas', compact('reservas'));
     }
 
-    public function show($ambiente_id)
+    public function show($ambiente_id, $ambiente_nro)
     {
-        $nroAmbiente = $ambiente_id; //muestra el nro de aula
+        $idAmbiente = $ambiente_id;
+        $nroAmbiente = $ambiente_nro; //muestra el nro de aula
         $materias = Materias::pluck('nombre', 'id'); // obtiene todas las materias para visualizar
         $nombreUsuario = Auth::user()->nombre; // Obtener el nombre del usuario
         $apellidoUsuario = Auth::user()->apellido;
-        return view('reservas/registroReserva', compact('nroAmbiente', 'materias', 'nombreUsuario', 'apellidoUsuario'));
+        return view('reservas/registroReserva', compact('idAmbiente', 'nroAmbiente', 'materias', 'nombreUsuario', 'apellidoUsuario'));
     }
 
     public function destroy(Request $request)
@@ -73,7 +74,7 @@ class reservaController extends Controller
         // para la creacion de uno nuevo en el formulario
         $reserva = new Reservar([
             'codUser' => Auth::id(), // obtiene el ID del usuario autenticado
-            'codAmb' => $request->get('ambiente'),
+            'codAmb' => $request->get('idAmbiente'),
             'Materia' => $request->get('materia'),
             'horaInicio' => $request->get('hora_inicio'),
             'horaFin' => $request->get('hora_fin'),
