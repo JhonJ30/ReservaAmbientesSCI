@@ -4,6 +4,24 @@
 <link href="{{asset ('css/calendario.css')}}" rel="stylesheet">
 
 <h1 class="aviso">{{ $nroAula }}: CALENDARIO</h1>
+
+<div class="navegacionCalendario">
+    <span>{{ $inicioSemana->format('d/m/Y') }} - {{ $finSemana->format('d/m/Y') }}</span>
+    <div class="enlaces">
+        <a class="exit" href="{{ route('ambientes.index') }}">
+            <i class="fas fa-right-from-bracket"></i>
+        </a>
+
+        <a class="actual" href="{{ route('ambientes.calendario', ['id' => $idAmbiente]) }}">Semana Actual</a>
+        <a id="anterior" href="{{ route('ambientes.calendario', ['id' => $idAmbiente, 'fecha' => $inicioSemana->copy()->subWeek()->toDateString()]) }}">
+            <i class="fas fa-circle-left"></i>
+        </a>
+        <a href="{{ route('ambientes.calendario', ['id' => $idAmbiente, 'fecha' => $inicioSemana->copy()->addWeek()->toDateString()]) }}">
+            <i class="fas fa-circle-right"></i>
+        </a>
+    </div>
+</div>
+
 <div class="calendarioContainer">
     <table>
         <tr>
@@ -21,12 +39,9 @@
         '6:45', '8:15', '9:45', '11:15', '12:45', '14:15', '15:45', '17:15', '18:45', '20:15'
         ];
 
-        $inicioSemana = \Carbon\Carbon::now()->startOfWeek()->toDateString();
-        $finSemana = \Carbon\Carbon::now()->endOfWeek()->toDateString();
-
         $reservas = \DB::table('reserva')
         ->where('codAmb', $idAmbiente)
-        ->whereBetween('fecha', [$inicioSemana, $finSemana])
+        ->whereBetween('fecha', [$inicioSemana->toDateString(), $finSemana->toDateString()])
         ->where('estado', 'Aceptado')
         ->get();
         @endphp
@@ -37,12 +52,12 @@
             @foreach(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'] as $dia)
             <td class="reserva-celda">
                 @php
-                $fechaDia = \Carbon\Carbon::now()->startOfWeek()->addDays($loop->index)->format('Y-m-d');
+                $fechaDia = $inicioSemana->copy()->addDays($loop->index)->toDateString();
 
                 $reserva = $reservas->first(function ($reserva) use ($fechaDia, $hora) {
-                    $horaTemporal = strtotime($hora);
-                    $horaInicioTemporal = strtotime($reserva->horaInicio);
-                    return $reserva->fecha === $fechaDia && $horaInicioTemporal === $horaTemporal;
+                $horaTemporal = strtotime($hora);
+                $horaInicioTemporal = strtotime($reserva->horaInicio);
+                return $reserva->fecha === $fechaDia && $horaInicioTemporal === $horaTemporal;
                 });
 
                 echo $reserva ? 'Reservado' : '';
@@ -51,22 +66,27 @@
             @endforeach
         </tr>
         @endforeach
-
-
-
     </table>
 </div>
 
-<button type="button" class="cancelar-btn" onclick="window.location.href='/verAmbientes'">Cancelar</button>
+<!-- <button type="button" class="cancelar-btn" onclick="window.location.href='/verAmbientes'">Cancelar</button> -->
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var celdasReserva = document.querySelectorAll('.reserva-celda');
+        let celdasReserva = document.querySelectorAll('.reserva-celda');
         celdasReserva.forEach(function(celda) {
             if (celda.textContent.trim() === 'Reservado') {
                 celda.classList.add('reservado');
             }
         });
+
+        let botonAnterior = document.getElementById('anterior');
+        let semanaActual = '{{ \Carbon\Carbon::now()->startOfWeek()->format("Y-m-d") }}';
+        let inicioSemanaActual = '{{ $inicioSemana->copy()->startOfWeek()->format("Y-m-d") }}';
+        if (semanaActual === inicioSemanaActual) {
+            botonAnterior.classList.add('deshabilitado');
+            botonAnterior.removeAttribute('href');
+        }
     });
 </script>
 @endsection

@@ -65,12 +65,12 @@ class ambienteController extends Controller
 
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
-        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->id_Usuario = $idUsuario;
         $bitacora->evento = 'Create';
         $bitacora->tabla = 'ambiente';
-        $bitacora->id_Registro=$idAmbiente;
-        $bitacora->dato_modificado = 'Nuevo ambiente: ' . $ambiente->nroAmb . ', ' . $ambiente->tipoAmb . ', ' .$ambiente->equipamiento. 
-        ', ' .$ambiente->capacidad;
+        $bitacora->id_Registro = $idAmbiente;
+        $bitacora->dato_modificado = 'Nuevo ambiente: ' . $ambiente->nroAmb . ', ' . $ambiente->tipoAmb . ', ' . $ambiente->equipamiento .
+            ', ' . $ambiente->capacidad;
         $bitacora->save();
         return redirect()->route('ambientes.create')->with('success', '¡Ambiente Registrado Correctamente!');
     }
@@ -94,16 +94,16 @@ class ambienteController extends Controller
     public function update(Request $request, $id)
     {
         $ambiente = Ambientes::findOrFail($id);
-        $datosOriginales = $ambiente->toArray(); 
-        
+        $datosOriginales = $ambiente->toArray();
+
         $ambiente->update($request->all());
-        
+
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
         $idAmbiente = $ambiente->id;
         $idUsuario = Auth::id();
-    
-      
+
+
         $datosModificados = [];
         foreach ($request->except('_token', '_method') as $campo => $valor) {
             if (!array_key_exists($campo, $datosOriginales) || $datosOriginales[$campo] != $valor) {
@@ -113,10 +113,10 @@ class ambienteController extends Controller
                 ];
             }
         }
-    
-        
+
+
         $datosModificadosJson = json_encode($datosModificados);
-    
+
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
         $bitacora->id_Usuario = $idUsuario;
@@ -127,14 +127,14 @@ class ambienteController extends Controller
         $bitacora->save();
         return redirect()->route('ambientes.create')->with('success', '¡Ambiente actualizado Correctamente!');
     }
-    
-    
+
+
 
     public function destroy(Request $request)
     {
         $registro = Ambientes::findOrFail($request->registro_id);
         $registro->delete();
-        
+
 
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
@@ -143,12 +143,12 @@ class ambienteController extends Controller
 
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
-        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->id_Usuario = $idUsuario;
         $bitacora->evento = 'Delete';
         $bitacora->tabla = 'ambiente';
-        $bitacora->id_Registro=$idAmbiente;
-        $bitacora->dato_modificado = 'Ambiente Eliminado: ' . $registro->nroAmb . ', ' . $registro->tipoAmb . ', ' .$registro->equipamiento. 
-        ', ' .$registro->capacidad;
+        $bitacora->id_Registro = $idAmbiente;
+        $bitacora->dato_modificado = 'Ambiente Eliminado: ' . $registro->nroAmb . ', ' . $registro->tipoAmb . ', ' . $registro->equipamiento .
+            ', ' . $registro->capacidad;
         $bitacora->save();
         return redirect()->back()->with('success', 'Registro eliminado correctamente');
     }
@@ -161,8 +161,8 @@ class ambienteController extends Controller
         if (Auth::user()->rol === 'Administrador') {
             $ambientes = Ambientes::where('nroAmb', 'like', '%' . $search . '%')->get();
             return view('ambientes/listaAmbientes',  compact('ambientes'));
-        } 
-        
+        }
+
         //buscador de otros usuarios
         else {
             if (empty($search)) {
@@ -199,11 +199,20 @@ class ambienteController extends Controller
         }
     }
 
-    public function showCalendario($id)
+    public function showCalendario($id, $fecha = null)
     {
         $idAmbiente = $id;
         $ambiente = Ambientes::find($id);
         $nroAula = $ambiente->nroAmb;
-        return view('ambientes/calendarioAmbiente', compact('nroAula', 'idAmbiente'));
+
+        if ($fecha === null) {
+            $inicioSemana = Carbon::now()->startOfWeek();
+            $finSemana = Carbon::now()->endOfWeek();
+        } else {
+            $fecha = Carbon::createFromFormat('Y-m-d', $fecha)->startOfWeek();
+            $inicioSemana = $fecha->copy();
+            $finSemana = $fecha->endOfWeek();
+        }
+        return view('ambientes/calendarioAmbiente', compact('nroAula', 'idAmbiente', 'inicioSemana', 'finSemana'));
     }
 }

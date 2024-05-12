@@ -32,7 +32,7 @@ Route::put('/ambientes/{id}', [ambienteController::class, 'update'])->name('ambi
 Route::get('/verAmbientes', [ambienteController::class, 'index'])->name('ambientes.index');
 Route::get('/buscarAmbientes', [ambienteController::class, 'buscar'])->name('ambientes.buscar');
 Route::get('/buscarAmbientesAvanzado', [ambienteController::class, 'buscarAvanzado'])->name('ambientes.buscarAvanzado');
-Route::get('/calendario/{id}', [ambienteController::class, 'showCalendario'])->name('ambientes.calendario');
+Route::get('/calendario/{id}/{fecha?}', [ambienteController::class, 'showCalendario'])->name('ambientes.calendario');
 
 //horarios
 Route::view('/registroHorario', 'horarios/registroHorario')->name('horarios.registrar');
