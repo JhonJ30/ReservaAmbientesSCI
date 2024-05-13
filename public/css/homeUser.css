@@ -97,7 +97,18 @@ body {
     transition: color 0.3s;
     cursor: pointer; 
 }
-
+.priHabilitadoInicio{
+  background-color: #F5F6F7;
+  color: #3d475b;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: background-color 0.3s;
+  transition: color 0.3s;
+  cursor: pointer; 
+}
 .priHabilitado2{
     background-color: #ADADAD;
     color: #3d475b;

@@ -35,7 +35,7 @@
       <td style="text-align: center;">
 
         <button type="button"  class="edit-btn">Modificar</button>
-        <button type="button" class="delete-btn" onclick="#">Eliminar</button>
+        <button type="button" class="delete-btn" onclick="openModalE({{ $item->id }})" >Eliminar</button>
 
       </td>
     </tr>
@@ -45,6 +45,39 @@
 </div>
 
 <!-- Modal de confirmación de eliminación -->
+<div id="myModalE" class="modal">
+ 
+  <div class="modal-content1">
+    <p><strong>¿Estás seguro que deseas eliminar este registro?</strong></p>
+    <br>
+    <p class="gris">Esta operacion es irreversible</p>
+    <br>
+    <div class="button-container1">
+    <form action="{{route('avisos.eliminar')}}" method="POST">
+            @csrf
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="registro_id" id="registro_id">
+       <button class="btnAceptar" type="submit" >Aceptar</button>
+      </form>
+    <button class="btnCancelar"onclick="closeModalE()">Cancelar</button>
+  </div>
+  </div>
+</div>
+
+<!---->
+@if(Session::has('success'))
+    <div id="successModal" class="modal" style="display: block;">
+        <div class="modal-content">
+            <p><strong>{{ Session::get('success') }}</strong></p>
+            <!-- Otro contenido del modal si es necesario -->
+            <div class="button-container1">
+                <button class="btnAceptar" onclick="closeSuccessModal()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+@endif
+
+<!-- Modal de registro de ambiente -->
 
 <div id="myModal" class="modal">
   <div class="modal-content">
@@ -98,11 +131,21 @@
     // Mostrar el modal
         document.getElementById('myModal').style.display = 'block';
     }
-
-    // Función para cerrar el modal
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
+    function openModalE(registroId) {
+    document.getElementById('registro_id').value = registroId;
+        document.getElementById('myModalE').style.display = 'block';
+    }
+    function closeModalE() {
+        document.getElementById('myModalE').style.display = 'none';
+    }
+    // Función para cerrar el modal
+    function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+}
+    
     
 </script>
 

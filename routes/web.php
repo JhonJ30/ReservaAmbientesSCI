@@ -91,6 +91,8 @@ Route::post('/notificaciones/Rechazar', [notificationController::class, 'Rechaza
 
 Route::get('/viewlistAviso', [avisoController::class, 'verAvisos'])->name('avisos.verAvisos');
 Route::post('/avisos', [avisoController::class, 'add'])->name('avisos.add');
+Route::get('/descargar-archivo/{archivo}', [avisoController::class, 'descargarArchivo'])->name('descargar.archivo');
+Route::delete('/viewlistAviso', [avisoController::class, 'eliminar'])->name('avisos.eliminar');
 
 /*
 //mary

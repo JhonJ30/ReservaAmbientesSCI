@@ -6,10 +6,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\aviso;
+use Illuminate\Support\Facades\Storage;
 
 class avisoController extends Controller
 {
     //
+   /*public function verAvisoHome()
+    {
+       
+        $avisos = aviso::where('estado', "Habilitado")->get();
+        return view('usuarios/home',compact('avisos'));
+    }*/
+     public function descargarArchivo($archivo)
+    {
+       
+       // Encuentra la ubicación del archivo en el sistema de archivos
+        $rutaArchivo = 'archivos/' . $archivo;
+
+        // Verifica si el archivo existe en el sistema de archivos
+        if (Storage::exists($rutaArchivo)) {
+            // Descarga el archivo
+            return Storage::download($rutaArchivo);
+        }
+
+        // Manejo de error si el archivo no se encuentra o no se puede descargar
+        abort(404);
+    }
     public function verAvisos()
     {
        $avisos = aviso::all();
@@ -34,9 +56,18 @@ class avisoController extends Controller
 
         // Guarda la ruta del archivo en la base de datos
         $avisos->archivo = $nombreArchivo;
+    }else {
+        // Si no se carga ningún archivo, establece un valor predeterminado para el campo 'archivo'
+        $avisos->archivo = 'sin_archivo'; // Puedes cambiar 'sin_archivo' por cualquier valor que desees
     }
 
         $avisos->save();
         return redirect()->route('avisos.verAvisos')->with('success', '¡Aviso Registrado Correctamente!');
+    }
+    public function eliminar(Request $request)
+    {
+        $registro = aviso::findOrFail($request->registro_id);
+        $registro->delete();
+        return redirect()->back()->with('success', 'Registro eliminado correctamente');
     }
 }
