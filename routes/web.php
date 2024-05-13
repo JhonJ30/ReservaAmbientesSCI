@@ -69,6 +69,7 @@ Route::get('/listaReservas', [reservaController::class, 'verReserva'])->name('re
 Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
 Route::post('/reservas/{id}', [reservaController::class, 'update'])->name('reservas.update');
 Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
+Route::put('/reservas/{id}', [reservaController::class, 'update'])->name('reservas.update');
 
 //usuarios
 Route::view('/registroUsuario','usuarios/registroUsuario')->name('usuarios.registrar');
