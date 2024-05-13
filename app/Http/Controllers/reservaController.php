@@ -118,8 +118,9 @@ class reservaController extends Controller
     public function update(Request $request, $id)
     {
         $reserva = Reservar::findOrFail($id);
-        // Aquí debes validar y actualizar los datos de la reserva según los datos enviados desde el formulario
+        // valida y actualiza los datos de la reserva según los datos enviados desde el formulario editar
         $reserva->horaInicio = $request->input('hora_inicio');
+        $reserva->horaFin = $request->input('hora_fin');
         // Actualiza más campos según sea necesario
         $reserva->save();
         return redirect('/verAmbientes')->with('success', 'Reserva actualizada exitosamente');
