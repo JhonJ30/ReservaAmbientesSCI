@@ -5,24 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class notification extends Model
+class aviso extends Model
 {
     use HasFactory;
-    
-    protected $table = 'notificacion';
+    protected $table = 'aviso';
     
     // Si la tabla tiene un campo de autoincremento, especifica su nombre
     protected $primaryKey = 'id';
 
     // Los campos que se pueden asignar en masa
     protected $fillable = [
-        'codReser',
-        'mensaje',
+        'titulo',
+        'descripcion',
+        'archivo',
+        'fecInicio', 
+        'fecFin',
         'estado',
     ];
-    //notif
-    public function reserva()
-    {
-        return $this->belongsTo(Reservar::class);
-    }
+    
 }

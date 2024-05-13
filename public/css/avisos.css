@@ -1,28 +1,18 @@
-.search-container {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    
-  }
-  
-  .search-input {
-    padding: 8px;
-    border: 1px solid #bbc0c2;
-    border-radius: 4px ;
-    width:50%;
-  }
-  
-  .search-button {
-    background-color: #0D7360;
-    color: #fff;
+.add-button {
+    float: right;
+    margin-top: -30px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 4px;
-    padding: 10px;
-    margin-left: 5px;
+    padding: 8px 12px;
     cursor: pointer;
-  }
-  
-  
+    transition: background-color 0.3s;
+}
+.add-button:hover {
+    background-color: #0056b3;
+}
 
 
 h2 {
@@ -139,69 +129,93 @@ table {
 
   /* Estilo para el modal */
  
+  body {
+    font-family: Arial, sans-serif;
+}
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.6);
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
 }
-
-/* Estilo para el contenido del modal */
 .modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 60%; /* Ancho ajustado para dispositivos móviles */
-  max-width: 400px; /* Ancho máximo para dispositivos grandes */
-  text-align: center;
-  border-radius: 5px;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
 }
+.modal-content h2{
+text-align: center;
+color: #0B6F63;
 
-/* Estilos para el contenedor de los botones */
+}
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.form-column {
+    flex: 1;
+    margin-right: 10px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+   /* font-weight: bold;*/
+    color: #0B6F63;
+}
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="datetime-local"],
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 .button-container {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente los botones */
-  margin-top: 10px; /* Añade margen arriba de los botones */
+    text-align: left;
 }
-
-/* Estilos para los botones */
-.modal-content button {
-  margin: 0 5px; /* Añade margen entre los botones */
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+.botones {
+    margin-top: 20px;
+    text-align: center;
 }
-
-/* Estilos específicos para los botones de aceptar y cancelar */
-.modal-content .btnAceptar {
-  background-color:#0D7360 ;
-  color: white;
+.botones button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #FFFFFF;
 }
-
-.modal-content .btnCancelar {
-  background-color:  #393e41;
-  color: white;
+.btnCancelar{
+    background-color: #393E41;
+}
+.btnRegistrar{
+    background-color: #0B6F63;
 }
 .btnCancelar:hover{
-  background-color: #ee316b;
-  transition: 0.5s;
-  }
-  .btnAceptar:hover{
-  background-color: #17ae74;
-  transition: 0.5s;
-  }
-/* Ajustes adicionales para pantallas grandes */
-@media only screen and (min-width: 600px) {
-  .modal-content button {
-      width: auto; /* Restaura el ancho automático de los botones */
-  }
+    background-color: #ee316b;
+    transition: 0.5s;
 }
-
+.btnRegistrar:hover{
+    background-color: #17ae74;
+    transition: 0.5s;
+}
+@media only screen and (max-width: 600px) {
+    .form-column {
+        flex: 100%;
+        margin-right: 0;
+    }
+}

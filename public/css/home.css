@@ -29,6 +29,8 @@ body {
   display: none;
   flex-direction: column;
   cursor: pointer;
+  padding: 0px;
+  margin: 0px;
 }
 
 .bar {
@@ -42,9 +44,8 @@ body {
   display: flex;
   list-style-type: none;
   /*background-color: #ADADAD;*/
-  align-items: center;
-  margin-right: 45px !important;
-  
+  align-items: center;  
+  margin-right: 10px;
 }
 
 .menu li {
@@ -71,6 +72,8 @@ body {
   background-color: #444;
   padding: 10px 0;
   background-color: #ADADAD;
+  margin: 0px;
+  padding: 0px;
 }
 
 .submenu li {
@@ -78,9 +81,17 @@ body {
   margin-bottom: 5px;
 }
 
-.submenu a {
+.submenu a{
     color: #3d475b;
+    padding-top: 17px;
+    padding-bottom: 17px;
 }
+
+.submenu p{
+  margin: 0px;
+  padding: 0px;
+}
+
 /*agregado*/
 
 .priHabilitado{
@@ -210,6 +221,7 @@ body {
     top: 50px;
     left: 0;
     width: 100%;
+    z-index: 1;
   }
 
   .menu.active {
@@ -296,6 +308,7 @@ body {
 .container-reservas {
   width: 400px;
   margin: 50px auto;
+  max-height: 500px;
   background-color: #FFFFFF;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

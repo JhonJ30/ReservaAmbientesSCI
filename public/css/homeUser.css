@@ -42,6 +42,7 @@ body {
   display: flex;
   list-style-type: none;
   align-items: center;
+  margin-right: 10px;
 }
 
 .menu li {
@@ -304,14 +305,13 @@ body {
 .container-reservas {
             width: 400px;
             height: auto;
-            max-height: 450px;
             margin: 50px auto;
             background-color: #FFFFFF;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative; 
             border-radius: 10px;
-            overflow-y: auto;
+            z-index: 2;
         }
 
 .container-reservas h2 {
@@ -512,5 +512,3 @@ body {
         width: auto; /* Restaura el ancho automático de los botones */
     }
   }
-  
-  

@@ -10,27 +10,44 @@
 </head>
 
 <body>
-    <h1>INICIAR SESIÓN</h1>
+    <h1>INGRESE A SU CUENTA</h1>
     <form action="{{route('login')}}" method="POST" onsubmit="return error()">
         @csrf
         <select name="rol" required>
-            <option value="Administrador">Administrador</option>
-            <option value="Docente">Docente</option>
-            <option value="Auxiliar">Auxiliar</option>
+            <option value="Administrador" {{ old('rol') == 'Administrador' ? 'selected' : '' }}>Administrador</option>
+            <option value="Docente" {{ old('rol') == 'Docente' ? 'selected' : '' }}>Docente</option>
         </select>
 
         <div class="form-column">
             <label for="email">Correo electrónico: </label>
-            <input name="email" , type="email" required>
+            <input name="email" type="email" value="{{ old('email') }}" required>
         </div>
+
 
         <div class="form-column">
             <label for="password" , style="margin-right: 67px;">Contraseña: </label>
             <input name="password" , type="password" required>
         </div>
 
-        <button class="buttonLogin" type="submit">INGRESAR</button>
+        @if (session('errorMessage'))
+            <p id="errorMessage">{{ session('errorMessage') }}</p>
+        @endif
+
+
+        <div class="button-container">
+            <button class="buttonCancel" type="button" onclick="window.location.href='/'">CANCELAR</button>
+            <button class="buttonLogin" type="submit">INICIAR SESIÓN</button>
+        </div>
     </form>
 </body>
+
+<script>
+    var errorMessage = document.getElementById('errorMessage');
+    if (errorMessage) {
+        setTimeout(function() {
+            errorMessage.textContent = '';
+        }, 3000);
+    }
+</script>
 
 </html>

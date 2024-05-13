@@ -1,0 +1,106 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,td {
+    border: 1px solid #0D7360;
+    text-align: center;
+    padding: 8px;
+    background-color: #f1f1f1;
+}
+
+th {
+    background-color: #0D7360;
+    color: white;
+    border: 1px solid white;
+}
+
+.horas{
+    border: 1px solid white;
+    background-color: #0D7360;
+    color: white;
+}
+
+.calendarioContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+button {
+    height: 35px;
+}
+
+.aviso{
+    text-align:center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.cancelar-btn {
+    background-color: #ccc;
+    color: white;
+    padding: 10px 50px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #393E41;
+    margin-top: 40px;
+}
+
+.cancelar-btn:hover{
+    background-color: #ee316b;
+    transition: 0.5s;
+}
+
+.reservado {
+    background-color: rgb(220, 56, 56);
+    color: white;
+}
+
+.navegacionCalendario{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.enlaces{
+    display: flex;
+}
+
+.enlaces i{
+    font-size: xx-large;
+    color:#0D7360;
+    margin-left: 30px;
+}
+
+.actual{
+    color: white;
+    text-decoration: none;
+    background-color: #0D7360;
+    align-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+
+.deshabilitado {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.exit i{
+    transform: rotate(180deg);
+    color: red;
+}
+
+span{
+    background-color: #235298;
+    padding: 10px;
+    color: white;
+    justify-content: center;
+    align-content: center;
+}
