@@ -48,7 +48,7 @@
 
         @foreach($horarios as $hora)
         <tr>
-            <td>{{ $hora }}</td>
+            <td class="horas">{{ $hora }}</td>
             @foreach(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'] as $dia)
             <td class="reserva-celda">
                 @php
