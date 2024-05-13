@@ -3,17 +3,25 @@ table {
     width: 100%;
 }
 
+td:first-child {
+    font-weight: bold; /* Hacer que las horas estén en negrita */
+    background-color: #214a88;
+    color: white; 
+}
+
 th,td {
-    border: 1px solid #dddddd;
+    border: 1px solid #333; /*celdas color negro*/
     text-align: center;
     padding: 8px;
 }
 
 th {
-    background-color: #f2f2f2;
+     color: white;
+    background-color: #3a77d3; /*cambio color fondo de celdas de semana*/
 }
 
 .calendarioContainer{
+    background-color: white; /* Establecer el fondo blanco al cuadro*/
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -47,7 +55,7 @@ button {
 }
 
 .reservado {
-    background-color: rgb(207, 0, 0);
+    background-color: rgb(207, 0, 0);/*cambia color de celdas reservado*/
     color: white;
 }
 
@@ -86,4 +94,14 @@ button {
 .exit i{
     transform: rotate(180deg);
     color: red;
+}
+
+/*span*/
+.navegacionCalendario span {
+    border: 3px solid #0D7360; /* Ajusta el color y grosor del borde según lo necesites */
+    padding: 5px; /* Ajusta el relleno dentro del cuadro según lo necesites */
+    font-weight: bold;
+    color: white;
+    background-color: #0D7360;
+    border-radius: 5px; /* Ajusta el radio del borde si quieres esquinas redondeadas */
 }
