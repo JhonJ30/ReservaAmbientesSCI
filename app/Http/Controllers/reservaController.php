@@ -99,4 +99,29 @@ class reservaController extends Controller
             ->get();
         return view('reservas/listaReservas', compact('reservas'));
     }
+    //editar reserva
+    public function editar($id)
+    {
+        $nombreUsuario = Auth::user()->nombre; // Obtener el nombre del usuario
+        $apellidoUsuario = Auth::user()->apellido;
+        $reserva = Reservar::findOrFail($id);
+        $materias = Materias::pluck('nombre', 'id', 'idAmbiente');
+        $nroAmbiente = $reserva->nroAmb;
+
+
+        $actividad = $reserva->Actividad;
+        $horaFin = $reserva->horaFin;
+        $materia = $reserva->Materia;
+        //retornar la vista de editar junto con los datos de la reserva y las materias :)
+        return view('reservas.editarReserva', compact('reserva', 'nroAmbiente', 'materias', 'id', 'nombreUsuario', 'apellidoUsuario', 'actividad', 'materia', 'horaFin'));
+    }
+    public function update(Request $request, $id)
+    {
+        $reserva = Reservar::findOrFail($id);
+        // Aquí debes validar y actualizar los datos de la reserva según los datos enviados desde el formulario
+        $reserva->horaInicio = $request->input('hora_inicio');
+        // Actualiza más campos según sea necesario
+        $reserva->save();
+        return redirect('/verAmbientes')->with('success', 'Reserva actualizada exitosamente');
+    }
 }

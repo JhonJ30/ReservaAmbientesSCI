@@ -53,7 +53,7 @@
                                     Estado: {{ $ambiente->estado }}
                                 </span>
                                 @if ($ambiente->estado == 'Proceso')
-                                <button class="editar-button">Editar</button>
+                                <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button">Editar</a>
                                 @endif
                                 <button class="cancel-button" onclick="openModal2({{ $ambiente->id }})">Cancelar</button>
                             </li>

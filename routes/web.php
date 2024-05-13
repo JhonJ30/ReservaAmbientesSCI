@@ -65,6 +65,11 @@ Route::delete('/', [reservaController::class, 'destroy'])->name('reservas.destro
 Route::get('/listaReservas', [reservaController::class, 'create'])->name('reservas.create');
 Route::get('/listaReservas', [reservaController::class, 'verReserva'])->name('reservas.verReserva');
 
+//editar reserva
+Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
+Route::post('/reservas/{id}', [reservaController::class, 'update'])->name('reservas.update');
+Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
+
 //usuarios
 Route::view('/registroUsuario','usuarios/registroUsuario')->name('usuarios.registrar');
 Route::post('/usuarios', [usuarioController::class, 'store'])->name('usuarios.store');
