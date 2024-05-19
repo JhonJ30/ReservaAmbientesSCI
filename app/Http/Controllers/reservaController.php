@@ -123,8 +123,9 @@ class reservaController extends Controller
         $reserva->horaFin = $request->input('hora_fin');
         // Actualiza más campos según sea necesario
         $reserva->save();
-        return redirect('/verAmbientes')->with('success', 'Reserva actualizada exitosamente');
+        return redirect('/verAmbientes')->with('success', '¡Reserva actualizada exitosamente!');
     }
+
 
 
     public function informacion($id)
