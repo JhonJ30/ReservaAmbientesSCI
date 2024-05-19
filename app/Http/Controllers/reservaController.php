@@ -125,4 +125,14 @@ class reservaController extends Controller
         $reserva->save();
         return redirect('/verAmbientes')->with('success', 'Reserva actualizada exitosamente');
     }
+
+
+    public function informacion($id)
+    {
+        $reserva = Reservar::find($id);
+        if (!$reserva) {
+            abort(404, 'Reserva no encontrada');
+        }
+        return view('reservas/informacionReserva', compact('reserva'));
+    }
 }

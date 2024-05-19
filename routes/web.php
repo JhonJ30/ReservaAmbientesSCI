@@ -64,6 +64,7 @@ Route::delete('/', [reservaController::class, 'destroy'])->name('reservas.destro
 
 Route::get('/listaReservas', [reservaController::class, 'create'])->name('reservas.create');
 Route::get('/listaReservas', [reservaController::class, 'verReserva'])->name('reservas.verReserva');
+Route::get('/reserva/informacion/{id}', [reservaController::class, 'informacion'])->name('reservas.informacion');
 
 //editar reserva
 Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
