@@ -15,7 +15,7 @@ use App\Http\Controllers\csvController;
 
 
 //general
-Route::view('/', 'usuarios/home')->name('home');
+Route::get('/', [usuarioController::class, 'home'])->name('home');
 
 //login
 Route::view('/iniciarSesion', 'iniciarSesion')->name('iniciarSesion');
