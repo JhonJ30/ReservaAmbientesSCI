@@ -19,12 +19,12 @@
                 <div class="form-column">
                     <div class="form-group">
                         <label for="solicitante">Solicitante(*)</label>
-                        <input type="text" id="solicitante" name="solicitante" value="{{ $reserva->nombreUsuario }} {{ $reserva->apellidoUsuario }}" readonly>
+                        <input type="text" id="solicitante" name="solicitante" value="{{ $nombreUsuario }} {{ $apellidoUsuario }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="ambiente">Ambiente(*)</label>
                         <input type="text" id="ambiente" name="ambiente" value="{{ $nroAmbiente }}" readonly>
-                        <input type="hidden" id="idAmbiente" name="idAmbiente" value="{{ $reserva->idAmbiente }}">
+                        <input type="hidden" id="idAmbiente" name="idAmbiente" value="{{ $idAmbiente }}">
                     </div>
                     <div class="form-group">
                         <label for="hora_inicio">Hora de inicio(*)</label>
