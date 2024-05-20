@@ -94,6 +94,9 @@ Route::get('/viewlistAviso', [avisoController::class, 'verAvisos'])->name('aviso
 Route::post('/avisos', [avisoController::class, 'add'])->name('avisos.add');
 Route::get('/descargar-archivo/{archivo}', [avisoController::class, 'descargarArchivo'])->name('descargar.archivo');
 Route::delete('/viewlistAviso', [avisoController::class, 'eliminar'])->name('avisos.eliminar');
+Route::get('/avisos/editar/{id}', [avisoController::class, 'editar'])->name('avisos.editar');
+Route::post('/avisos/{id}/update', [avisoController::class, 'update'])->name('avisos.update');
+
 
 /*
 //mary
