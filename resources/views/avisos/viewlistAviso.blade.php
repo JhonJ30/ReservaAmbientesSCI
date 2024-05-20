@@ -34,7 +34,9 @@
       <td style="text-align: center;">{{$item->estado}}</td>
       <td style="text-align: center;">
 
-        <button type="button"  class="edit-btn">Modificar</button>
+        
+
+        <button type="button" class="edit-btn" onclick="window.location.href='{{ route('avisos.editar', $item->id) }}'">Modificar</button>
         <button type="button" class="delete-btn" onclick="openModalE({{ $item->id }})" >Eliminar</button>
 
       </td>

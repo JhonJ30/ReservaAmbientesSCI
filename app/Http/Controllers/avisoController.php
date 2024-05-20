@@ -70,4 +70,35 @@ class avisoController extends Controller
         $registro->delete();
         return redirect()->back()->with('success', 'Registro eliminado correctamente');
     }
+
+    public function editar($id)
+{
+    $avisos = aviso::findOrFail($id);
+    return view('avisos/editaviso', compact('avisos'));
+}
+
+public function update(Request $request, $id)
+{
+    $avisos = aviso::findOrFail($id);
+    $avisos->titulo = $request->input('titulo');
+    $avisos->descripcion = $request->input('descripcion');
+    $avisos->fecInicio = $request->input('fecha_inicio');
+    $avisos->fecFin = $request->input('fecha_fin');
+    
+    // Verifica si se ha subido un nuevo archivo
+    if ($request->hasFile('archivo')) {
+        // Obtiene el archivo
+        $archivo = $request->file('archivo');
+        
+        // Guarda el archivo en el sistema de archivos
+        $nombreArchivo = $archivo->getClientOriginalName(); // Obtén el nombre original del archivo
+        $archivo->storeAs('archivos', $nombreArchivo); // Guarda el archivo en la carpeta 'archivos'
+
+        // Actualiza la ruta del archivo en la base de datos
+        $avisos->archivo = $nombreArchivo;
+    }
+    
+    $avisos->save();
+    return redirect()->route('avisos.verAvisos')->with('success', '¡Aviso Actualizado Correctamente!');
+}
 }
