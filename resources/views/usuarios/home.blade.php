@@ -28,7 +28,8 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
         .columna-extremos1 {
             width: 30%;
             vertical-align: top;
-            background-color: #235b82 ;  /* #235298 #393E41 #063970 #235b82 Añade el color de fondo */
+            background-color: #235298 ;
+            /*text-align: center;   #235298 #393E41 #063970 #235b82 Añade el color de fondo */
         }
         .columna-extremos2 {
             width: 70%;
@@ -38,23 +39,50 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
         }
 
         .tarjeta {
-            background-color:white;
+            background-color: white;
             color: black;
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px; /* Espacio entre tarjetas */
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.2;
         }
 
-        .contenido-tarjeta {
-             text-align: center;
-            /* Agrega estilos adicionales para el contenido de la tarjeta si es necesario */
+        .tarjeta-header {
+            color: #B4B8BB;
+            font-size: 12px; /* Puedes ajustar el tamaño de la fecha si es necesario */
+            margin-bottom: 5px;
         }
-        .contenido-tarjeta p{
-             text-align: left;
-             color:#B4B8BB;
-            /* Agrega estilos adicionales para el contenido de la tarjeta si es necesario */
+
+        .tarjeta-body {
+            text-align: center;
         }
+
+             .fecha {
+                text-align:left;
+                color: #ee316b;
+                display: block;/* Asegura que el texto ocupe toda la línea */
+                 
+            }
+            .d-none {
+                display: none;
+            }
+
+            #ver-mas-btn {
+                display: block;
+                margin: 20px auto;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            #ver-mas-btn:hover {
+                background-color: #0056b3;
+            }
+          
        
 
     </style>
@@ -69,23 +97,29 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
 
             <td class="columna-extremos1">
                 <h3 style="text-align: center;">Avisos</h3>
-                
-                    @foreach($avisos as $dato)
-                    <div class="tarjeta">
-                        <div class="contenido-tarjeta">
-                            <p>{{$dato->fecInicio}}</p>
-                            <strong> {{$dato->titulo}}</strong><br>
-                            {{$dato->descripcion}}<br>
-                            
-                            @if ($dato->archivo !== 'sin_archivo')
-                                <a href="{{ route('descargar.archivo',$dato->archivo) }}">Descargar Archivo</a>
-                            @else
-                                <strong>No hay archivo adjunto</strong>
-                            @endif
+                <div id="avisos-container">
+                    @foreach($avisos as $index => $dato)
+                        <div class="tarjeta aviso @if($index >= 3) d-none @endif">
+                            <div class="tarjeta-header">
+                          <strong class="fecha"><i class="fas fa-thumbtack"></i> {{ $dato->fecInicio }} </strong>
+                            </div>
+                            <div class="tarjeta-body">
+                                <strong>{{ $dato->titulo }}</strong><br>
+                                {{ $dato->descripcion }}<br>
+                                
+                                @if ($dato->archivo !== 'sin_archivo')
+                                    <a href="{{ route('descargar.archivo', $dato->archivo) }}">Descargar Archivo</a>
+                                @else
+                                    <strong>No hay archivo adjunto</strong>
+                                @endif
+                            </div>  
                         </div>
-                    </div>
-                    <hr>
+                        <hr class="aviso @if($index >= 3) d-none @endif">
                     @endforeach
+                </div>
+                 @if(count($avisos) > 3)
+                    <button id="ver-mas-btn">Ver más</button>
+                @endif
         
                 <table >
                 <tbody>
@@ -131,10 +165,24 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
                     </tr>          
                 </tbody>
                 </table>
+                <br>
+                <br>
+                <br>
              </td>
         </table>
 <script>
-    
+     document.addEventListener('DOMContentLoaded', function () {
+        const verMasBtn = document.getElementById('ver-mas-btn');
+        if (verMasBtn) {
+            verMasBtn.addEventListener('click', function () {
+                const avisos = document.querySelectorAll('.aviso.d-none');
+                avisos.forEach(function (aviso) {
+                    aviso.classList.remove('d-none');
+                });
+                verMasBtn.style.display = 'none';
+            });
+        }
+    });
 </script>
 
 
