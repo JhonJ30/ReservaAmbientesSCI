@@ -98,8 +98,6 @@
     <div class="container">
         @yield('contenido')
     </div>
-
-
 </body>
-
+    @include('layout.footer')
 </html>

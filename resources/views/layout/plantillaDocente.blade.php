@@ -93,7 +93,7 @@
         @yield('contenido')
     </div>
 </body>
-
+@include('layout.footer')
 <script>
     function toggleMenu() {
         const menu = document.querySelector('.menu');
