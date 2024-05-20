@@ -8,7 +8,6 @@
 <!--ver lista de ambientes registrados -->
 <link href="{{asset ('css/avisos.css')}}" rel="stylesheet">
 <br>
-
 <div class="container">
 <h2>LISTA DE AVISOS</h2>
 <button class="add-button" onclick="openModal()"><i class="fas fa-plus"></i>&nbsp;Añadir</button>
@@ -79,55 +78,113 @@
     </div>
 @endif
 
-<!-- Modal de registro de ambiente -->
+<!-- Formulario de registro de avisos -->
 
 <div id="myModal" class="modal">
-  <div class="modal-content">
-    <h2>PUBLICAR AVISO</h2>
-    <br>
-    <div class="button-container">
-        <form action="{{ route('avisos.add') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-row">
-                <div class="form-column">
-                    <div class="form-group">
-                        <label for="fecha_inicio">Fecha de inicio:</label><br>
-                        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+        <div class="modal-content">
+            <h2>PUBLICAR AVISO</h2>
+            <br>
+            <div class="button-container">
+                <form id="avisoForm" action="{{ route('avisos.add') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="fecha_inicio">Fecha de inicio:</label><br>
+                                <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+                                <span class="error-message" id="fecha_inicio_error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo">Título:</label><br>
+                                <input type="text" id="titulo" name="titulo" required>
+                                <span class="error-message" id="titulo_error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="archivo">Subir archivo:</label><br>
+                                <input type="file" id="archivo" name="archivo"> 
+                                <span class="error-message" id="archivo_error"></span>  
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="fecha_fin">Fecha y hora fin:</label><br>
+                                <input type="datetime-local" id="fecha_fin" name="fecha_fin" required>
+                                <span class="error-message" id="fecha_fin_error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion">Descripción:</label><br>
+                                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                                <span class="error-message" id="descripcion_error"></span>
+                            </div>
+                        </div>  
                     </div>
-                    <div class="form-group">
-                        <label for="titulo">Título:</label><br>
-                        <input type="text" id="titulo" name="titulo" required>
+                    <div class="botones">
+                        <button type="button" class="btnCancelar" onclick="closeModal()">Cancelar</button>
+                        <button type="submit" class="btnRegistrar">Registrar</button>
                     </div>
-                    <div class="form-group">
-                        <label for="archivo">Subir archivo:</label><br>
-                        <input type="file" id="archivo" name="archivo">   
-                    </div>
-                </div>
-                <div class="form-column">
-                    <div class="form-group">
-                        <label for="fecha_fin">Fecha y hora fin:</label><br>
-                        <input type="datetime-local" id="fecha_fin" name="fecha_fin" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcion">Descripción:</label><br>
-                        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-                    </div>
-                    
-                </div>  
-               
+                </form>
             </div>
- 
-            <div class="botones">
-                <button type="button" class="btnCancelar"onclick="closeModal()">Cancelar</button>
-                <button  type="submit" class="btnRegistrar" >Registrar</button>
-            </div>
-        </form>
-    
-  </div>
-  </div>
-</div>
+        </div>
+    </div>
 
 <script>
+  /*validar formulario*/
+  document.getElementById('avisoForm').addEventListener('submit', function(event) {
+            var isValid = true;
+            var today = new Date().toISOString().split('T')[0];
+            var fechaInicio = document.getElementById('fecha_inicio').value;
+            var fechaFin = document.getElementById('fecha_fin').value;
+            var titulo = document.getElementById('titulo').value;
+            var descripcion = document.getElementById('descripcion').value;
+            var archivo = document.getElementById('archivo').files[0];
+            var maxFileSize = 2 * 1024 *1024; // 3 MB
+
+            // Limpiar mensajes de error
+            document.getElementById('fecha_inicio_error').textContent = '';
+            document.getElementById('fecha_fin_error').textContent = '';
+            document.getElementById('titulo_error').textContent = '';
+            document.getElementById('descripcion_error').textContent = '';
+            document.getElementById('archivo_error').textContent = '';
+
+            // Validar fecha de inicio
+            if (fechaInicio < today) {
+                isValid = false;
+                document.getElementById('fecha_inicio_error').textContent = 'La fecha de inicio debe ser hoy o una fecha futura.';
+            }
+
+            // Validar fecha de fin
+            if (fechaFin < today) {
+                isValid = false;
+                document.getElementById('fecha_fin_error').textContent = 'La fecha y hora de fin deben ser hoy o en el futuro.';
+            }
+
+
+            // Validar título
+            if (!/^[a-zA-Z0-9\s]+$/.test(titulo)) {
+                isValid = false;
+                document.getElementById('titulo_error').textContent = 'El título solo debe contener letras y numeros';
+            }
+
+            // Validar descripción
+            if (!/^[a-zA-Z0-9\s]+$/.test(descripcion)) {
+                isValid = false;
+                document.getElementById('descripcion_error').textContent = 'La descripción solo debe contener letras y numeros';
+            }
+         // Validar tamaño del archivo
+         if (archivo && archivo.size > maxFileSize) {
+                isValid = false;
+                document.getElementById('archivo_error').textContent = 'El archivo no debe superar los 2MB.';
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+
+
+
+
    // Función para abrir el modal
    function openModal() {
     // Mostrar el modal

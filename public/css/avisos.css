@@ -284,3 +284,9 @@ color: #0B6F63;
         margin-right: 0;
     }
 }
+
+/*mensaje de error*/
+.error-message {
+    color: red;
+    font-size: 12px;
+}
