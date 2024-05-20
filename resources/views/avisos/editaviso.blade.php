@@ -6,11 +6,9 @@
 
 @section('contenido')
 
- 
-<!-- Modal de registro de ambiente --
-
-
-    <h2>PUBLICAR AVISO</h2>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <h2>MODIFICAR AVISO</h2>
     <br>
     <div class="button-container">
         <form action="{{ route('avisos.add') }}" method="POST" enctype="multipart/form-data">
@@ -19,25 +17,25 @@
                 <div class="form-column">
                     <div class="form-group">
                         <label for="fecha_inicio">Fecha de inicio:</label><br>
-                        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+                        <input type="date" id="fecha_inicio" name="fecha_inicio" required value="{{ $avisos->fecInicio }}">
                     </div>
                     <div class="form-group">
                         <label for="titulo">Título:</label><br>
-                        <input type="text" id="titulo" name="titulo" required>
+                        <input type="text" id="titulo" name="titulo" required value="{{ $avisos->titulo }}">
                     </div>
                     <div class="form-group">
                         <label for="archivo">Subir archivo:</label><br>
-                        <input type="file" id="archivo" name="archivo">   
+                        <input type="file" id="archivo" name="archivo" required value="{{ $avisos->archivo }}">   
                     </div>
                 </div>
                 <div class="form-column">
                     <div class="form-group">
                         <label for="fecha_fin">Fecha y hora fin:</label><br>
-                        <input type="datetime-local" id="fecha_fin" name="fecha_fin" required>
+                        <input type="datetime-local" id="fecha_fin" name="fecha_fin" required value="{{ $avisos->fecFin }}">
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripción:</label><br>
-                        <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                        <textarea id="descripcion" name="descripcion" rows="4" required>{{ $aviso->descripcion }}</textarea>
                     </div>
                     
                 </div>  
@@ -51,6 +49,8 @@
         </form>
     
   </div>
+  </div>
+</div>
 
 <script>
    // Función para abrir el modal
