@@ -68,12 +68,15 @@
 label{ /*LAS LETRAS PONE COLOR VERDE*/
     color: #0B6F63;
     font-size: 16px;
+    font-size: 18px; 
 }
 .botonCancelar{
     background-color: #393E41;
+    font-size: 16px; 
 }
 .botonRegistrar{
     background-color: #0B6F63;
+    font-size: 16px; 
 }
 .botonCancelar:hover{
     background-color: #ee316b;
