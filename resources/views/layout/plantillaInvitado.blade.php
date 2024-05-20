@@ -30,6 +30,7 @@
         @yield('contenido')
     </div>
 </body>
+    @include('layout.footer')
 
 <script>
     function toggleMenu() {

@@ -102,18 +102,18 @@ class reservaController extends Controller
     //editar reserva
     public function editar($id)
     {
-        $nombreUsuario = Auth::user()->nombre; // Obtener el nombre del usuario
+        $nombreUsuario = Auth::user()->nombre;
         $apellidoUsuario = Auth::user()->apellido;
         $reserva = Reservar::findOrFail($id);
         $materias = Materias::pluck('nombre', 'id', 'idAmbiente');
         $nroAmbiente = $reserva->nroAmb;
 
-
         $actividad = $reserva->Actividad;
         $horaFin = $reserva->horaFin;
         $materia = $reserva->Materia;
+        $idAmbiente = $reserva->codAmb;
         //retornar la vista de editar junto con los datos de la reserva y las materias :)
-        return view('reservas.editarReserva', compact('reserva', 'nroAmbiente', 'materias', 'id', 'nombreUsuario', 'apellidoUsuario', 'actividad', 'materia', 'horaFin'));
+        return view('reservas.editarReserva', compact('reserva', 'nombreUsuario', 'apellidoUsuario', 'idAmbiente', 'nroAmbiente', 'materias', 'id', 'actividad', 'materia', 'horaFin'));
     }
     public function update(Request $request, $id)
     {
@@ -123,6 +123,17 @@ class reservaController extends Controller
         $reserva->horaFin = $request->input('hora_fin');
         // Actualiza más campos según sea necesario
         $reserva->save();
-        return redirect('/verAmbientes')->with('success', 'Reserva actualizada exitosamente');
+        return redirect('/verAmbientes')->with('success', '¡Reserva actualizada exitosamente!');
+    }
+
+
+
+    public function informacion($id)
+    {
+        $reserva = Reservar::find($id);
+        if (!$reserva) {
+            abort(404, 'Reserva no encontrada');
+        }
+        return view('reservas/informacionReserva', compact('reserva'));
     }
 }

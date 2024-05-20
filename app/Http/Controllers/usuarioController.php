@@ -167,5 +167,12 @@ class UsuarioController extends Controller
         $bitacora->save();
         return redirect()->route('usuarios.create')->with('success', '¡Usuario actualizado correctamente!');
     }
-    
+
+    public function home(){
+        if(Auth::check()){
+            return view('usuarios/home');
+        }else{
+            return view('usuarios/homeInvitado');
+        }
+    }
 }

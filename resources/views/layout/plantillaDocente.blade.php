@@ -53,7 +53,7 @@
                                     Estado: {{ $ambiente->estado }}
                                 </span>
                                 @if ($ambiente->estado == 'Proceso')
-                                <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button">Editar</a>
+                                <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button"><span class="texto-blanco">Modificar</span></a>
                                 @endif
                                 <button class="cancel-button" onclick="openModal2({{ $ambiente->id }})">Cancelar</button>
                             </li>
@@ -93,7 +93,7 @@
         @yield('contenido')
     </div>
 </body>
-
+@include('layout.footer')
 <script>
     function toggleMenu() {
         const menu = document.querySelector('.menu');

@@ -357,18 +357,30 @@ body {
             margin-right: 30px;
         }
 
-        
-        .editar-button {
-            background-color: #edf0f5;
-            color: #fefafa;
-            border: none;
-            padding: 8px 10px;
-            cursor: pointer;
-            font-size: 15px;
-            border-radius: 8px;
-        }
 
-       
+        .editar-button {
+          background-color: #393e41; /* Cambia el color del fondo del botón a gris oscuro */
+          color: white; /* Color del texto */
+          border: none;
+          padding: 5px 10px; /* Ajusta el padding vertical para reducir la altura */
+          cursor: pointer;
+          font-size: 14px; /* Reduce el tamaño de la fuente */
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center; /* Centra horizontalmente el texto */
+          height: 5px; /* Ajusta la altura del botón */
+          width: 60px; /* Ajusta el ancho del botón */
+          margin-left: auto; /* Alinea el botón al centro */
+          margin-right: auto; /* Alinea el botón al centro */
+          font-weight: normal; /* Quita la negrita */
+      }
+      .editar-button span {
+          color: white; /* Cambia el color del texto a blanco */
+          font-weight: normal; /* Quita la negrita */
+      }
+   
 
         .cancel-button2 {
             background-color: #D3D7DF;

@@ -1,16 +1,10 @@
-@extends(Auth::check() ? 
-    (Auth::user()->rol === 'Docente' ? 'layout.plantillaDocente' : 
-    (Auth::user()->rol === 'Administrador' ? 'layout.plantillaAdmin' : 
-    'layout.plantillaInvitado')) 
-: 'layout.plantillaInvitado')
+@extends('layout.plantillaInvitado')
 @php
 $materias = App\Models\Materias::all();
 $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
 @endphp
-
 @section('contenido')
-
-    <style>
+<style>
          /* Estilos específicos para la tabla */
          table {
             width: 100%;
@@ -24,19 +18,80 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
             color: white;
         }
 
-        /* Personaliza los estilos de las columnas de la tabla */
-        .columna-extremos1 {
+        .columna-derecha {
             width: 30%;
             vertical-align: top;
-            background-color: #235b82 ;  /* #235298 #393E41 #063970 #235b82 Añade el color de fondo */
-        }
-        .columna-extremos2 {
-            width: 70%;
-            vertical-align: top;
-            color:black;
-            text-align: center;
+            background-color: #235b82 ; /* #b41415Ajusta la alineación vertical */
+            /* #393E41 Añade el color de fondo */
         }
 
+        .columna-izquierda {
+            width: 70%;
+            vertical-align: top;
+        }
+
+      /* Estilos para el carrusel */
+      .carousel-container {
+            position: relative;
+            height: 500px; /* Ajusta la altura del carrusel según tus necesidades */
+            overflow: hidden; /* Oculta el contenido que se desborda del carrusel */
+        }
+
+        .carousel-inner {
+            position: relative;
+            width: 100%; /* Asegura que el carrusel ocupe todo el espacio disponible */
+            height: 100%;
+            transition: transform 0.5s ease; /* Agrega una transición suave al cambiar las diapositivas */
+            white-space: nowrap; /* Evita que las diapositivas se envuelvan */
+        }
+
+        .carousel-item {
+            display: inline-block;
+            width: 100%; /* Asegura que cada diapositiva ocupe todo el ancho del carrusel */
+            height: 100%;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Botones de control del carrusel */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 2;
+        }
+
+        .carousel-control-prev {
+            left: 0;
+        }
+
+        .carousel-control-next {
+            right: 0;
+        }
+
+        .imagen-fija {
+            position: absolute;
+            top: 0px; /* Ajusta la posición vertical de la imagen fija */
+            left: 0px; /* Ajusta la posición horizontal de la imagen fija */
+            width: 100px; /* Ajusta el ancho de la imagen fija */
+            height: auto;
+            z-index: 1; /* Asegura que la imagen fija esté sobre el carrusel */
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .tarjeta {
             background-color:white;
             color: black;
@@ -62,13 +117,29 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
     <table >
     <tbody>
         <tr>
-            <td class="columna-extremos2">
-                <h1>Bienvenido al sistema de reserva</h1>
-                <h3> Verifique si tiene alguna notificacion</h3>
+            <td class="columna-izquierda">
+                 <!-- Carrusel de Bootstrap con imagen fija -->
+                 <div class="carousel-container">
+                    <img src="{{asset ('img/tecno1.png')}}" class="imagen-fija" alt="Imagen Fija">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <img src="{{asset ('img/img2.jpg')}}" alt="Slide 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{asset ('img/img03.jpg')}}" alt="Slide 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{asset ('img/img01.jpg')}}" alt="Slide 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control carousel-control-prev" onclick="prevSlide()">‹</button>
+                        <button class="carousel-control carousel-control-next" onclick="nextSlide()">›</button>
+                    </div>
+                </div>
             </td>
-
-            <td class="columna-extremos1">
-                <h3 style="text-align: center;">Avisos</h3>
+            <td class="columna-derecha">
+            <h3 style="text-align: center;">Avisos</h3>
                 
                     @foreach($avisos as $dato)
                     <div class="tarjeta">
@@ -86,8 +157,7 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
                     </div>
                     <hr>
                     @endforeach
-        
-                <table >
+            <table >
                 <tbody>
                     <tr >
                         <td style="padding:3px;">
@@ -130,12 +200,37 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
                         </td>
                     </tr>          
                 </tbody>
-                </table>
+            </table>
+
              </td>
         </table>
 <script>
-    
-</script>
+    // Funciones para cambiar las diapositivas del carrusel
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.carousel-item');
 
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = slides.length - 1;
+        }
+        updateCarousel();
+    }
+
+    function nextSlide() {
+        if (currentIndex < slides.length - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0;
+        }
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        const carouselInner = document.querySelector('.carousel-inner');
+        carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+</script>
 
 @endsection

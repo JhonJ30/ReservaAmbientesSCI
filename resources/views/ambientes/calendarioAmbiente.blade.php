@@ -1,7 +1,7 @@
 @extends(Auth::check() && Auth::user()->rol === 'Docente' ? 'layout.plantillaDocente' : 'layout.plantillaInvitado')
 
 @section('contenido')
-<link href="{{asset ('css/calendario.css')}}" rel="stylesheet">
+<link href="{{ asset('css/calendario.css') }}" rel="stylesheet">
 
 <h1 class="aviso">{{ $nroAula }}: CALENDARIO</h1>
 
@@ -50,17 +50,22 @@
         <tr>
             <td class="horas">{{ $hora }}</td>
             @foreach(['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'] as $dia)
-            <td class="reserva-celda">
+            <td class="reserva-celda" 
                 @php
-                $fechaDia = $inicioSemana->copy()->addDays($loop->index)->toDateString();
-
-                $reserva = $reservas->first(function ($reserva) use ($fechaDia, $hora) {
-                $horaTemporal = strtotime($hora);
-                $horaInicioTemporal = strtotime($reserva->horaInicio);
-                return $reserva->fecha === $fechaDia && $horaInicioTemporal === $horaTemporal;
-                });
-
-                echo $reserva ? 'Reservado' : '';
+                    $fechaDia = $inicioSemana->copy()->addDays($loop->index)->toDateString();
+                    $reserva = $reservas->first(function ($reserva) use ($fechaDia, $hora) {
+                        $horaTemporal = strtotime($hora);
+                        $horaInicioTemporal = strtotime($reserva->horaInicio);
+                        return $reserva->fecha === $fechaDia && $horaInicioTemporal === $horaTemporal;
+                    });
+                    if ($reserva) {
+                        echo 'data-id="' . $reserva->id . '"';
+                    }
+                @endphp>
+                @php
+                    if ($reserva) {
+                        echo 'Reservado';
+                    }
                 @endphp
             </td>
             @endforeach
@@ -69,14 +74,17 @@
     </table>
 </div>
 
-<!-- <button type="button" class="cancelar-btn" onclick="window.location.href='/verAmbientes'">Cancelar</button> -->
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let celdasReserva = document.querySelectorAll('.reserva-celda');
         celdasReserva.forEach(function(celda) {
             if (celda.textContent.trim() === 'Reservado') {
                 celda.classList.add('reservado');
+                celda.style.cursor = 'pointer';
+                celda.addEventListener('click', function() {
+                    var idReserva = this.getAttribute('data-id');
+                    window.location.href = '/reserva/informacion/' + idReserva;
+                });
             }
         });
 
