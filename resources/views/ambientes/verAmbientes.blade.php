@@ -106,6 +106,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     font-weight: bold;
     font-size: 18px; 
+    color: #e31111; 
 }
 </style>
 <script>
