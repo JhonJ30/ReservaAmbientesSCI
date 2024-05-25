@@ -27,6 +27,7 @@
                     <p><a href="/registroHorario" class="priHabilitado2">&nbsp;&nbsp;Horarios</a></p>
                     <p><a href="/registroMateria" class="priHabilitado2">&nbsp;&nbsp;Materias</a></p>
                     <p><a href="/registroUsuario" class="priHabilitado2">&nbsp;&nbsp;Usuarios</a></p>
+                    <p><a href="/registrarBackup" class="priHabilitado2">&nbsp;&nbsp;Backups</a></p>
                 </ul>
             </li>
             <li><a href="#" id="menuRegistrar2" class="priHabilitado2"><i class="fas fa-eye"></i>&nbsp;Visualizar</a>
