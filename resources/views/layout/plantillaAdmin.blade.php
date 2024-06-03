@@ -8,8 +8,9 @@
     <link href="{{asset ('css/home.css')}}" rel="stylesheet">
     <title>@yield('titulopagina')</title>
 </head>
-
 <body>
+
+<div class="main"> 
     <div class="navbar">
         <div class="logo">
             <img src="{{asset ('img/san simon.png')}}" class="logo" alt="...">
@@ -60,7 +61,16 @@
         </ul>
     </div>
 
-    <script>
+   
+    <div class="container">
+        @yield('contenido')
+    </div>
+    <div class="footer">
+        @include('layout.footer')
+    </div>
+</div>    
+</body>
+<script>
         function toggleMenu() {
             const menu = document.querySelector('.menu');
             menu.classList.toggle('active');
@@ -96,9 +106,5 @@
             document.getElementById("miCuentaContent").style.display = "none";
         }
     </script>
-    <div class="container">
-        @yield('contenido')
-    </div>
-</body>
-    @include('layout.footer')
+   
 </html>

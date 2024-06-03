@@ -28,8 +28,14 @@
     </div>
     <div class="container">
         @yield('contenido')
-    </div>
+   
+   
+
 </body>
+
+    <br>
+    <br>
+    <br>
     @include('layout.footer')
 
 <script>

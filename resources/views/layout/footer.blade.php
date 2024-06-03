@@ -1,12 +1,13 @@
 
 <style>
 .footer {
-    background-color: #f8f9fa;
-    padding: 20px 0;
-    text-align: center;
     position: fixed;
-    width: 100%;
     bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #dee0e0;
+    text-align: center;
+    padding: 10px 20px;
 }
 .footer p {
     margin: 0;

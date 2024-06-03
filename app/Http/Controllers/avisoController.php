@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\aviso;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class avisoController extends Controller
 {
@@ -34,10 +35,24 @@ class avisoController extends Controller
     }
     public function verAvisos()
     {
-       $avisos = aviso::all();
-      // $avisos = aviso::where('estado', "Habilitado")->get();
+        // Actualizar estado de los avisos expirados
+        //$this->actualizarEstadoAvisos();
+      $avisos = aviso::all();
         return view('avisos/viewlistAviso',compact('avisos'));
     }
+    /*
+    public function actualizar()
+        {
+            $now = Carbon::now();
+
+            // Obtener los avisos expirados y actualizar su estado
+            $avisosExpirados = aviso::where('fecFin', '<', $now)
+                                    ->where('estado', "Habilitado")
+                                    ->update(['estado' => "Deshabilitado"]);
+            return redirect()->refresh();
+            
+                                    // Puedes devolver o imprimir un mensaje aquí si lo deseas
+        }*/
     public function add(Request $request){
         $avisos = new aviso();
         $avisos->titulo = $request->input('titulo');
@@ -49,18 +64,15 @@ class avisoController extends Controller
     if ($request->hasFile('archivo')) {
         // Obtiene el archivo
         $archivo = $request->file('archivo');
-        
         // Guarda el archivo en el sistema de archivos
         $nombreArchivo = $archivo->getClientOriginalName(); // Obtén el nombre original del archivo
         $archivo->storeAs('archivos', $nombreArchivo); // Guarda el archivo en la carpeta 'archivos'
-
         // Guarda la ruta del archivo en la base de datos
         $avisos->archivo = $nombreArchivo;
     }else {
         // Si no se carga ningún archivo, establece un valor predeterminado para el campo 'archivo'
         $avisos->archivo = 'sin_archivo'; // Puedes cambiar 'sin_archivo' por cualquier valor que desees
     }
-
         $avisos->save();
         return redirect()->route('avisos.verAvisos')->with('success', '¡Aviso Registrado Correctamente!');
     }

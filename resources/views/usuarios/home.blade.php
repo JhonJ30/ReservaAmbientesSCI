@@ -4,8 +4,15 @@
     'layout.plantillaInvitado')) 
 : 'layout.plantillaInvitado')
 @php
+use Carbon\Carbon;
+use App\Models\aviso;
+$now = Carbon::now();
 $materias = App\Models\Materias::all();
-$avisos= App\Models\aviso::where('estado', "Habilitado")->get();
+$avisos = aviso::where('estado', 'Habilitado')
+                ->where('fecFin', '>=', $now)
+                ->orderBy('created_at', 'desc')
+                ->get();
+          
 @endphp
 
 @section('contenido')
@@ -29,17 +36,19 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
             width: 30%;
             vertical-align: top;
             background-color: #235298 ;
-            /*text-align: center;   #235298 #393E41 #063970 #235b82 Añade el color de fondo */
+            /*text-align: center;   #0D7360 #235298 #393E41 #063970 #235b82 Añade el color de fondo */
         }
         .columna-extremos2 {
             width: 70%;
             vertical-align: top;
             color:black;
             text-align: center;
+            background-color: white;
+            
         }
 
         .tarjeta {
-            background-color: white;
+            background-color: #E9F4F3;
             color: black;
             padding: 10px;
             border-radius: 5px;
@@ -90,10 +99,17 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
     <table >
     <tbody>
         <tr>
-            <td class="columna-extremos2">
-                <h1>Bienvenido al sistema de reserva</h1>
-                <h3> Verifique si tiene alguna notificacion</h3>
-            </td>
+        <td class="columna-extremos2">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1>Bienvenido al Sistema de Reserva de Ambientes</h1>
+        <h3>¡Hola, {{ Auth::user()->nombre }}! Por favor verifique si tiene alguna notificación importante</h3>
+        <p>Utilice el menú de navegación para explorar las diferentes secciones del sistema y realizar sus reservas.</p>
+        <p>Si necesita ayuda, consulte nuestra sección de <a href="/ayuda"><i class="fas fa-question-circle"></i>Ayuda</a> o contáctenos directamente.</p>
+        </td>
+
 
             <td class="columna-extremos1">
                 <h3 style="text-align: center;">Avisos</h3>

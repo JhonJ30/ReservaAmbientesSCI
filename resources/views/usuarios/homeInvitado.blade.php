@@ -1,7 +1,13 @@
 @extends('layout.plantillaInvitado')
 @php
+use Carbon\Carbon;
+use App\Models\aviso;
+$now = Carbon::now();
 $materias = App\Models\Materias::all();
-$avisos= App\Models\aviso::where('estado', "Habilitado")->get();
+$avisos = aviso::where('estado', 'Habilitado')
+                ->where('fecFin', '>=', $now)
+                ->orderBy('created_at', 'desc')
+                ->get();
 @endphp
 @section('contenido')
 <style>
@@ -80,11 +86,11 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
 
         .imagen-fija {
             position: absolute;
-            top: 0px; /* Ajusta la posición vertical de la imagen fija */
-            left: 0px; /* Ajusta la posición horizontal de la imagen fija */
-            width: 100px; /* Ajusta el ancho de la imagen fija */
+            top: 0px; 
+            left: 0px;
+            width: 100px; 
             height: auto;
-            z-index: 1; /* Asegura que la imagen fija esté sobre el carrusel */
+            z-index: 1; 
         }
 
         .carousel-inner img {
@@ -94,7 +100,7 @@ $avisos= App\Models\aviso::where('estado', "Habilitado")->get();
         }
        
         .tarjeta {
-            background-color: white;
+            background-color: #E9F4F3;
             color: black;
             padding: 10px;
             border-radius: 5px;

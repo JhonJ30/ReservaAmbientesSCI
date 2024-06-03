@@ -97,6 +97,7 @@ Route::get('/descargar-archivo/{archivo}', [avisoController::class, 'descargarAr
 Route::delete('/viewlistAviso', [avisoController::class, 'eliminar'])->name('avisos.eliminar');
 Route::get('/avisos/editar/{id}', [avisoController::class, 'editar'])->name('avisos.editar');
 Route::post('/avisos/{id}/update', [avisoController::class, 'update'])->name('avisos.update');
+//Route::get('/avisos-actualizar', [avisoController::class, 'actualizar'])->name('avisos.actualizar');
 
 
 //backups

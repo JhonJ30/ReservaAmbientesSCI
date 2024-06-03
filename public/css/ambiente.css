@@ -1,29 +1,29 @@
 
 .registro {
-width: 950px;
-height: auto; /* Ajusta según sea necesario para acomodar el contenido */
-position: absolute;
-left: 50%;
-top: 60%;
-transform: translate(-50%, -50%);
-background-color: #ADADAD;
-border: none;
-border-radius: 9px;
-display: flex;
-flex-direction: column; /* Alinea los hijos (columnas y botones) verticalmente */
-align-items: center; /* Centra los hijos horizontalmente */
-padding: 20px;
-gap: 20px; /* Espacio entre el contenido de registro y los botones */
-z-index: -1;
+    width: 950px;
+    height: auto; /* Ajusta según sea necesario para acomodar el contenido */
+    position: relative; /* Cambiado de absolute a relative */
+    margin: 20px auto; /* Centra el formulario horizontalmente */
+    background-color: #ADADAD;
+    border: none;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column; /* Alinea los hijos (columnas y botones) verticalmente */
+    align-items: center; /* Centra los hijos horizontalmente */
+    padding: 20px;
+    gap: 20px; /* Espacio entre el contenido de registro y los botones */
+    /* z-index eliminado */
+    z-index: -1;
+}
 
-}
 .contenido-registro {
-display: flex;
-justify-content: center;
-width: 100%;
-gap: 20px; /* Espacio entre las columnas */
-margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 20px; /* Espacio entre las columnas */
+    margin-bottom: 20px;
 }
+
 
 .botones {
 width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */

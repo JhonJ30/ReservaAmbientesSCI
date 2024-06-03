@@ -9,7 +9,6 @@
 <link href="{{asset ('css/clienteReserva.css')}}" rel="stylesheet">
 <script src="{{ asset('js/clienteReserva.js') }}"></script>
 <div>
-    <br>
     <div class="reserva-form">
         <h2>REGISTRAR RESERVA</h2>
         <form action="{{ route('reservas.store') }}" method="POST">
