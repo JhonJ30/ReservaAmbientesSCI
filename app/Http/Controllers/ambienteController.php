@@ -95,7 +95,18 @@ class ambienteController extends Controller
     {
         $ambiente = Ambientes::findOrFail($id);
         $datosOriginales = $ambiente->toArray();
+        
 
+        // Verificar si el nroAmb ha sido modificado
+    $nroAmbModificado = $request->input('nroAmb') !== $datosOriginales['nroAmb'];
+
+    // Verificar si el nuevo nroAmb ya existe en la tabla
+    if ($nroAmbModificado) {
+        $nroAmbExistente = Ambientes::where('nroAmb', $request->input('nroAmb'))->exists();
+        if ($nroAmbExistente) {
+            return redirect()->back()->withErrors(['nroAmb' => 'El número de ambiente ya está registrado.']);
+        }
+    }
         $ambiente->update($request->all());
 
         $bitacora = new Bitacora();
@@ -133,25 +144,27 @@ class ambienteController extends Controller
     public function destroy(Request $request)
     {
         $registro = Ambientes::findOrFail($request->registro_id);
+        $registro->estado = 'No Disponible';
+        $registro->save();
+    
+        // Eliminar reservas asociadas al ambiente
         Reservar::where('codAmb', $registro->id)->delete();
-        $registro->delete();
-
-
+    
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
         $idAmbiente = $registro->id;
         $idUsuario = Auth::id();
-
+    
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
         $bitacora->id_Usuario = $idUsuario;
         $bitacora->evento = 'Delete';
         $bitacora->tabla = 'ambiente';
         $bitacora->id_Registro = $idAmbiente;
-        $bitacora->dato_modificado = 'Ambiente Eliminado: ' . $registro->nroAmb . ', ' . $registro->tipoAmb . ', ' . $registro->equipamiento .
-            ', ' . $registro->capacidad;
+        $bitacora->dato_modificado = 'Ambiente marcado como no disponible: ' . $registro->nroAmb . ', ' . $registro->tipoAmb . ', ' . $registro->equipamiento . ', ' . $registro->capacidad;
         $bitacora->save();
-        return redirect()->back()->with('success', 'Registro eliminado correctamente');
+    
+        return redirect()->back()->with('success', 'Registro marcado como no disponible');
     }
 
     public function buscar(Request $request)

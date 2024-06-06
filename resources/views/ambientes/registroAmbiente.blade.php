@@ -130,8 +130,8 @@
             switch(selectedOption) {
                 case 'Aula':
                     // Solo se admiten 3 números seguidos de una letra
-                    if (!/^\d{3}[a-zA-Z]$/.test(inputValue)) {
-                        showError("Error en formato. Ej: 691A");
+                    if (!/^\d{3}[a-zA-Z]?$/.test(inputValue)) {
+                        showError("Error en formato. Ej: 691 o 691A");
                     } else {
                         hideError();
                     }
