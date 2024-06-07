@@ -11,7 +11,7 @@
         <div class="form-row">
             <div class="form-column">
                 <label for="tipo-ambiente">Tipo de Ambiente:</label>
-                <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" required>
+                <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" disabled>
                     <option value="" disabled selected hidden>----</option>
                     <option value="aula" {{ $horario->tipoAmbiente == 'aula' ? 'selected' : '' }}>Aula</option>
                     <option value="laboratorio" {{ $horario->tipoAmbiente == 'laboratorio' ? 'selected' : '' }}>Laboratorio</option>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-column">
                 <label for="dias">Días:</label>
-                <select name="dias" id="dias" required>
+                <select name="dias" id="dias" disabled>
                     <option value="" disabled selected hidden>----</option>
                     <option value="lunes" {{ $horario->dias == 'lunes' ? 'selected' : '' }}>Lunes</option>
                     <option value="martes" {{ $horario->dias == 'martes' ? 'selected' : '' }}>Martes</option>
