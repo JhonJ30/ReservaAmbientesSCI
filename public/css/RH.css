@@ -25,7 +25,6 @@ label::after {
     content: "(*)";
     color: #0B6F63;
   }
-
 /* Estilos para los campos de entrada */
 input[type="time"],
 input[type="text"],
@@ -48,9 +47,6 @@ button {
     cursor: pointer;
 }
 
-/*button:hover {
-    background-color: #0056b3;
-}*/
 h1{/*Registro de horario*/
     font-size: 38px;/*agranda la letra*/
     margin-bottom: 30px; /* Añade un margen inferior al título(abajo) */
@@ -72,9 +68,6 @@ h1{/*Registro de horario*/
 
 .form-column:last-child {
     margin-right: 0; /* No se necesita margen a la derecha para el último elemento de la fila */
-}
-#intervalo {
-    width: 50%; /* Puedes ajustar el valor según tus necesidades */
 }
 /*CAMBIOS PARA BOTONES RESPONSIVOS ------------------------------------------------------------*/
 /* Estilos de los botones cancelar y registrar */
@@ -121,6 +114,9 @@ h1{/*Registro de horario*/
     background-color: #393E41;
 }
 
+#intervalo {
+    width: 50%; /* Puedes ajustar el valor según tus necesidades */
+}
 .registrar-btn {
     background-color: #0B6F63; /* Color verde */
     color: white; /* Color del texto */

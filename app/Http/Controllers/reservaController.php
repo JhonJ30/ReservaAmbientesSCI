@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ambientes;
 use Illuminate\Http\Request;
 use App\Models\Reservar;
 use App\Models\Materias; //para extraer materias
@@ -106,7 +107,8 @@ class reservaController extends Controller
         $apellidoUsuario = Auth::user()->apellido;
         $reserva = Reservar::findOrFail($id);
         $materias = Materias::pluck('nombre', 'id', 'idAmbiente');
-        $nroAmbiente = $reserva->nroAmb;
+        $nroAmbiente = $reserva->codAmb;
+
 
         $actividad = $reserva->Actividad;
         $horaFin = $reserva->horaFin;

@@ -15,9 +15,10 @@ class Horarios extends Model
 
     // Los campos que se pueden asignar en masa
     protected $fillable = [
-        'ambi',
-        'tipoHora',
+        'tipoAmbiente',
         'horaInicio',
         'horaFin',
+        'dias',
+        'intervalo',
     ];
 }

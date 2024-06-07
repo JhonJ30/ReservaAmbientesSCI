@@ -1,9 +1,5 @@
 @extends('layout/plantillaAdmin')
 
-@php
-    $ambientes = App\Models\Ambientes::all();
-@endphp
-
 @section('contenido')
 <link href="{{asset ('css/RH.css')}}" rel="stylesheet">
 <script src="{{ asset('js/RH.js') }}"></script>
@@ -24,12 +20,15 @@
             </select>
         </div>
         <div class="form-column">
-            <label for="ambiente">Ambiente:</label>
-            <select name="ambi" required>
+            <label for="dias">Dias:</label>
+            <select name="dias" id="dias" onchange="toggleIntervalo()" required>
                 <option value="" disabled selected hidden>----</option>
-                   @foreach($ambientes as $ambiente)
-                <option value="{{ $ambiente->nroAmb }}">{{ $ambiente->nroAmb }}</option>
-            @endforeach
+                <option value="lunes">Lunes</option>
+                <option value="martes">Martes</option>
+                <option value="miercoles">Miercoles</option>
+                <option value="jueves">Jueves</option>
+                <option value="viernes">Viernes</option>
+                <option value="sabado">Sabado</option>
             </select>
         </div>
     </div>
@@ -44,12 +43,13 @@
             <label for="hora-fin">Hora de Fin:</label>
             <input name="horaFin" type="time" id="hora-fin" required>
         </div>
+       
     </div>
-        <div class="form-column"  id="intervalo-label">
-            <label for="intervalo">Intervalo (si es necesario):</label>
-            <input type="text" id="intervalo" onchange="calcularHoraFin()" placeholder="Ingrese el rango de intervalo" requiered>
+    <div class="form-column"  id="intervalo-label">
+        <label for="intervalo">Intervalo (si es necesario):</label>
+        <input type="text" id="intervalo"  placeholder="Ingrese el rango de intervalo" requiered>
 
-        </div>
+    </div>
     <div class="button-container">
         <button type="button" class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
         <button class="registrar-btn" type="submit">Registrar</button>

@@ -18,7 +18,9 @@
   <thead>
     <tr>
       <th style="text-align: center;">Tipo de Ambiente</th>
-      <th style="text-align: center;">Ambiente</th>
+      <th style="text-align: center;"> Dias</th>
+      <th style="text-align: center;">Intervalo</th>
+      <!--<th style="text-align: center;">Ambiente</th>-->
       <th style="text-align: center;">Hora de inicio</th>
       <th style="text-align: center;">Hora de fin</th>
       <th style="text-align: center;">Acciones</th>
@@ -28,7 +30,9 @@
     @foreach ($datos as $item )
     <tr>
       <td style="text-align: center;">{{$item->tipoAmbiente}}</td>
-      <td style="text-align: center;">{{$item->ambi}}</td>
+      <td style="text-align: center;">{{$item->dias}}</td>
+      <td style="text-align: center;">{{$item->intervalo}}</td>
+      <!--<td style="text-align: center;">{{$item->ambi}}</td>-->
       <td style="text-align: center;">{{$item->horaInicio}}</td>
       <td style="text-align: center;">{{$item->horaFin}}</td>
       <td style="text-align: center;">
