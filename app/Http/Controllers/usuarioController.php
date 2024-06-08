@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Bitacora;
 use App\Models\UsuarioMateria;
+use App\Models\Materias;
 use App\Models\Reservar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -62,20 +63,54 @@ class UsuarioController extends Controller
             ', ' . $usuario->correo;
         $bitacora->save();
 
+
+        $errores = [];
+
         if ($request->get('rol') === 'Docente') {
             $asignaciones = $request->input('asignaciones');
             $asignacionesArray = json_decode($asignaciones[0], true);
+    
             if (!empty($asignacionesArray)) {
                 foreach ($asignacionesArray as $asignacion) {
+                    $idMateria = $asignacion['materia'];
+                    $grupo = $asignacion['grupo'];
+    
+                    $materia = Materias::find($idMateria);
+                    if (!$materia) {
+                        $errores[] = 'Materia no encontrada: ' . $idMateria;
+                        continue;
+                    }
+    
+                    $limiteGrupos = $materia->cantGrupos;
+                    $countGruposExistentes = UsuarioMateria::where('idMateria', $idMateria)->count();
+    
+                    if ($countGruposExistentes >= $limiteGrupos) {
+                        $errores[] = 'No se pueden agregar más grupos para la materia ' . $materia->nombre . '.';
+                        continue;
+                    }
+    
+                    $grupoExistente = UsuarioMateria::where('idMateria', $idMateria)->where('nGrupo', $grupo)->first();
+                    if ($grupoExistente) {
+                        $errores[] = 'El grupo ' . $grupo . ' ya existe para la materia ' . $materia->nombre . '.';
+                        continue;
+                    }
+    
                     $usuarioMateria = new UsuarioMateria([
                         'idUsuario' => $usuario->id,
-                        'idMateria' => $asignacion['materia'],
-                        'nGrupo' => $asignacion['grupo'],
+                        'idMateria' => $idMateria,
+                        'nGrupo' => $grupo,
                     ]);
                     $usuarioMateria->save();
                 }
             }
         }
+    
+        if (!empty($errores)) {
+            $erroresMensaje = implode(' ', $errores);
+            return redirect()->route('usuarios.create')->with('success', '¡El usuario ha sido registrado de manera correcta!
+                                                                Sin embargo no se pudieron asignar algunas materias.');
+        }
+    
         return redirect()->route('usuarios.create')->with('success', '¡El usuario ha sido registrado de manera correcta!');
     }
 
@@ -127,7 +162,7 @@ class UsuarioController extends Controller
 
         if ($usuario->codSis != $request->input('codSis') || ($usuario->nombre != $request->input('nombre')
             && $usuario->apellido != $request->input('apellido'))) {
-                $existingUsuario = User::where('codSis', $request->input('codSis'))
+            $existingUsuario = User::where('codSis', $request->input('codSis'))
                 ->orWhere(function ($query) use ($request) {
                     $query->where('nombre', $request->input('nombre'))
                         ->where('apellido', $request->input('apellido'));
@@ -149,19 +184,51 @@ class UsuarioController extends Controller
 
         UsuarioMateria::where('idUsuario', $usuario->id)->delete();
 
+        $errores = [];
+
         if ($request->get('rol') === 'Docente') {
             $asignaciones = $request->input('asignaciones');
             $asignacionesArray = json_decode($asignaciones[0], true);
+    
             if (!empty($asignacionesArray)) {
                 foreach ($asignacionesArray as $asignacion) {
+                    $idMateria = $asignacion['materia'];
+                    $grupo = $asignacion['grupo'];
+    
+                    $materia = Materias::find($idMateria);
+                    if (!$materia) {
+                        $errores[] = 'Materia no encontrada: ' . $idMateria;
+                        continue;
+                    }
+    
+                    $limiteGrupos = $materia->cantGrupos;
+                    $countGruposExistentes = UsuarioMateria::where('idMateria', $idMateria)->count();
+    
+                    if ($countGruposExistentes >= $limiteGrupos) {
+                        $errores[] = 'No se pueden agregar más grupos para la materia ' . $materia->nombre . '.';
+                        continue;
+                    }
+    
+                    $grupoExistente = UsuarioMateria::where('idMateria', $idMateria)->where('nGrupo', $grupo)->first();
+                    if ($grupoExistente) {
+                        $errores[] = 'El grupo ' . $grupo . ' ya existe para la materia ' . $materia->nombre . '.';
+                        continue;
+                    }
+    
                     $usuarioMateria = new UsuarioMateria([
                         'idUsuario' => $usuario->id,
-                        'idMateria' => $asignacion['materia'],
-                        'nGrupo' => $asignacion['grupo'],
+                        'idMateria' => $idMateria,
+                        'nGrupo' => $grupo,
                     ]);
                     $usuarioMateria->save();
                 }
             }
+        }
+    
+        if (!empty($errores)) {
+            $erroresMensaje = implode(' ', $errores);
+            return redirect()->route('usuarios.create')->with('success', '¡Usuario actualizado correctamente!
+                                                                Sin embargo no se pudieron asignar algunas materias.');
         }
 
         $bitacora = new Bitacora();
