@@ -47,7 +47,7 @@
     </div>
     <div class="form-column" id="intervalo-label">
         <label for="intervalo">Intervalo:</label>
-        <input type="text" name="intervalo" id="intervalo" placeholder="Ingrese el rango de intervalo">
+        <input type="number" name="intervalo" id="intervalo" placeholder="Ingrese el rango de intervalo">
     </div>
     <div class="button-container">
         <button type="button" class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>

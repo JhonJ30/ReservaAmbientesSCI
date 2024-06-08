@@ -21,7 +21,7 @@
             </div>
             <div class="form-column">
                 <label for="dias">Días:</label>
-                <select name="dias" id="dias" disabled>
+                <select name="dias" id="dias" required>
                     <option value="" disabled selected hidden>----</option>
                     <option value="lunes" {{ $horario->dias == 'lunes' ? 'selected' : '' }}>Lunes</option>
                     <option value="martes" {{ $horario->dias == 'martes' ? 'selected' : '' }}>Martes</option>
@@ -46,7 +46,7 @@
         </div>
         <div class="form-column" id="intervalo-label" @if($horario->tipoAmbiente === 'auditorio' || $horario->tipoAmbiente === 'taller') style="display: none;" @endif>
             <label for="intervalo">Intervalo (si es necesario):</label>
-            <input type="text" id="intervalo" placeholder="Ingrese el rango de intervalo" value="{{ $horario->intervalo }}">
+            <input type="number" name="intervalo" id="intervalo" placeholder="Ingrese el rango de intervalo" value="{{ $horario->intervalo }}">
         </div>
         <div class="button-container">
             <a href="/listaHorarios">
