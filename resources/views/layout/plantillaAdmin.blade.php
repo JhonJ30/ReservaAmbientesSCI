@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css>
     <link href="{{asset ('css/home.css')}}" rel="stylesheet">
-    <title>UMSS-Reservas</title>
+    <title>Reservas-UMSS</title>
 </head>
 <body>
 
@@ -14,6 +14,7 @@
     <div class="navbar">
         <div class="logo">
             <img src="{{asset ('img/san simon.png')}}" class="logo" alt="...">
+            <span class="logo-text">RESERVA DE AMBIENTES</span>
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">
             <div class="bar"></div>

@@ -100,7 +100,7 @@ $avisos = aviso::where('estado', 'Habilitado')
         }
        
         .tarjeta {
-            background-color:#fff;
+            background-color:#E9F4F3;
             color: black;
             padding: 10px;
             border-radius: 5px;
