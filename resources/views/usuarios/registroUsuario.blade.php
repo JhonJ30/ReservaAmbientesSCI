@@ -11,22 +11,41 @@ $materias = App\Models\Materias::all();
 <form id="csvForm" action="{{ route('usuarios.csv') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="file" name="csv_file" id="csv_file">
-    <button type="button" onclick="validarCSV()">Subir archivo CSV</button >
+    <button type="button" onclick="validarCSV()">Subir archivo CSV</button>
+    <i class="fa fa-info-circle" id="infoIcon" onclick="mostrarFormatoCSV()" style="margin-left: 20px;"></i>
 </form>
 
-<form id="registroForm" action="{{route('usuarios.store')}}" method="POST" onsubmit="return error()">
+<div id="modalFormatoCSV" class="modal">
+    <div class="modal-content" style="text-align: left;">
+        <h2 style="text-align: center;">Formato de archivo CSV</h2>
+        <p>Para registrar usuarios mediante un archivo CSV, se requiere que el archivo tenga el siguiente formato.</p>
+        <ul>
+            <li>C1: codSis</li>
+            <li>C2: rol</li>
+            <li>C3: nombre</li>
+            <li>C4: apellido</li>
+            <li>C5: correo</li>
+            <li>C6: contraseña</li>
+        </ul>
+        <div class="button-container">
+            <button class="btnAceptar" onclick="cerrarModal()">Aceptar</button>
+        </div>
+    </div>
+</div>
+
+<form id="registroForm" action="{{route('usuarios.store')}}" method="POST">
     @csrf
     <div class="register">
         <div class="form-row">
             <div class="form-column">
                 <label for="codSis">Código sis: </label>
-                <input name="codSis" , type="number" required>
+                <input name="codSis" type="number" required oninput="validarCodSis()">
                 <p class="error" id="error-codSis" style="display: none; color: red;"></p>
             </div>
 
             <div class="form-column">
                 <label for="rol">Rol: </label>
-                <select name="rol" id="rol" required onchange="mostrarMateriasDocente()">
+                <select name="rol" id="rol" required">
                     <option value="" disabled selected hidden>----</option>
                     <option value="Administrador">Administrador</option>
                     <option value="Docente">Docente</option>
@@ -37,13 +56,13 @@ $materias = App\Models\Materias::all();
         <div class="form-row">
             <div class="form-column">
                 <label for="nombre">Nombre: </label>
-                <input name="nombre" , type="text" required>
+                <input name="nombre" type="text" required oninput="validarNombre()">
                 <p class="error" id="error-nombre" style="display: none; color: red;"></p>
             </div>
 
             <div class="form-column">
                 <label for="apellido">Apellido: </label>
-                <input name="apellido" , type="text" required>
+                <input name="apellido" type="text" required oninput="validarApellido()">
                 <p class="error" id="error-apellido" style="display: none; color: red;"></p>
             </div>
         </div>
@@ -51,14 +70,19 @@ $materias = App\Models\Materias::all();
         <div class="form-row">
             <div class="form-column">
                 <label for="correo">Correo electrónico: </label>
-                <input name="correo" , type="email" required>
+                <input name="correo" type="email" required>
             </div>
 
             <div class="form-column">
                 <label for="contraseña">Contraseña: </label>
-                <input name="contraseña" type="password" required>
+                <input name="contraseña" type="password" required oninput="validarContraseña()">
                 <p class="error" id="error-contraseña" style="display: none; color: red;"></p>
             </div>
+        </div>
+
+        <div id="checkboxMateriasDocente">
+            <p for="mostrarMateriasDocente">Mostrar materias de docente</p>
+            <input type="checkbox" id="mostrarMateriasDocente" style="width: 20px;" onchange="mostrarOcultarMateriasDocente()">
         </div>
 
         <div class="materiasDocente" id="materiasDocente" style="display: none;">
@@ -101,10 +125,39 @@ $materias = App\Models\Materias::all();
         <button type="button" class="cancelar-btn" onclick="cancelar()">Cancelar</button>
         <button class="registrar-btn" type="submit">Registrar</button>
     </div>
-
 </form>
 
 <script>
+    function mostrarFormatoCSV() {
+        var modal = document.getElementById("modalFormatoCSV");
+        modal.style.display = "block";
+    }
+
+    function cerrarModal() {
+        var modal = document.getElementById("modalFormatoCSV");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("modalFormatoCSV");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    function mostrarOcultarMateriasDocente() {
+        let checkbox = document.getElementById("mostrarMateriasDocente");
+        let materiasDocente = document.getElementById("materiasDocente");
+
+        if (checkbox.checked) {
+            materiasDocente.style.display = "block";
+        } else {
+            materiasDocente.style.display = "none";
+        }
+    }
+
     function mostrarError(inputId, mensaje) {
         var elementoError = document.getElementById('error-' + inputId);
         elementoError.textContent = mensaje;
@@ -117,86 +170,93 @@ $materias = App\Models\Materias::all();
         elementoError.style.display = 'none';
     }
 
-    function validarFormulario() {
+    function validarCodSis() {
         var codSis = document.getElementsByName('codSis')[0].value;
-        var nombre = document.getElementsByName('nombre')[0].value;
-        var apellido = document.getElementsByName('apellido')[0].value;
-        var correo = document.getElementsByName('correo')[0].value;
-        var contraseña = document.getElementsByName('contraseña')[0].value;
-
-        var error = "";
-
-        if (!(/^\d{9}$/.test(codSis))) {
-            error += "El código sis debe contener 9 dígitos.\n";
+        if (codSis === "") {
+            ocultarError('codSis');
+        } else if (!(/^\d{9}$/.test(codSis))) {
             mostrarError('codSis', "El código sis debe contener 9 dígitos.");
         } else if (codSis.startsWith('0')) {
-            error += "El código sis no puede comenzar con cero.\n";
             mostrarError('codSis', "El código sis no puede comenzar con cero.");
         } else {
             ocultarError('codSis');
         }
+    }
 
-        if (!/^[A-Za-z\sÁÉÍÓÚáéíóúñÑ]+$/.test(nombre)) {
-            error += "El nombre solo puede contener letras.\n";
+    function validarNombre() {
+        var nombre = document.getElementsByName('nombre')[0].value;
+        if (nombre === "") {
+            ocultarError('nombre');
+        } else if (!/^[A-Za-z\sÁÉÍÓÚáéíóúñÑ]+$/.test(nombre)) {
             mostrarError('nombre', "El nombre solo puede contener letras.");
         } else if (nombre.length < 2 || nombre.length > 20) {
-            error += "El nombre debe tener entre 2 y 20 caracteres.\n";
             mostrarError('nombre', "El nombre debe tener entre 2 y 20 caracteres.");
         } else {
             ocultarError('nombre');
         }
+    }
 
-        if (!/^[A-Za-z\sÁÉÍÓÚáéíóúñÑ]+$/.test(apellido)) {
-            error += "El apellido solo puede contener letras.\n";
+    function validarApellido() {
+        var apellido = document.getElementsByName('apellido')[0].value;
+        if (apellido === "") {
+            ocultarError('apellido');
+        } else if (!/^[A-Za-z\sÁÉÍÓÚáéíóúñÑ]+$/.test(apellido)) {
             mostrarError('apellido', "El apellido solo puede contener letras.");
         } else if (apellido.length < 2 || apellido.length > 20) {
-            error += "El apellido debe tener entre 2 y 20 caracteres.\n";
             mostrarError('apellido', "El apellido debe tener entre 2 y 20 caracteres.");
         } else {
             ocultarError('apellido');
         }
+    }
 
-        if (contraseña.length < 8) {
-            error += "La contraseña debe tener al menos 8 caracteres.\n";
+    function validarContraseña() {
+        var contraseña = document.getElementsByName('contraseña')[0].value;
+        if (contraseña === "") {
+            ocultarError('contraseña');
+        } else if (contraseña.length < 8) {
             mostrarError('contraseña', "La contraseña debe tener al menos 8 caracteres.");
         } else if (!/[a-z]/.test(contraseña)) {
-            error += "La contraseña debe contener al menos una letra minúscula.\n";
             mostrarError('contraseña', "La contraseña debe contener al menos una letra minúscula.");
         } else if (!/[A-Z]/.test(contraseña)) {
-            error += "La contraseña debe contener al menos una letra mayúscula.\n";
             mostrarError('contraseña', "La contraseña debe contener al menos una letra mayúscula.");
         } else if (!/\d/.test(contraseña)) {
-            error += "La contraseña debe contener al menos un número.\n";
             mostrarError('contraseña', "La contraseña debe contener al menos un número.");
         } else if (!/\W/.test(contraseña)) {
-            error += "La contraseña debe contener al menos un carácter especial.\n";
             mostrarError('contraseña', "La contraseña debe contener al menos un carácter especial.");
         } else {
             ocultarError('contraseña');
         }
-
-        if (error !== "") {
-            return false;
-        }
-
-        return true;
     }
 
     function validarCSV() {
         var inputFile = document.getElementById('csv_file');
         if (inputFile.files.length === 0) {
+            alert("Debe seleccionar un archivo CSV.");
             return false;
         }
-        document.getElementById('csvForm').submit(); // Si hay un archivo seleccionado, enviar el formulario
+        document.getElementById('csvForm').submit();
+    }
+
+    function validarFormulario() {
+        validarCodSis();
+        validarNombre();
+        validarApellido();
+        validarContraseña();
+
+        var errores = document.querySelectorAll('.error');
+        for (var i = 0; i < errores.length; i++) {
+            if (errores[i].style.display === 'block') {
+                return false;
+            }
+        }
+        return true;
     }
 
     document.getElementById('registroForm').onsubmit = function() {
         return validarFormulario();
-    }
+    };
 </script>
 
 <script src="{{ asset('js/registroUsuario.js') }}"></script>
-
-
 
 @endsection

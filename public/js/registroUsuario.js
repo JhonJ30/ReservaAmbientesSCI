@@ -109,10 +109,26 @@ function cancelar() {
         "Esta seguro que quiere descartar el registro actual?"
     );
     if (confirmar) {
-        window.location.href = "/";
+        window.location.href = "/listaUsuarios";
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    mostrarMateriasDocente();
+    function mostrarMateriasDocente() {
+        let rol = document.getElementById("rol").value;
+        let checkboxMateriasDocente = document.getElementById("checkboxMateriasDocente");
+        let checkbox = document.getElementById("mostrarMateriasDocente");
+
+        if (rol === "Docente") {
+            checkboxMateriasDocente.style.display = "inline-block";
+        } else {
+            checkbox.checked = false;
+            checkboxMateriasDocente.style.display = "none";
+            materiasDocente.style.display = "none";
+        }
+    }
+    document.getElementById("rol").addEventListener("change", mostrarMateriasDocente);
+
     asignacionesPendientes = JSON.parse(document.querySelector('input[name="asignaciones[]"]').value);
 });

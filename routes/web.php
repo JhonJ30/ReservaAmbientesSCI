@@ -27,6 +27,7 @@ Route::get('/logout', [loginController::class, 'logout'])->name('logout');
 Route::view('/registroAmbiente', 'ambientes/registroAmbiente')->name('ambientes.registrar');
 Route::post('/ambientes', [ambienteController::class, 'store'])->name('ambientes.store');
 Route::get('/listaAmbientes', [ambienteController::class, 'create'])->name('ambientes.create');
+Route::get('/buscarAmbiente', [ambienteController::class, 'search'])->name('ambientes.search');
 Route::delete('/listaAmbientes', [ambienteController::class, 'destroy'])->name('ambientes.destroy');
 Route::get('/ambientes/editar/{id}', [ambienteController::class, 'editar'])->name('ambientes.editar');
 Route::put('/ambientes/{id}', [ambienteController::class, 'update'])->name('ambientes.update');

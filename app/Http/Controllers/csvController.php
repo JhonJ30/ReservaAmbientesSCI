@@ -15,22 +15,28 @@ class CsvController extends Controller
         $validator = Validator::make($request->all(), [
             'csv_file' => 'required|mimes:csv,txt',
         ]);
-    
+
         if ($validator->fails()) {
             return redirect()->route('materias.create')->with('error', 'Por favor, selecciona un archivo CSV válido.');
         }
-    
+
         try {
             if ($request->hasFile('csv_file')) {
                 $file = $request->file('csv_file');
                 $csvData = file_get_contents($file);
                 $lines = explode("\n", $csvData);
-    
+
+                $header = str_getcsv($lines[0]);
+                $expectedHeader = ['codSis', 'nivel', 'nombre', 'departamento', 'cantGrupos'];
+                if ($header !== $expectedHeader) {
+                    return redirect()->route('materias.create')->with('success', 'El formato del archivo CSV no es válido.');
+                }
+
                 DB::beginTransaction();
-    
+
                 // Omitir la primera línea (encabezados)
                 $lines = array_slice($lines, 1);
-    
+
                 foreach ($lines as $line) {
                     $data = str_getcsv($line);
                     if (count($data) == 5) {
@@ -47,9 +53,9 @@ class CsvController extends Controller
                         }
                     }
                 }
-    
+
                 DB::commit();
-    
+
                 return redirect()->route('materias.create')->with('success', '¡Archivo CSV subido exitosamente!');
             }
         } catch (\Exception $e) {
@@ -57,7 +63,7 @@ class CsvController extends Controller
             return redirect()->route('materias.create')->with('error', 'Ocurrió un error al procesar el archivo CSV.');
         }
     }
-    
+
     public function usuario(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -73,6 +79,12 @@ class CsvController extends Controller
                 $file = $request->file('csv_file');
                 $csvData = file_get_contents($file);
                 $lines = explode("\n", $csvData);
+    
+                $header = str_getcsv($lines[0]);
+                $expectedHeader = ['codSis', 'rol', 'nombre', 'apellido', 'correo', 'contraseña'];
+                if ($header !== $expectedHeader) {
+                    return redirect()->route('usuarios.create')->with('success', 'El formato del archivo CSV no es válido.');
+                }
     
                 DB::beginTransaction();
     

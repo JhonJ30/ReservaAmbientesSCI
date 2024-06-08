@@ -7,17 +7,35 @@
 <form id="csvForm" action="{{ route('materias.csv') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="file" name="csv_file" id="csv_file">
-    <button type="button" onclick="validarCSV()">Subir archivo CSV</button >
+    <button type="button" onclick="validarCSV()">Subir archivo CSV</button>
+    <i class="fa fa-info-circle" id="infoIcon" onclick="mostrarFormatoCSV()" style="margin-left: 20px;"></i>
 </form>
 
+<div id="modalFormatoCSV" class="modal">
+    <div class="modal-content" style="text-align: left;">
+        <h2 style="text-align: center;">Formato de archivo CSV</h2>
+        <p>Para registrar materias mediante un archivo CSV, se requiere que el archivo tenga el siguiente formato.</p>
+        <ul>
+            <li>C1: codMat</li>
+            <li>C2: nivel</li>
+            <li>C3: nombre</li>
+            <li>C4: departamento</li>
+            <li>C5: cantGrupos</li>
+        </ul>
+        <div class="button-container">
+            <button class="btnAceptar" onclick="cerrarModal()">Aceptar</button>
+        </div>
+    </div>
+</div>
 
-<form id="registroForm" action="{{route('materias.store')}}" method="POST" onsubmit="return error()">
+
+<form id="registroForm" action="{{route('materias.store')}}" method="POST" onsubmit="return validarFormulario()">
     @csrf
     <div class="register">
         <div class="form-row">
             <div class="form-column">
                 <label for="codSis">Código de Materia: </label>
-                <input name="codSis" type="number" required>
+                <input name="codSis" type="number" required oninput="validarCodSis()">
                 <p class="error" id="error-codSis" style="display: none; color: red;"></p>
             </div>
 
@@ -42,13 +60,13 @@
         <div class="form-row">
             <div class="form-column">
                 <label for="nombre">Nombre: </label>
-                <input name="nombre" , type="text" , style="width: 100%;" required>
+                <input name="nombre" type="text" style="width: 100%;" required oninput="validarNombre()">
                 <p class="error" id="error-nombre" style="display: none; color: red;"></p>
             </div>
 
             <div class="form-column">
                 <label for="cantGrupos">Grupos: </label>
-                <input name="cantGrupos" , type="number" required>
+                <input name="cantGrupos" type="number" required oninput="validarCantGrupos()">
                 <p class="error" id="error-cantGrupos" style="display: none; color: red;"></p>
             </div>
         </div>
@@ -78,78 +96,106 @@
 </form>
 
 <script>
+    function mostrarFormatoCSV() {
+        var modal = document.getElementById("modalFormatoCSV");
+        modal.style.display = "block";
+    }
+
+    function cerrarModal() {
+        var modal = document.getElementById("modalFormatoCSV");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("modalFormatoCSV");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script>
     function cancelar() {
-        var confirmar = confirm("Esta seguro que quiere descartar el registro actual?");
+        var confirmar = confirm("Está seguro que quiere descartar el registro actual?");
         if (confirmar) {
             window.location.href = "/";
         }
     }
-    // Función para mostrar mensajes de error
+
     function mostrarError(inputId, mensaje) {
         var elementoError = document.getElementById('error-' + inputId);
         elementoError.textContent = mensaje;
-        elementoError.style.display = 'block'; // Mostrar el mensaje
+        elementoError.style.display = 'block';
     }
 
-    // Función para ocultar mensajes de error
     function ocultarError(inputId) {
         var elementoError = document.getElementById('error-' + inputId);
         elementoError.textContent = '';
-        elementoError.style.display = 'none'; // Ocultar el mensaje
+        elementoError.style.display = 'none';
     }
 
-    // Función de validación
-    function validarFormulario() {
+    function validarCodSis() {
         var codigo = document.getElementsByName('codSis')[0].value;
-        var nombre = document.getElementsByName('nombre')[0].value;
-        var cantGrupos = document.getElementsByName('cantGrupos')[0].value;
-        // Obtener los valores de los otros campos
+        if (codigo === '') {
+            ocultarError('codSis');
+            return;
+        }
 
-        var error = "";
-
-        if (!(/^\d{7}$/.test(codigo))) {
-            error += "El código de materia debe contener 7 dígitos.\n";
+        if (!/^\d{7}$/.test(codigo)) {
             mostrarError('codSis', "El código de materia debe contener 7 dígitos.");
         } else if (codigo.startsWith('0')) {
-            error += "El código de materia no puede comenzar con cero.\n";
             mostrarError('codSis', "El código de materia no puede comenzar con cero.");
         } else {
             ocultarError('codSis');
         }
+    }
 
-        // Nombre
+    function validarNombre() {
+        var nombre = document.getElementsByName('nombre')[0].value;
+        if (nombre === '') {
+            ocultarError('nombre');
+            return;
+        }
+
         if (nombre.length < 2 || nombre.length > 50) {
-            error += "El nombre debe tener entre 2 y 50 caracteres.\n";
             mostrarError('nombre', "El nombre debe tener entre 2 y 50 caracteres.");
         } else {
             ocultarError('nombre');
         }
+    }
 
-        // Cantidad de grupos
+    function validarCantGrupos() {
+        var cantGrupos = document.getElementsByName('cantGrupos')[0].value;
+        if (cantGrupos === '') {
+            ocultarError('cantGrupos');
+            return;
+        }
+
         if (isNaN(cantGrupos) || cantGrupos < 1 || cantGrupos > 20) {
-            error += "La cantidad de grupos debe ser un número entre 1 y 20.\n";
             mostrarError('cantGrupos', "La cantidad de grupos debe ser un número entre 1 y 20.");
         } else {
             ocultarError('cantGrupos');
         }
-
-        // Si hay errores, detener el envío del formulario
-        if (error !== "") {
-            return false;
-        }
-
-        return true; // Permitir el envío del formulario si no hay errores
     }
 
     function validarCSV() {
         var inputFile = document.getElementById('csv_file');
         if (inputFile.files.length === 0) {
+            alert("Debe seleccionar un archivo CSV.");
             return false;
         }
-        document.getElementById('csvForm').submit(); // Si hay un archivo seleccionado, enviar el formulario
+        document.getElementById('csvForm').submit();
     }
 
-    // Asignar la función de validación al evento onsubmit del formulario
+    function validarFormulario() {
+        validarCodSis();
+        validarNombre();
+        validarCantGrupos();
+
+        var errores = document.querySelectorAll('.error:empty');
+        return errores.length === 3; // Si no hay errores visibles, el formulario es válido
+    }
+
     document.getElementById('registroForm').onsubmit = function() {
         return validarFormulario();
     };
