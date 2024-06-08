@@ -11,7 +11,7 @@
         <div class="form-row">
             <div class="form-column">
                 <label for="tipo-ambiente">Tipo de Ambiente:</label>
-                <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" disabled>
+                <select name="tipoAmbiente" id="tipo-ambiente" onchange="toggleIntervalo()" required readonly>
                     <option value="" disabled selected hidden>----</option>
                     <option value="aula" {{ $horario->tipoAmbiente == 'aula' ? 'selected' : '' }}>Aula</option>
                     <option value="laboratorio" {{ $horario->tipoAmbiente == 'laboratorio' ? 'selected' : '' }}>Laboratorio</option>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-column">
                 <label for="dias">Días:</label>
-                <select name="dias" id="dias" required>
+                <select name="dias" id="dias" required readonly>
                     <option value="" disabled selected hidden>----</option>
                     <option value="lunes" {{ $horario->dias == 'lunes' ? 'selected' : '' }}>Lunes</option>
                     <option value="martes" {{ $horario->dias == 'martes' ? 'selected' : '' }}>Martes</option>
@@ -59,6 +59,24 @@
 @endsection
 
 <script>
+     // Asegura que el campo "Días" no sea editable
+     document.addEventListener('DOMContentLoaded', function() {
+        var diasSelect = document.getElementById('dias');
+        diasSelect.onmousedown = function(event) {
+            event.preventDefault();
+            this.blur();
+            window.focus();
+        }
+    });
+     // Asegura que el campo "Tipo de Ambiente" no sea editable
+     document.addEventListener('DOMContentLoaded', function() {
+        var tipoAmbienteSelect = document.getElementById('tipo-ambiente');
+        tipoAmbienteSelect.onmousedown = function(event) {
+            event.preventDefault();
+            this.blur();
+            window.focus();
+        }
+    });
     function toggleIntervalo() {
         var tipoAmbiente = document.getElementById('tipo-ambiente').value;
         var intervaloInput = document.getElementById('intervalo');

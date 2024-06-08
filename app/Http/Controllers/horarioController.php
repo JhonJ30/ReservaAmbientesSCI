@@ -63,6 +63,28 @@ class horarioController extends Controller
             'dias' => 'required|string',
             'intervalo' => 'nullable|string', // Validación para el intervalo
         ]);
+///CAMBIOS
+        // Verificar si ya existe un horario con las mismas características
+        $horarioExistente = Horarios::where('tipoAmbiente', $request->tipoAmbiente)
+            ->where('dias', $request->dias)
+            ->where('horaInicio', $request->horaInicio)
+            ->where('horaFin', $request->horaFin)
+            ->exists();
+
+        if ($horarioExistente) {
+            // Horario ya existe, regresar con un mensaje de error
+            return back()->withInput()->withErrors(['error' => 'Ya existe un horario registrado con estas características.']);
+        }
+
+        // Si no existe, proceder a crear el nuevo horario
+        Horarios::create([
+            'tipoAmbiente' => $request->tipoAmbiente,
+            'dias' => $request->dias,
+            'horaInicio' => $request->horaInicio,
+            'horaFin' => $request->horaFin,
+            'intervalo' => $request->intervalo,
+        ]);
+        ///CAMBIOS
         //sirve para guardar datos en la bd
         $Horario = new Horarios();
         $Horario->tipoAmbiente = $request->input('tipoAmbiente');
@@ -121,11 +143,6 @@ class horarioController extends Controller
         $horario->dias = $request->dias;
         $horario->intervalo = $request->intervalo;
         $horario->save();
-
-
-        // Obtener todos los ambientes disponibles
-        $ambientes = Ambientes::all(); //para q aparezca ambientes
-
 
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();

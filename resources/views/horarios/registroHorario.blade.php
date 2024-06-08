@@ -49,6 +49,9 @@
         <label for="intervalo">Intervalo:</label>
         <input type="number" name="intervalo" id="intervalo" placeholder="Ingrese el rango de intervalo">
     </div>
+    @error('error')
+    <div class="alert alert-danger">{{ $message }}</div>
+   @enderror
     <div class="button-container">
         <button type="button" class="cancelar-btn" onclick="cancelarRegistro()">Cancelar</button>
         <button class="registrar-btn" type="submit">Registrar</button>

@@ -31,7 +31,13 @@
     <tr>
       <td style="text-align: center;">{{$item->tipoAmbiente}}</td>
       <td style="text-align: center;">{{$item->dias}}</td>
-      <td style="text-align: center;">{{$item->intervalo}}</td>
+      <td style="text-align: center;">
+        @if ($item->tipoAmbiente == 'auditorio' || $item->tipoAmbiente == 'taller')
+            Indefinido
+        @else
+            {{ $item->intervalo }}
+        @endif
+    </td>
       <!--<td style="text-align: center;">{{$item->ambi}}</td>-->
       <td style="text-align: center;">{{$item->horaInicio}}</td>
       <td style="text-align: center;">{{$item->horaFin}}</td>
