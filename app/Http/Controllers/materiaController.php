@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Materias;
@@ -8,6 +9,7 @@ use App\Models\UsuarioMateria;
 use App\Models\Reservar;
 use App\Models\Bitacora;
 use Carbon\Carbon;
+
 class materiaController extends Controller
 {
     public function create()
@@ -25,6 +27,14 @@ class materiaController extends Controller
 
     public function store(Request $request)
     {
+        $existingMateria = Materias::where('codSis', $request->input('codSis'))
+            ->orWhere('nombre', $request->input('nombre'))
+            ->first();
+
+        if ($existingMateria) {
+            return redirect()->route('materias.create')->with('success', '¡La materia ya existe!');
+        }
+
         $materia = new Materias([
             'codSis' => $request->get('codSis'),
             'nivel' => $request->get('nivel'),
@@ -41,12 +51,12 @@ class materiaController extends Controller
 
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
-        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->id_Usuario = $idUsuario;
         $bitacora->evento = 'Create';
         $bitacora->tabla = 'materia';
-        $bitacora->id_Registro=$idMateria;
-        $bitacora->dato_modificado = 'Nueva Materia: ' . $materia->codSis . ', ' . $materia->nivel . ', ' .$materia->nombre. 
-        ', ' .$materia->cantGrupos;
+        $bitacora->id_Registro = $idMateria;
+        $bitacora->dato_modificado = 'Nueva Materia: ' . $materia->codSis . ', ' . $materia->nivel . ', ' . $materia->nombre .
+            ', ' . $materia->cantGrupos;
         $bitacora->save();
         return redirect()->route('materias.create')->with('success', '¡La materia ha sido registrado de manera correcta!');
     }
@@ -72,12 +82,12 @@ class materiaController extends Controller
 
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
-        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->id_Usuario = $idUsuario;
         $bitacora->evento = 'Delete';
         $bitacora->tabla = 'materia';
-        $bitacora->id_Registro=$idMateria;
-        $bitacora->dato_modificado = 'Materia Eliminada: ' . $materias->codSis . ', ' . $materias->nivel . ', ' .$materias->nombre. 
-        ', ' .$materias->cantGrupos;
+        $bitacora->id_Registro = $idMateria;
+        $bitacora->dato_modificado = 'Materia Eliminada: ' . $materias->codSis . ', ' . $materias->nivel . ', ' . $materias->nombre .
+            ', ' . $materias->cantGrupos;
         $bitacora->save();
         return redirect()->back()->with('success', '¡La materia ha sido eliminado correctamente!');
     }
@@ -95,15 +105,24 @@ class materiaController extends Controller
     {
         $materias = Materias::findOrFail($id);
         $datosOriginales = $materias->toArray();
+
+        if ($materias->codSis != $request->input('codSis') || $materias->nombre != $request->input('nombre')) {
+            $existingMateria = Materias::where('codSis', $request->input('codSis'))
+                ->orWhere('nombre', $request->input('nombre'))
+                ->first();
+    
+            if ($existingMateria) {
+                return redirect()->back()->withErrors(['error' => 'La materia ya está registrada.']);
+            }
+        }
         $materias->update($request->all());
-        
 
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
         $idMateria = $materias->id;
         $idUsuario = Auth::id();
-    
-      
+
+
         $datosModificados = [];
         foreach ($request->except('_token', '_method') as $campo => $valor) {
             if (!array_key_exists($campo, $datosOriginales) || $datosOriginales[$campo] != $valor) {
@@ -113,10 +132,10 @@ class materiaController extends Controller
                 ];
             }
         }
-    
-        
+
+
         $datosModificadosJson = json_encode($datosModificados);
-    
+
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
         $bitacora->id_Usuario = $idUsuario;

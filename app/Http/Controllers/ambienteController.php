@@ -167,25 +167,22 @@ class ambienteController extends Controller
         return redirect()->back()->with('success', 'Registro marcado como no disponible');
     }
 
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $ambientes = Ambientes::where('nroAmb', 'like', '%' . $searchTerm . '%')->get();
+        return view('ambientes/listaAmbientes',  compact('ambientes'));
+    }
+
     public function buscar(Request $request)
     {
         $search = $request->input('search');
-
-        //buscador de administrador
-        if (Auth::user()->rol === 'Administrador') {
-            $ambientes = Ambientes::where('nroAmb', 'like', '%' . $search . '%')->get();
-            return view('ambientes/listaAmbientes',  compact('ambientes'));
-        }
-
-        //buscador de otros usuarios
-        else {
-            if (empty($search)) {
-                return redirect()->route('ambientes.index');
-            } else {
-                $ambientes = Ambientes::where('nroAmb', 'like', '%' . $search . '%')
-                    ->orWhere('ubicacion', 'like', '%' . $search . '%')->get();
-                return view('ambientes/verAmbientes', compact('ambientes'));
-            }
+        if (empty($search)) {
+            return redirect()->route('ambientes.index');
+        }else {
+            $ambientes = Ambientes::where('nroAmb', 'like', '%' . $search . '%')
+                ->orWhere('ubicacion', 'like', '%' . $search . '%')->get();
+            return view('ambientes/verAmbientes', compact('ambientes'));
         }
     }
 

@@ -9,6 +9,7 @@ use App\Models\UsuarioMateria;
 use App\Models\Reservar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+
 class UsuarioController extends Controller
 {
     public function create()
@@ -25,6 +26,17 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        $existingUsuario = User::where('codSis', $request->input('codSis'))
+            ->orWhere(function ($query) use ($request) {
+                $query->where('nombre', $request->input('nombre'))
+                    ->where('apellido', $request->input('apellido'));
+            })
+            ->first();
+
+        if ($existingUsuario) {
+            return redirect()->route('usuarios.create')->with('success', '¡El usuario ya existe!');
+        }
+
         $usuario = new User([
             'codSis' => $request->get('codSis'),
             'rol' => $request->get('rol'),
@@ -34,7 +46,7 @@ class UsuarioController extends Controller
             'password' => bcrypt($request->get('contraseña')),
         ]);
         $usuario->save();
-        
+
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
         $idUsu = $usuario->id;
@@ -42,12 +54,12 @@ class UsuarioController extends Controller
 
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
-        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->id_Usuario = $idUsuario;
         $bitacora->evento = 'Create';
         $bitacora->tabla = 'usuario';
-        $bitacora->id_Registro=$idUsu;
-        $bitacora->dato_modificado = 'Nuevo Usuario: ' . $usuario->codSis . ', ' . $usuario->rol . ', ' .$usuario->nombre. 
-        ', ' .$usuario->correo;
+        $bitacora->id_Registro = $idUsu;
+        $bitacora->dato_modificado = 'Nuevo Usuario: ' . $usuario->codSis . ', ' . $usuario->rol . ', ' . $usuario->nombre .
+            ', ' . $usuario->correo;
         $bitacora->save();
 
         if ($request->get('rol') === 'Docente') {
@@ -80,7 +92,7 @@ class UsuarioController extends Controller
         UsuarioMateria::where('idUsuario', $usuarios->id)->delete();
         Reservar::where('codUser', $usuarios->id)->delete();
         $usuarios->delete();
-        
+
 
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
@@ -89,12 +101,12 @@ class UsuarioController extends Controller
 
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
-        $bitacora->id_Usuario=$idUsuario;
+        $bitacora->id_Usuario = $idUsuario;
         $bitacora->evento = 'Delete';
         $bitacora->tabla = 'usuario';
-        $bitacora->id_Registro=$idUsu;
-        $bitacora->dato_modificado = 'Usuario Eliminado: ' . $usuarios->codSis . ', ' . $usuarios->rol . ', ' .$usuarios->nombre. 
-        ', ' .$usuarios->correo;
+        $bitacora->id_Registro = $idUsu;
+        $bitacora->dato_modificado = 'Usuario Eliminado: ' . $usuarios->codSis . ', ' . $usuarios->rol . ', ' . $usuarios->nombre .
+            ', ' . $usuarios->correo;
         $bitacora->save();
         return redirect()->back()->with('success', '¡El usuario ha sido eliminado correctamente!');
     }
@@ -111,7 +123,21 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $usuario = User::findOrFail($id);
-        $datosOriginales = $usuario->toArray();////añadido
+        $datosOriginales = $usuario->toArray();
+
+        if ($usuario->codSis != $request->input('codSis') || ($usuario->nombre != $request->input('nombre')
+            && $usuario->apellido != $request->input('apellido'))) {
+                $existingUsuario = User::where('codSis', $request->input('codSis'))
+                ->orWhere(function ($query) use ($request) {
+                    $query->where('nombre', $request->input('nombre'))
+                        ->where('apellido', $request->input('apellido'));
+                })
+                ->first();
+            if ($existingUsuario) {
+                return redirect()->back()->withErrors(['error' => 'El usuario ya está registrado.']);
+            }
+        }
+
         $usuario->update([
             'codSis' => $request->get('codSis'),
             'rol' => $request->get('rol'),
@@ -120,9 +146,9 @@ class UsuarioController extends Controller
             'email' => $request->get('correo'),
             'password' => bcrypt($request->get('contraseña')),
         ]);
-        
+
         UsuarioMateria::where('idUsuario', $usuario->id)->delete();
-        
+
         if ($request->get('rol') === 'Docente') {
             $asignaciones = $request->input('asignaciones');
             $asignacionesArray = json_decode($asignaciones[0], true);
@@ -142,8 +168,8 @@ class UsuarioController extends Controller
         $fechaYHoraActual = Carbon::now();
         $idUsu = $usuario->id;
         $idUsuario = Auth::id();
-    
-      
+
+
         $datosModificados = [];
         foreach ($request->except('_token', '_method') as $campo => $valor) {
             if (!array_key_exists($campo, $datosOriginales) || $datosOriginales[$campo] != $valor) {
@@ -153,10 +179,10 @@ class UsuarioController extends Controller
                 ];
             }
         }
-    
-        
+
+
         $datosModificadosJson = json_encode($datosModificados);
-    
+
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
         $bitacora->id_Usuario = $idUsuario;
@@ -168,10 +194,11 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.create')->with('success', '¡Usuario actualizado correctamente!');
     }
 
-    public function home(){
-        if(Auth::check()){
+    public function home()
+    {
+        if (Auth::check()) {
             return view('usuarios/home');
-        }else{
+        } else {
             return view('usuarios/homeInvitado');
         }
     }
