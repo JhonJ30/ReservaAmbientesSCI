@@ -55,13 +55,22 @@ class horarioController extends Controller
     //hecho por sara
     public function store(Request $request)
     {
+        // Validar datos de entrada
+        $request->validate([
+            'tipoAmbiente' => 'required|string',
+            'horaInicio' => 'required|date_format:H:i',
+            'horaFin' => 'required|date_format:H:i',
+            'dias' => 'required|string',
+            'intervalo' => 'nullable|string', // Validación para el intervalo
+        ]);
         //sirve para guardar datos en la bd
         $Horario = new Horarios();
         $Horario->tipoAmbiente = $request->input('tipoAmbiente');
+        $Horario->dias = $request->input('intervalo');
         $Horario->horaInicio = $request->input('horaInicio');
         $Horario->horaFin = $request->input('horaFin');
         $Horario->dias = $request->input('dias');
-
+        $Horario->intervalo = $request->input('intervalo');
         // Guardar el nuevo ambiente en la base de datos
         $Horario->save();
 
