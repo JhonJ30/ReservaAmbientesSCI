@@ -26,7 +26,7 @@
   </thead>
   <tbody>
   @foreach ($usuarios as $item)
-    @if($item->id != 1)
+    @if($item->id != 1001)
       <tr>
         <td style="text-align: center;">{{$item->codSis}}</td>
         <td style="text-align: center;">{{$item->nombre}}</td>

@@ -88,8 +88,15 @@ class reservaController extends Controller
         ]);
         $reserva->save();
 
-        // Redirigir a una página de éxito o donde desees
-        return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
+        if (Auth::check()) {
+            if (Auth::user()->rol === 'Administrador') {
+                return redirect('/listaAmbientes')->with('success', 'Reserva realizada exitosamente');
+            }else{
+                return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
+            }
+        } else {
+            return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
+        }
     }
 
     public function verReserva()

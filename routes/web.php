@@ -17,6 +17,7 @@ use App\Http\Controllers\BackupController;
 
 //general
 Route::get('/', [usuarioController::class, 'home'])->name('home');
+Route::view('/ayuda', 'ayuda')->name('ayuda');
 
 //login
 Route::view('/iniciarSesion', 'iniciarSesion')->name('iniciarSesion');
