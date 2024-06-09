@@ -4,7 +4,7 @@
     <link href="{{ asset('css/backup.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <form action="{{ route('backups.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return error()">
+    <form id="backupForm" action="{{ route('backups.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="registro">
             <div class="titulo-registro">
@@ -20,51 +20,86 @@
                 </div>
             </div>
             <div class="botones">
-                <button class="botonCancelar" onclick="redireccionarAVista()">Cancelar</button>
+                <button type="button" class="botonCancelar" onclick="redireccionarAVista()">Cancelar</button>
                 <button class="botonRegistrar" type="submit">Registrar</button>
             </div>
         </div>
     </form>
 
-     <!-- Modal de Confirmación de Backup -->
-<div class="modal" id="backupSuccessModal">
-    <div class="modal-content">
-        <span class="close" onclick="cerrarModal()">&times;</span>
-        <p>¡El backup se ha registrado correctamente!</p>
-        <button class="botonAceptar" onclick="redireccionarAVista()">Aceptar</button>
+    <!-- Modal de Confirmación de Backup -->
+    <div class="modal" id="backupSuccessModal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <p>¡El backup se ha registrado correctamente!</p>
+            <button class="botonAceptar" onclick="redireccionarAVista()">Aceptar</button>
+        </div>
     </div>
-</div>
 
-
-
+    <!-- Modal de Error de Formato de Archivo -->
+    <div class="modal" id="fileErrorModal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <p>Formato de archivo incorrecto. Por favor, suba un archivo PDF o TXT.</p>
+            <button class="botonAceptar" onclick="cerrarModal()">Aceptar</button>
+        </div>
+    </div>
 
     <script>
-        // Obtener el modal
-        var modal = document.getElementById("backupSuccessModal");
+        document.getElementById('backupForm').onsubmit = function(e) {
+            var fileInput = document.getElementById('backup-file');
+            var filePath = fileInput.value;
+            var allowedExtensions = /(\.pdf|\.txt)$/i;
 
-        // Obtener el botón para cerrar el modal
-        var span = document.getElementsByClassName("close")[0];
+            if (!allowedExtensions.exec(filePath)) {
+                e.preventDefault();
+                showFileErrorModal();
+                return false;
+            }
+        };
 
-        // Cuando el usuario haga clic en <span> (x), cierre el modal
-        span.onclick = function() {
-            modal.style.display = "none";
+        // Obtener los modales
+        var successModal = document.getElementById("backupSuccessModal");
+        var errorModal = document.getElementById("fileErrorModal");
+
+        // Obtener los botones para cerrar los modales
+        var spanCloseButtons = document.getElementsByClassName("close");
+
+        // Cuando el usuario haga clic en <span> (x), cierre el modal correspondiente
+        for (var i = 0; i < spanCloseButtons.length; i++) {
+            spanCloseButtons[i].onclick = function() {
+                cerrarModal();
+            }
         }
 
         // Cuando el usuario haga clic en cualquier parte fuera del modal, ciérrelo
         window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            if (event.target == successModal) {
+                successModal.style.display = "none";
+            }
+            if (event.target == errorModal) {
+                errorModal.style.display = "none";
             }
         }
 
-        // Función para mostrar el modal cuando se registre correctamente un backup
+        // Función para mostrar el modal de éxito
         function showBackupSuccessModal() {
-            modal.style.display = "block";
+            successModal.style.display = "block";
         }
+
+        // Función para mostrar el modal de error de archivo
+        function showFileErrorModal() {
+            errorModal.style.display = "block";
+        }
+
+        // Función para cerrar cualquier modal
+        function cerrarModal() {
+            successModal.style.display = "none";
+            errorModal.style.display = "none";
+        }
+
         function redireccionarAVista() {
-        // Cambiar la ubicación actual del navegador a la URL de la otra vista
-        window.location.href = "{{ route('home') }}";
-    }
+            window.location.href = "{{ route('home') }}";
+        }
 
         // Verificar si hay sesión de éxito y mostrar el modal si es necesario
         @if(session('success'))
