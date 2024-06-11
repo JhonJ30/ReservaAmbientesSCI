@@ -52,7 +52,6 @@ class horarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //hecho por sara
     public function store(Request $request)
     {
         // Validar datos de entrada
@@ -63,8 +62,7 @@ class horarioController extends Controller
             'dias' => 'required|string',
             'intervalo' => 'nullable|string', // Validación para el intervalo
         ]);
-///CAMBIOS
-        // Verificar si ya existe un horario con las mismas características
+        // verificar si ya existe un horario con las mismas características
         $horarioExistente = Horarios::where('tipoAmbiente', $request->tipoAmbiente)
             ->where('dias', $request->dias)
             ->where('horaInicio', $request->horaInicio)
@@ -72,31 +70,18 @@ class horarioController extends Controller
             ->exists();
 
         if ($horarioExistente) {
-            // Horario ya existe, regresar con un mensaje de error
+            // horario existente, regresar con un mensaje de error
             return back()->withInput()->withErrors(['error' => 'Ya existe un horario registrado con estas características.']);
         }
 
         // Si no existe, proceder a crear el nuevo horario
-        Horarios::create([
+        $Horario = Horarios::create([
             'tipoAmbiente' => $request->tipoAmbiente,
             'dias' => $request->dias,
             'horaInicio' => $request->horaInicio,
             'horaFin' => $request->horaFin,
             'intervalo' => $request->intervalo,
         ]);
-        ///CAMBIOS
-        //sirve para guardar datos en la bd
-        $Horario = new Horarios();
-        $Horario->tipoAmbiente = $request->input('tipoAmbiente');
-        $Horario->dias = $request->input('intervalo');
-        $Horario->horaInicio = $request->input('horaInicio');
-        $Horario->horaFin = $request->input('horaFin');
-        $Horario->dias = $request->input('dias');
-        $Horario->intervalo = $request->input('intervalo');
-        // Guardar el nuevo ambiente en la base de datos
-        $Horario->save();
-
-
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
         $idHorario = $Horario->id;

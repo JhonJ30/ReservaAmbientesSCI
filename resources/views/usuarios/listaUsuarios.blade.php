@@ -26,7 +26,7 @@
   </thead>
   <tbody>
   @foreach ($usuarios as $item)
-    @if($item->id != 1)
+    @if($item->id != 1001)
       <tr>
         <td style="text-align: center;">{{$item->codSis}}</td>
         <td style="text-align: center;">{{$item->nombre}}</td>
@@ -65,9 +65,6 @@
   </div>
   </div>
 </div>
-
-<br>
-<br>
 
 @if(Session::has('success'))
     <div id="successModal" class="modal" style="display: block;">

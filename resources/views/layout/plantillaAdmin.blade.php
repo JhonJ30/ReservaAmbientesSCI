@@ -66,11 +66,15 @@
     <div class="container">
         @yield('contenido')
     </div>
-    <div class="footer">
-        @include('layout.footer')
-    </div>
 </div>    
 </body>
+
+<div>
+    <br>
+    <br>
+    <br>
+</div>
+@include('layout.footer')
 <script>
         function toggleMenu() {
             const menu = document.querySelector('.menu');

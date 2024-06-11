@@ -77,7 +77,7 @@
             </div>
             @endif
             <div class="botones">
-                <button id="botonCancelar" class="botonCancelar" type="button" onclick="window.location.href='/verAmbientes'">Cancelar</button>
+                <button id="botonCancelar" class="botonCancelar" type="button" onclick="window.history.back()">Cancelar</button>
                 <button class="botonRegistrar" type="submit">Registrar</button>
             </div>
         </form>
