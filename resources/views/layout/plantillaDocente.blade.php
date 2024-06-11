@@ -27,7 +27,6 @@
         <ul class="menu">
             <li> <a href="/" class="priHabilitadoInicio"><i class="fas fa-home"></i>&nbsp;Inicio</a></li>
             <li><a href="/verAmbientes" class="priHabilitado2"><i class="fas fa-plus-circle"></i>&nbsp;Ver Ambientes</a></li>
-            
             <li><a href="/notificacion" id="notificacionLink"  class="ultimo" ><i class="fas fa-bell"><sup id="contadorNotificaciones" style="color: red;">
             {{ App\Http\Controllers\notificationController::contarNotificacionesRecientes() }}</sup></i>
             </a></li>
