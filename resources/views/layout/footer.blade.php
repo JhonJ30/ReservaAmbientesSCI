@@ -13,6 +13,26 @@
     margin: 0;
     color: #6c757d;
 }
+@media (max-width: 768px) {
+            .footer {
+                padding: 10px;
+            }
+            .footer p {
+                font-size: 14px;
+            }
+        }
+
+  /* Media query para tamaños de pantalla de móviles */
+  @media (max-width: 480px) {
+            .footer {
+                padding: 10px;
+                background-color: #cfd2d3; /* Color de fondo más oscuro para mejor visibilidad */
+            }
+            .footer p {
+                font-size: 14px;
+                color: #50575e; /* Color de texto más oscuro para mejor contraste */
+            }
+        }
 </style>    
 
 <!-- pie de pagina -->
