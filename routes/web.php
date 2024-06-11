@@ -62,8 +62,8 @@ Route::put('/materias/{id}', [materiaController::class, 'update'])->name('materi
 //reservas
 Route::post('/reservas', [reservaController::class, 'store'])->name('reservas.store');
 Route::get('/reservas/{ambiente_id}/{nro_ambiente}', [reservaController::class, 'show'])->name('reservas.show');
-Route::delete('/verAmbientes', [reservaController::class, 'destroy'])->name('reservas.destroy');
-Route::delete('/', [reservaController::class, 'destroy'])->name('reservas.destroy');
+Route::delete('/verAmbientes', [reservaController::class, 'destroy'])->name('reservas.destroy.verAmbiente');
+Route::delete('/', [reservaController::class, 'destroy'])->name('reservas.destroy.home');
 
 Route::get('/listaReservas', [reservaController::class, 'create'])->name('reservas.create');
 Route::get('/listaReservas', [reservaController::class, 'verReserva'])->name('reservas.verReserva');
