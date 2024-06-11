@@ -104,9 +104,6 @@
     <div class="container">
         @yield('contenido')
     </div>
-    <div class="footer">
-        @include('layout.footer')
-    </div>
 </div>    
 </body>
 

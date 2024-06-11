@@ -16,7 +16,7 @@ function toggleIntervalo() {
 // RH.js
 
 // Función para calcular y actualizar la hora de fin de forma :) automáticamente
-function calcularHoraFin() {
+/*function calcularHoraFin() {
     var tipoAmbiente = document.getElementById('tipo-ambiente').value;
     var horaInicio = document.getElementById('hora-inicio').value;
     var intervalo = parseInt(document.getElementById('intervalo').value, 10); // Convertir a entero
@@ -42,7 +42,7 @@ function calcularHoraFin() {
             document.getElementById('hora-fin').value = horaFin;
         }
     }
-}
+}*/
 
 // onchange sirve para controlar los intervalos o label
 document.getElementById('hora-inicio').onchange = calcularHoraFin;

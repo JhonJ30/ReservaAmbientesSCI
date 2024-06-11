@@ -47,14 +47,15 @@ class reservaController extends Controller
             'hora_fin' => 'required',
         ]);
 
-        // Verificar si ya existe una reserva para el mismo ambiente en la misma fecha y hora
+        // Verificar si ya existe una reserva aceptada para el mismo ambiente en la misma fecha y hora
         $reservaExistente = Reservar::where('codAmb', $request->get('idAmbiente'))
             ->where('fecha', $request->get('fecha'))
             ->where('horaInicio', $request->get('hora_inicio'))
+            ->where('estado', 'Aceptado')
             ->exists();
 
         if ($reservaExistente) {
-            return redirect()->back()->with('error', 'Ya existe una reserva para este ambiente en la misma fecha y hora.')->with('error_color', 'red');
+            return redirect()->back()->with('error', 'Ya existe una reserva aceptada para este ambiente en la misma fecha y hora.')->with('error_color', 'red');
         }
 
         // CAMBIOS calcular la diferencia de tiempo entre la hora de inicio y la hora de fin
@@ -91,14 +92,22 @@ class reservaController extends Controller
         if (Auth::check()) {
             if (Auth::user()->rol === 'Administrador') {
                 return redirect('/listaAmbientes')->with('success', 'Reserva realizada exitosamente');
-            }else{
+            } else {
                 return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
             }
         } else {
             return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
         }
     }
+    // nueva funcion 
+    public function Rechazar(Request $request)
+    {
+        $reserva = Reservar::findOrFail($request->reserva_id);
+        $reserva->estado = 'Rechazado';
+        $reserva->save();
 
+        return redirect()->back()->with('success', 'Reserva rechazada exitosamente.');
+    }
     public function verReserva()
     {
         $reservas = Reservar::join('users', 'reserva.codUser', '=', 'users.id')
@@ -130,7 +139,7 @@ class reservaController extends Controller
         // valida y actualiza los datos de la reserva según los datos enviados desde el formulario editar
         $reserva->horaInicio = $request->input('hora_inicio');
         $reserva->horaFin = $request->input('hora_fin');
-        // Actualiza más campos según sea necesario
+        // Actualiza más campos según sea necesario :)
         $reserva->save();
         return redirect('/verAmbientes')->with('success', '¡Reserva actualizada exitosamente!');
     }

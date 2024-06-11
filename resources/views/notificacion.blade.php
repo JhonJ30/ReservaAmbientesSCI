@@ -9,12 +9,12 @@
 
 @foreach ($notificaciones as $item )
       <div class="card">
-        <div class="card-header">Notificación
+        <div class="card-header"><i class="fas fa-bell"></i> Notificación
 
-        <form action="{{ route('notificaciones.update', $item->idN) }}" method="POST" style="display: inline;">
+        <form action="{{ route('notificaciones.update', $item->idN) }}" method="POST" >
                 @csrf
                 @method('PUT')
-                <button type="submit" class="btn btn-link"><span class="noti">X</span></button>
+                <button type="submit" class="noti">X</button>
             </form>
          
         </div>

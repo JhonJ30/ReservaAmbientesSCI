@@ -5,10 +5,11 @@
 : 'layout.plantillaInvitado')
 
 @section('contenido')
-
-<div id="myModal" class="modal">
-  <div class="modal-content">
+<link href="{{asset ('css/avisos.css')}}" rel="stylesheet">
+<div  class="container">
+  
     <h2>MODIFICAR AVISO</h2>
+    
     <br>
     <div class="button-container">
         <form action="{{ route('avisos.add') }}" method="POST" enctype="multipart/form-data">
@@ -35,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripción:</label><br>
-                        <textarea id="descripcion" name="descripcion" rows="4" required>{{ $aviso->descripcion }}</textarea>
+                        <textarea id="descripcion" name="descripcion" rows="4" required>{{ $avisos->descripcion }}</textarea>
                     </div>
                     
                 </div>  
@@ -49,9 +50,9 @@
         </form>
     
   </div>
-  </div>
+  
 </div>
-
+</br>
 <script>
    // Función para abrir el modal
    function openModal() {
