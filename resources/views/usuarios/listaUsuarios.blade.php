@@ -66,9 +66,6 @@
   </div>
 </div>
 
-<br>
-<br>
-
 @if(Session::has('success'))
     <div id="successModal" class="modal" style="display: block;">
         <div class="modal-content">

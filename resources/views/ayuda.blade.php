@@ -41,16 +41,16 @@
         margin: 0px;
     }
 
-    ul {
+    .containerAyuda ul {
         list-style: none;
         padding: 0;
     }
 
-    ul li {
+    .containerAyuda ul li {
         margin: 10px 0;
     }
 
-    ul li strong {
+    .containerAyuda ul li strong {
         color: #333;
     }
 
