@@ -44,6 +44,19 @@
         </div>
     </div>
 
+    @if(Session::has('success'))
+<div id="successModal" class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;">
+  <div class="modal-content" style="background-color: white; width: 50%; margin: 20% auto; padding: 20px; border-radius: 5px; text-align: center;">
+    <p><strong>{{ Session::get('success') }}</strong></p>
+    <!-- Otro contenido del modal si es necesario -->
+    <div class="button-container">
+      <button class="btnAceptar" style="background-color: #0B6F63; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" onclick="closeSuccessModal()">Aceptar</button>
+    </div>
+  </div>
+</div>
+@endif
+
+
     <script>
         document.getElementById('backupForm').onsubmit = function(e) {
             var fileInput = document.getElementById('backup-file');
@@ -100,9 +113,13 @@
         function redireccionarAVista() {
             window.location.href = "{{ route('home') }}";
         }
+        
+  function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+  }
 
         // Verificar si hay sesión de éxito y mostrar el modal si es necesario
-        @if(session('success'))
+        @if(session('success2'))
             showBackupSuccessModal();
         @endif
     </script>

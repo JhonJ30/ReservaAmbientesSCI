@@ -29,21 +29,26 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($ambientes as $item )
-      <tr>
-        <td style="text-align: center;">{{$item->nroAmb}}</td>
-        <td style="text-align: center;">{{$item->capacidad}}</td>
-        <td style="text-align: center;">{{$item->ubicacion}}</td>
-        <td style="text-align: center;">{{$item->estado}}</td>
-        <td style="text-align: center;">
-          <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
-          <button class="delete-btn" onclick="openModal({{ $item->id }})">Eliminar</button>
-        </td>
-        <td style="text-align: center;">
-          <button class="edit-btn" onclick="window.location.href='{{ route('reservas.show', ['ambiente_id' => $item->id, 'nro_ambiente' => $item->nroAmb]) }}'">Reservar</button>
-        </td>
-      </tr>
-      @endforeach
+    @foreach ($ambientes as $item)
+<tr>
+    <td style="text-align: center;">{{$item->nroAmb}}</td>
+    <td style="text-align: center;">{{$item->capacidad}}</td>
+    <td style="text-align: center;">{{$item->ubicacion}}</td>
+    <td style="text-align: center;">{{$item->estado}}</td>
+    <td style="text-align: center;">
+        <button class="edit-btn" onclick="window.location.href='{{ route('ambientes.editar', $item->id) }}'">Modificar</button>
+        <button class="delete-btn" onclick="openModal({{ $item->id }})">Eliminar</button>
+    </td>
+    <td style="text-align: center;">
+        @if($item->estado == 'Disponible')
+        <button class="edit-btn" onclick="window.location.href='{{ route('reservas.show', ['ambiente_id' => $item->id, 'nro_ambiente' => $item->nroAmb]) }}'">Reservar</button>
+        @else
+        <button class="edit-btn" disabled>Reservar</button>
+        @endif
+    </td>
+</tr>
+@endforeach
+
     </tbody>
   </table>
 </div>
@@ -70,19 +75,6 @@
   </div>
 </div>
 
-@if(Session::has('success'))
-<div id="successModal" class="modal" style="display: block;">
-  <div class="modal-content">
-    <p><strong>{{ Session::get('success') }}</strong></p>
-    <!-- Otro contenido del modal si es necesario -->
-    <div class="button-container">
-      <button class="btnAceptar" onclick="closeSuccessModal()">Aceptar</button>
-    </div>
-  </div>
-</div>
-@endif
-
-
 <script>
   // Función para abrir el modal
   function openModal(registroId) {
@@ -94,11 +86,6 @@
   // Función para cerrar el modal
   function closeModal() {
     document.getElementById('myModal').style.display = 'none';
-  }
-
-
-  function closeSuccessModal() {
-    document.getElementById('successModal').style.display = 'none';
   }
 </script>
 

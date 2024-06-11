@@ -328,13 +328,14 @@ body {
 /* otro*/
 .container-reservas {
   width: 400px;
+  height: auto;
   margin: 50px auto;
-  max-height: 500px;
   background-color: #FFFFFF;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative; 
   border-radius: 10px;
+  z-index: 2;
 }
 
 .container-reservas h2 {
@@ -345,10 +346,12 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  max-height: 300px; /* Ajusta este valor según tu preferencia */
+ overflow-y: auto; /* Añade la barra de desplazamiento vertical */
 }
 
 .container-reservas  li {
-  padding: 10px;
+  padding: 8px;
   background-color: #0B6F63;
   color: #FFFFFF;
   border-radius: 10px;
@@ -362,23 +365,35 @@ body {
   background-color: #EE316B;
   color: #FFFFFF;
   border: none;
-  padding: 8px 10px;
+  padding: 8px 15px;
   cursor: pointer;
   font-size: 15px;
   border-radius: 8px;
+  margin-right: 30px;
 }
 
 
 .editar-button {
-  background-color: #3D475B;
-  color: #FFFFFF;
-  border: none;
-  padding: 8px 10px;
-  cursor: pointer;
-  font-size: 15px;
-  border-radius: 8px;
-}
+background-color: #393e41; /* Cambia el color del fondo del botón a gris oscuro */
+color: white; /* Color del texto */
+border: none;
+padding: 8px 15px; /* Ajusta el padding vertical para reducir la altura */
+cursor: pointer;
+font-size: 14px; /* Reduce el tamaño de la fuente */
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center; /* Centra horizontalmente el texto */
 
+margin-left: auto; /* Alinea el botón al centro */
+margin-right: auto; /* Alinea el botón al centro */
+font-weight: normal; /* Quita la negrita */
+}
+.editar-button span {
+color: white; /* Cambia el color del texto a blanco */
+font-weight: normal; /* Quita la negrita */
+}
 
 
 .cancel-button2 {
@@ -455,4 +470,15 @@ margin-top: 23px;
 
 .icon-color {
 color: #3d475b; 
+}
+
+.miCuentaContent .footer {
+position: sticky;
+bottom: -20px;
+width: calc(106% - 50px); /* Ajusta el ancho para compensar el padding de container-reservas */
+z-index: 2; /* Asegura que esté por encima del contenido de container-reservas */
+}
+
+.container-reservas span{
+margin-left: 10px;
 }

@@ -69,17 +69,6 @@
 <br>
 <br>
 
-@if(Session::has('success'))
-    <div id="successModal" class="modal" style="display: block;">
-        <div class="modal-content">
-            <p><strong>{{ Session::get('success') }}</strong></p>
-            <div class="button-container">
-                <button class="btnAceptar" onclick="closeSuccessModal()">Aceptar</button>
-            </div>
-        </div>
-    </div>
-@endif
-
 <script>
    function openModal(registroId) {
     document.getElementById('registro_id').value = registroId;
@@ -89,11 +78,6 @@
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
-
-function closeSuccessModal() {
-    document.getElementById('successModal').style.display = 'none';
-}
-
 </script>
 
 

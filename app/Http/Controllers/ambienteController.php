@@ -14,7 +14,7 @@ class ambienteController extends Controller
 {
     public function index()
     {
-        $ambientes = Ambientes::all();
+        $ambientes = Ambientes::where('estado', 'Disponible')->get();
         return view('ambientes/verAmbientes', compact('ambientes'));
     }
 

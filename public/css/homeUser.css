@@ -343,6 +343,8 @@ body {
             list-style-type: none;
             padding: 0;
             margin: 0;
+            max-height: 300px; /* Ajusta este valor según tu preferencia */
+           overflow-y: auto; /* Añade la barra de desplazamiento vertical */
         }
 
 .container-reservas  li {
@@ -358,13 +360,21 @@ body {
 
         .cancel-button {
             background-color: #EE316B;
-            color: #FFFFFF;
+            color: white; /* Color del texto */
             border: none;
-            padding: 8px 15px;
+            padding: 5px 10px; /* Ajusta el padding vertical para reducir la altura */
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px; /* Reduce el tamaño de la fuente */
             border-radius: 8px;
-            margin-right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center; /* Centra horizontalmente el texto */
+            height: 5px; /* Ajusta la altura del botón */
+            width: 60px; /* Ajusta el ancho del botón */
+            margin-left: auto; /* Alinea el botón al centro */
+            margin-right: auto; /* Alinea el botón al centro */
+            font-weight: normal; /* Quita la negrita */
         }
 
 
@@ -385,6 +395,7 @@ body {
           margin-left: auto; /* Alinea el botón al centro */
           margin-right: auto; /* Alinea el botón al centro */
           font-weight: normal; /* Quita la negrita */
+          margin-left: 27px ;
       }
       .editar-button span {
           color: white; /* Cambia el color del texto a blanco */
@@ -471,7 +482,7 @@ body {
 .miCuentaContent .footer {
   position: sticky;
   bottom: -20px;
-  width: calc(114% - 50px); /* Ajusta el ancho para compensar el padding de container-reservas */
+  width: calc(106% - 50px); /* Ajusta el ancho para compensar el padding de container-reservas */
   z-index: 2; /* Asegura que esté por encima del contenido de container-reservas */
 }
 

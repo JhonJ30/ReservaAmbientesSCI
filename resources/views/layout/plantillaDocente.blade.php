@@ -46,16 +46,20 @@
                         @else
                         <ul>
                             @foreach ($ambientes as $ambiente)
+                            @php
+                                $nombre = DB::table('ambiente')->where('id', $ambiente->codAmb)->first();
+                            @endphp
                             <li>
-                                <span>Aula: {{ $ambiente->codAmb }}<br>
+                                <span>Aula: {{ $nombre->nroAmb }}<br>
                                     Fecha: {{ $ambiente->fecha }}<br>
                                     Hora: {{ $ambiente->horaInicio }}<br>
                                     Estado: {{ $ambiente->estado }}
                                 </span>
                                 @if ($ambiente->estado == 'Proceso')
-                                <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button"><span class="texto-blanco">Modificar</span></a>
+                                <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button" style="color:#ffff; font-weight: normal;" >Modificar</a>
+                                <a href="{{ route('eliminarReserva', $ambiente->id) }}" class="cancel-button" style="color:#ffff; font-weight: normal;">Cancelar</a>
+
                                 @endif
-                                <button class="cancel-button" onclick="openModal2({{ $ambiente->id }})">Cancelar</button>
                             </li>
                             @endforeach
                         </ul>
@@ -71,7 +75,7 @@
     </div>
 
     <!-- Modal de confirmación de eliminación -->
-    <div id="myModal" class="modal">
+    <div id="myMod-al" class="modal">
 
         <div class="modal-content">
             <p><strong>¿Estás seguro que quiere cancelar su Reserva?</strong></p>
@@ -94,6 +98,18 @@
     </div>
 </body>
    
+@if(Session::has('success'))
+<div id="successModal" class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;">
+  <div class="modal-content" style="background-color: white; width: 50%; margin: 20% auto; padding: 20px; border-radius: 5px; text-align: center;">
+    <p><strong>{{ Session::get('success') }}</strong></p>
+    <!-- Otro contenido del modal si es necesario -->
+    <div class="button-container">
+      <button class="btnAceptar" style="background-color: #0B6F63; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" onclick="closeSuccessModal()">Aceptar</button>
+    </div>
+  </div>
+</div>
+@endif
+
 <div>
     <br>
     <br>
@@ -155,6 +171,9 @@
         document.getElementById('contadorNotificaciones').textContent = '0';
     });
 
+    function closeSuccessModal() {
+    document.getElementById('successModal').style.display = 'none';
+  }
 
 </script>
 

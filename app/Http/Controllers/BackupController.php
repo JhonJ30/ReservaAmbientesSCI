@@ -45,7 +45,7 @@ class BackupController extends Controller
         $backup->archivo = $path; // Guarda la ruta del archivo en la base de datos
         $backup->save();
 
-        return back()->with('success', 'Backup registrado correctamente');
+        return back()->with('success2', 'Backup registrado correctamente');
     }
 
     /**

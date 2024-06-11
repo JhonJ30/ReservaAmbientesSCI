@@ -75,6 +75,8 @@ Route::post('/reservas/{id}', [reservaController::class, 'update'])->name('reser
 Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
 Route::put('/reservas/{id}', [reservaController::class, 'update'])->name('reservas.update');
 
+Route::get('/eliminarReserva/{id}', [reservaController::class, 'destroy'])->name('eliminarReserva');
+
 //usuarios
 Route::view('/registroUsuario','usuarios/registroUsuario')->name('usuarios.registrar');
 Route::post('/usuarios', [usuarioController::class, 'store'])->name('usuarios.store');

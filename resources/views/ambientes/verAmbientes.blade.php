@@ -55,16 +55,6 @@
         @endif
     </div>
 </div>
-@if(session('success'))
-<div class="overlay">
-    <div class="overlay-content">
-        <p>{{ session('success') }}</p>
-        <div class="button-container">
-            <button id="closeButton">Aceptar</button>
-        </div>
-    </div>
-</div>
-@endif
 <style>
 .overlay {
     position: fixed;

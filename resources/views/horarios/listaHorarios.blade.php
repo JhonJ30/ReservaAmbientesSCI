@@ -71,18 +71,6 @@
   </div>
 </div>
 
-@if(Session::has('success'))
-    <div id="successModal" class="modal" style="display: block;">
-        <div class="modal-content">
-            <p><strong>{{ Session::get('success') }}</strong></p>
-            <!-- Otro contenido del modal si es necesario -->
-            <div class="button-container">
-                <button class="btnAceptar" onclick="closeSuccessModal()">Aceptar</button>
-            </div>
-        </div>
-    </div>
-@endif
-
 <script>
    // Función para abrir el modal
    function openModal(registroId) {
@@ -95,13 +83,6 @@
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
-
-
-
-function closeSuccessModal() {
-    document.getElementById('successModal').style.display = 'none';
-}
-
 </script>
 
 

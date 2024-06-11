@@ -26,9 +26,9 @@ class reservaController extends Controller
         return view('reservas/registroReserva', compact('idAmbiente', 'nroAmbiente', 'materias', 'nombreUsuario', 'apellidoUsuario'));
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $registro = Reservar::findOrFail($request->registro_id);
+        $registro = Reservar::findOrFail($id);
         $registro->delete();
 
         return redirect()->back()->with('success', 'Reserva eliminada');
@@ -114,8 +114,8 @@ class reservaController extends Controller
         $apellidoUsuario = Auth::user()->apellido;
         $reserva = Reservar::findOrFail($id);
         $materias = Materias::pluck('nombre', 'id', 'idAmbiente');
-        $nroAmbiente = $reserva->codAmb;
-
+        $nombre = Ambientes::where('id', $reserva->codAmb)->first();
+        $nroAmbiente = $nombre->nroAmb;
 
         $actividad = $reserva->Actividad;
         $horaFin = $reserva->horaFin;
