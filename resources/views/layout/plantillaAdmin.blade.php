@@ -72,11 +72,12 @@
                                     Estado: {{ $ambiente->estado }}
                                 </span>
                                 @if ($ambiente->estado == 'Proceso')
-                                
-                                <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button" style="color:#ffff; font-weight: normal;" >Modificar</a>
-                                <a href="{{ route('eliminarReserva', $ambiente->id) }}" class="cancel-button" style="color:#ffff; font-weight: normal;">Cancelar</a>
+                           <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button" style="color:#ffff; font-weight: normal;">Modificar</a>
+                           <a href="{{ route('eliminarReserva', $ambiente->id) }}" class="cancel-button" style="color:#ffff; font-weight: normal;">Cancelar</a>
+                         @elseif ($ambiente->estado == 'Aceptado' || $ambiente->estado == 'Rechazado')
+                           <a href="{{ route('eliminarReserva', $ambiente->id) }}" class="cancel-button" style="color:#ffff; font-weight: normal;">Cancelar</a>
+                         @endif
 
-                                @endif
                             </li>
                             @endforeach
                         </ul>
@@ -91,7 +92,7 @@
  
     @if(Session::has('success'))
 <div id="successModal" class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;">
-  <div class="modal-content" style="background-color: white; width: 50%; margin: 20% auto; padding: 20px; border-radius: 5px; text-align: center;">
+  <div class="modal-content" style="background-color: white; width: 26%; margin: 20% auto; padding: 20px; border-radius: 5px; text-align: center;">
     <p><strong>{{ Session::get('success') }}</strong></p>
     <!-- Otro contenido del modal si es necesario -->
     <div class="button-container">
@@ -102,7 +103,7 @@
 @endif
    
     <div class="container">
-        @yield('contenido')
+        @yield('contenido')f
     </div>
 </div>    
 </body>

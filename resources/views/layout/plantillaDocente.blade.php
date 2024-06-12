@@ -55,10 +55,11 @@
                                     Estado: {{ $ambiente->estado }}
                                 </span>
                                 @if ($ambiente->estado == 'Proceso')
-                                <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button" style="color:#ffff; font-weight: normal;" >Modificar</a>
-                                <a href="{{ route('eliminarReserva', $ambiente->id) }}" class="cancel-button" style="color:#ffff; font-weight: normal;">Cancelar</a>
-
-                                @endif
+                           <a href="{{ route('editarReserva', $ambiente->id) }}" class="editar-button" style="color:#ffff; font-weight: normal;">Modificar</a>
+                           <a href="{{ route('eliminarReserva', $ambiente->id) }}" class="cancel-button" style="color:#ffff; font-weight: normal;">Cancelar</a>
+                         @elseif ($ambiente->estado == 'Aceptado' || $ambiente->estado == 'Rechazado')
+                           <a href="{{ route('eliminarReserva', $ambiente->id) }}" class="cancel-button" style="color:#ffff; font-weight: normal;">Cancelar</a>
+                         @endif
                             </li>
                             @endforeach
                         </ul>
