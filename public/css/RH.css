@@ -6,8 +6,8 @@
 #form-container {
     margin-bottom: 20px;/* Ajusta los márgenes para reducir el tamaño del contenedor */
     padding: 20px;
-    background-color: #9ca2a6ef; /*color del cuadro*/
-    background-color: #ADADAD; /*borde del cuadro*/
+    background-color: #E3E3E3; /*color del cuadro*/
+   /* background-color: #ADADAD; borde del cuadro*/
     max-width: 1200px; /* Establece un ancho máximo para el contenedor*/
     max-width: 1000px; /* Ajusta este valor según el tamaño deseado */
     margin-left: auto; /* Centra el contenedor horizontalmente*/

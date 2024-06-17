@@ -1,32 +1,78 @@
-  /* Estilo del card */
+/* Estilo del card */
+.card {
+  max-width: 600px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: max-width 0.3s ease;
+}
+
+/* Estilo del header del card */
+.card-header {
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Diferentes colores para el header según el tipo de notificación */
+.card-header.success {
+  background-color: #0D7360; /* Verde */
+}
+
+.card-header.error {
+  background-color: #dc3545; /* Rojo */
+}
+
+/* Estilo del contenido del card */
+.card-content {
+  padding: 20px;
+  background-color: #bbc0c2;
+}
+
+/* Estilo del botón de cierre */
+.noti {
+  background: none; /* Elimina el fondo del botón */
+  border: none; /* Elimina el borde del botón */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2em; /* Ajusta el tamaño de la fuente */
+  padding: 5px; /* Añade un poco de espacio alrededor del texto */
+}
+
+/*.noti:hover {
+  background: #bbc0c2;
+  color: white; }/* Cambia el color al pasar el ratón por encima */
+
+
+
+/* Media queries para hacer que el card sea responsive */
+@media (max-width: 768px) {
   .card {
-    max-width: 600px;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
-    overflow: hidden;
+      max-width: 90%;
   }
-  /* Estilo del header del card */
-  .card-header {
-    background-color: #0D7360;
-    color: white;
-    padding: 10px;
-    font-weight: bold;
-    position: relative;
-  }
-  /* Estilo del contenido del card */
-  .card-content {
-    padding: 20px;
-    background-color: #bbc0c2;
+}
+
+@media (max-width: 480px) {
+  .card {
+      max-width: 95%;
   }
 
-  /* Estilo del botón de cierre */
-  .noti{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    color: white;
-    background-color: #0D7360;
+  .card-content {
+      padding: 15px;
   }
+
+  .card-header {
+      padding: 8px;
+  }
+
+  .noti {
+      top: 8px;
+      right: 8px;
+  }
+}

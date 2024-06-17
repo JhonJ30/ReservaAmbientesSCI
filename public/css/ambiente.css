@@ -4,7 +4,7 @@
     height: auto; /* Ajusta según sea necesario para acomodar el contenido */
     position: relative; /* Cambiado de absolute a relative */
     margin: 20px auto; /* Centra el formulario horizontalmente */
-    background-color: #ADADAD;
+    background-color: #E3E3E3;
     border: none;
     border-radius: 9px;
     display: flex;

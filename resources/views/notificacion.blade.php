@@ -4,26 +4,30 @@
     'layout.plantillaInvitado')) 
 : 'layout.plantillaInvitado')
 
+
 @section('contenido')
 <link href="{{asset ('css/noti.css')}}" rel="stylesheet">
 
 @foreach ($notificaciones as $item )
-      <div class="card">
-        <div class="card-header"><i class="fas fa-bell"></i> Notificación
+        @php
+            $messageClass = $item->mensaje == 'Reserva aceptada' ? 'success' : 'error';
+        @endphp
 
-        <form action="{{ route('notificaciones.update', $item->idN) }}" method="POST" >
-                @csrf
-                @method('PUT')
-                <button type="submit" class="noti">X</button>
-            </form>
-         
+        <div class="card">
+            <div class="card-header {{ $messageClass }}">
+                <i class="fas fa-bell"></i> Notificación
+
+                <form action="{{ route('notificaciones.update', $item->idN) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="noti">X</button>
+                </form>
+            </div>
+            <div class="card-content">
+                La solicitud a su reserva del aula {{ $item->codAmb }} en fecha {{ $item->fecha }}
+                fue una <strong>{{ $item->mensaje }}</strong>
+            </div>
         </div>
-        <div class="card-content">
-        La solicitud a su reserva del aula {{$item->codAmb}} en fecha {{$item->fecha}} 
-        fue una  {{$item->mensaje}} 
-        </div>
-       
-      </div>
   @endforeach
 
 

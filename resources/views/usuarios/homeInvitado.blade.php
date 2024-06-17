@@ -122,7 +122,7 @@ $avisos = aviso::where('estado', 'Habilitado')
 
              .fecha {
                 text-align:left;
-                color: #ee316b;
+                color:#9D0B37 ;
                 display: block;/* Asegura que el texto ocupe toda la línea */
                  
             }
