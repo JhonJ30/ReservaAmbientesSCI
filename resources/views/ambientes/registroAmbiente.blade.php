@@ -200,7 +200,7 @@
 }
 
 function validarInput2(input) {
-  const onlyLettersAndSpacesRegex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ.]+$/;
+  const onlyLettersAndSpacesRegex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ.,]+$/;
   
   if (input.value.trim() === '') {
     input.style.borderColor = "red";
@@ -217,7 +217,7 @@ function validarInput2(input) {
 }
 
 function validarInput3(input) {
-  const onlyLettersAndSpacesRegex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ.]+$/;
+  const onlyLettersAndSpacesRegex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑ.,]+$/;
   
   if (input.value.trim() === '') {
     input.style.borderColor = "red";
