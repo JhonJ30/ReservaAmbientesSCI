@@ -48,8 +48,8 @@
   </table>
 </div>
 @if(session('error'))
-<div style="color: {{ session('error_color', 'red') }};">
-  {{ session('error') }}
+    <div style="color: {{ session('error_color', 'red') }}; font-weight: bold;">
+        {{ session('error') }}
 </div>
 @endif
 <!-- Modal de confirmación de eliminación -->

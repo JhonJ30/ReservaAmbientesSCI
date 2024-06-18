@@ -119,7 +119,8 @@ class reservaController extends Controller
             ->where('reserva.estado', "Proceso")
             ->select('users.nombre as nombre', 'users.apellido as apellido', 'users.email as correo', 'reserva.*')
             ->get();
-        return view('reservas/listaReservas', compact('reservas'));
+
+        return view('reservas.listaReservas', compact('reservas'));
     }
     // Función para aceptar la reserva
     public function aceptarReserva($id)
@@ -146,6 +147,24 @@ class reservaController extends Controller
         $reserva->save();
 
         return redirect()->back()->with('success', 'Reserva aceptada exitosamente.');
+    }
+    //Funcion para q se autoeliminen OTRA MANERAAA
+    public function aceptar($id)
+    {
+        // Encuentra la reserva por ID
+        $reserva = Reservar::findOrFail($id);
+
+        // Cambia el estado de la reserva a 'Aceptado'
+        $reserva->estado = 'Aceptado';
+        $reserva->save();
+
+        // Elimina otras reservas para el mismo ambiente y fecha
+        Reservar::where('codAmb', $reserva->codAmb)
+            ->where('fecha', $reserva->fecha)
+            ->where('id', '!=', $id) // Excluye la reserva actual
+            ->delete();
+
+        return redirect()->back()->with('success', 'Reserva aceptada y otras reservas eliminadas.');
     }
 
     //editar reserva

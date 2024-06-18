@@ -69,7 +69,7 @@ Route::get('/listaReservas', [reservaController::class, 'create'])->name('reserv
 Route::get('/listaReservas', [reservaController::class, 'verReserva'])->name('reservas.verReserva');
 Route::get('/reserva/informacion/{id}', [reservaController::class, 'informacion'])->name('reservas.informacion');
 Route::post('/reservas/aceptar/{id}', [reservaController::class, 'aceptarReserva'])->name('reservas.aceptar');
-
+Route::post('/reservas/aceptar/{id}', [reservaController::class, 'aceptar'])->name('reservas.aceptar');
 //editar reserva
 Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
 Route::post('/reservas/{id}', [reservaController::class, 'update'])->name('reservas.update');
