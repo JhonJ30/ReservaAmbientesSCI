@@ -48,7 +48,7 @@ Route::get('/horarios/editar/{id}', [horarioController::class, 'edit'])->name('h
 Route::put('/horarios/{id}', [horarioController::class, 'update'])->name('horarios.update');
 
 //materias
-Route::view('/registroMateria','materias/registroMateria')->name('materias.registrar');
+Route::view('/registroMateria', 'materias/registroMateria')->name('materias.registrar');
 Route::post('/materias', [materiaController::class, 'store'])->name('materias.store');
 Route::get('/listaMaterias', [materiaController::class, 'create'])->name('materias.create');
 Route::get('/buscarMaterias', [materiaController::class, 'search'])->name('materias.search');
@@ -68,6 +68,7 @@ Route::delete('/', [reservaController::class, 'destroy'])->name('reservas.destro
 Route::get('/listaReservas', [reservaController::class, 'create'])->name('reservas.create');
 Route::get('/listaReservas', [reservaController::class, 'verReserva'])->name('reservas.verReserva');
 Route::get('/reserva/informacion/{id}', [reservaController::class, 'informacion'])->name('reservas.informacion');
+Route::post('/reservas/aceptar/{id}', [reservaController::class, 'aceptarReserva'])->name('reservas.aceptar');
 
 //editar reserva
 Route::get('/editarReserva/{id}', [reservaController::class, 'editar'])->name('editarReserva');
@@ -78,7 +79,7 @@ Route::put('/reservas/{id}', [reservaController::class, 'update'])->name('reserv
 Route::get('/eliminarReserva/{id}', [reservaController::class, 'destroy'])->name('eliminarReserva');
 
 //usuarios
-Route::view('/registroUsuario','usuarios/registroUsuario')->name('usuarios.registrar');
+Route::view('/registroUsuario', 'usuarios/registroUsuario')->name('usuarios.registrar');
 Route::post('/usuarios', [usuarioController::class, 'store'])->name('usuarios.store');
 Route::get('/listaUsuarios', [usuarioController::class, 'create'])->name('usuarios.create');
 Route::get('/buscarUsuarios', [usuarioController::class, 'search'])->name('usuarios.search');

@@ -31,11 +31,11 @@
       <td style="text-align: center;">{{$item->nombre}} {{$item->apellido}}</td>
       <td style="text-align: center;">{{$item->Actividad}}</td>
       <td style="text-align: center;">
-      <form method="POST" action="{{ route('notificaciones.store') }}">
+        <form method="POST" action="{{ route('reservas.aceptar', $item->id) }}">
         @csrf
         <input type="hidden" name="reserva_id" value="{{$item->id}}">
         <button type="submit"  class="edit-btn">Aceptar</button>
-        <button type="button" class="delete-btn" onclick="openModal({{ $item->id }})">Rechazar</button>
+        <button type="button" class="delete-btn" onclick="openModal({{ $item->id }})">Rechazar</button>       
       </form>  
         
   

@@ -50,10 +50,15 @@ class reservaController extends Controller
         // Verificar si ya existe una reserva aceptada para el mismo ambiente en la misma fecha y hora
         $reservaExistente = Reservar::where('codAmb', $request->get('idAmbiente'))
             ->where('fecha', $request->get('fecha'))
-            ->where('horaInicio', $request->get('hora_inicio'))
+            ->where(function ($query) use ($request) {
+                $query->whereBetween('horaInicio', [$request->get('hora_inicio'), $request->get('hora_fin')])
+                    ->orWhereBetween('horaFin', [$request->get('hora_inicio'), $request->get('hora_fin')])
+                    ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_inicio')])
+                    ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_fin')]);
+            })
             ->where('estado', 'Aceptado')
             ->exists();
-
+        // ARRIBA CAMBIOS PARA NO ACEPTAR 2 VECES
         if ($reservaExistente) {
             return redirect()->back()->with('error', 'Ya existe una reserva aceptada para este ambiente en la misma fecha y hora.')->with('error_color', 'red');
         }
@@ -116,6 +121,33 @@ class reservaController extends Controller
             ->get();
         return view('reservas/listaReservas', compact('reservas'));
     }
+    // Función para aceptar la reserva
+    public function aceptarReserva($id)
+    {
+        $reserva = Reservar::findOrFail($id);
+
+        // Verificar si ya existe una reserva aceptada para el mismo ambiente en la misma fecha y hora
+        $reservaExistente = Reservar::where('codAmb', $reserva->codAmb)
+            ->where('fecha', $reserva->fecha)
+            ->where(function ($query) use ($reserva) {
+                $query->whereBetween('horaInicio', [$reserva->horaInicio, $reserva->horaFin])
+                    ->orWhereBetween('horaFin', [$reserva->horaInicio, $reserva->horaFin])
+                    ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$reserva->horaInicio])
+                    ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$reserva->horaFin]);
+            })
+            ->where('estado', 'Aceptado')
+            ->exists();
+
+        if ($reservaExistente) {
+            return redirect()->back()->with('error', 'Ya existe una reserva aceptada para este ambiente en la misma fecha y hora.')->with('error_color', 'red');
+        }
+
+        $reserva->estado = 'Aceptado';
+        $reserva->save();
+
+        return redirect()->back()->with('success', 'Reserva aceptada exitosamente.');
+    }
+
     //editar reserva
     public function editar($id)
     {
