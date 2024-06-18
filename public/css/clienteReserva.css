@@ -1,10 +1,10 @@
 .reserva-form {
     width: 60%;/*Ajusta el largo del contenedor*/
-    margin: 0 auto;
+    margin: 25px auto;
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: #ADADAD; /* Color de fondo del formulario */
+    background-color: #E3E3E3; /* Color de fondo del formulario */
     padding: 30px;/*Ajusta el alto del contenedor*/
     border-radius: 8px;
     
