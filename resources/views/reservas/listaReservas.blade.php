@@ -1,7 +1,7 @@
-@extends(Auth::check() ? 
-    (Auth::user()->rol === 'Docente' ? 'layout.plantillaDocente' : 
-    (Auth::user()->rol === 'Administrador' ? 'layout.plantillaAdmin' : 
-    'layout.plantillaInvitado')) 
+@extends(Auth::check() ?
+(Auth::user()->rol === 'Docente' ? 'layout.plantillaDocente' :
+(Auth::user()->rol === 'Administrador' ? 'layout.plantillaAdmin' :
+'layout.plantillaInvitado'))
 : 'layout.plantillaInvitado')
 
 @section('contenido')
@@ -10,78 +10,79 @@
 <br>
 <h2>LISTA DE RESERVAS</h2>
 <br>
-<div> 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center;">Fecha</th>
-      <th style="text-align: center;">Hora</th>
-      <th style="text-align: center;">Ambiente</th>
-      <th style="text-align: center;">Usuario</th>
-      <th style="text-align: center;">Actividad</th>
-      <th style="text-align: center;">Accion</th>
-    </tr>
-  </thead>
-  <tbody>
-  @foreach ($reservas as $item )
-    <tr>
-      <td style="text-align: center;">{{$item->fecha}}</td>
-      <td style="text-align: center;">{{$item->horaInicio}} - {{$item->horaFin}}</td>
-      <td style="text-align: center;">{{$item->codAmb}}</td>
-      <td style="text-align: center;">{{$item->nombre}} {{$item->apellido}}</td>
-      <td style="text-align: center;">{{$item->Actividad}}</td>
-      <td style="text-align: center;">
-        <form method="POST" action="{{ route('reservas.aceptar', $item->id) }}">
-        @csrf
-        <input type="hidden" name="reserva_id" value="{{$item->id}}">
-        <button type="submit"  class="edit-btn">Aceptar</button>
-        <button type="button" class="delete-btn" onclick="openModal({{ $item->id }})">Rechazar</button>       
-      </form>  
-      </td>
-    </tr>
-  @endforeach
-   
-  </tbody>
-</table>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center;">Fecha</th>
+        <th style="text-align: center;">Hora</th>
+        <th style="text-align: center;">Ambiente</th>
+        <th style="text-align: center;">Usuario</th>
+        <th style="text-align: center;">Actividad</th>
+        <th style="text-align: center;">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($reservas as $item )
+      @php
+      $nombre = DB::table('ambiente')->where('id', $item->codAmb)->first();
+      @endphp
+      <tr>
+        <td style="text-align: center;">{{$item->fecha}}</td>
+        <td style="text-align: center;">{{$item->horaInicio}} - {{$item->horaFin}}</td>
+        <td style="text-align: center;">{{$nombre->nroAmb}}</td>
+        <td style="text-align: center;">{{$item->nombre}} {{$item->apellido}}</td>
+        <td style="text-align: center;">{{$item->Actividad}}</td>
+        <td style="text-align: center;">
+          <form method="POST" action="{{ route('reservas.aceptar', $item->id) }}">
+            @csrf
+            <input type="hidden" name="reserva_id" value="{{$item->id}}">
+            <button type="submit" class="edit-btn">Aceptar</button>
+            <button type="button" class="delete-btn" onclick="openModal({{ $item->id }})">Rechazar</button>
+          </form>
+        </td>
+      </tr>
+      @endforeach
+
+    </tbody>
+  </table>
 </div>
 @if(session('error'))
-    <div style="color: {{ session('error_color', 'red') }};">
-        {{ session('error') }}
-    </div>
+<div style="color: {{ session('error_color', 'red') }};">
+  {{ session('error') }}
+</div>
 @endif
 <!-- Modal de confirmación de eliminación -->
 <div id="myModal" class="modal">
- 
+
   <div class="modal-content">
     <p><strong>¿Estás seguro que desea rechazar esta solicitud?</strong></p>
     <br>
     <p class="gris">Esta operacion es irreversible</p>
     <br>
     <div class="button-container">
-    <form method="POST" action="{{ route('notificaciones.Rechazar') }}">
-    @csrf
-            <input type="hidden" name="reserva_id" id="reserva_id">
-       <button class="btnAceptar" type="submit" >Aceptar</button>
+      <form method="POST" action="{{ route('notificaciones.Rechazar') }}">
+        @csrf
+        <input type="hidden" name="reserva_id" id="reserva_id">
+        <button class="btnAceptar" type="submit">Aceptar</button>
       </form>
-    <button class="btnCancelar"onclick="closeModal()">Cancelar</button>
-  </div>
+      <button class="btnCancelar" onclick="closeModal()">Cancelar</button>
+    </div>
   </div>
 </div>
 
 <script>
-   // Función para abrir el modal
-   function openModal(registroId) {
+  // Función para abrir el modal
+  function openModal(registroId) {
     document.getElementById('reserva_id').value = registroId;
     // Mostrar el modal
-        document.getElementById('myModal').style.display = 'block';
-    }
+    document.getElementById('myModal').style.display = 'block';
+  }
 
-    // Función para cerrar el modal
-    function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
-    }
-
-
+  // Función para cerrar el modal
+  function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+  }
 </script>
 
 @endsection
