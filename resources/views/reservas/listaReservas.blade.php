@@ -37,8 +37,6 @@
         <button type="submit"  class="edit-btn">Aceptar</button>
         <button type="button" class="delete-btn" onclick="openModal({{ $item->id }})">Rechazar</button>       
       </form>  
-        
-  
       </td>
     </tr>
   @endforeach
@@ -46,7 +44,11 @@
   </tbody>
 </table>
 </div>
-
+@if(session('error'))
+    <div style="color: {{ session('error_color', 'red') }};">
+        {{ session('error') }}
+    </div>
+@endif
 <!-- Modal de confirmación de eliminación -->
 <div id="myModal" class="modal">
  
