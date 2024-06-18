@@ -87,13 +87,13 @@ class reservaController extends Controller
 
         // CAMBIOS verificar si la duración es exactamente de 90 minutos
         if ($duracion->format('%H:%I') !== '01:30') {
-            return redirect()->back()->with('error', 'No aceptable el tiempo de reserva')->with('error_color', 'ed');
+            return redirect()->back()->with('error', 'No aceptable el tiempo de reserva')->with('error_color', 'red');
         }
 
         // CAMBIOS verificar que la hora de inicio esté dentro de los horarios permitidos
         $horarios_permitidos = ['06:45', '08:15', '09:45', '11:15', '12:45', '14:15', '15:45', '17:15', '18:45', '20:15'];
         if (!in_array($request->get('hora_inicio'), $horarios_permitidos)) {
-            return redirect()->back()->with('error', 'El horario no es valido')->with('error_color', 'ed');
+            return redirect()->back()->with('error', 'El horario no es valido')->with('error_color', 'red');
         }
 
         // para la creacion de uno nuevo en el formulario
