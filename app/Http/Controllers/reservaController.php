@@ -34,76 +34,90 @@ class reservaController extends Controller
         return redirect()->back()->with('success', 'Reserva eliminada');
     }
     //guardar registro :) :(
-    public function store(Request $request)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'solicitante' => 'required',
-            'ambiente' => 'required',
-            'hora_inicio' => 'required',
-            'actividad' => 'required',
-            'materia' => 'required',
-            'fecha' => 'required',
-            'hora_fin' => 'required',
-        ]);
-
-        // Verificar si ya existe una reserva aceptada para el mismo ambiente en la misma fecha y hora
-        $reservaExistente = Reservar::where('codAmb', $request->get('idAmbiente'))
-            ->where('fecha', $request->get('fecha'))
-            ->where(function ($query) use ($request) {
-                $query->whereBetween('horaInicio', [$request->get('hora_inicio'), $request->get('hora_fin')])
-                    ->orWhereBetween('horaFin', [$request->get('hora_inicio'), $request->get('hora_fin')])
-                    ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_inicio')])
-                    ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_fin')]);
-            })
-            ->where('estado', 'Aceptado')
-            ->exists();
-        // ARRIBA CAMBIOS PARA NO ACEPTAR 2 VECES
-        if ($reservaExistente) {
-            return redirect()->back()->with('error', 'Ya existe una reserva aceptada para este ambiente en la misma fecha y hora.')->with('error_color', 'red');
-        }
-
-        // CAMBIOS calcular la diferencia de tiempo entre la hora de inicio y la hora de fin
-        $inicio = new \DateTime($request->get('hora_inicio'));
-        $fin = new \DateTime($request->get('hora_fin'));
-        $duracion = $inicio->diff($fin);
-
-        // CAMBIOS verificar si la duración es exactamente de 90 minutos
-        if ($duracion->format('%H:%I') !== '01:30') {
-            return redirect()->back()->with('error', 'No aceptable el tiempo de reserva')->with('error_color', 'red');
-        }
-
-        // CAMBIOS verificar que la hora de inicio esté dentro de los horarios permitidos
-        $horarios_permitidos = ['06:45', '08:15', '09:45', '11:15', '12:45', '14:15', '15:45', '17:15', '18:45', '20:15'];
-        if (!in_array($request->get('hora_inicio'), $horarios_permitidos)) {
-            return redirect()->back()->with('error', 'El horario no es valido')->with('error_color', 'red');
-        }
-
-
-
-        // para la creacion de uno nuevo en el formulario
-        $reserva = new Reservar([
-            'codUser' => Auth::id(), // obtiene el ID del usuario autenticado
-            'codAmb' => $request->get('idAmbiente'),
-            'Materia' => $request->get('materia'),
-            'horaInicio' => $request->get('hora_inicio'),
-            'horaFin' => $request->get('hora_fin'),
-            'Actividad' => $request->get('actividad'),
-            'fecha' => $request->get('fecha'),
-            'estado' => "Proceso",
-        ]);
-        $reserva->save();
-
-        if (Auth::check()) {
-            if (Auth::user()->rol === 'Administrador') {
-                return redirect('/listaAmbientes')->with('success', 'Reserva realizada exitosamente');
+        public function store(Request $request)
+        {
+            // Validar los datos del formulario
+            $request->validate([
+                'solicitante' => 'required', // Aquí cambiaste validateEquired por required
+                'ambiente' => 'required', // Aquí cambiaste validateEquired por required
+                'hora_inicio' => 'required', // Aquí cambiaste validateEquired por required
+                'actividad' => 'required', // Aquí cambiaste validateEquired por required
+                'materia' => 'required', // Aquí cambiaste validateEquired por required
+                'fecha' => 'required', // Aquí cambiaste validateEquired por required
+                'hora_fin' => 'required', // Aquí cambiaste validateEquired por required
+            ]);
+            // Verificar si ya existe una reserva aceptada para el mismo ambiente en la misma fecha y hora
+            $reservaExistente = Reservar::where('codAmb', $request->get('idAmbiente'))
+                ->where('fecha', $request->get('fecha'))
+                ->where(function ($query) use ($request) {
+                    $query->whereBetween('horaInicio', [$request->get('hora_inicio'), $request->get('hora_fin')])
+                        ->orWhereBetween('horaFin', [$request->get('hora_inicio'), $request->get('hora_fin')])
+                        ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_inicio')])
+                        ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_fin')]);
+                })
+                ->where('estado', 'Aceptado')
+                ->exists();
+        
+            if ($reservaExistente) {
+                return redirect()->back()->with('error', 'Ya existe una reserva aceptada para este ambiente en la misma fecha y hora.')->with('error_color', 'ed');
+            }
+        
+            // Verificar si el usuario ya tiene una reserva pendiente o aceptada para el mismo ambiente, fecha y hora
+            $userHasReservation = Reservar::where('codUser', Auth::id())
+                ->where('codAmb', $request->get('idAmbiente'))
+                ->where('fecha', $request->get('fecha'))
+                ->where(function ($query) use ($request) {
+                    $query->whereBetween('horaInicio', [$request->get('hora_inicio'), $request->get('hora_fin')])
+                        ->orWhereBetween('horaFin', [$request->get('hora_inicio'), $request->get('hora_fin')])
+                        ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_inicio')])
+                        ->orWhereRaw('? BETWEEN horaInicio AND horaFin', [$request->get('hora_fin')]);
+                })
+                ->whereIn('estado', ['Proceso', 'Aceptado'])
+                ->exists();
+        
+            if ($userHasReservation) {
+                return redirect()->back()->with('error', 'Ya tienes una reserva pendiente o aceptada para este ambiente en la misma fecha y hora.')->with('error_color', 'ed');
+            }
+        
+            // CAMBIOS calcular la diferencia de tiempo entre la hora de inicio y la hora de fin
+            $inicio = new \DateTime($request->get('hora_inicio'));
+            $fin = new \DateTime($request->get('hora_fin'));
+            $duracion = $inicio->diff($fin);
+        
+            // CAMBIOS verificar si la duración es exactamente de 90 minutos
+            if ($duracion->format('%H:%I')!== '01:30') {
+                return redirect()->back()->with('error', 'No aceptable el tiempo de reserva')->with('error_color', 'ed');
+            }
+        
+            // CAMBIOS verificar que la hora de inicio esté dentro de los horarios permitidos
+            $horarios_permitidos = ['06:45', '08:15', '09:45', '11:15', '12:45', '14:15', '15:45', '17:15', '18:45', '20:15'];
+            if (!in_array($request->get('hora_inicio'), $horarios_permitidos)) {
+                return redirect()->back()->with('error', 'El horario no es valido')->with('error_color', 'ed');
+            }
+        
+            // para la creacion de uno nuevo en el formulario
+            $reserva = new Reservar([
+                'codUser' => Auth::id(), // obtiene el ID del usuario autenticado
+                'codAmb' => $request->get('idAmbiente'),
+                'Materia' => $request->get('materia'),
+                'horaInicio' => $request->get('hora_inicio'),
+                'horaFin' => $request->get('hora_fin'),
+                'Actividad' => $request->get('actividad'),
+                'fecha' => $request->get('fecha'),
+                'estado' => "Proceso",
+            ]);
+            $reserva->save();
+        
+            if (Auth::check()) {
+                if (Auth::user()->rol === 'Administrador') {
+                    return redirect('/listaAmbientes')->with('success', 'Reserva realizada exitosamente');
+                } else {
+                    return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
+                }
             } else {
                 return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
             }
-        } else {
-            return redirect('/verAmbientes')->with('success', 'Reserva realizada exitosamente');
         }
-    }
     // nueva funcion 
     public function Rechazar(Request $request)
     {
@@ -119,8 +133,7 @@ class reservaController extends Controller
             ->where('reserva.estado', "Proceso")
             ->select('users.nombre as nombre', 'users.apellido as apellido', 'users.email as correo', 'reserva.*')
             ->get();
-
-        return view('reservas.listaReservas', compact('reservas'));
+        return view('reservas/listaReservas', compact('reservas'));
     }
     // Función para aceptar la reserva
     public function aceptarReserva($id)
@@ -148,7 +161,6 @@ class reservaController extends Controller
 
         return redirect()->back()->with('success', 'Reserva aceptada exitosamente.');
     }
-    //Funcion para q se autoeliminen OTRA MANERAAA
     public function aceptar($id)
     {
         // Encuentra la reserva por ID
@@ -166,7 +178,6 @@ class reservaController extends Controller
 
         return redirect()->back()->with('success', 'Reserva aceptada y otras reservas eliminadas.');
     }
-
     //editar reserva
     public function editar($id)
     {
