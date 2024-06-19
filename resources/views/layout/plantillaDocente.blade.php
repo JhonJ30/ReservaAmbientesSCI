@@ -20,6 +20,7 @@
     <div class="navbar">
         <div class="logo">
             <img src="{{ asset('img/san simon.png') }}" class="logo" alt="...">
+            <span class="logo-text">RESERVA DE AMBIENTES</span>
         </div>
         <div class="menu-toggle" onclick="toggleMenu()">
             <div class="bar"></div>

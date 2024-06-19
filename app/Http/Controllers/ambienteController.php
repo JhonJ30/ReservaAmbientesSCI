@@ -20,7 +20,7 @@ class ambienteController extends Controller
 
     public function create()
     {
-        $ambientes = Ambientes::all();
+        $ambientes = Ambientes::where('estado', 'Disponible')->orderBy('nroAmb', 'asc')->get();
         return view('ambientes/listaAmbientes', compact('ambientes'));
     }
 
@@ -95,18 +95,18 @@ class ambienteController extends Controller
     {
         $ambiente = Ambientes::findOrFail($id);
         $datosOriginales = $ambiente->toArray();
-        
+
 
         // Verificar si el nroAmb ha sido modificado
-    $nroAmbModificado = $request->input('nroAmb') !== $datosOriginales['nroAmb'];
+        $nroAmbModificado = $request->input('nroAmb') !== $datosOriginales['nroAmb'];
 
-    // Verificar si el nuevo nroAmb ya existe en la tabla
-    if ($nroAmbModificado) {
-        $nroAmbExistente = Ambientes::where('nroAmb', $request->input('nroAmb'))->exists();
-        if ($nroAmbExistente) {
-            return redirect()->back()->withErrors(['nroAmb' => 'El número de ambiente ya está registrado.']);
+        // Verificar si el nuevo nroAmb ya existe en la tabla
+        if ($nroAmbModificado) {
+            $nroAmbExistente = Ambientes::where('nroAmb', $request->input('nroAmb'))->exists();
+            if ($nroAmbExistente) {
+                return redirect()->back()->withErrors(['nroAmb' => 'El número de ambiente ya está registrado.']);
+            }
         }
-    }
         $ambiente->update($request->all());
 
         $bitacora = new Bitacora();
@@ -146,15 +146,15 @@ class ambienteController extends Controller
         $registro = Ambientes::findOrFail($request->registro_id);
         $registro->estado = 'No Disponible';
         $registro->save();
-    
+
         // Eliminar reservas asociadas al ambiente
         Reservar::where('codAmb', $registro->id)->delete();
-    
+
         $bitacora = new Bitacora();
         $fechaYHoraActual = Carbon::now();
         $idAmbiente = $registro->id;
         $idUsuario = Auth::id();
-    
+
         $bitacora->fecha = $fechaYHoraActual->toDateString();
         $bitacora->hora = $fechaYHoraActual->toTimeString();
         $bitacora->id_Usuario = $idUsuario;
@@ -163,7 +163,7 @@ class ambienteController extends Controller
         $bitacora->id_Registro = $idAmbiente;
         $bitacora->dato_modificado = 'Ambiente marcado como no disponible: ' . $registro->nroAmb . ', ' . $registro->tipoAmb . ', ' . $registro->equipamiento . ', ' . $registro->capacidad;
         $bitacora->save();
-    
+
         return redirect()->back()->with('success', 'Registro marcado como no disponible');
     }
 
@@ -179,7 +179,7 @@ class ambienteController extends Controller
         $search = $request->input('search');
         if (empty($search)) {
             return redirect()->route('ambientes.index');
-        }else {
+        } else {
             $ambientes = Ambientes::where('nroAmb', 'like', '%' . $search . '%')
                 ->orWhere('ubicacion', 'like', '%' . $search . '%')->get();
             return view('ambientes/verAmbientes', compact('ambientes'));
