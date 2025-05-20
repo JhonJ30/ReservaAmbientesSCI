@@ -1,5 +1,5 @@
 
-.registro {
+.registro {/*cambio aqui*/
     width: 950px;
     height: auto; /* Ajusta según sea necesario para acomodar el contenido */
     position: relative; /* Cambiado de absolute a relative */
